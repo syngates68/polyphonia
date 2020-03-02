@@ -1,6 +1,9 @@
 *
 {
     --orange: #fa940f;
+    --border: #E0E0E0;
+    --grey: #4F4F4F;
+    box-sizing: border-box;
 }
 
 body
@@ -48,5 +51,235 @@ nav .nav_liens a
 
 .container
 {
-    padding: 24px;
+    padding: 24px 48px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.container h1
+{
+    font-weight: 600;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.message_presentation
+{
+    padding: 16px 8px;
+    color: #276F86;
+    font-size: 14px;
+    background: #F8FFFF;
+    border: 1px solid #A9D5DE;
+    border-radius: 5px;
+    width: 50%;
+    margin-top: 16px;
+    line-height: 17px;
+}
+
+.recherche_projet
+{
+    padding: 40px 0;
+}
+
+.recherche_projet .recherche
+{
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--orange);
+    padding: 8px;
+    width: 32%;
+}
+
+.pagination
+{
+    padding: 16px 0;
+    text-align: center;
+}
+
+.pagination ul li
+{
+    display: inline-block;
+    margin: 0 8px;
+    padding: 8px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid var(--border);
+    font-size: 17px;
+    text-align: center;
+    vertical-align: middle;
+    transition-duration: .3s;
+}
+
+.pagination ul li:hover
+{
+    background: var(--border);
+    cursor: pointer; 
+    transition-duration: .3s;
+}
+
+.pagination ul li.actif
+{
+    background: var(--orange);
+}
+
+.pagination ul li.actif a
+{
+    color: #FFF;
+}
+
+.pagination ul li a
+{
+    text-decoration: none;
+    color: #000;
+}
+
+.liste_projets
+{
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    column-gap: 16px;
+}
+
+.projet
+{
+    border: 1px solid var(--border);
+    /*box-shadow: 0 2px 10px #9c9c9c;*/
+    border-radius: 5px;
+    margin-bottom: 18px;
+}
+
+.projet .image_projet
+{
+    height: 166px;
+}
+
+.projet .image_projet img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.projet .corps_projet
+{
+    padding: 8px;
+}
+
+.projet .titre_projet
+{
+    font-size: 20px;
+    font-weight: 600;
+    min-height: 40px;
+    text-transform: uppercase;
+}
+
+.projet .description_projet
+{
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 15px;
+    margin-top: 24px;
+}
+
+.projet .footer_projet
+{
+    margin-top: 24px;
+    padding: 16px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.infos_projet
+{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.auteur_projet,
+.date_projet
+{
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+}
+
+.auteur_projet img,
+.date_projet img
+{
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+}
+
+.auteur_projet .nom_auteur,
+.date_projet .date
+{
+    font-size: 12px;
+    color: var(--grey);
+}
+
+.btn_lire_projet
+{
+    background: var(--orange);
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+}
+
+.btn_lire_projet:hover
+{
+    cursor: pointer;
+}
+
+.btn_lire_projet img
+{
+    margin-left: 8px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media only screen and (max-width: 700px)
+{
+    nav
+    {
+        padding: 8px;
+    }
+
+    nav .logo_polyphonia
+    {
+        font-size: 20px;
+    }
+
+    nav .logo_polyphonia img
+    {
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav_liens
+    {
+        display: none;
+    }
+
+    .container
+    {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .message_presentation
+    {
+        width: 100%;
+    }
+
+    .recherche_projet .recherche
+    {
+        width: 100%;
+    }
+
+    .liste_projets
+    {
+        display: block;
+    }
 }
