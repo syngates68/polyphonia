@@ -9,6 +9,7 @@
 body
 {
     font-family: 'Roboto';
+    background: #fffbf9;
 }
 
 nav
@@ -63,6 +64,12 @@ nav .nav_liens a
     text-transform: uppercase;
 }
 
+/*********************************************************
+
+    PAGE D'ACCUEIL
+
+*********************************************************/
+
 .message_presentation
 {
     padding: 16px 8px;
@@ -107,6 +114,7 @@ nav .nav_liens a
     text-align: center;
     vertical-align: middle;
     transition-duration: .3s;
+    background: #FFF;
 }
 
 .pagination ul li:hover
@@ -141,6 +149,7 @@ nav .nav_liens a
 
 .projet
 {
+    background: #FFF;
     border: 1px solid var(--border);
     /*box-shadow: 0 2px 10px #9c9c9c;*/
     border-radius: 5px;
@@ -225,6 +234,7 @@ nav .nav_liens a
     border: none;
     border-radius: 5px;
     padding: 8px 16px;
+    text-decoration: none;
 }
 
 .btn_lire_projet:hover
@@ -237,7 +247,130 @@ nav .nav_liens a
     margin-left: 8px;
 }
 
-/* RESPONSIVE DESIGN */
+/*********************************************************
+
+    PAGE PROJET
+
+*********************************************************/
+
+.projet_header
+{
+    height: 500px;
+    position: relative;
+}
+
+.projet_header .bloc_noir
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.445);
+}
+
+.projet_header .titre
+{
+    position: absolute;
+    background: #FFF;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 100%;
+    top: calc(50% - 50px);
+    mix-blend-mode: screen;
+}
+
+.projet_contenu
+{
+    padding: 36px 0;
+    line-height: 30px;
+    color: var(--grey);
+}
+
+.projet_contenu .projet_actions
+{
+    padding: 16px 0;
+}
+
+.projet_contenu .projet_actions img
+{
+    width: 20px;
+    height: 20px;
+}
+
+.projet_contenu .projet_actions .exporter_pdf
+{
+    border: 1px solid var(--orange);
+    background: none;
+    padding: 8px 16px;
+}
+
+/*********************************************************
+
+    PAGE 404 : NOT FOUND
+
+*********************************************************/
+
+.error_page
+{
+    background: #fffbf9;
+    height: 100vh;
+    text-align: center;
+    padding: 25px;
+}
+
+.error_content
+{
+    display: grid;
+    grid-template-columns: repeat(2, 49%);
+    align-items: center;
+    column-gap: 10px;
+    height: 90vh;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.error_page h1
+{
+    font-size: 90px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--orange);
+}
+
+.error_page h3
+{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 30px 0;
+}
+
+.error_page a
+{
+    display: block;
+    margin: 50px auto 0 auto;
+    width: 30%;
+    border: 2px solid var(--orange);
+    padding: 16px;
+    text-decoration: none;
+    color: var(--orange);
+    transition-duration: .3s;
+    font-weight: 600;
+}
+
+.error_page a:hover
+{
+    background: var(--orange);
+    color: #FFF;
+    transition-duration: .3s;
+}
+
+/*********************************************************
+
+    RESPONSIVE DESIGN
+
+*********************************************************/
 
 @media only screen and (max-width: 700px)
 {
