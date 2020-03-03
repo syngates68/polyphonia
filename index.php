@@ -5,6 +5,7 @@
     ini_set('display_errors', 1);
 
     include("config/config.php");
+    include("config/fonctions.php");
 ?>
 
 <!DOCTYPE html>

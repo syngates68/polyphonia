@@ -1,0 +1,55 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mar. 03 mars 2020 à 21:27
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.2.18
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `polyphonia`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `projets`
+--
+
+DROP TABLE IF EXISTS `projets`;
+CREATE TABLE IF NOT EXISTS `projets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) NOT NULL,
+  `contenu` text NOT NULL,
+  `illustration` varchar(255) NOT NULL,
+  `id_redacteur` int(11) NOT NULL,
+  `date_ajout` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `slug` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `projets`
+--
+
+INSERT INTO `projets` (`id`, `titre`, `contenu`, `illustration`, `id_redacteur`, `date_ajout`, `slug`) VALUES
+(1, 'Gestion des notes d\'un établissement scolaire', '<p>Une voiture venait d’arriver de l’autre côté de la barrière. Une personne sortit. Un militaire. Il était comme dans les films de guerre pensa David. Les décorations remplissaient l’avant de sa veste. Il s’approcha de la voiture où se trouvait David. Le chauffeur ouvrit la fenêtre.</p>\r\n\r\n<p>Le militaire regagna sa voiture et la barrière s’ouvrit. David regardait autour de lui, la base militaire où il avait passé dix mois de sa vie. Il n’y avait pas beaucoup de changement. L’herbe toujours aussi bien tondue, les allées toujours aussi propres. Les mêmes bâtiments. Juste les décors avaient changés. Il s’agissait de chars. C’étaient les chars que David avait eu l’occasion de voir fonctionner et qui, maintenant, avaient remplacés les vieux chars qui servaient de décors. Cela fit sourire David.</p>\r\n\r\n<p>D’ailleurs, le Dr. ne savait pas vraiment comment son processeur pouvait fonctionner. D’une architecture trop complexe, le Dr. s’était reposé sur les tests effectués. Tests très légèrement modifiés par Prélude afin de cacher certaines fonctions du processeur.</p>\r\n\r\n<p>Désormais, tous les ordinateurs lui étaient accessibles. Les centrales nucléaires, les services informatiques des grandes compagnies, de l’eau, du téléphone, la télévision, l’électricité, la défense, la bourse...</p>\r\n\r\n<p>C’est comme ça qu’il se voyait à cette époque. Un peu rebelle envers ce monde. L’informatique l’avait aidé à s’enfermer un peu plus dans cet état. Il était devenu doué d’une logique à toute épreuve et d’une intelligence remarquable, mais surtout, il était devenu insociable. Avec l’âge, le besoin de trouver l’âme sœur avait pris le dessus et il avait été un peu obligé de rencontrer des gens, de parler avec eux. Très difficile au début, il avait réussi à vaincre ces préjugés. Il avait accepté la lenteur d’esprit des autres ainsi que leur manque de logique.</p>\r\n\r\n<p>De tout temps, l\'homme a tenté de comprendre puis de reproduire l\'extraordinaire machine qu\'est l\'être humain. Les premiers automates nous font sourire aujourd\'hui. Les premiers ordinateurs également, mais un peu moins. Et lorsqu\'un certain McCullogn, aidé de Pitts, invente en 1943 le premier neurone formel, on ne rigole plus. L\'ordinateur est devenu capable de reproduire des neurones artificiels. Le \"complexe de Frankenstein\" va alors freiner les recherches. On commence à entendre parler du concept d\'Intelligence Artificielle, plus connu sous les termes d\'IA. Cela fait peur.</p>\r\n\r\n<p>C’est comme ça qu’il se voyait à cette époque. Un peu rebelle envers ce monde. L’informatique l’avait aidé à s’enfermer un peu plus dans cet état. Il était devenu doué d’une logique à toute épreuve et d’une intelligence remarquable, mais surtout, il était devenu insociable. Avec l’âge, le besoin de trouver l’âme sœur avait pris le dessus et il avait été un peu obligé de rencontrer des gens, de parler avec eux. Très difficile au début, il avait réussi à vaincre ces préjugés. Il avait accepté la lenteur d’esprit des autres ainsi que leur manque de logique.</p>\r\n\r\n<p>Aujourd’hui, c’est son anniversaire. Il a vingt-six ans, mais il ne s’en souvient plus. Il ne prête pas attention à ce genre de détails. David est un homme distrait, timide, mais sûr de lui. Il est grand et mince. De grandes mains prolongent ses longs bras. Il lui serait possible de tenir deux bouteilles de Champagne dans chacune de ses mains, mais il ne boit jamais. L\'alcool le rend malade et malheureux, voir dépressif.</p>\r\n\r\n<p>Les deux hommes entourent David et le conduisent à la voiture, un Espace, garé devant sa maison. Il se dit que ce serait bien si sa voisine pouvait le voir comme ça, entouré de deux gardes du corps. Ça fait ‘pro’. Et comme tous les matins, sa voisine Florence le regarde partir, mais cette fois-ci entouré de deux gros gars baraqués, rasés au plus près, menton et crâne. Un peu plus les pieds sur terre et surtout plus réveillée, elle ne trouve pas cette scène très drôle. Il faudra qu’elle vienne le voir ce soir, à son retour, pour lui demander de quoi il s’agissait.</p>\r\n\r\n<p>Les deux gardes du corps personnels de David le prirent par le bras et suivirent le général. Les militaires s‘étaient mis au « garde à vous » sur les côtés du couloir. Celui-ci menait à un ascenseur. Le général inséra à nouveau son badge et la porte s’ouvrit. Il y montèrent tous les quatre. Il n’y avait pas de niveau d’indiqué.</p>', 'assets/img/ecole.jpg', 1, '2020-03-03 20:59:10', 'gestion_notes_etablissement_scolaire'),
+(2, 'Site de vente en ligne', '<p>Une voiture venait d’arriver de l’autre côté de la barrière. Une personne sortit. Un militaire. Il était comme dans les films de guerre pensa David. Les décorations remplissaient l’avant de sa veste. Il s’approcha de la voiture où se trouvait David. Le chauffeur ouvrit la fenêtre.</p>', 'assets/img/magasin.jpg', 1, '2020-03-03 21:01:10', 'site_vente_ligne'),
+(3, 'Réseau social inter-université', '<p>Une voiture venait d’arriver de l’autre côté de la barrière. Une personne sortit. Un militaire. Il était comme dans les films de guerre pensa David. Les décorations remplissaient l’avant de sa veste. Il s’approcha de la voiture où se trouvait David. Le chauffeur ouvrit la fenêtre.</p>\r\n\r\n<p>Le militaire regagna sa voiture et la barrière s’ouvrit. David regardait autour de lui, la base militaire où il avait passé dix mois de sa vie. Il n’y avait pas beaucoup de changement. L’herbe toujours aussi bien tondue, les allées toujours aussi propres. Les mêmes bâtiments. Juste les décors avaient changés. Il s’agissait de chars. C’étaient les chars que David avait eu l’occasion de voir fonctionner et qui, maintenant, avaient remplacés les vieux chars qui servaient de décors. Cela fit sourire David.</p>\r\n\r\n<p>D’ailleurs, le Dr. ne savait pas vraiment comment son processeur pouvait fonctionner. D’une architecture trop complexe, le Dr. s’était reposé sur les tests effectués. Tests très légèrement modifiés par Prélude afin de cacher certaines fonctions du processeur.</p>\r\n\r\n<p>Désormais, tous les ordinateurs lui étaient accessibles. Les centrales nucléaires, les services informatiques des grandes compagnies, de l’eau, du téléphone, la télévision, l’électricité, la défense, la bourse...</p>\r\n\r\n<p>C’est comme ça qu’il se voyait à cette époque. Un peu rebelle envers ce monde. L’informatique l’avait aidé à s’enfermer un peu plus dans cet état. Il était devenu doué d’une logique à toute épreuve et d’une intelligence remarquable, mais surtout, il était devenu insociable. Avec l’âge, le besoin de trouver l’âme sœur avait pris le dessus et il avait été un peu obligé de rencontrer des gens, de parler avec eux. Très difficile au début, il avait réussi à vaincre ces préjugés. Il avait accepté la lenteur d’esprit des autres ainsi que leur manque de logique.</p>\r\n\r\n<p>De tout temps, l\'homme a tenté de comprendre puis de reproduire l\'extraordinaire machine qu\'est l\'être humain. Les premiers automates nous font sourire aujourd\'hui. Les premiers ordinateurs également, mais un peu moins. Et lorsqu\'un certain McCullogn, aidé de Pitts, invente en 1943 le premier neurone formel, on ne rigole plus. L\'ordinateur est devenu capable de reproduire des neurones artificiels. Le \"complexe de Frankenstein\" va alors freiner les recherches. On commence à entendre parler du concept d\'Intelligence Artificielle, plus connu sous les termes d\'IA. Cela fait peur.</p>\r\n\r\n<p>C’est comme ça qu’il se voyait à cette époque. Un peu rebelle envers ce monde. L’informatique l’avait aidé à s’enfermer un peu plus dans cet état. Il était devenu doué d’une logique à toute épreuve et d’une intelligence remarquable, mais surtout, il était devenu insociable. Avec l’âge, le besoin de trouver l’âme sœur avait pris le dessus et il avait été un peu obligé de rencontrer des gens, de parler avec eux. Très difficile au début, il avait réussi à vaincre ces préjugés. Il avait accepté la lenteur d’esprit des autres ainsi que leur manque de logique.</p>\r\n\r\n<p>Aujourd’hui, c’est son anniversaire. Il a vingt-six ans, mais il ne s’en souvient plus. Il ne prête pas attention à ce genre de détails. David est un homme distrait, timide, mais sûr de lui. Il est grand et mince. De grandes mains prolongent ses longs bras. Il lui serait possible de tenir deux bouteilles de Champagne dans chacune de ses mains, mais il ne boit jamais. L\'alcool le rend malade et malheureux, voir dépressif.</p>\r\n\r\n<p>Les deux hommes entourent David et le conduisent à la voiture, un Espace, garé devant sa maison. Il se dit que ce serait bien si sa voisine pouvait le voir comme ça, entouré de deux gardes du corps. Ça fait ‘pro’. Et comme tous les matins, sa voisine Florence le regarde partir, mais cette fois-ci entouré de deux gros gars baraqués, rasés au plus près, menton et crâne. Un peu plus les pieds sur terre et surtout plus réveillée, elle ne trouve pas cette scène très drôle. Il faudra qu’elle vienne le voir ce soir, à son retour, pour lui demander de quoi il s’agissait.</p>\r\n\r\n<p>Les deux gardes du corps personnels de David le prirent par le bras et suivirent le général. Les militaires s‘étaient mis au « garde à vous » sur les côtés du couloir. Celui-ci menait à un ascenseur. Le général inséra à nouveau son badge et la porte s’ouvrit. Il y montèrent tous les quatre. Il n’y avait pas de niveau d’indiqué.</p>', 'assets/img/social.jpg', 1, '2020-03-03 21:03:27', 'reseau_social_inter_universite');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

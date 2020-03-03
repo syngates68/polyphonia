@@ -25,91 +25,35 @@
 </div>
 
 <div class="liste_projets">
+    <?php 
+        $liste_projets = req_liste_projets(); 
+        foreach($liste_projets as $projet) :
+    ?>
     <div class="projet">
         <div class="image_projet">
-            <img src="<?= BASEURL ?>assets/img/ecole.jpg">
+            <img src="<?= BASEURL ?><?= $projet['illustration']; ?>">
         </div>
         <div class="corps_projet">
-            <div class="titre_projet">Gestion des notes d’un etablissement scolaire</div>
+            <div class="titre_projet"><?= $projet['titre']; ?></div>
             <div class="description_projet">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quo? Molestiae perferendis repudiandae cum tempora autem ullam quo, 
-                aperiam culpa quod. Soluta ipsa eum velit iusto laboriosam veniam atque ad!<br/><br/>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque sapiente nobis corporis dolorem cum. Rem iusto quaerat ullam, id perferendis, 
-                quibusdam incidunt obcaecati illum qui non tempora voluptates totam magnam.<br/><br/>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime non nihil deserunt, quam architecto animi quas adipisci dolore maiores debitis quidem quaerat unde 
-                commodi nostrum exercitationem libero tempora, tempore minima...
+                <?= extrait_texte($projet['contenu'], 710); ?>
             </div>
         </div>
         <div class="footer_projet">
             <div class="infos_projet">
                 <div class="auteur_projet">
                     <img src="<?= BASEURL ?>assets/img/user.svg">
-                    <div class="nom_auteur">syngates68</div>
+                    <div class="nom_auteur"><?= $projet['nom_utilisateur']; ?></div>
                 </div>
                 <div class="date_projet">
                     <img src="<?= BASEURL ?>assets/img/calendar.svg">
-                    <div class="date">28/02/2020</div>
+                    <div class="date"><?= formate_date($projet['date_ajout']); ?></div>
                 </div>
             </div>
-            <a href="<?= BASEURL ?>projet/gestion_notes_etablissement_scolaire.html" class="btn_lire_projet">Lire<img src="<?= BASEURL ?>assets/img/arrow_right.svg"></a>
+            <a href="<?= BASEURL ?>projet/<?= $projet['slug']; ?>.html" class="btn_lire_projet">Lire<img src="<?= BASEURL ?>assets/img/arrow_right.svg"></a>
         </div>
     </div>
-    <div class="projet">
-        <div class="image_projet">
-            <img src="<?= BASEURL ?>assets/img/magasin.jpg">
-        </div>
-        <div class="corps_projet">
-            <div class="titre_projet">Site de vente en ligne</div>
-            <div class="description_projet">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quo? Molestiae perferendis repudiandae cum tempora autem ullam quo, 
-                aperiam culpa quod. Soluta ipsa eum velit iusto laboriosam veniam atque ad!<br/><br/>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque sapiente nobis corporis dolorem cum. Rem iusto quaerat ullam, id perferendis, 
-                quibusdam incidunt obcaecati illum qui non tempora voluptates totam magnam.<br/><br/>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime non nihil deserunt, quam architecto animi quas adipisci dolore maiores debitis quidem quaerat unde 
-                commodi nostrum exercitationem libero tempora, tempore minima...
-            </div>
-        </div>
-        <div class="footer_projet">
-            <div class="infos_projet">
-                <div class="auteur_projet">
-                    <img src="<?= BASEURL ?>assets/img/user.svg">
-                    <div class="nom_auteur">syngates68</div>
-                </div>
-                <div class="date_projet">
-                    <img src="<?= BASEURL ?>assets/img/calendar.svg">
-                    <div class="date">28/02/2020</div>
-                </div>
-            </div>
-            <a href="#" class="btn_lire_projet">Lire<img src="<?= BASEURL ?>assets/img/arrow_right.svg"></a>
-        </div>
-    </div>
-    <div class="projet">
-        <div class="image_projet">
-            <img src="<?= BASEURL ?>assets/img/social.jpg">
-        </div>
-        <div class="corps_projet">
-            <div class="titre_projet">Réseau social inter-université</div>
-            <div class="description_projet">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, quo? Molestiae perferendis repudiandae cum tempora autem ullam quo, 
-                aperiam culpa quod. Soluta ipsa eum velit iusto laboriosam veniam atque ad!<br/><br/>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque sapiente nobis corporis dolorem cum. Rem iusto quaerat ullam, id perferendis, 
-                quibusdam incidunt obcaecati illum qui non tempora voluptates totam magnam.<br/><br/>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime non nihil deserunt, quam architecto animi quas adipisci dolore maiores debitis quidem quaerat unde 
-                commodi nostrum exercitationem libero tempora, tempore minima...
-            </div>
-        </div>
-        <div class="footer_projet">
-            <div class="infos_projet">
-                <div class="auteur_projet">
-                    <img src="<?= BASEURL ?>assets/img/user.svg">
-                    <div class="nom_auteur">syngates68</div>
-                </div>
-                <div class="date_projet">
-                    <img src="<?= BASEURL ?>assets/img/calendar.svg">
-                    <div class="date">28/02/2020</div>
-                </div>
-            </div>
-            <a href="#" class="btn_lire_projet">Lire<img src="<?= BASEURL ?>assets/img/arrow_right.svg"></a>
-        </div>
-    </div>
+    <?php
+        endforeach; 
+    ?>
 </div>

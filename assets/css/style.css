@@ -187,6 +187,7 @@ nav .nav_liens a
     color: var(--grey);
     line-height: 15px;
     margin-top: 24px;
+    min-height: 150px;
 }
 
 .projet .footer_projet
@@ -288,6 +289,13 @@ nav .nav_liens a
     color: var(--grey);
 }
 
+.projet_contenu__top
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .projet_contenu .projet_actions
 {
     padding: 16px 0;
@@ -297,13 +305,41 @@ nav .nav_liens a
 {
     width: 20px;
     height: 20px;
+    margin-right: 5px;
 }
 
 .projet_contenu .projet_actions .exporter_pdf
 {
-    border: 1px solid var(--orange);
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent transparent var(--orange) transparent;
     background: none;
     padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    transition-duration: .3s;
+}
+
+.projet_contenu .projet_actions .exporter_pdf:hover
+{
+    border: 2px solid var(--orange);
+    transition-duration: .3s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.projet_contenu .projet_infos
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.projet_contenu .projet_infos > *
+{
+    padding: 0 8px;
+    color: var(--grey);
+    font-size: 13px;
 }
 
 /*********************************************************
