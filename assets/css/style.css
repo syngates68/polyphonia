@@ -344,6 +344,128 @@ nav .nav_liens a
 
 /*********************************************************
 
+    ADMINISTRATION
+
+*********************************************************/
+
+.btn_nouveau_projet
+{
+    display: block;
+    width: 150px;
+    margin-top: 16px;
+    border: none;
+    padding: 8px 16px;
+    background: var(--orange);
+    color: #FFF;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.administration
+{
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid var(--border);
+}
+
+.administration .tbl_header,
+.administration .tbl_contenu
+{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 1fr;
+    align-items: center;
+    padding: 8px;
+}
+
+.administration .tbl_header .tbl_header__col,
+.administration .tbl_contenu .tbl_contenu__col
+{
+    padding: 0 16px;
+}
+
+.administration .tbl_header
+{
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--grey);
+}
+
+.administration .tbl_contenu
+{
+    border-bottom: 1px solid var(--border);
+    margin: 32px 0;
+}
+
+.administration .tbl_contenu img
+{
+    width: 100%;
+}
+
+.administration .tbl_actions
+{
+    display: flex;
+    justify-content: end;
+}
+
+.administration .tbl_actions .icon
+{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.nouveau_projet
+{
+    margin-top: 16px;
+}
+
+.nouveau_projet label
+{
+    font-weight: 600;
+}
+
+.nouveau_projet .form_ligne
+{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 49%);
+    column-gap: 10px;
+    padding: 8px 0;
+}
+
+.nouveau_projet .form_ligne input[type="text"],
+.nouveau_projet textarea
+{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border);
+}
+
+.nouveau_projet textarea
+{
+    resize: none;
+    min-height: 500px;
+    font-family: 'Roboto';
+}
+
+.nouveau_projet button
+{
+    display: block;
+    width: 25%;
+    margin: 16px auto 0 auto;
+    background: var(--orange);
+    color: #FFF;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/*********************************************************
+
     PAGE 404 : NOT FOUND
 
 *********************************************************/
