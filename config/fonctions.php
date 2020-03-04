@@ -23,6 +23,14 @@ function req_liste_projets()
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function count_nbr_projets()
+{
+    $count = db()->query("SELECT COUNT(*) FROM projets");
+    $count->execute();
+
+    return $count->fetch(PDO::FETCH_NUM)[0];
+}
+
 function req_by_slug($slug)
 {
     $req = db()->prepare("SELECT * FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");

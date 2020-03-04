@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="<?= BASEURL ?>assets/css/reset.css">
     <link rel="stylesheet" href="<?= BASEURL ?>assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="<?= BASEURL ?>assets/img/favicon.png" />
+    <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 </head>
 <body>
     <?php include("vues/index.php"); ?>

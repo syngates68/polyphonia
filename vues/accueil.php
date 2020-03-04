@@ -24,9 +24,11 @@
     </ul>
 </div>
 
+<div class="nbr_projets"><?= count_nbr_projets(); ?> projets</div>
+
 <div class="liste_projets">
     <?php 
-        $liste_projets = req_liste_projets(); 
+        $liste_projets = req_liste_projets();
         foreach($liste_projets as $projet) :
     ?>
     <div class="projet">
