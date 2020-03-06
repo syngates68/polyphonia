@@ -1,9 +1,18 @@
 *
 {
     --orange: #fa940f;
+    --orange_clair: #fa940f9a;
     --border: #E0E0E0;
     --grey: #4F4F4F;
+    --links: #276F86;
     box-sizing: border-box;
+}
+
+br 
+{
+    content: "";
+    display: block;
+    margin-bottom: 1em;
 }
 
 body
@@ -18,13 +27,14 @@ nav
     align-items: center;
     justify-content: space-between;
     padding: 24px;
-    background: var(--orange);
+    background: #FFF;
+    border-bottom: 2px solid var(--orange);
 }
 
 nav a
 {
     text-decoration: none;
-    color: #FFF;
+    color: var(--orange);
 }
 
 nav .logo_polyphonia
@@ -45,16 +55,31 @@ nav .logo_polyphonia img
 
 nav .nav_liens a
 {
-    padding: 0 16px;
-    text-transform: uppercase;
+    padding: 8px 16px;
+    letter-spacing: 2px;
     font-size: 14px;
+    transition-duration: .3s;
+    color: var(--orange_clair);
+}
+
+nav .nav_liens a.actif
+{
+    color: var(--orange);
+}
+
+nav .nav_liens a:hover
+{
+    color: var(--orange);
+    transition-duration: .3s;
 }
 
 .container
 {
     padding: 24px 48px;
     width: 70%;
-    margin: 0 auto;
+    margin: 16px auto;
+    background: #FFF;
+    border: 1px solid var(--border);
 }
 
 .container h1
@@ -158,7 +183,7 @@ nav .nav_liens a
 {
     background: #FFF;
     border: 1px solid var(--border);
-    /*box-shadow: 0 2px 10px #9c9c9c;*/
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border-radius: 5px;
     margin-bottom: 18px;
 }
@@ -177,15 +202,17 @@ nav .nav_liens a
 
 .projet .corps_projet
 {
-    padding: 8px;
+    padding: 16px 8px;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .projet .titre_projet
 {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
     min-height: 40px;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    letter-spacing: 1px;
 }
 
 .projet .description_projet
@@ -194,16 +221,17 @@ nav .nav_liens a
     color: var(--grey);
     line-height: 15px;
     margin-top: 24px;
-    min-height: 150px;
+    min-height: 180px;
 }
 
 .projet .footer_projet
 {
-    margin-top: 24px;
+    margin: 24px auto 16px auto;
     padding: 16px 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 90%;
 }
 
 .infos_projet
@@ -240,19 +268,16 @@ nav .nav_liens a
     background: var(--orange);
     color: #FFF;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 8px 16px;
     text-decoration: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .btn_lire_projet:hover
 {
     cursor: pointer;
-}
-
-.btn_lire_projet img
-{
-    margin-left: 8px;
+    background: var(--orange_clair);
 }
 
 /*********************************************************
@@ -291,9 +316,12 @@ nav .nav_liens a
 
 .projet_contenu
 {
-    padding: 36px 0;
+    width: 70%;
+    margin: 16px auto;
     line-height: 30px;
     color: var(--grey);
+    background: #FFF;
+    /*border: 1px solid var(--border);*/
 }
 
 .projet_contenu__top
@@ -301,6 +329,8 @@ nav .nav_liens a
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 16px;
+    border-bottom: 2px solid var(--orange);
 }
 
 .projet_contenu .projet_actions
@@ -319,20 +349,27 @@ nav .nav_liens a
 {
     border-style: solid;
     border-width: 2px;
-    border-color: transparent transparent var(--orange) transparent;
+    border: 2px solid var(--orange);
     background: none;
     padding: 8px 16px;
     display: flex;
     align-items: center;
     transition-duration: .3s;
+    font-size: 12px;
+}
+
+.projet_contenu .projet_actions .exporter_pdf i
+{
+    font-size: 14px;
+    margin-right: 5px;
 }
 
 .projet_contenu .projet_actions .exporter_pdf:hover
 {
-    border: 2px solid var(--orange);
+    background: var(--orange);
+    color: #FFF;
     transition-duration: .3s;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 .projet_contenu .projet_infos
@@ -349,6 +386,22 @@ nav .nav_liens a
     font-size: 13px;
 }
 
+.projet_contenu .projet_texte
+{
+    padding: 36px;
+}
+
+.projet_contenu__footer
+{
+    padding: 16px;
+}
+
+.projet_contenu__footer a
+{
+    font-size: 12px;
+    color: var(--links);
+}
+
 /*********************************************************
 
     ADMINISTRATION
@@ -358,31 +411,42 @@ nav .nav_liens a
 .btn_nouveau_projet
 {
     display: block;
-    width: 150px;
+    width: 170px;
+    text-align: center;
+    font-size: 12px;
     margin-top: 16px;
     border: none;
     padding: 8px 16px;
-    background: var(--orange);
-    color: #FFF;
-    border-radius: 5px;
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    border-radius: 3px;
     cursor: pointer;
     text-decoration: none;
+    transition-duration: .3s;
+}
+
+.btn_nouveau_projet:hover
+{
+    background: var(--orange);
+    color: #FFF;
+    transition-duration: .3s;
 }
 
 .administration
 {
     margin-top: 16px;
     padding: 16px;
-    border: 1px solid var(--border);
 }
 
 .administration .tbl_header,
 .administration .tbl_contenu
 {
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     padding: 8px;
+    max-height: 120px;
+    text-align: center;
 }
 
 .administration .tbl_header .tbl_header__col,
@@ -396,7 +460,8 @@ nav .nav_liens a
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
-    color: var(--grey);
+    color: var(--orange);
+    background: var(--grey);
 }
 
 .administration .tbl_contenu
@@ -407,7 +472,8 @@ nav .nav_liens a
 
 .administration .tbl_contenu img
 {
-    width: 100%;
+    width: 70%;
+    height: 100px;
 }
 
 .administration .tbl_actions
@@ -427,7 +493,7 @@ nav .nav_liens a
 {
     margin-top: 16px;
     background: #FFF;
-    border: 1px solid var(--border);
+    /*border: 1px solid var(--border);*/
     padding: 16px;
     border-radius: 5px;
 }
@@ -457,11 +523,11 @@ nav .nav_liens a
 
 .nouveau_projet label
 {
-    font-weight: 600;
     display: block;
     margin-bottom: 8px;
     font-size: 11px;
     color: rgba(0,0,0,.87);
+    letter-spacing: 1px;
     text-align: left;
 }
 

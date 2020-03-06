@@ -19,7 +19,7 @@ if (sizeof($projet) > 0)
     <div class="projet_contenu">
         <div class="projet_contenu__top">
             <div class="projet_actions">
-                <button class="exporter_pdf"><img src="<?= BASEURL; ?>assets/img/pdf.svg">Exporter en PDF</button>
+                <button class="exporter_pdf"><i class="material-icons">description</i>Exporter en PDF</button>
             </div>
             <div class="projet_infos">
                 <div class="auteur">
@@ -32,7 +32,12 @@ if (sizeof($projet) > 0)
                 </div>
             </div>   
         </div>
-        <?= nl2br($p['contenu']); ?>
+        <div class="projet_texte">
+            <?= nl2br($p['contenu']); ?>
+        </div>
+        <div class="projet_contenu__footer">
+            <a href="#">Suggérer une modification</a>
+        </div>
     </div>
     
     <?php

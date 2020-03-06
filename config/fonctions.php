@@ -2,22 +2,9 @@
 
 include('database.php');
 
-function db()
-{
-    try{
-        $bdd = new PDO('mysql:host=localhost;dbname=polyphonia;charset=utf8', USERNAME, PASSWORD);
-    }
-    catch(PDOException $e){
-        print "Erreur : ". $e->getMessage()."<br/>";
-        die();
-    }
-
-    return $bdd;
-}
-
 function req_liste_projets()
 {
-    $req = db()->query("SELECT * FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur");
+    $req = db()->query("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.vues, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur");
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -76,4 +63,18 @@ function ajouter_projet($titre, $contenu, $illustration)
 
     $ins = db()->prepare('INSERT INTO projets(titre, contenu, illustration, id_redacteur, slug) VALUES (?, ?, ?, 1, ?)');
     $ins->execute([$titre, $contenu, $illustration, $slug]);
+}
+
+function req_by_id($id_projet)
+{
+    $req = db()->prepare("SELECT * FROM projets WHERE id = ?");
+    $req->execute([$id_projet]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0];
+}
+
+function update_vues($id_projet, $vues)
+{
+    $upd = db()->prepare("UPDATE projets SET vues = ? WHERE id = ?");
+    $upd->execute([$vues, $id_projet]);
 }

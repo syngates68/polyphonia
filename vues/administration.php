@@ -4,9 +4,9 @@
 
 <div class="administration">
     <div class="tbl_header">
-        <div class="tbl_header__col">Titre</div>
-        <div class="tbl_header__col">Contenu</div>
         <div class="tbl_header__col">Illustration</div>
+        <div class="tbl_header__col">Titre</div>
+        <div class="tbl_header__col">Vues</div>
         <div class="tbl_header__col"></div>
     </div>
 
@@ -19,13 +19,13 @@ foreach($liste_projets as $projet) :
     
     <div class="tbl_contenu">
         <div class="tbl_contenu__col">
+            <img src="<?= BASEURL; ?><?= $projet['illustration']; ?>">
+        </div>
+        <div class="tbl_contenu__col">
             <?= $projet['titre']; ?>
         </div>
         <div class="tbl_contenu__col">
-            <?= extrait_texte($projet['contenu'], 700); ?>
-        </div>
-        <div class="tbl_contenu__col">
-            <img src="<?= BASEURL; ?><?= $projet['illustration']; ?>">
+            <?= $projet['vues']; ?>
         </div>
         <div class="tbl_contenu__col tbl_actions">
             <img class="icon" src="<?= BASEURL; ?>assets/img/edit.svg">

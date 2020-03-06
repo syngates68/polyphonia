@@ -52,7 +52,7 @@
                     <div class="date"><?= formate_date($projet['date_ajout']); ?></div>
                 </div>
             </div>
-            <a href="<?= BASEURL ?>projet/<?= $projet['slug']; ?>.html" class="btn_lire_projet">Lire<img src="<?= BASEURL ?>assets/img/arrow_right.svg"></a>
+            <a href="<?= BASEURL ?>projet/<?= $projet['slug']; ?>.html" projet="<?= $projet['id_projet']; ?>" class="btn_lire_projet">Lire</a>
         </div>
     </div>
     <?php
