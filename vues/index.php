@@ -5,7 +5,7 @@
     ?>
         <nav>
             <div class="logo_polyphonia">
-                <img src="<?= BASEURL ?>assets/img/logo orange.png">
+                <img src="<?= BASEURL ?>assets/img/logo_orange.png">
                 <a href="<?= BASEURL ?>">Polyphonia</a>
             </div>
             <div class="nav_liens">
@@ -13,7 +13,10 @@
                 <a href="<?= BASEURL ?>blog.html">Blog</a>
                 <a href="<?= BASEURL ?>forum.html">Forum</a>
                 <a href="<?= BASEURL ?>contact.html">Contact</a>
-                <a href="<?= BASEURL ?>administration.html">Administration</a>
+                <?php if (isset($_SESSION['utilisateur'])) : ?>
+                    <a href="<?= BASEURL ?>administration.html">Administration</a>
+                    <a href="<?= BASEURL ?>deconnexion.html">Déconnexion</a>
+                <?php endif; ?>
             </div>
         </nav>
         <div class="container">

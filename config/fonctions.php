@@ -23,7 +23,7 @@ function req_by_slug($slug)
     $req = db()->prepare("SELECT * FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
     $req->execute([$slug]);
 
-    return $req->fetchAll(PDO::FETCH_ASSOC);
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
 function formate_date($date)
@@ -57,12 +57,12 @@ function slugify($string, $delimiter = '-') {
 	return $clean;
 }
 
-function ajouter_projet($titre, $contenu, $illustration)
+function ajouter_projet($titre, $contenu, $id_utilisateur, $illustration)
 {
     $slug = slugify($titre);
 
-    $ins = db()->prepare('INSERT INTO projets(titre, contenu, illustration, id_redacteur, slug) VALUES (?, ?, ?, 1, ?)');
-    $ins->execute([$titre, $contenu, $illustration, $slug]);
+    $ins = db()->prepare('INSERT INTO projets(titre, contenu, illustration, id_redacteur, slug) VALUES (?, ?, ?, ?, ?)');
+    $ins->execute([$titre, $contenu, $illustration, $id_utilisateur, $slug]);
 }
 
 function req_by_id($id_projet)
@@ -77,4 +77,21 @@ function update_vues($id_projet, $vues)
 {
     $upd = db()->prepare("UPDATE projets SET vues = ? WHERE id = ?");
     $upd->execute([$vues, $id_projet]);
+}
+
+function check_connexion($nom_utilisateur)
+{
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE nom_utilisateur = ?');
+    $req->execute([$nom_utilisateur]);
+
+    if ($req->rowCount() > 0)
+        return $req->fetchAll(PDO::FETCH_ASSOC)[0];
+    else
+        return 0;
+}
+
+function update_projet($titre, $contenu, $id)
+{
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ? WHERE id = ?');
+    $upd->execute([$titre, $contenu, $id]);
 }

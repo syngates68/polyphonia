@@ -21,6 +21,57 @@ body
     background: #fffbf9;
 }
 
+form label
+{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    color: rgba(0,0,0,.87);
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+form .form_ligne
+{
+    width: 100%;
+    padding: 16px 0;
+}
+
+form .form_ligne input[type="text"],
+form .form_ligne input[type="password"],
+form textarea
+{
+    width: 100%;
+    display: block;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+}
+
+form textarea
+{
+    resize: none;
+    min-height: 500px;
+    font-family: 'Roboto';
+}
+
+.erreur
+{
+    box-shadow: 0 0 0 1px #e0b4b4 inset,0 0 0 0 transparent;
+    background-color: #fff6f6;
+    color: #9f3a38;
+    padding: 1em 1.5em;
+    margin-top: 8px;
+}
+
+.succes
+{
+    box-shadow: 0 0 0 1px #a3c293 inset,0 0 0 0 transparent;
+    background-color: #fcfff5;
+    color: #2c662d;
+    padding: 1em 1.5em;
+}
+
 nav
 {
     display: flex;
@@ -404,6 +455,50 @@ nav .nav_liens a:hover
 
 /*********************************************************
 
+    CONNEXION
+
+*********************************************************/
+
+.formulaire_connexion
+{
+    text-align: center;
+}
+
+.formulaire_connexion img
+{
+    width: 150px;
+    height: 150px;
+}
+
+.formulaire_connexion form
+{
+    width: 30%;
+    margin: 0 auto;
+}
+
+.formulaire_connexion button
+{
+    display: block;
+    width: 40%;
+    margin: 16px auto 0 auto;
+    border: 1px solid var(--orange);
+    background: none;
+    color: var(--orange);
+    font-weight: 600;
+    padding: 8px;
+    transition-duration: .3s;
+}
+
+.formulaire_connexion button:hover
+{
+    cursor: pointer;
+    background: var(--orange);
+    color: #FFF;
+    transition-duration: .3s;
+}
+
+/*********************************************************
+
     ADMINISTRATION
 
 *********************************************************/
@@ -498,43 +593,11 @@ nav .nav_liens a:hover
     border-radius: 5px;
 }
 
-.nouveau_projet .erreur
-{
-    box-shadow: 0 0 0 1px #e0b4b4 inset,0 0 0 0 transparent;
-    background-color: #fff6f6;
-    color: #9f3a38;
-    padding: 1em 1.5em;
-}
-
-.nouveau_projet .succes
-{
-    box-shadow: 0 0 0 1px #a3c293 inset,0 0 0 0 transparent;
-    background-color: #fcfff5;
-    color: #2c662d;
-    padding: 1em 1.5em;
-}
-
 .nouveau_projet form
 {
     width: 70%;
     margin: 0 auto;
     text-align: center;
-}
-
-.nouveau_projet label
-{
-    display: block;
-    margin-bottom: 8px;
-    font-size: 11px;
-    color: rgba(0,0,0,.87);
-    letter-spacing: 1px;
-    text-align: left;
-}
-
-.nouveau_projet .form_ligne
-{
-    width: 100%;
-    padding: 16px 0;
 }
 
 .nouveau_projet .ajouter_image
@@ -564,23 +627,6 @@ nav .nav_liens a:hover
 .nouveau_projet .ajouter_image:hover
 {
     cursor: pointer;
-}
-
-.nouveau_projet .form_ligne input[type="text"],
-.nouveau_projet textarea
-{
-    width: 100%;
-    display: block;
-    padding: 10px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-}
-
-.nouveau_projet textarea
-{
-    resize: none;
-    min-height: 500px;
-    font-family: 'Roboto';
 }
 
 .nouveau_projet button

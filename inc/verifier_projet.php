@@ -48,7 +48,8 @@ if (isset($_POST['ajouter_projet']))
         
                     if(move_uploaded_file($fichier_temp, $url))
                     {
-                        ajouter_projet($_POST['titre'], $_POST['contenu'], str_replace('../', '', $url));
+                        ajouter_projet($_POST['titre'], $_POST['contenu'], $_SESSION['utilisateur'], str_replace('../', '', $url));
+                        
                         $_SESSION['succes'] = 'Votre projet <B>'.$_POST['titre'].'</B> a bien été ajouté.';
                         header('Location:'.BASEURL.'nouveau_projet.html');
                     }

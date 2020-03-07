@@ -4,15 +4,13 @@ $projet = req_by_slug($_GET['slug']);
 
 if (sizeof($projet) > 0)
 {
-
-    foreach($projet as $p) :
     
-    ?>
+?>
     
-    <div class="projet_header" style="background:url('<?= BASEURL; ?><?= $p['illustration']; ?>');background-size:cover;background-repeat:no-repeat;">
+    <div class="projet_header" style="background:url('<?= BASEURL; ?><?= $projet['illustration']; ?>');background-size:cover;background-repeat:no-repeat;">
         <div class="bloc_noir"></div>
         <div class="titre">
-            <h1><?= $p['titre']; ?></h1>
+            <h1><?= $projet['titre']; ?></h1>
         </div>
     </div>
     
@@ -24,25 +22,23 @@ if (sizeof($projet) > 0)
             <div class="projet_infos">
                 <div class="auteur">
                     <img src="<?= BASEURL; ?>assets/img/user.svg">
-                    <span class="nom_auteur"><?= $p['nom_utilisateur']; ?></span>
+                    <span class="nom_auteur"><?= $projet['nom_utilisateur']; ?></span>
                 </div>
                 <div class="date">
                     <img src="<?= BASEURL; ?>assets/img/calendar.svg">
-                    <span class="date_ajout"><?= formate_date($p['date_ajout']); ?></span>
+                    <span class="date_ajout"><?= formate_date($projet['date_ajout']); ?></span>
                 </div>
             </div>   
         </div>
         <div class="projet_texte">
-            <?= nl2br($p['contenu']); ?>
+            <?= nl2br($projet['contenu']); ?>
         </div>
         <div class="projet_contenu__footer">
             <a href="#">Suggérer une modification</a>
         </div>
     </div>
     
-    <?php
-    
-    endforeach;
+<?php
 }
 else
 {

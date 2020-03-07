@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="<?= BASEURL ?>assets/css/reset.css">
     <link rel="stylesheet" href="<?= BASEURL ?>assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <script src="http://daenerys/zephir/public/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="icon" type="image/png" href="<?= BASEURL ?>assets/img/favicon.png" />
     <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
