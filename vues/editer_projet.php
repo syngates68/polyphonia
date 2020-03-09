@@ -4,6 +4,7 @@ if (isset($_GET['slug']))
 { 
     $projet = req_by_id($_GET['slug']);
     $_SESSION['id_projet'] = $projet['id'];
+    $_SESSION['modification'] = true;
 ?>
 
     <h1>Editer <?= $projet['titre']; ?></h1>

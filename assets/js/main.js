@@ -6,3 +6,9 @@ $(document).on('click', '.projet .btn_lire_projet', function(){
         id_projet : id_projet
     })
 });
+
+$(document).on('click', 'nav #dropdown', function(e)
+{
+    e.preventDefault();
+    $('.dropdown').toggle('is_visible')
+});

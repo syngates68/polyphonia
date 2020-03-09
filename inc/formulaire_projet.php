@@ -5,6 +5,8 @@ $illustration = null;
 $contenu = null;
 $btn = "Ajouter";
 $btn_name = "ajouter_projet";
+$btn_brouillon = "Enregistrer en brouillon";
+$btn_brouillon_name = "enregistrer_brouillon";
 
 if (isset($_SESSION['id_projet']))
 {
@@ -13,8 +15,20 @@ if (isset($_SESSION['id_projet']))
     $titre = $projet['titre'];
     $illustration = $projet['illustration'];
     $contenu = $projet['contenu'];
-    $btn = "Modifier";
-    $btn_name = "editer_projet";
+
+    /* Edition d'un projet */
+    if (isset($_SESSION['modification']))
+    {
+        $btn = "Modifier";
+        $btn_name = "editer_projet";
+    }
+    /* Brouillon */
+    else
+    {
+        $btn_name = "valider_brouillon";
+        $btn_brouillon = "Enregistrer les modifications";
+        $btn_brouillon_name = "enregistrer_modifications";
+    }
 }
 
 ?>
@@ -36,6 +50,19 @@ if (isset($_SESSION['id_projet']))
 </div>
 <label>Contenu</label>
 <textarea name="contenu" id="contenu"><?= $contenu; ?></textarea>
-<button type="submit" name="<?= $btn_name; ?>"><?= $btn; ?></button>
+<div class="form_footer">
+    <button type="submit" name="<?= $btn_name; ?>"><?= $btn; ?></button>
 
-<?php unset($_SESSION['id_projet']); ?>
+    <?php 
+    if (!isset($_SESSION['modification'])) : 
+    ?>
+        <button type="submit" name="<?= $btn_brouillon_name; ?>" class="btn_enregistrer_brouillon"><?= $btn_brouillon; ?></button>
+    <?php 
+    endif;
+    ?>
+
+</div>
+
+<?php
+unset($_SESSION['id_projet']);
+unset($_SESSION['modification']);
