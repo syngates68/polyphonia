@@ -571,7 +571,11 @@ nav .nav_liens a:hover
     text-align: center;
 }
 
-.administration .tbl_header .tbl_header__col,
+.administration .tbl_header .tbl_header__col
+{
+    padding: 8px 16px;
+}
+
 .administration .tbl_contenu .tbl_contenu__col
 {
     padding: 0 16px;
@@ -610,48 +614,33 @@ nav .nav_liens a:hover
     font-style: italic;
 }
 
-.administration .tbl_actions
-{
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-
-.administration .tbl_actions .icon_more
-{
-    cursor: pointer;
-}
-
-.administration .tbl_actions .icon_more:hover
-{
-    color: var(--orange);
-}
-
 .administration .tbl_actions .btn_administration
 {
     border: none;
     border-radius: 5px;
     font-size: 12px;
     color: #FFF;
-    padding: 8px;
+    padding: 16px 8px;
     text-decoration: none;
     display: flex;
     align-items: center;
-}
-
-.administration .tbl_actions .btn_administration i
-{
-    margin-right: 5px;
+    justify-content: center;
+    margin: 5px 0;
 }
 
 .administration .tbl_actions .btn_administration.editer
 {
-    background: #00a800;
+    background: #21ba45;
 }
 
 .administration .tbl_actions .btn_administration.brouillon
 {
-    background: #6868f8;
+    background: #2185d0;
+}
+
+.administration .tbl_actions .btn_administration.remettre_brouillon
+{
+    background: #54c8ff;
 }
 
 .nouveau_projet

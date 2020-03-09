@@ -25,3 +25,23 @@ function readURL(input){
         }
     }
 }
+
+//Remettre projet en brouillon
+$(document).on('click', '.tbl_contenu .tbl_actions .remettre_brouillon', function(e)
+{
+    e.preventDefault();
+    var id = $(this).attr('projet');
+    
+    if (confirm('Êtes-vous sûr de vouloir remettre ce projet en brouillon?'))
+    {
+        $.post(baseurl + 'inc/remettre_brouillon.php',
+        {
+            id_projet : id
+        },
+        function(data)
+        {
+            alert(data);
+            location.reload();
+        });
+    }
+});

@@ -10,52 +10,12 @@
     <input type="text" class="recherche" placeholder="Rechercher un projet">
 </div>
 
-<div class="pagination">
-    <ul>
-        <li class="actif">
-            <a href="#">1</a>
-        </li>
-        <li>
-            <a href="#">2</a>
-        </li>
-        <li>
-            <a href="#">3</a>
-        </li>
-    </ul>
-</div>
+<div class="projets_container"></div>
 
-<div class="nbr_projets"><?= count_nbr_projets(); ?> projets</div>
-
-<div class="liste_projets">
-    <?php 
-        $liste_projets = req_liste_projets();
-        foreach($liste_projets as $projet) :
-    ?>
-    <div class="projet">
-        <div class="image_projet">
-            <img src="<?= BASEURL ?><?= $projet['illustration']; ?>">
-        </div>
-        <div class="corps_projet">
-            <div class="titre_projet"><?= $projet['titre']; ?></div>
-            <div class="description_projet">
-                <?= extrait_texte($projet['contenu'], 710); ?>
-            </div>
-        </div>
-        <div class="footer_projet">
-            <div class="infos_projet">
-                <div class="auteur_projet">
-                    <img src="<?= BASEURL ?>assets/img/user.svg">
-                    <div class="nom_auteur"><?= $projet['nom_utilisateur']; ?></div>
-                </div>
-                <div class="date_projet">
-                    <img src="<?= BASEURL ?>assets/img/calendar.svg">
-                    <div class="date"><?= formate_date($projet['date_ajout']); ?></div>
-                </div>
-            </div>
-            <a href="<?= BASEURL ?>projet/<?= $projet['slug']; ?>.html" projet="<?= $projet['id_projet']; ?>" class="btn_lire_projet">Lire</a>
-        </div>
-    </div>
-    <?php
-        endforeach; 
-    ?>
-</div>
+<script src="<?= BASEURL; ?>assets/js/projets.js"></script>
+<script>
+    $(document).ready(function()
+    {
+        req_liste_projets(1);
+    });
+</script>

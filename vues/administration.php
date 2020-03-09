@@ -19,7 +19,7 @@ if (isset($_SESSION['utilisateur']))
 
     <?php
 
-    $liste_projets = req_liste_projets(true);
+    $liste_projets = req_liste_projets(NULL, NULL, true);
     foreach($liste_projets as $projet) :
 
         $illustration = ($projet['illustration'] != NULL) ? $projet['illustration'] : 'assets/img/aucune_image.png';
@@ -47,11 +47,11 @@ if (isset($_SESSION['utilisateur']))
             </div>
             <div class="tbl_contenu__col tbl_actions">
                 <?php if ($projet['brouillon'] == 0) : ?>
-                    <a href="<?= BASEURL ?>editer_projet/<?= $projet['id_projet']; ?>.html" class="btn_administration editer"><i class="material-icons" title="Editer le projet">edit</i>Editer le projet</a>
+                    <a href="<?= BASEURL ?>editer_projet/<?= $projet['id_projet']; ?>.html" class="btn_administration editer">Editer le projet</a>
+                    <a href="#" class="btn_administration remettre_brouillon" projet="<?= $projet['id_projet']; ?>">Remettre en brouillon</a>
                 <?php else : ?>
-                    <a href="<?= BASEURL ?>brouillon/<?= $projet['id_projet']; ?>.html" class="btn_administration brouillon"><i class="material-icons" title="Reprendre le brouillon">insert_drive_file</i>Reprendre brouillon</a>
+                    <a href="<?= BASEURL ?>brouillon/<?= $projet['id_projet']; ?>.html" class="btn_administration brouillon">Reprendre brouillon</a>
                 <?php endif; ?>
-                <i class="material-icons icon_more" title="Autres actions">more_vert</i>
             </div>
         </div>
         
@@ -60,6 +60,7 @@ if (isset($_SESSION['utilisateur']))
     ?>
 
     </div>
+    <script src="<?= BASEURL; ?>assets/js/admin.js"></script>
 
 <?php
 

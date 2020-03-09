@@ -1,9 +1,11 @@
 <?php
 
-$projet = req_by_slug($_GET['slug']);
+$exist_projet = count_by_slug($_GET['slug']);
 
-if (sizeof($projet) > 0)
+if ($exist_projet > 0)
 {
+
+    $projet = req_by_slug($_GET['slug']);
     
 ?>
     
@@ -43,7 +45,7 @@ if (sizeof($projet) > 0)
 else
 {
     //Revoir
-    include('404.php');
+    header('Location:'.BASEURL.'404.html');
 }
 
 ?>

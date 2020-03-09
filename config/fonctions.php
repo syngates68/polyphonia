@@ -2,17 +2,32 @@
 
 include('database.php');
 
-function req_liste_projets($admin = false)
+function req_liste_projets($page, $nbr_par_page, $admin = false)
 {
     $where = '';
+    $limit = '';
+
+    if ($page != NULL)
+    {
+        $offset = ($page - 1) * $nbr_par_page;
+        $limit = ' LIMIT '.$nbr_par_page.' OFFSET '.$offset;
+    }
 
     if (!$admin)
         $where = ' WHERE p.brouillon = 0';
 
-    $req = db()->query("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC");
+    $req = db()->query("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit);
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function req_nbr_pages($nbr_par_page)
+{
+    $nbr = db()->query('SELECT COUNT(*) FROM projets WHERE brouillon = 0');
+    $nbr = $nbr->fetch(PDO::FETCH_NUM)[0];
+
+    return ceil($nbr/$nbr_par_page);
 }
 
 function count_nbr_projets()
@@ -29,6 +44,14 @@ function req_by_slug($slug)
     $req->execute([$slug]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
+}
+
+function count_by_slug($slug)
+{
+    $req = db()->prepare("SELECT COUNT(*) FROM projets WHERE slug = ?");
+    $req->execute([$slug]);
+
+    return $req->fetch(PDO::FETCH_NUM)[0];
 }
 
 function formate_date($date)
@@ -136,4 +159,63 @@ function req_nom_utilisateur($id)
     $req->execute([$id]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nom_utilisateur'];
+}
+
+function upload_image($fichier)
+{
+    $max_size = 1000000;
+    $types = array('image/jpg', 'image/png', 'image/jpeg');
+    $fichier_temp = $fichier['tmp_name'];
+
+    $type = $fichier['type'];
+    $size = $fichier['size'];
+    $dossier = '../assets/img/';
+
+    $msg = '';
+
+    if(in_array($type, $types))
+    {
+        if ($type == 'image/jpg')
+            $type = '.jpg';
+
+        if ($type == 'image/png')
+            $type = '.png';
+
+        if ($type == 'image/jpeg')
+            $type = '.jpeg';
+
+        if ($type == 'image/gif')
+            $type = '.gif';
+
+        if($size < $max_size)
+        {
+            $char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+            $string = '';
+            for($j = 0; $j < 9; $j++)
+            {
+                $string .= $char[rand(0, strlen($char)-1)];
+            }
+
+            $nom_fichier = $string.$type;
+            $url = $dossier.$nom_fichier;
+
+            if(move_uploaded_file($fichier_temp, $url))
+                $msg = '1';
+            else
+                $msg = '0Une erreur innatendue s\'est produite durant le téléchargement de votre image.';
+        }
+        else
+            $msg = '0L\'illustration choisie est trop lourde.';
+    }
+    else
+        $msg = '0L\'illustration doit être au format PNG, JPG ou JPEG.';
+
+    return [$msg, $url];
+}
+
+function remettre_brouillon($id)
+{
+    $upd = db()->prepare('UPDATE projets SET brouillon = 1 WHERE id = ?');
+    $upd->execute([$id]);
 }
