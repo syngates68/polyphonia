@@ -219,3 +219,11 @@ function remettre_brouillon($id)
     $upd = db()->prepare('UPDATE projets SET brouillon = 1 WHERE id = ?');
     $upd->execute([$id]);
 }
+
+function req_rang($id)
+{
+    $req = db()->prepare('SELECT rang FROM utilisateurs WHERE id = ?');
+    $req->execute([$id]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['rang'];
+}

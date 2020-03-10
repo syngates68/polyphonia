@@ -16,9 +16,11 @@
                 <?php if (isset($_SESSION['utilisateur'])) : ?>
                     <a href="#" id="dropdown"><i class="material-icons">person</i><?= req_nom_utilisateur($_SESSION['utilisateur']); ?></a>
                     <div class="dropdown">
+                        <?php if (req_rang($_SESSION['utilisateur']) == 'admin') : ?>
                         <div class="dropdown_lien">
                             <a href="<?= BASEURL ?>administration.html"><i class="material-icons">account_circle</i>Administration</a>
                         </div>
+                        <?php endif; ?>
                         <div class="dropdown_lien">
                             <a href="<?= BASEURL ?>deconnexion.html"><i class="material-icons">power_settings_new</i>Déconnexion</a>
                         </div>

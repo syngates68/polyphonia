@@ -17,8 +17,7 @@ br
 
 body
 {
-    font-family: 'Roboto';
-    background: #fffbf9;
+    font-family:  Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 }
 
 form label
@@ -137,7 +136,7 @@ nav .nav_liens a:hover
     right: 0;
     top: 102px;
     background: #FFF;
-    padding: 16px;
+    padding: 0 16px;
     border: 1px solid var(--orange);
 }
 
@@ -154,10 +153,9 @@ nav .nav_liens a:hover
 .container
 {
     padding: 24px 48px;
-    width: 70%;
-    margin: 16px auto;
+    width: 80%;
+    margin: 0 auto;
     background: #FFF;
-    border: 1px solid var(--border);
 }
 
 .container h1
@@ -253,7 +251,7 @@ nav .nav_liens a:hover
 .liste_projets
 {
     display: grid;
-    grid-template-columns: repeat(3, 32%);
+    grid-template-columns: repeat(4, 24%);
     column-gap: 16px;
 }
 
@@ -261,7 +259,7 @@ nav .nav_liens a:hover
 {
     background: #FFF;
     border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px 0 #d4d4d5,0 0 0 1px #d4d4d5;;
     border-radius: 5px;
     margin-bottom: 18px;
 }
@@ -467,6 +465,7 @@ nav .nav_liens a:hover
 .projet_contenu .projet_texte
 {
     padding: 36px;
+    line-height: 1.5;
 }
 
 .projet_contenu__footer
@@ -672,8 +671,8 @@ nav .nav_liens a:hover
     position: absolute;
     width: 60px;
     height: 60px;
-    top: calc(25% + 65px);
-    right: calc(25% + 170px);
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
 }
 
 .nouveau_projet .ajouter_image img
@@ -820,5 +819,10 @@ nav .nav_liens a:hover
     .liste_projets
     {
         display: block;
+    }
+
+    .nouveau_projet form
+    {
+        width: 100%;
     }
 }
