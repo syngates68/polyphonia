@@ -15,9 +15,15 @@ br
     margin-bottom: 1em;
 }
 
+.orange
+{
+    color: var(--orange);
+    font-weight: 600;
+}
+
 body
 {
-    font-family:  Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 form label
@@ -51,7 +57,7 @@ form textarea
 {
     resize: none;
     min-height: 500px;
-    font-family: 'Roboto';
+    font-family: 'Open Sans', sans-serif;
 }
 
 .erreur
@@ -73,12 +79,18 @@ form textarea
 
 nav
 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 24px;
     background: #FFF;
     border-bottom: 2px solid var(--orange);
+}
+
+nav .nav_content
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
 }
 
 nav a
@@ -133,11 +145,12 @@ nav .nav_liens a:hover
 {
     display: none;
     position: absolute;
-    right: 0;
+    right: 10%;
     top: 102px;
     background: #FFF;
     padding: 0 16px;
     border: 1px solid var(--orange);
+    z-index: 2;
 }
 
 .dropdown.is_visible
@@ -155,14 +168,12 @@ nav .nav_liens a:hover
     padding: 24px 48px;
     width: 80%;
     margin: 0 auto;
-    background: #FFF;
 }
 
 .container h1
 {
-    font-weight: 600;
-    font-size: 20px;
-    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 /*********************************************************
@@ -171,17 +182,26 @@ nav .nav_liens a:hover
 
 *********************************************************/
 
+.jumbotron
+{
+    padding: 16px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.jumbotron img
+{
+    width: 150px;
+    height: 150px;
+}
+
 .message_presentation
 {
-    padding: 16px 8px;
-    color: #276F86;
-    font-size: 14px;
-    background: #F8FFFF;
-    border: 1px solid #A9D5DE;
-    border-radius: 5px;
-    width: 50%;
-    margin-top: 16px;
-    line-height: 17px;
+    padding: 16px 0;
+    line-height: 1.8;
+    font-size: 20px;
+    width: 70%;
+    margin:  auto;
 }
 
 .recherche_projet
@@ -192,8 +212,8 @@ nav .nav_liens a:hover
 .recherche_projet .recherche
 {
     border: 1px solid var(--border);
-    border-left: 2px solid var(--orange);
-    padding: 8px;
+    border-radius: 5px;
+    padding: 10px;
     width: 32%;
 }
 
@@ -216,6 +236,7 @@ nav .nav_liens a:hover
     vertical-align: middle;
     transition-duration: .3s;
     background: #FFF;
+    border-radius: 5px;
 }
 
 .pagination ul li:hover
@@ -228,6 +249,7 @@ nav .nav_liens a:hover
 .pagination ul li.actif
 {
     background: var(--orange);
+    border: none;
 }
 
 .pagination ul li.actif a
@@ -243,9 +265,8 @@ nav .nav_liens a:hover
 
 .nbr_projets
 {
-    padding: 8px 0;
-    font-size: 12px;
-    font-weight: 600;
+    padding: 16px 0;
+    font-size: 14px;
 }
 
 .liste_projets
@@ -297,7 +318,7 @@ nav .nav_liens a:hover
     color: var(--grey);
     line-height: 15px;
     margin-top: 24px;
-    min-height: 180px;
+    min-height: 210px;
 }
 
 .projet .footer_projet
@@ -468,6 +489,22 @@ nav .nav_liens a:hover
     line-height: 1.5;
 }
 
+.projet_contenu .projet_texte strong
+{
+    font-weight: 600;
+    color: #000;
+}
+
+.projet_contenu .projet_texte a
+{
+    color: var(--links);
+}
+
+.projet_contenu .projet_texte ul li
+{
+    list-style: inside;
+}
+
 .projet_contenu__footer
 {
     padding: 16px;
@@ -597,7 +634,7 @@ nav .nav_liens a:hover
 
 .administration .tbl_contenu.brouillon 
 {
-    background: #9adfff;
+    background: #c7edff;
 }
 
 .administration .tbl_contenu img

@@ -41,7 +41,7 @@ if (isset($_SESSION['utilisateur']))
             </div>
             <div class="tbl_contenu__col">
                 <?= formate_date($projet['date_ajout']); ?>
-                <?php if ($projet['brouillon'] == 1) : ?>
+                <?php if ($projet['brouillon'] == 1 && $projet['date_sauvegarde'] != NULL) : ?>
                     <p class="label_brouillon">(Dernière sauvegarde le <?= formate_date_heure($projet['date_sauvegarde']); ?>)</p>
                 <?php endif; ?>
             </div>

@@ -8,9 +8,9 @@ if (isset($_POST['enregistrer_modifications']))
 {
     $titre = (!empty($_POST['titre'])) ? $_POST['titre'] : NULL;
     $contenu = (!empty($_POST['contenu'])) ? $_POST['contenu'] : NULL;
-    $illustration = NULL;
+    $illustration = (req_by_id($_GET['id'])['illustration'] != NULL && req_by_id($_GET['id'])['illustration'] != '') ? req_by_id($_GET['id'])['illustration'] : NULL;
 
-    if (isset($_FILES['illustration']) && $_FILES['illustration']['error'] == 0)
+    if ($illustration == NULL && isset($_FILES['illustration']) && $_FILES['illustration']['error'] == 0)
     {
         $rep = upload_image($_FILES['illustration']);
 

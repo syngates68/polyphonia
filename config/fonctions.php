@@ -2,7 +2,7 @@
 
 include('database.php');
 
-function req_liste_projets($page, $nbr_par_page, $admin = false)
+function req_liste_projets($page, $nbr_par_page, $admin = false, $recherche = NULL)
 {
     $where = '';
     $limit = '';
@@ -14,26 +14,62 @@ function req_liste_projets($page, $nbr_par_page, $admin = false)
     }
 
     if (!$admin)
-        $where = ' WHERE p.brouillon = 0';
+        $where .= ' WHERE p.brouillon = 0';
 
-    $req = db()->query("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit);
-    $req->execute();
+    if ($recherche != NULL)
+    {
+        if ($where != '')
+            $where .= ' AND';
+        else
+            $where .= ' WHERE';
+
+        $where .= ' CONCAT(p.titre, " ", p.contenu) LIKE :recherche';
+    }
+
+    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
+
+    $req = db()->prepare($sql);
+    
+    if ($recherche != NULL)
+        $req->execute([":recherche" => "%".$recherche."%"]);
+    else
+        $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function req_nbr_pages($nbr_par_page)
+function req_nbr_pages($nbr_par_page, $recherche = NULL)
 {
-    $nbr = db()->query('SELECT COUNT(*) FROM projets WHERE brouillon = 0');
+    $where = ' WHERE brouillon = 0';
+
+    if ($recherche != NULL)
+        $where .= ' AND CONCAT(titre, " ", contenu) LIKE :recherche';
+
+    $nbr = db()->prepare('SELECT COUNT(*) FROM projets'.$where);
+
+    if ($recherche != NULL)
+        $nbr->execute([":recherche" => "%".$recherche."%"]);
+    else
+        $nbr->execute();
+
     $nbr = $nbr->fetch(PDO::FETCH_NUM)[0];
 
     return ceil($nbr/$nbr_par_page);
 }
 
-function count_nbr_projets()
+function count_nbr_projets($recherche = NULL)
 {
-    $count = db()->query("SELECT COUNT(*) FROM projets WHERE brouillon = 0");
-    $count->execute();
+    $where = ' WHERE brouillon = 0';
+
+    if ($recherche != NULL)
+        $where .= ' AND CONCAT(titre, " ", contenu) LIKE :recherche';
+
+
+    $count = db()->prepare("SELECT COUNT(*) FROM projets".$where);
+    if ($recherche != NULL)
+        $count->execute([":recherche" => "%".$recherche."%"]);
+    else
+        $count->execute();
 
     return $count->fetch(PDO::FETCH_NUM)[0];
 }
