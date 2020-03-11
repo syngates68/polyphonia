@@ -1,3 +1,8 @@
+$(document).on('click', '.clickable', function()
+{
+    $('#illustration').click();
+});
+
 $(document).on('change', '#illustration', function()
 {
     readURL(this);
@@ -14,7 +19,14 @@ function readURL(input){
             var reader = new FileReader();
           
             reader.onload = function(e) {
-                $('.ajouter_image img').attr('src', e.target.result).removeClass('icon');
+                $.post(baseurl + 'inc/ajouter_image.php',
+                {
+                    src : e.target.result
+                },
+                function(data)
+                {
+                    $('.ajouter_image').html(data).addClass('has_image');
+                });
             }
             
             reader.readAsDataURL(input.files[0]);

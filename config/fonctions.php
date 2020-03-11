@@ -186,7 +186,7 @@ function valider_brouillon($titre, $contenu, $illustration, $id)
     $slug = slugify($titre);
 
     $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, slug = ?, brouillon = 0 WHERE id = ?');
-    $upd->execute([$titre, $contenu, $illustration, $slug, $id]);
+    $upd->execute([$titre, utf8_encode($contenu), $illustration, $slug, $id]);
 }
 
 function req_nom_utilisateur($id)

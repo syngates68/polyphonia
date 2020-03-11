@@ -15,9 +15,8 @@ br
     margin-bottom: 1em;
 }
 
-.orange
+.gras
 {
-    color: var(--orange);
     font-weight: 600;
 }
 
@@ -97,6 +96,13 @@ nav a
 {
     text-decoration: none;
     color: var(--orange);
+}
+
+nav a.btn_connexion
+{
+    background: var(--orange);
+    color: #FFF !important;
+    border-radius: 5px;
 }
 
 nav .logo_polyphonia
@@ -184,9 +190,11 @@ nav .nav_liens a:hover
 
 .jumbotron
 {
-    padding: 16px;
+    color: #FFF;
+    padding: 32px 16px;
     text-align: center;
     margin-bottom: 8px;
+    background: linear-gradient(135deg, rgb(255, 171, 69) 0%, rgb(248, 172, 79) 35%, rgba(242,168,84,1) 51%, rgba(237,156,57,1) 71%, rgba(222,122,0,1) 100%);
 }
 
 .jumbotron img
@@ -211,7 +219,7 @@ nav .nav_liens a:hover
 
 .recherche_projet .recherche
 {
-    border: 1px solid var(--border);
+    border: 1px solid #FFF;
     border-radius: 5px;
     padding: 10px;
     width: 32%;
@@ -385,7 +393,7 @@ nav .nav_liens a:hover
 
 .projet_header
 {
-    height: 500px;
+    height: 700px;
     position: relative;
 }
 
@@ -403,8 +411,9 @@ nav .nav_liens a:hover
 {
     position: absolute;
     background: #FFF;
-    height: 50px;
-    line-height: 50px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 25px;
     text-align: center;
     width: 100%;
     top: calc(50% - 50px);
@@ -593,7 +602,7 @@ nav .nav_liens a:hover
 .administration
 {
     margin-top: 16px;
-    padding: 16px;
+    background: #f5f5f5;
 }
 
 .administration .tbl_header,
@@ -628,13 +637,20 @@ nav .nav_liens a:hover
 
 .administration .tbl_contenu
 {
-    border-bottom: 1px solid var(--border);
-    /*margin: 32px 0;*/
+    border: 1px solid var(--border);
+    margin: 32px 0;
+    background: #FFF;
+    font-size: 13px;
 }
 
 .administration .tbl_contenu.brouillon 
 {
     background: #c7edff;
+}
+
+.administration .tbl_contenu .titre
+{
+    font-weight: 600;     
 }
 
 .administration .tbl_contenu img
@@ -646,15 +662,18 @@ nav .nav_liens a:hover
 
 .administration .tbl_contenu .label_brouillon
 {
-    font-size: 13px;
+    font-size: 12px;
+    margin-top: 8px;
     font-style: italic;
+    color: var(--grey);
 }
 
 .administration .tbl_actions .btn_administration
 {
     border: none;
-    border-radius: 5px;
-    font-size: 12px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-size: 11px;
     color: #FFF;
     padding: 16px 8px;
     text-decoration: none;
@@ -662,21 +681,23 @@ nav .nav_liens a:hover
     align-items: center;
     justify-content: center;
     margin: 5px 0;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
 .administration .tbl_actions .btn_administration.editer
 {
-    background: #21ba45;
+    background: #388E3C;
 }
 
 .administration .tbl_actions .btn_administration.brouillon
 {
-    background: #2185d0;
+    background: #e0f7fa;
+    color: #000;
 }
 
 .administration .tbl_actions .btn_administration.remettre_brouillon
 {
-    background: #54c8ff;
+    background: #1976D2;
 }
 
 .nouveau_projet
@@ -703,13 +724,28 @@ nav .nav_liens a:hover
     position: relative;
 }
 
-.nouveau_projet .ajouter_image .icon
+.nouveau_projet .ajouter_image.has_image
+{
+    border: 1px solid var(--border);
+}
+
+.nouveau_projet .ajouter_image .btn_ajouter_image
 {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    top: calc(50% - 30px);
-    left: calc(50% - 30px);
+    width: 150px;
+    height: 150px;
+    top: calc(50% - 75px);
+    left: calc(50% - 75px);
+}
+
+.nouveau_projet .ajouter_image .btn_ajouter_image:hover
+{
+    color: var(--grey);
+}
+
+.nouveau_projet .ajouter_image .btn_ajouter_image i
+{
+    font-size: 50px;
 }
 
 .nouveau_projet .ajouter_image img

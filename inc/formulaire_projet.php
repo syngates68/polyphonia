@@ -41,12 +41,15 @@ if (isset($_SESSION['id_projet']))
     <label>Illustration</label>
     <div class="ajouter_image">
     <?php if ($illustration != null) : ?>
-        <img src="<?= BASEURL.$illustration; ?>">
+        <img src="<?= BASEURL.$illustration; ?>" onclick="$('#illustration').click()">
     <?php else : ?>
-        <img src="<?= BASEURL; ?>assets/img/photo.svg" class="icon" onclick="$('#illustration').click()">
-        <input type="file" id="illustration" name="illustration" style="display:none;">
+        <div class="btn_ajouter_image" onclick="$('#illustration').click()">
+            <i class="material-icons">photo</i>
+            <p>Cliquer pour ajouter une image</p>
+        </div>
     <?php endif; ?>
     </div>
+    <input type="file" id="illustration" name="illustration" style="display:none;">
 </div>
 <label>Contenu</label>
 <textarea name="contenu" id="contenu"><?= $contenu; ?></textarea>
@@ -62,6 +65,13 @@ if (isset($_SESSION['id_projet']))
     ?>
 
 </div>
+
+<script src="<?= BASEURL; ?>assets/js/admin.js"></script>
+<script>
+    CKEDITOR.replace('contenu', {
+        height: 500
+    });
+</script>
 
 <?php
 unset($_SESSION['id_projet']);

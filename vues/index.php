@@ -14,7 +14,9 @@
                     <a href="<?= BASEURL ?>blog.html">Blog</a>
                     <a href="<?= BASEURL ?>forum.html">Forum</a>
                     <a href="<?= BASEURL ?>contact.html">Contact</a>
-                    <?php if (isset($_SESSION['utilisateur'])) : ?>
+                    <?php if (!isset($_SESSION['utilisateur'])) : ?>
+                        <a href="<?= BASEURL ?>connexion.html" class="btn_connexion">Connexion</a>
+                    <?php else : ?>
                         <a href="#" id="dropdown"><i class="material-icons">person</i><?= req_nom_utilisateur($_SESSION['utilisateur']); ?></a>
                         <div class="dropdown">
                             <?php if (req_rang($_SESSION['utilisateur']) == 'admin') : ?>
@@ -30,11 +32,9 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
     <?php
         include($var_page.'.php');
     ?>
-        </div>
     <?php
     }
     else
