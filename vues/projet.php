@@ -36,6 +36,14 @@ if ($exist_projet > 0)
             <?= nl2br($projet['contenu']); ?>
         </div>
         <div class="projet_contenu__footer">
+            <div class="message">
+                <span class="nota_bene">N.B. :</span><br/>
+                Les projets proposés sur Polyphonia sont faits pour vous donner des idées de projets intéressants à faire, et ils ne sont en rien exhaustifs,
+                si vous trouvez d'autres idées concernant le projet ci-dessus, libre à vous de le rajouter à votre projet, et si vous pensez que ces idées peuvent intéresser
+                d'autres personnes, ou simplement compléter le projet, n'hésitez pas à <B>suggérer une modification</b> ci-dessous.<br/>
+                Si vous ne vous pensez pas avoir le niveau pour une partie du projet, ne vous bloquez pas pour autant, vous pouvez ne pas faire cette partie ou simplement la
+                remplacer par autre chose.
+            </div>
             <a href="#">Suggérer une modification</a>
         </div>
     </div>

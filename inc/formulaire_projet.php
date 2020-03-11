@@ -39,7 +39,7 @@ if (isset($_SESSION['id_projet']))
 </div>
 <div class="form_ligne">
     <label>Illustration</label>
-    <div class="ajouter_image">
+    <div class="ajouter_image <?php if ($illustration != null) : ?>has_image<?php endif; ?>">
     <?php if ($illustration != null) : ?>
         <img src="<?= BASEURL.$illustration; ?>" onclick="$('#illustration').click()">
     <?php else : ?>

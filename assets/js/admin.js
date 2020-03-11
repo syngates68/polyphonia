@@ -57,3 +57,25 @@ $(document).on('click', '.tbl_contenu .tbl_actions .remettre_brouillon', functio
         });
     }
 });
+
+//Supprimer projet
+$(document).on('click', '.tbl_contenu .tbl_actions .supprimer', function(e)
+{
+    e.preventDefault();
+    var id = $(this).attr('projet');
+    var type = $(this).attr('type');
+    
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce ' + type + '?'))
+    {
+        $.post(baseurl + 'inc/supprimer_projet.php',
+        {
+            id_projet : id,
+            type : type
+        },
+        function(data)
+        {
+            alert(data);
+            location.reload();
+        });
+    }
+});

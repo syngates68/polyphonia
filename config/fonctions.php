@@ -26,6 +26,13 @@ function req_liste_projets($page, $nbr_par_page, $admin = false, $recherche = NU
         $where .= ' CONCAT(p.titre, " ", p.contenu) LIKE :recherche';
     }
 
+    if ($where == '')
+        $where .= ' WHERE';
+    else
+        $where .= ' AND';
+        
+    $where .= ' p.actif = 1';
+
     $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
 
     $req = db()->prepare($sql);
@@ -40,7 +47,7 @@ function req_liste_projets($page, $nbr_par_page, $admin = false, $recherche = NU
 
 function req_nbr_pages($nbr_par_page, $recherche = NULL)
 {
-    $where = ' WHERE brouillon = 0';
+    $where = ' WHERE brouillon = 0 AND actif = 1';
 
     if ($recherche != NULL)
         $where .= ' AND CONCAT(titre, " ", contenu) LIKE :recherche';
@@ -59,7 +66,7 @@ function req_nbr_pages($nbr_par_page, $recherche = NULL)
 
 function count_nbr_projets($recherche = NULL)
 {
-    $where = ' WHERE brouillon = 0';
+    $where = ' WHERE brouillon = 0 AND actif = 1';
 
     if ($recherche != NULL)
         $where .= ' AND CONCAT(titre, " ", contenu) LIKE :recherche';
@@ -205,7 +212,7 @@ function upload_image($fichier)
 
     $type = $fichier['type'];
     $size = $fichier['size'];
-    $dossier = '../assets/img/';
+    $dossier = '../assets/projets/';
 
     $msg = '';
 
@@ -255,6 +262,13 @@ function remettre_brouillon($id)
     $upd = db()->prepare('UPDATE projets SET brouillon = 1 WHERE id = ?');
     $upd->execute([$id]);
 }
+
+function supprimer_projet($id)
+{
+    $upd = db()->prepare('UPDATE projets SET actif = 0 WHERE id = ?');
+    $upd->execute([$id]);
+}
+
 
 function req_rang($id)
 {

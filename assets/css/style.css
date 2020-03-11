@@ -28,10 +28,11 @@ body
 form label
 {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     font-size: 11px;
-    color: rgba(0,0,0,.87);
-    letter-spacing: 1px;
+    color: var(--orange_clair);
+    letter-spacing: .5px;
+    font-weight: 600;
     text-align: left;
 }
 
@@ -376,7 +377,7 @@ nav .nav_liens a:hover
     border-radius: 3px;
     padding: 8px 16px;
     text-decoration: none;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
 .btn_lire_projet:hover
@@ -504,6 +505,11 @@ nav .nav_liens a:hover
     color: #000;
 }
 
+.projet_contenu .projet_texte em
+{
+    font-style: italic;
+}
+
 .projet_contenu .projet_texte a
 {
     color: var(--links);
@@ -512,11 +518,36 @@ nav .nav_liens a:hover
 .projet_contenu .projet_texte ul li
 {
     list-style: inside;
+    padding-left: 8px;
+}
+
+.projet_contenu .projet_texte li > ul > li
+{
+    list-style: inside square;
+    padding-left: 32px;
 }
 
 .projet_contenu__footer
 {
+    border-top: 2px solid var(--orange);
     padding: 16px;
+}
+
+.projet_contenu__footer .message 
+{
+    color: #000;
+    padding: 16px 0;
+}
+
+.projet_contenu__footer .message .nota_bene
+{
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.projet_contenu__footer .message b
+{
+    font-weight: 600;
 }
 
 .projet_contenu__footer a
@@ -612,7 +643,6 @@ nav .nav_liens a:hover
     grid-template-columns: repeat(5, 1fr);
     align-items: center;
     padding: 8px;
-    max-height: 120px;
     text-align: center;
 }
 
@@ -641,6 +671,7 @@ nav .nav_liens a:hover
     margin: 32px 0;
     background: #FFF;
     font-size: 13px;
+    min-height: 120px;
 }
 
 .administration .tbl_contenu.brouillon 
@@ -698,6 +729,11 @@ nav .nav_liens a:hover
 .administration .tbl_actions .btn_administration.remettre_brouillon
 {
     background: #1976D2;
+}
+
+.administration .tbl_actions .btn_administration.supprimer
+{
+    background: #cc0e0e;
 }
 
 .nouveau_projet

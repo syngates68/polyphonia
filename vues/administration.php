@@ -53,6 +53,7 @@ if (isset($_SESSION['utilisateur']) && (req_rang($_SESSION['utilisateur']) == 'a
                     <?php else : ?>
                         <a href="<?= BASEURL ?>brouillon/<?= $projet['id_projet']; ?>.html" class="btn_administration brouillon">Reprendre brouillon</a>
                     <?php endif; ?>
+                    <a href="#" class="btn_administration supprimer" type="<?php if ($projet['brouillon'] == 0) : ?>projet<?php else : ?>brouillon<?php endif; ?>" projet="<?= $projet['id_projet']; ?>">Supprimer</a>
                 </div>
             </div>
             
