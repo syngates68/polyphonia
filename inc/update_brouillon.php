@@ -10,12 +10,16 @@ if (isset($_POST['enregistrer_modifications']))
     $contenu = (!empty($_POST['contenu'])) ? $_POST['contenu'] : NULL;
     $illustration = (req_by_id($_GET['id'])['illustration'] != NULL && req_by_id($_GET['id'])['illustration'] != '') ? req_by_id($_GET['id'])['illustration'] : NULL;
 
-    if ($illustration == NULL && isset($_FILES['illustration']) && $_FILES['illustration']['error'] == 0)
+    if ($illustration == NULL || (isset($_FILES['illustration']) && $_FILES['illustration']['error'] == 0))
     {
         $rep = upload_image($_FILES['illustration']);
 
         if (substr($rep[0], 0, 1) == '1')
+        {
+            if ($illustration != NULL)
+                unlink('../'.$illustration);
             $illustration = $rep[1];
+        }
     }
 
     update_brouillon($titre, $contenu, str_replace('../', '', $illustration), $_GET['id']);
@@ -33,7 +37,7 @@ if (isset($_POST['valider_brouillon']))
             $illustration = (req_by_id($_GET['id'])['illustration'] != NULL && req_by_id($_GET['id'])['illustration'] != '') ? req_by_id($_GET['id'])['illustration'] : NULL;
             $msg = '';
             
-            if ($illustration == NULL)
+            if ($illustration == NULL || (isset($_FILES['illustration']) && $_FILES['illustration']['error'] == 0))
             {
                 $rep = upload_image($_FILES['illustration']);
 

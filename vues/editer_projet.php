@@ -10,7 +10,7 @@ if (isset($_SESSION['utilisateur']) && (req_rang($_SESSION['utilisateur']) == 'a
         $_SESSION['modification'] = true;
     ?>
         <div class="container">
-            <h1>Editer <?= $projet['titre']; ?></h1>
+            <h1>Edition :  <?= $projet['titre']; ?></h1>
 
             <div class="nouveau_projet">
 

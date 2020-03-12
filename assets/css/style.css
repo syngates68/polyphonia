@@ -82,6 +82,9 @@ nav
     padding: 24px;
     background: #FFF;
     border-bottom: 2px solid var(--orange);
+    width: 100%;
+    position: fixed;
+    z-index: 2;
 }
 
 nav .nav_content
@@ -104,6 +107,7 @@ nav a.btn_connexion
     background: var(--orange);
     color: #FFF !important;
     border-radius: 5px;
+    padding: 16px !important;
 }
 
 nav .logo_polyphonia
@@ -120,6 +124,12 @@ nav .logo_polyphonia img
     width: 50px;
     height: 50px;
     margin-right: 8px;
+}
+
+nav .nav_liens
+{
+    display: flex;
+    align-items: center;
 }
 
 nav .nav_liens a
@@ -148,12 +158,20 @@ nav .nav_liens a:hover
     transition-duration: .3s;
 }
 
+nav .avatar
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid var(--orange);
+    object-fit: cover;
+}
+
 .dropdown
 {
     display: none;
     position: absolute;
     right: 10%;
-    top: 102px;
     background: #FFF;
     padding: 0 16px;
     border: 1px solid var(--orange);
@@ -288,7 +306,6 @@ nav .nav_liens a:hover
 .projet
 {
     background: #FFF;
-    border: 1px solid var(--border);
     box-shadow: 0 1px 3px 0 #d4d4d5,0 0 0 1px #d4d4d5;;
     border-radius: 5px;
     margin-bottom: 18px;
@@ -330,6 +347,11 @@ nav .nav_liens a:hover
     min-height: 210px;
 }
 
+.projet .description_projet .see_more
+{
+    color: var(--links);
+}
+
 .projet .footer_projet
 {
     margin: 24px auto 16px auto;
@@ -367,23 +389,6 @@ nav .nav_liens a:hover
 {
     font-size: 12px;
     color: var(--grey);
-}
-
-.btn_lire_projet
-{
-    background: var(--orange);
-    color: #FFF;
-    border: none;
-    border-radius: 3px;
-    padding: 8px 16px;
-    text-decoration: none;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-}
-
-.btn_lire_projet:hover
-{
-    cursor: pointer;
-    background: var(--orange_clair);
 }
 
 /*********************************************************
@@ -537,6 +542,7 @@ nav .nav_liens a:hover
 {
     color: #000;
     padding: 16px 0;
+    font-style: italic;
 }
 
 .projet_contenu__footer .message .nota_bene
@@ -696,6 +702,7 @@ nav .nav_liens a:hover
     font-size: 12px;
     margin-top: 8px;
     font-style: italic;
+    line-height: 1.5;
     color: var(--grey);
 }
 

@@ -17,7 +17,7 @@
                     <?php if (!isset($_SESSION['utilisateur'])) : ?>
                         <a href="<?= BASEURL ?>connexion.html" class="btn_connexion">Connexion</a>
                     <?php else : ?>
-                        <a href="#" id="dropdown"><i class="material-icons">person</i><?= req_nom_utilisateur($_SESSION['utilisateur']); ?></a>
+                        <a href="#" id="dropdown"><img class="avatar" src="<?= BASEURL; ?><?= req_utilisateur_by_id($_SESSION['utilisateur'])['avatar']; ?>"></a>
                         <div class="dropdown">
                             <?php if (req_rang($_SESSION['utilisateur']) == 'admin') : ?>
                             <div class="dropdown_lien">
@@ -32,9 +32,11 @@
                 </div>
             </div>
         </nav>
-    <?php
-        include($var_page.'.php');
-    ?>
+        <div class="site_content">
+            <?php
+                include($var_page.'.php');
+            ?>
+        </div>
     <?php
     }
     else

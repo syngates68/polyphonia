@@ -107,7 +107,7 @@ function formate_date_heure($date)
     return date("d/m/Y à H:i:s", strtotime($date)); 
 }
 
-function extrait_texte($texte, $longueur)
+function extrait_texte($texte, $slug, $longueur)
 {
     if (strlen($texte) <= $longueur)
         return $texte;
@@ -118,7 +118,7 @@ function extrait_texte($texte, $longueur)
     if ($espace > 0)
         $texte = substr($texte, 0, $espace);
 
-    return $texte.'...';
+    return $texte.'...<br/><a class="see_more" href="'.BASEURL.'projet/'.$slug.'.html">En savoir plus</a>';
 }
 
 function slugify($string, $delimiter = '-') {
@@ -174,10 +174,10 @@ function check_connexion($nom_utilisateur)
         return 0;
 }
 
-function update_projet($titre, $contenu, $id)
+function update_projet($titre, $contenu, $id, $illustration)
 {
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ? WHERE id = ?');
-    $upd->execute([$titre, $contenu, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ? WHERE id = ?');
+    $upd->execute([$titre, $contenu, $illustration, $id]);
 }
 
 function update_brouillon($titre, $contenu, $illustration, $id)
@@ -202,6 +202,14 @@ function req_nom_utilisateur($id)
     $req->execute([$id]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nom_utilisateur'];
+}
+
+function req_utilisateur_by_id($id)
+{
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE id = ?');
+    $req->execute([$id]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
 function upload_image($fichier)

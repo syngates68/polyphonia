@@ -12,3 +12,9 @@ $(document).on('click', 'nav #dropdown', function(e)
     e.preventDefault();
     $('.dropdown').toggle('is_visible')
 });
+
+$(document).ready(function()
+{
+    $('.site_content').css('padding-top', $('nav').css('height'));
+    $('.dropdown').css('top', $('nav').css('height'));
+});

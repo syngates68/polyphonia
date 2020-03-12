@@ -29,7 +29,7 @@ $nbr_pages = req_nbr_pages(20, $_POST['recherche']);
         <div class="corps_projet">
             <div class="titre_projet"><?= $projet['titre']; ?></div>
             <div class="description_projet">
-                <?= extrait_texte($projet['contenu'], 710); ?>
+                <?= extrait_texte($projet['contenu'], $projet['slug'], 710); ?>
             </div>
         </div>
         <div class="footer_projet">
@@ -43,7 +43,6 @@ $nbr_pages = req_nbr_pages(20, $_POST['recherche']);
                     <div class="date"><?= formate_date($projet['date_ajout']); ?></div>
                 </div>
             </div>
-            <a href="<?= BASEURL ?>projet/<?= $projet['slug']; ?>.html" projet="<?= $projet['id_projet']; ?>" class="btn_lire_projet">Lire</a>
         </div>
     </div>
     <?php
