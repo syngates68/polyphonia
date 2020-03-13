@@ -33,26 +33,33 @@ if (isset($_SESSION['id_projet']))
 
 ?>
 
-<div class="form_ligne">
-    <label>Titre</label>
-    <input type="text" name="titre" value="<?= $titre; ?>">
-</div>
-<div class="form_ligne">
-    <label>Illustration</label>
-    <div class="ajouter_image <?php if ($illustration != null) : ?>has_image<?php endif; ?>">
-    <?php if ($illustration != null) : ?>
-        <img src="<?= BASEURL.$illustration; ?>" onclick="$('#illustration').click()">
-    <?php else : ?>
-        <div class="btn_ajouter_image" onclick="$('#illustration').click()">
-            <i class="material-icons">photo</i>
-            <p>Cliquer pour ajouter une image</p>
+<div class="formulaire">
+    <div class="bloc_formulaire gauche">
+        <div class="form_ligne">
+            <label>Titre</label>
+            <input type="text" name="titre" value="<?= $titre; ?>">
         </div>
-    <?php endif; ?>
+        <div class="form_ligne">
+            <label>Illustration</label>
+            <div class="ajouter_image <?php if ($illustration != null) : ?>has_image<?php endif; ?>">
+            <?php if ($illustration != null) : ?>
+                <img src="<?= BASEURL.$illustration; ?>" onclick="$('#illustration').click()">
+            <?php else : ?>
+                <div class="btn_ajouter_image" onclick="$('#illustration').click()">
+                    <i class="material-icons">photo</i>
+                    <p>Cliquer pour ajouter une image</p>
+                </div>
+            <?php endif; ?>
+            </div>
+            <input type="file" id="illustration" name="illustration" style="display:none;">
+        </div>
     </div>
-    <input type="file" id="illustration" name="illustration" style="display:none;">
+    <div class="bloc_formulaire droite">
+        <label>Contenu</label>
+        <textarea name="contenu" id="contenu"><?= $contenu; ?></textarea>
+    </div>
 </div>
-<label>Contenu</label>
-<textarea name="contenu" id="contenu"><?= $contenu; ?></textarea>
+
 <div class="form_footer">
     <button type="submit" name="<?= $btn_name; ?>"><?= $btn; ?></button>
 

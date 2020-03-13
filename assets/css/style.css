@@ -39,7 +39,7 @@ form label
 form .form_ligne
 {
     width: 100%;
-    padding: 16px 0;
+    padding-bottom: 16px;
 }
 
 form .form_ligne input[type="text"],
@@ -754,9 +754,28 @@ nav .avatar
 
 .nouveau_projet form
 {
-    width: 70%;
-    margin: 0 auto;
     text-align: center;
+}
+
+.nouveau_projet form .formulaire
+{
+    display: flex;
+    justify-content: center;
+}
+
+.nouveau_projet form .formulaire .bloc_formulaire
+{
+    padding: 16px;
+}
+
+.nouveau_projet form .formulaire .bloc_formulaire.droite 
+{
+    width: 60%;
+}
+
+.nouveau_projet form .formulaire .bloc_formulaire.gauche
+{
+    width: 40%;
 }
 
 .nouveau_projet .ajouter_image
