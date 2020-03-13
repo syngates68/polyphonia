@@ -79,3 +79,10 @@ $(document).on('click', '.tbl_contenu .tbl_actions .supprimer', function(e)
         });
     }
 });
+
+//Bouton d'ajout d'image
+/*$(document).ready(function()
+{
+    $('.site_content').css('padding-top', $('nav').css('height'));
+    $('.dropdown').css('top', $('nav').css('height'));
+});*/

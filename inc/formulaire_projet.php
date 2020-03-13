@@ -41,15 +41,17 @@ if (isset($_SESSION['id_projet']))
         </div>
         <div class="form_ligne">
             <label>Illustration</label>
-            <div class="ajouter_image <?php if ($illustration != null) : ?>has_image<?php endif; ?>">
-            <?php if ($illustration != null) : ?>
-                <img src="<?= BASEURL.$illustration; ?>" onclick="$('#illustration').click()">
-            <?php else : ?>
-                <div class="btn_ajouter_image" onclick="$('#illustration').click()">
-                    <i class="material-icons">photo</i>
-                    <p>Cliquer pour ajouter une image</p>
+            <div class="ajouter_image_container">
+                <div class="ajouter_image <?php if ($illustration != null) : ?>has_image<?php endif; ?>">
+                <?php if ($illustration != null) : ?>
+                    <img src="<?= BASEURL.$illustration; ?>" onclick="$('#illustration').click()">
+                <?php else : ?>
+                    <div class="btn_ajouter_image" onclick="$('#illustration').click()">
+                        <i class="material-icons">photo</i>
+                        <p>Cliquer pour ajouter une image</p>
+                    </div>
+                <?php endif; ?>
                 </div>
-            <?php endif; ?>
             </div>
             <input type="file" id="illustration" name="illustration" style="display:none;">
         </div>

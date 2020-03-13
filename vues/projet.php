@@ -19,7 +19,7 @@ if ($exist_projet > 0)
     <div class="projet_contenu">
         <div class="projet_contenu__top">
             <div class="projet_actions">
-                <button class="exporter_pdf"><i class="material-icons">description</i>Exporter en PDF</button>
+                <a href="<?= BASEURL; ?>exporter_pdf.php?id=<?= $projet['id_projet']; ?>" class="exporter_pdf"><i class="material-icons">description</i>Exporter en PDF</a>
             </div>
             <div class="projet_infos">
                 <div class="auteur">
