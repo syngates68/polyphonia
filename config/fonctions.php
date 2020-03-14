@@ -33,7 +33,7 @@ function req_liste_projets($page, $nbr_par_page, $admin = false, $recherche = NU
         
     $where .= ' p.actif = 1';
 
-    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
+    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, p.tags, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
 
     $req = db()->prepare($sql);
     
@@ -50,7 +50,7 @@ function req_nbr_pages($nbr_par_page, $recherche = NULL)
     $where = ' WHERE brouillon = 0 AND actif = 1';
 
     if ($recherche != NULL)
-        $where .= ' AND CONCAT(titre, " ", contenu) LIKE :recherche';
+        $where .= ' AND CONCAT(titre, " ", contenu, " ", tags) LIKE :recherche';
 
     $nbr = db()->prepare('SELECT COUNT(*) FROM projets'.$where);
 
@@ -83,7 +83,7 @@ function count_nbr_projets($recherche = NULL)
 
 function req_by_slug($slug)
 {
-    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
+    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.tags u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
     $req->execute([$slug]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -107,7 +107,7 @@ function formate_date_heure($date)
     return date("d/m/Y à H:i:s", strtotime($date)); 
 }
 
-function extrait_texte($texte, $slug, $longueur)
+function extrait_texte($texte, $slug, $longueur, $id_projet)
 {
     if (strlen($texte) <= $longueur)
         return $texte;
@@ -118,7 +118,7 @@ function extrait_texte($texte, $slug, $longueur)
     if ($espace > 0)
         $texte = substr($texte, 0, $espace);
 
-    return $texte.'...<br/><a class="see_more" href="'.BASEURL.'projet/'.$slug.'.html">En savoir plus</a>';
+    return $texte.'...<br/><a class="btn_lire_projet" projet="'.$id_projet.'" href="'.BASEURL.'projet/'.$slug.'.html">En savoir plus</a>';
 }
 
 function slugify($string, $delimiter = '-') {
@@ -133,20 +133,20 @@ function slugify($string, $delimiter = '-') {
 	return $clean;
 }
 
-function ajouter_projet($titre, $contenu, $id_utilisateur, $illustration)
+function ajouter_projet($titre, $contenu, $id_utilisateur, $illustration, $tags)
 {
     $slug = slugify($titre);
 
-    $ins = db()->prepare('INSERT INTO projets(titre, contenu, illustration, id_redacteur, slug) VALUES (?, ?, ?, ?, ?)');
-    $ins->execute([$titre, $contenu, $illustration, $id_utilisateur, $slug]);
+    $ins = db()->prepare('INSERT INTO projets(titre, contenu, illustration, id_redacteur, slug, tags) VALUES (?, ?, ?, ?, ?, ?)');
+    $ins->execute([$titre, $contenu, $illustration, $id_utilisateur, $slug, $tags]);
 }
 
-function brouillon_projet($titre, $contenu, $illustration, $id_utilisateur)
+function brouillon_projet($titre, $contenu, $illustration, $id_utilisateur, $tags)
 {
     $date_sauvegarde = date("Y-m-d H:i:s");
 
-    $ins = db()->prepare('INSERT INTO projets(titre, contenu, id_redacteur, illustration, brouillon, date_sauvegarde) VALUES (?, ?, ?, ?, 1, ?)');
-    $ins->execute([$titre, $contenu, $id_utilisateur, $illustration, $date_sauvegarde]);
+    $ins = db()->prepare('INSERT INTO projets(titre, contenu, id_redacteur, illustration, brouillon, date_sauvegarde, tags) VALUES (?, ?, ?, ?, 1, ?, ?)');
+    $ins->execute([$titre, $contenu, $id_utilisateur, $illustration, $date_sauvegarde, $tags]);
 }
 
 function req_by_id($id_projet)
@@ -174,26 +174,26 @@ function check_connexion($nom_utilisateur)
         return 0;
 }
 
-function update_projet($titre, $contenu, $id, $illustration)
+function update_projet($titre, $contenu, $id, $illustration, $tags)
 {
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ? WHERE id = ?');
-    $upd->execute([$titre, $contenu, $illustration, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, tags = ? WHERE id = ?');
+    $upd->execute([$titre, $contenu, $illustration, $tags, $id]);
 }
 
-function update_brouillon($titre, $contenu, $illustration, $id)
+function update_brouillon($titre, $contenu, $illustration, $id, $tags)
 {
     $date_sauvegarde = date("Y-m-d H:i:s");
 
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, date_sauvegarde = ? WHERE id = ?');
-    $upd->execute([$titre, $contenu, $illustration, $date_sauvegarde, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, date_sauvegarde = ?, tags = ? WHERE id = ?');
+    $upd->execute([$titre, $contenu, $illustration, $date_sauvegarde, $tags, $id]);
 }
 
-function valider_brouillon($titre, $contenu, $illustration, $id)
+function valider_brouillon($titre, $contenu, $illustration, $id, $tags)
 {
     $slug = slugify($titre);
 
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, slug = ?, brouillon = 0 WHERE id = ?');
-    $upd->execute([$titre, utf8_encode($contenu), $illustration, $slug, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, slug = ?, brouillon = 0, tags = ? WHERE id = ?');
+    $upd->execute([$titre, utf8_encode($contenu), $illustration, $slug, $tags, $id]);
 }
 
 function req_nom_utilisateur($id)

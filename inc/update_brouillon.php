@@ -9,6 +9,7 @@ if (isset($_POST['enregistrer_modifications']))
     $titre = (!empty($_POST['titre'])) ? $_POST['titre'] : NULL;
     $contenu = (!empty($_POST['contenu'])) ? $_POST['contenu'] : NULL;
     $illustration = (req_by_id($_GET['id'])['illustration'] != NULL && req_by_id($_GET['id'])['illustration'] != '') ? req_by_id($_GET['id'])['illustration'] : NULL;
+    $tags = (!empty($_POST['tags'])) ? $_POST['tags'] : NULL;
 
     if ($illustration == NULL || (isset($_FILES['illustration']) && $_FILES['illustration']['error'] == 0))
     {
@@ -22,7 +23,7 @@ if (isset($_POST['enregistrer_modifications']))
         }
     }
 
-    update_brouillon($titre, $contenu, str_replace('../', '', $illustration), $_GET['id']);
+    update_brouillon($titre, $contenu, str_replace('../', '', $illustration), $_GET['id'], $tags);
 
     $_SESSION['succes'] = 'Votre brouillon a bien été sauvegardé.';
     header('Location:'.BASEURL.'brouillon/'.$_GET['id'].'.html');
@@ -49,7 +50,7 @@ if (isset($_POST['valider_brouillon']))
 
             if ($msg == '')
             {
-                valider_brouillon($_POST['titre'], $_POST['contenu'], $illustration, $_GET['id']);
+                valider_brouillon($_POST['titre'], $_POST['contenu'], $illustration, $_GET['id'], $_POST['tags']);
                             
                 $_SESSION['succes'] = 'Votre projet <B>'.$_POST['titre'].'</B> a bien été ajouté.';
                 header('Location:'.BASEURL.'brouillon/'.$_GET['id'].'.html');

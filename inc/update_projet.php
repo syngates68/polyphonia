@@ -28,7 +28,7 @@ if (isset($_POST['editer_projet']))
 
             if ($msg == '')
             {
-                update_projet($_POST['titre'], $_POST['contenu'], $_GET['id'], str_replace('../', '', $illustration));
+                update_projet($_POST['titre'], $_POST['contenu'], $_GET['id'], str_replace('../', '', $illustration), $_POST['tags']);
     
                 $_SESSION['succes'] = "Le projet a bien été édité";
                 header('Location:'.BASEURL.'editer_projet/'.$_GET['id'].'.html');

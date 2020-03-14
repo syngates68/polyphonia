@@ -80,9 +80,25 @@ $(document).on('click', '.tbl_contenu .tbl_actions .supprimer', function(e)
     }
 });
 
-//Bouton d'ajout d'image
-/*$(document).ready(function()
+//Système de tags
+$(document).on('keyup', 'input[name="nouveau_tag"]', function(e)
 {
-    $('.site_content').css('padding-top', $('nav').css('height'));
-    $('.dropdown').css('top', $('nav').css('height'));
-});*/
+    if (e.key == ';' || e.code == 'Space')
+    {
+        var val = $(this).val().replace(';', '').replace(' ', '')
+        $('.tags_container').append('<span class="tag">'+ val + '</span>')
+        $('input[name="tags"]').val($('input[name="tags"]').val() + val + ';');
+        $(this).val('')
+    }
+});
+
+$(document).on('click', '.tags_container .tag', function()
+{
+    $(this).addClass('deleted')
+
+    $('.tag').each(function()
+    {
+        if ($(this).hasClass('deleted'))
+            $('.tags_container').append($(this))
+    })
+});

@@ -3,6 +3,7 @@
 $titre = null;
 $illustration = null;
 $contenu = null;
+$tags = null;
 $btn = "Ajouter";
 $btn_name = "ajouter_projet";
 $btn_brouillon = "Enregistrer en brouillon";
@@ -15,6 +16,7 @@ if (isset($_SESSION['id_projet']))
     $titre = $projet['titre'];
     $illustration = $projet['illustration'];
     $contenu = $projet['contenu'];
+    $tags = $projet['tags'];
 
     /* Edition d'un projet */
     if (isset($_SESSION['modification']))
@@ -55,6 +57,23 @@ if (isset($_SESSION['id_projet']))
             </div>
             <input type="file" id="illustration" name="illustration" style="display:none;">
         </div>
+        <div class="form_ligne">
+            <label>Tags</label>
+            <div class="tags_container">
+                <?php 
+                    $exp = explode(';', $tags); 
+                    if (sizeof($exp) > 0) :
+                        for ($i = 0; $i < sizeof($exp) - 1; $i++) :
+                ?>
+                    <span class="tag"><?= $exp[$i]; ?></span>
+                <?php
+                        endfor;
+                    endif;
+                ?>
+            </div>
+            <input type="text" name="nouveau_tag" placeholder="Ajouter un tag">
+            <input type="hidden" name="tags" value="<?= $tags; ?>">
+        </div>
     </div>
     <div class="bloc_formulaire droite">
         <label>Contenu</label>
@@ -75,7 +94,6 @@ if (isset($_SESSION['id_projet']))
 
 </div>
 
-<script src="<?= BASEURL; ?>assets/js/admin.js"></script>
 <script>
     CKEDITOR.replace('contenu', {
         height: 500

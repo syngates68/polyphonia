@@ -29,7 +29,7 @@ $nbr_pages = req_nbr_pages(20, $_POST['recherche']);
         <div class="corps_projet">
             <div class="titre_projet"><?= $projet['titre']; ?></div>
             <div class="description_projet">
-                <?= extrait_texte($projet['contenu'], $projet['slug'], 710); ?>
+                <?= extrait_texte($projet['contenu'], $projet['slug'], 710, $projet['id_projet']); ?>
             </div>
         </div>
         <div class="footer_projet">
