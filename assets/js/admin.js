@@ -87,18 +87,24 @@ $(document).on('keyup', 'input[name="nouveau_tag"]', function(e)
     {
         var val = $(this).val().replace(';', '').replace(' ', '')
         $('.tags_container').append('<span class="tag">'+ val + '</span>')
-        $('input[name="tags"]').val($('input[name="tags"]').val() + val + ';');
+        $('input[name="tags"]').val($('input[name="tags"]').val() + val + ';')
         $(this).val('')
     }
 });
 
 $(document).on('click', '.tags_container .tag', function()
 {
-    $(this).addClass('deleted')
-
-    $('.tag').each(function()
+    if (confirm("Supprimer ce tag?"))
     {
-        if ($(this).hasClass('deleted'))
-            $('.tags_container').append($(this))
-    })
+        $(this).hide()
+        var value = $(this).html()
+        var tags = $('input[name="tags"]').val().split(';')
+        $('input[name="tags"]').val('')
+
+        for (var i = 0; i < tags.length - 1; i++)
+        {
+            if (tags[i] != value)
+                $('input[name="tags"]').val($('input[name="tags"]').val() + tags[i] + ';')
+        }
+    }
 });

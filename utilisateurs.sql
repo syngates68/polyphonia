@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3307
--- Généré le :  jeu. 12 mars 2020 à 17:01
+-- Généré le :  lun. 16 mars 2020 à 11:47
 -- Version du serveur :  10.2.14-MariaDB
 -- Version de PHP :  7.1.16
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
   `nom_utilisateur` varchar(255) NOT NULL,
   `pass` text NOT NULL,
   `rang` varchar(255) NOT NULL,
@@ -43,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`id`, `nom_utilisateur`, `pass`, `rang`, `avatar`, `date_inscription`) VALUES
-(1, 'syngates68', '$2y$10$EWs0.V.uJ2ajUorWRECawe5oqb0GY9kTvT/e1si0stbWONSSMpU1y', 'admin', 'assets/utilisateurs/default.jpg', '2020-03-03 21:03:34'),
-(2, 'compte_test', '$2y$10$8U2BtePDwvnvragJQ9cTb.5FjlBSyCMdLhvqWovjwg1Zn0.jHd6z6', 'externe', 'assets/utilisateurs/default.jpg', '2020-03-10 08:43:17');
+INSERT INTO `utilisateurs` (`id`, `email`, `nom_utilisateur`, `pass`, `rang`, `avatar`, `date_inscription`) VALUES
+(1, 'quentin.schifferle@gmail.com', 'syngates68', '$2y$10$EWs0.V.uJ2ajUorWRECawe5oqb0GY9kTvT/e1si0stbWONSSMpU1y', 'admin', 'assets/utilisateurs/default.jpg', '2020-03-03 21:03:34'),
+(2, 'compte@test.com', 'compte_test', '$2y$10$8U2BtePDwvnvragJQ9cTb.5FjlBSyCMdLhvqWovjwg1Zn0.jHd6z6', 'externe', 'assets/utilisateurs/default.jpg', '2020-03-10 08:43:17');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

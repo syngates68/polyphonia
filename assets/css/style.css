@@ -66,7 +66,7 @@ form textarea
     background-color: #fff6f6;
     color: #9f3a38;
     padding: 1em 1.5em;
-    margin-top: 8px;
+    margin: 8px 0;
 }
 
 .succes
@@ -75,6 +75,7 @@ form textarea
     background-color: #fcfff5;
     color: #2c662d;
     padding: 1em 1.5em;
+    margin: 8px 0;
 }
 
 nav
@@ -914,6 +915,71 @@ nav .avatar
 .nouveau_projet .tags_container .tag:hover::after 
 {
     border-left-color: crimson; 
+}
+
+/*********************************************************
+
+    MON COMPTE
+
+*********************************************************/
+
+.compte_content
+{
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.compte_content .avatar_container,
+.compte_content .infos_container
+{
+    padding: 16px;
+}
+
+.compte_content .avatar_container
+{
+    text-align: center;
+}
+
+.compte_content .avatar_container img
+{
+    width: 50%;
+    border: 1px solid var(--border);
+}
+
+.compte_content .infos_container .libelle_parametres
+{
+    font-size: 15px;
+    margin: 16px 0;
+}
+
+.compte_content .infos_container button
+{
+    display: block;
+    width: 40%;
+    margin: 16px auto 0 auto;
+    border: 1px solid var(--orange);
+    background: none;
+    color: var(--orange);
+    font-weight: 600;
+    padding: 8px;
+    transition-duration: .3s;
+}
+
+.compte_content .infos_container button:hover
+{
+    cursor: pointer;
+    background: var(--orange);
+    color: #FFF;
+    transition-duration: .3s;
+}
+
+.compte_content .infos_container .btn_supprimer_compte
+{
+    color: red;
+    display: block;
+    margin-top: 16px;
+    font-size: 12px;
+    text-align: right;
 }
 
 /*********************************************************
