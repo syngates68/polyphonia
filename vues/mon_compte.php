@@ -7,7 +7,13 @@ if (isset($_SESSION['utilisateur']))
         <h1>Votre compte</h1>
         <div class="compte_content">
             <div class="avatar_container">
-                <img src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>">
+                <div class="avatar">
+                    <img src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>">
+                    <div class="modifier_avatar">
+                        <i class="material-icons">insert_photo</i>
+                    </div>
+                </div>
+                <input type="file" name="avatar" utilisateur="<?= $utilisateur['id']; ?>">
             </div>
             <div class="infos_container">
                 <form method="POST" action="./inc/verifier_identifiants.php">
@@ -39,6 +45,7 @@ if (isset($_SESSION['utilisateur']))
             </div>
         </div>
     </div>
+    <script src="<?= BASEURL; ?>assets/js/mon_compte.js"></script>
 <?php
 }
 else

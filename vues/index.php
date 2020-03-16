@@ -21,14 +21,17 @@
                         <div class="dropdown">
                             <?php if (req_rang($_SESSION['utilisateur']) == 'admin') : ?>
                             <div class="dropdown_lien">
-                                <a href="<?= BASEURL ?>administration.html"><i class="material-icons">how_to_reg</i>Administration</a>
+                                <i class="material-icons">how_to_reg</i>
+                                <a href="<?= BASEURL ?>administration.html">Administration</a>
                             </div>
                             <?php endif; ?>
                             <div class="dropdown_lien">
-                                <a href="<?= BASEURL ?>mon_compte.html"><i class="material-icons">account_circle</i>Mon Compte</a>
+                                <i class="material-icons">account_circle</i>
+                                <a href="<?= BASEURL ?>mon_compte.html"><B><?= req_utilisateur_by_id($_SESSION['utilisateur'])['nom_utilisateur']; ?></B></a>
                             </div>
                             <div class="dropdown_lien">
-                                <a href="<?= BASEURL ?>deconnexion.html"><i class="material-icons">power_settings_new</i>Déconnexion</a>
+                                <i class="material-icons">power_settings_new</i>
+                                <a href="<?= BASEURL ?>deconnexion.html">Déconnexion</a>
                             </div>
                         </div>
                     <?php endif; ?>

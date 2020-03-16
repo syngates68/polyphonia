@@ -285,3 +285,9 @@ function req_rang($id)
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0]['rang'];
 }
+
+function update_avatar($avatar, $id)
+{
+    $upd = db()->prepare('UPDATE utilisateurs SET avatar = ? WHERE id = ?');
+    $upd->execute([$avatar, $id]);
+}
