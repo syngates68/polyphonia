@@ -43,6 +43,7 @@ form .form_ligne
 }
 
 form .form_ligne input[type="text"],
+form .form_ligne input[type="mail"],
 form .form_ligne input[type="password"],
 form textarea
 {
@@ -67,6 +68,7 @@ form textarea
     color: #9f3a38;
     padding: 1em 1.5em;
     margin: 8px 0;
+    font-size: 12px;
 }
 
 .succes
@@ -76,6 +78,7 @@ form textarea
     color: #2c662d;
     padding: 1em 1.5em;
     margin: 8px 0;
+    font-size: 12px;
 }
 
 nav
@@ -105,10 +108,35 @@ nav a
 
 nav a.btn_connexion
 {
+    border: 2px solid var(--orange);
     background: var(--orange);
     color: #FFF !important;
     border-radius: 5px;
     padding: 16px !important;
+    transition-duration: .3s;
+}
+
+nav a.btn_connexion:hover
+{
+    background-color: #FFF;
+    color: var(--orange) !important;
+    transition-duration: .3s;
+}
+
+nav a.btn_inscription
+{
+    border: 2px solid var(--orange_clair);
+    color: var(--orange_clair) !important;
+    border-radius: 5px;
+    padding: 16px !important;
+    transition-duration: .3s;
+}
+
+nav a.btn_inscription:hover
+{
+    border: 2px solid var(--orange);
+    color: var(--orange) !important;
+    transition-duration: .3s;
 }
 
 nav .logo_polyphonia
@@ -116,50 +144,65 @@ nav .logo_polyphonia
     display: flex;
     align-items: center;
     justify-content: start;
-    font-weight: 600;
-    font-size: 25px;
 }
 
-nav .logo_polyphonia img
+nav .logo_polyphonia .logo
+{
+    display: flex;
+    align-items: center;
+}
+
+nav .logo_polyphonia .logo .main
+{
+    font-weight: 600;
+    margin-right: 16px;
+}
+
+nav .nav_content .menu_mobile
+{
+    display: none !important;
+}
+
+nav .logo_polyphonia .logo img
 {
     width: 50px;
     height: 50px;
     margin-right: 8px;
 }
 
-nav .nav_liens
+nav .logo_polyphonia .nav_liens
 {
     display: flex;
     align-items: center;
 }
 
-nav .nav_liens a
+nav .logo_polyphonia .nav_liens a
 {
-    padding: 8px 16px;
+    padding: 0 16px;
     letter-spacing: 2px;
     font-size: 14px;
     transition-duration: .3s;
     color: var(--orange_clair);
 }
 
-nav .nav_liens a i
+nav .logo_polyphonia .nav_liens a i
 {
     vertical-align: text-bottom;
     margin-right: 5px;
 }
 
-nav .nav_liens a.actif
+nav .logo_polyphonia .nav_liens a.actif
 {
     color: var(--orange);
 }
 
-nav .nav_liens a:hover
+nav .logo_polyphonia .nav_liens a:hover
 {
     color: var(--orange);
     transition-duration: .3s;
 }
 
-nav .avatar
+nav .cta .avatar
 {
     width: 50px;
     height: 50px;
@@ -168,7 +211,7 @@ nav .avatar
     object-fit: cover;
 }
 
-.dropdown
+nav .cta .dropdown
 {
     display: none;
     position: absolute;
@@ -179,12 +222,12 @@ nav .avatar
     z-index: 2;
 }
 
-.dropdown.is_visible
+nav .cta .dropdown.is_visible
 {
     display: block;
 }
 
-.dropdown_lien
+nav .cta .dropdown_lien
 {
     display: grid;
     grid-template-columns: 1fr 5fr;
@@ -192,9 +235,28 @@ nav .avatar
     padding: 8px 0;
 }
 
-.dropdown .dropdown_lien a
+nav .cta .dropdown_lien i 
+{
+    margin-right: 8px;
+}
+
+nav .cta .dropdown .dropdown_lien a
 {
     color: #000;
+    transition-duration: .3s;
+    text-align: center;
+    font-size: 13px;
+}
+
+nav .cta .dropdown .dropdown_lien a:hover
+{
+    color: var(--orange);
+    transition-duration: .3s;
+}
+
+nav .cta .dropdown .dropdown_lien a b 
+{
+    font-weight: 600;
 }
 
 .container
@@ -934,7 +996,7 @@ nav .avatar
 .compte_content
 {
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: 1fr 2fr;
 }
 
 .compte_content .avatar_container,
@@ -943,18 +1005,12 @@ nav .avatar
     padding: 16px;
 }
 
-.compte_content .avatar_container
-{
-    text-align: center;
-}
-
 .compte_content .avatar_container .avatar
 {
     position: relative;
-    width: 50%;
-    padding-top: 50%;
+    width: 100%;
+    padding-top: 100%;
     height: 0;
-    margin: 0 auto;
 }
 
 .compte_content .avatar_container .avatar img
@@ -1000,6 +1056,44 @@ nav .avatar
 .compte_content .avatar_container .modifier_avatar i
 {
     font-size: 70px;
+}
+
+.compte_content .avatar_container .vos_infos
+{
+    padding: 32px 0;
+}
+
+.compte_content .avatar_container .vos_infos .info 
+{
+    padding: 8px 0;
+}
+
+.compte_content .avatar_container .vos_infos p
+{
+    font-size: 12px;
+    color: var(--grey);
+}
+
+.compte_content .avatar_container .vos_infos p .label 
+{
+    font-weight: 600;
+    color: #000;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+.compte_content .avatar_container .vos_infos p .label i
+{
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.compte_content .infos_container form
+{
+    width: 70%;
+    margin: auto;
 }
 
 .compte_content .infos_container .libelle_parametres
@@ -1108,12 +1202,24 @@ nav .avatar
 {
     nav
     {
-        padding: 8px;
+        padding: 16px;
+    }
+
+    nav .nav_content
+    {
+        width: 100%;
     }
 
     nav .logo_polyphonia
     {
         font-size: 20px;
+    }
+
+    nav .nav_content .menu_mobile
+    {
+        display: block !important;
+        color: var(--orange);
+        cursor: pointer;
     }
 
     nav .logo_polyphonia img
@@ -1122,9 +1228,42 @@ nav .avatar
         height: 30px;
     }
 
-    .nav_liens
+    nav .nav_content .nav_liens
     {
-        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #FFF;
+        display: block;
+        width: 50%;
+        height: 100vh;
+        transform: translateX(-100%);
+        box-shadow: none;
+        transition-duration: .3s;
+    }
+
+    nav .nav_content .nav_liens.is_visible 
+    {
+        transform: translateX(0%);
+        transition-duration: .3s;
+        box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12);
+    }
+
+    nav .nav_content .nav_liens a 
+    {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 8px;
+    }
+
+    nav .nav_content .nav_liens .menu_mobile
+    {
+        padding: 35px 8px;
+    }
+
+    nav .cta .dropdown
+    {
+        right: 0;
     }
 
     .container
@@ -1148,8 +1287,33 @@ nav .avatar
         display: block;
     }
 
+    .projet_header
+    {
+        height: 300px;
+    }
+
+    .projet_contenu
+    {
+        width: 100%;
+    }
+
     .nouveau_projet form
     {
         width: 100%;
+    }
+
+    .compte_content
+    {
+        display: block;
+    }
+
+    .compte_content .infos_container form
+    {
+        width: 100%;
+    }
+
+    .formulaire_connexion form 
+    {
+        width: 90%;
     }
 }

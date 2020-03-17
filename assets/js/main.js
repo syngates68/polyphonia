@@ -15,6 +15,13 @@ $(document).on('click', 'nav #dropdown', function(e)
 
 $(document).ready(function()
 {
-    $('.site_content').css('padding-top', $('nav').css('height'));
-    $('.dropdown').css('top', $('nav').css('height'));
+    var hauteur = $('nav').css('height')
+
+    $('.site_content').css('padding-top', hauteur)
+    $('.dropdown').css('top', $('nav').css('height'))
+});
+
+$(document).on('click', 'nav .menu_mobile', function()
+{
+    $('nav .nav_liens').toggleClass('is_visible')
 });

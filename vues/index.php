@@ -5,17 +5,24 @@
     ?>
         <nav>
             <div class="nav_content">
+                <i class="material-icons menu_mobile">menu</i>
                 <div class="logo_polyphonia">
-                    <img src="<?= BASEURL ?>assets/img/logo_orange.png">
-                    <a href="<?= BASEURL ?>">Polyphonia</a>
+                    <div class="logo">
+                        <img src="<?= BASEURL ?>assets/img/logo_orange.png">
+                        <a class="main" href="<?= BASEURL ?>">Polyphonia</a>
+                    </div>
+                    <div class="nav_liens">
+                        <i class="material-icons menu_mobile">close</i>
+                        <a class="actif" href="<?= BASEURL ?>">Accueil</a>
+                        <a href="<?= BASEURL ?>blog.html">Blog</a>
+                        <a href="<?= BASEURL ?>forum.html">Forum</a>
+                        <a href="<?= BASEURL ?>contact.html">Contact</a>
+                    </div>
                 </div>
-                <div class="nav_liens">
-                    <a class="actif" href="<?= BASEURL ?>">Accueil</a>
-                    <a href="<?= BASEURL ?>blog.html">Blog</a>
-                    <a href="<?= BASEURL ?>forum.html">Forum</a>
-                    <a href="<?= BASEURL ?>contact.html">Contact</a>
+                <div class="cta">
                     <?php if (!isset($_SESSION['utilisateur'])) : ?>
                         <a href="<?= BASEURL ?>connexion.html" class="btn_connexion">Connexion</a>
+                        <a href="<?= BASEURL ?>inscription.html" class="btn_inscription">Inscription</a>
                     <?php else : ?>
                         <a href="#" id="dropdown"><img class="avatar" src="<?= BASEURL; ?><?= req_utilisateur_by_id($_SESSION['utilisateur'])['avatar']; ?>"></a>
                         <div class="dropdown">

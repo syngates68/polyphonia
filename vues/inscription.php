@@ -1,8 +1,8 @@
 <div class="container">
     <div class="formulaire_connexion">
         <img src="<?= BASEURL; ?>assets/img/logo_orange.png">
-        <h1>Connexion à l'espace membre</h1>
-        <form method="POST" action="./inc/verifier_identifiants.php">
+        <h1>Inscription à l'espace membre</h1>
+        <form method="POST" action="./inc/verifier_inscription.php">
 
             <?php
             //Message d'erreur
@@ -15,14 +15,22 @@
             ?>
 
             <div class="form_ligne">
-                <label>Nom d'utilisateur ou adresse mail</label>
-                <input type="text" name="login">
+                <label>Adresse mail</label>
+                <input type="mail" name="email">
+            </div>
+            <div class="form_ligne">
+                <label>Nom d'utilisateur</label>
+                <input type="text" name="nom_utilisateur">
             </div>
             <div class="form_ligne">
                 <label>Mot de passe</label>
                 <input type="password" name="pass">
             </div>
-            <button type="submit" name="connexion">Se connecter</button>
+            <div class="form_ligne">
+                <label>Confirmation du mot de passe</label>
+                <input type="password" name="pass2">
+            </div>
+            <button type="submit" name="inscription">S'inscrire</button>
         </form>
     </div>
 </div>

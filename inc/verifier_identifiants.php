@@ -6,15 +6,16 @@ include('../config/fonctions.php');
 
 if (isset($_POST['connexion']))
 {
-    if (isset($_POST['nom_utilisateur']) && !empty($_POST['nom_utilisateur']) && isset($_POST['pass']) && !empty($_POST['pass']))
+    if (isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['pass']) && !empty($_POST['pass']))
     {
-        if (check_connexion($_POST['nom_utilisateur']) != 0)
+        if (check_connexion($_POST['login']) != 0)
         {
-            $utilisateur = check_connexion($_POST['nom_utilisateur']);
+            $utilisateur = check_connexion($_POST['login']);
 
             if (password_verify($_POST['pass'], $utilisateur['pass']))
             {
                 $_SESSION['utilisateur'] = $utilisateur['id'];
+                update_derniere_connexion(date("Y-m-d H:i:s"), $utilisateur['id']);
                 header('Location:'.BASEURL);
             }
             else

@@ -31,6 +31,8 @@ if (isset($_SESSION['utilisateur']) && (req_rang($_SESSION['utilisateur']) == 'a
                 <?php include('./inc/formulaire_projet.php'); ?>
             </form>
         </div>
+
+        <script src="<?= BASEURL; ?>assets/js/admin.js"></script>
     </div>
 <?php
 }

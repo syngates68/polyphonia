@@ -69,7 +69,7 @@ function count_nbr_projets($recherche = NULL)
     $where = ' WHERE brouillon = 0 AND actif = 1';
 
     if ($recherche != NULL)
-        $where .= ' AND CONCAT(titre, " ", contenu) LIKE :recherche';
+        $where .= ' AND CONCAT(titre, " ", contenu, " ", tags) LIKE :recherche';
 
 
     $count = db()->prepare("SELECT COUNT(*) FROM projets".$where);
@@ -163,10 +163,10 @@ function update_vues($id_projet, $vues)
     $upd->execute([$vues, $id_projet]);
 }
 
-function check_connexion($nom_utilisateur)
+function check_connexion($login)
 {
-    $req = db()->prepare('SELECT * FROM utilisateurs WHERE nom_utilisateur = ?');
-    $req->execute([$nom_utilisateur]);
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE nom_utilisateur = :login OR email = :login');
+    $req->execute(['login' => $login]);
 
     if ($req->rowCount() > 0)
         return $req->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -290,4 +290,77 @@ function update_avatar($avatar, $id)
 {
     $upd = db()->prepare('UPDATE utilisateurs SET avatar = ? WHERE id = ?');
     $upd->execute([$avatar, $id]);
+}
+
+function update_profil($email, $nom_utilisateur, $pass, $bio, $id)
+{
+    $sql = 'UPDATE utilisateurs SET email = :email, nom_utilisateur = :nom_utilisateur, bio = :bio';
+
+    if ($pass != '')
+        $sql .= ', pass = :pass';
+
+    $sql .= ' WHERE id = :id';
+
+    $upd = db()->prepare($sql);
+    $upd->bindParam(':email', $email);
+    $upd->bindParam(':nom_utilisateur', $nom_utilisateur);
+    $upd->bindParam(':bio', $bio);
+    
+    if ($pass != '')
+        $upd->bindParam(':pass', $pass);
+
+    $upd->bindParam(':id', $id);
+    $upd->execute();
+}
+
+function update_derniere_connexion($date_connexion, $id)
+{
+    $upd = db()->prepare('UPDATE utilisateurs SET derniere_connexion = ? WHERE id = ?');
+    $upd->execute([$date_connexion, $id]);
+}
+
+function champs_non_vides($champs)
+{
+    $non_vides = 1;
+
+    for ($i = 0; $i < sizeof($champs); $i++)
+    {
+        if (empty($champs[$i]) || str_replace(' ', '', $champs[$i]) == '')
+        {
+            $non_vides = 0;
+            break;
+        }
+    }
+
+    return $non_vides;
+}
+
+function verifie_nom_utilisateur($nom_utilisateur)
+{
+    $req = db()->prepare('SELECT COUNT(*) as nb FROM utilisateurs WHERE nom_utilisateur = ?');
+    $req->execute([$nom_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function verifie_email($email)
+{
+    $req = db()->prepare('SELECT COUNT(*) as nb FROM utilisateurs WHERE email = ?');
+    $req->execute([$email]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function ajouter_utilisateur($email, $nom_utilisateur, $pass)
+{
+    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang) VALUES(?, ?, ?, ?, "externe")');
+    $ins->execute(
+    [
+        $email,
+        $nom_utilisateur,
+        password_hash($pass, PASSWORD_BCRYPT),
+        date('Y-m-d H:i:s')
+    ]);
+
+    mkdir('../assets/utilisateurs/'.$nom_utilisateur);
 }

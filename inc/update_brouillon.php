@@ -53,7 +53,7 @@ if (isset($_POST['valider_brouillon']))
                 valider_brouillon($_POST['titre'], $_POST['contenu'], $illustration, $_GET['id'], $_POST['tags']);
                             
                 $_SESSION['succes'] = 'Votre projet <B>'.$_POST['titre'].'</B> a bien été ajouté.';
-                header('Location:'.BASEURL.'brouillon/'.$_GET['id'].'.html');
+                header('Location:'.BASEURL.'editer_projet/'.$_GET['id'].'.html');
             }
             else
             {
