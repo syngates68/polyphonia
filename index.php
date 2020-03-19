@@ -5,6 +5,7 @@
 
     include("config/config.php");
     include("config/fonctions.php");
+    include("config/captcha.php");
 ?>
 
 <!DOCTYPE html>

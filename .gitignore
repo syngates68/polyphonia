@@ -2,3 +2,5 @@
 config/database.php
 
 mdp.php
+
+config/captcha.php

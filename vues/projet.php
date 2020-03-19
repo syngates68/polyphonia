@@ -71,7 +71,7 @@ if ($exist_projet > 0)
                     <label>Amélioration suggérée</label>
                     <textarea name="amelioration" id="amelioration"></textarea>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6LdWUOIUAAAAAPYUDDSKxhOBpl7GkZ5blVR9tHac"></div>
+                <div class="g-recaptcha" data-sitekey="<?= get_public_key(); ?>"></div>
                 <div class="button">
                     <button type="submit" name="envoyer">Envoyer</button>
                 </div>
