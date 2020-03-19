@@ -2,6 +2,10 @@
 
 include('database.php');
 
+require dirname(__DIR__).'/vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 function req_liste_projets($page, $nbr_par_page, $admin = false, $recherche = NULL)
 {
     $where = '';
@@ -363,4 +367,37 @@ function ajouter_utilisateur($email, $nom_utilisateur, $pass)
     ]);
 
     mkdir('../assets/utilisateurs/'.$nom_utilisateur);
+}
+
+function envoyer_mail($nom_utilisateur, $email)
+{
+    define('MAIL_HOST', 'localhost');
+    define('MAIL_SMTPAUTH', false);
+    define('MAIL_SMTPSECURE', null);
+    define('MAIL_PORT', 1025);
+    define('SMTP_DEBUG', 1);
+
+    $mail = new PHPMailer(true);
+
+    try
+    {
+        $mail->CharSet = 'UTF-8';
+        $mail->isMail();
+        $mail->SMTPDebug = SMTP_DEBUG;
+        $mail->Host = MAIL_HOST;
+        $mail->SMTPAuth = MAIL_SMTPAUTH;                       
+        $mail->SMTPSecure = MAIL_SMTPSECURE;                            
+        $mail->Port = MAIL_PORT;
+        $mail->setFrom("quentin.schifferle@gmail.com", "Polyphonia");
+        $mail->addAddress($email, $nom_utilisateur);
+        $mail->Subject = "Nouvelle idée d'amélioration";
+        $mail->Body = "Bonjour $nom_utilisateur, merci d'utiliser notre plateforme! Votre idée d'amélioration nous a bien été transmise et sera étudiée dans les plus brefs délais.";
+        $mail->AltBody = "";
+        $mail->send();
+    }
+    catch(Exception $e)
+    {
+        echo $mail->ErrorInfo;
+    }
+    
 }

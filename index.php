@@ -22,11 +22,13 @@
     <link rel="icon" type="image/png" href="<?= BASEURL ?>assets/img/favicon.png" />
     <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         var baseurl = "<?= BASEURL; ?>"
     </script>
 </head>
 <body>
+    <div class="has_modal"></div>
     <?php include("vues/index.php"); ?>
     <script src="<?= BASEURL; ?>assets/js/main.js"></script>
 </body>

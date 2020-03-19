@@ -44,10 +44,47 @@ if ($exist_projet > 0)
                 Si vous ne vous pensez pas avoir le niveau pour une partie du projet, ne vous bloquez pas pour autant, vous pouvez ne pas faire cette partie ou simplement la
                 remplacer par autre chose.
             </div>
-            <a href="#">Suggérer une modification</a>
+            <a href="#" id="suggerer_modifications">Suggérer une modification</a>
         </div>
     </div>
-    
+
+    <div class="modal_suggerer_modifications">
+        <div class="modal_title">
+            <div class="titre">
+            <span class="material-icons">notification_important</span>
+                Suggérer une modification
+            </div>
+            <span class="material-icons close_modal">close</span>
+        </div>
+        <div class="modal_content">
+            <div class="erreur" style="display:none;"></div>
+            <form method="POST" action="../inc/envoyer_modifications.php">
+                <div class="form_ligne">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" name="nom_utilisateur" <?php if (isset($_SESSION['utilisateur'])) : ?> value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['nom_utilisateur']; ?>" disabled <?php endif; ?> >
+                </div>
+                <div class="form_ligne">
+                    <label>Adresse mail</label>
+                    <input type="mail" name="email" <?php if (isset($_SESSION['utilisateur'])) : ?> value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['email']; ?>" disabled <?php endif; ?> >
+                </div>
+                <div class="form_ligne">
+                    <label>Amélioration suggérée</label>
+                    <textarea name="amelioration" id="amelioration"></textarea>
+                </div>
+                <div class="g-recaptcha" data-sitekey="6LdWUOIUAAAAAPYUDDSKxhOBpl7GkZ5blVR9tHac"></div>
+                <div class="button">
+                    <button type="submit" name="envoyer">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="<?= BASEURL; ?>assets/js/projet.js"></script>
+    <script>
+        CKEDITOR.replace('amelioration', {
+            height: 300
+        });
+    </script>
 <?php
 }
 else
