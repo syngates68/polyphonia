@@ -1429,3 +1429,16 @@ nav .cta .dropdown .dropdown_lien a b
         width: 90%;
     }
 }
+
+@media only screen and (max-width: 1400px) and (min-width: 700px)
+{
+    .container
+    {
+        width: 100%;
+    }
+
+    .error_content
+    {
+        width: 100%;
+    }
+}
