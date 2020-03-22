@@ -15,14 +15,14 @@ $('.modal_suggerer_modifications form').submit(function()
 {
     let nom_utilisateur = $('.modal_suggerer_modifications input[name="nom_utilisateur"]').val()
     let email = $('.modal_suggerer_modifications input[name="email"]').val()
-    let amelioration = CKEDITOR.instances["amelioration"].getData();
+    let suggestion = CKEDITOR.instances["suggestion"].getData();
     let captcha = (grecaptcha.getResponse() != '' && grecaptcha.getResponse() != null) ? grecaptcha.getResponse() : null;
 
     $.post(baseurl + 'inc/envoyer_modifications.php',
     {
         nom_utilisateur: nom_utilisateur,
         email: email,
-        amelioration: amelioration,
+        suggestion: suggestion,
         captcha: captcha
     },
     function(data)

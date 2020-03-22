@@ -14,7 +14,7 @@ ob_start();
 
 ?>
     <style>
-        table{ width: 100%; line-height: 5mm; border-collapse: collapse; }
+        table{ width: 100%; line-height: 5mm; border-collapse: collapse; height: 500px; }
         h1{ font-size: 20px; text-transform: uppercase; }
         img{ width: 100%; }
         ul{ padding: 16px 0; }
@@ -30,7 +30,9 @@ ob_start();
             </tr>
         </table>
         <table>
-            <?= $projet['contenu']; ?>
+            <tr>
+                <?= $projet['contenu']; ?>
+            </tr>
         </table>
     </page>
 

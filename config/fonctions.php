@@ -369,7 +369,7 @@ function ajouter_utilisateur($email, $nom_utilisateur, $pass)
     mkdir('../assets/utilisateurs/'.$nom_utilisateur);
 }
 
-function envoyer_mail($nom_utilisateur, $email)
+function get_mail()
 {
     define('MAIL_HOST', 'localhost');
     define('MAIL_SMTPAUTH', false);
@@ -379,19 +379,36 @@ function envoyer_mail($nom_utilisateur, $email)
 
     $mail = new PHPMailer(true);
 
+    $mail->CharSet = 'UTF-8';
+    $mail->isMail();
+    $mail->isHTML(true);
+    $mail->SMTPDebug = SMTP_DEBUG;
+    $mail->Host = MAIL_HOST;
+    $mail->SMTPAuth = MAIL_SMTPAUTH;                       
+    $mail->SMTPSecure = MAIL_SMTPSECURE;                            
+    $mail->Port = MAIL_PORT;
+    $mail->setFrom("quentin.schifferle@gmail.com", "Polyphonia");
+
+    return $mail;
+}
+
+function mail_nouvelle_suggestion($nom_utilisateur, $email)
+{
+    $mail = get_mail();
+    $body = '<body style="font-family: \'Roboto\', sans-serif;font-size:15px;width:660px; padding: 10px;">';
+    $body .= '<h1 style="text-align: center;">Polyphonia</h1>';
+    $body .= '<p>Bonjour '.$nom_utilisateur.'</p>';
+    $body .= '<p>Nous avons bien reçu votre suggestion concernant Polyphonia et nous vous en remercions.</p>';
+    $body .= '<p>Votre proposition va être étudiée dans les plus brefs délais, et nous reviendrons vers vous si votre idée retient notre attention</p>';
+    $body .= '<p>Cordialement,</p>';
+    $body .= '<p><strong>L\'équipe administrative de Polyphonia</strong></p>';
+    $body .= '</body>';
+
     try
     {
-        $mail->CharSet = 'UTF-8';
-        $mail->isMail();
-        $mail->SMTPDebug = SMTP_DEBUG;
-        $mail->Host = MAIL_HOST;
-        $mail->SMTPAuth = MAIL_SMTPAUTH;                       
-        $mail->SMTPSecure = MAIL_SMTPSECURE;                            
-        $mail->Port = MAIL_PORT;
-        $mail->setFrom("quentin.schifferle@gmail.com", "Polyphonia");
         $mail->addAddress($email, $nom_utilisateur);
-        $mail->Subject = "Nouvelle idée d'amélioration";
-        $mail->Body = "Bonjour $nom_utilisateur, merci d'utiliser notre plateforme! Votre idée d'amélioration nous a bien été transmise et sera étudiée dans les plus brefs délais.";
+        $mail->Subject = "Nouvelle suggestion d'amélioration";
+        $mail->Body = $body;
         $mail->AltBody = "";
         $mail->send();
     }

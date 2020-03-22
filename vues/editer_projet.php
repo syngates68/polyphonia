@@ -32,7 +32,7 @@ if (isset($_SESSION['utilisateur']) && (req_rang($_SESSION['utilisateur']) == 'a
                 endif;
                 ?>
 
-                <form method="POST" action="../inc/update_projet.php?id=<?= $projet['id']; ?>" enctype="multipart/form-data">
+                <form method="POST" action="<?= BASEURL; ?>inc/update_projet.php?id=<?= $projet['id']; ?>" enctype="multipart/form-data">
                     <?php include('./inc/formulaire_projet.php'); ?>
                 </form>
             </div>

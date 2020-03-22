@@ -68,8 +68,8 @@ if ($exist_projet > 0)
                     <input type="mail" name="email" <?php if (isset($_SESSION['utilisateur'])) : ?> value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['email']; ?>" disabled <?php endif; ?> >
                 </div>
                 <div class="form_ligne">
-                    <label>Amélioration suggérée</label>
-                    <textarea name="amelioration" id="amelioration"></textarea>
+                    <label>Modification suggérée</label>
+                    <textarea name="suggestion" id="suggestion"></textarea>
                 </div>
                 <div class="g-recaptcha" data-sitekey="<?= get_public_key(); ?>"></div>
                 <div class="button">
@@ -81,7 +81,7 @@ if ($exist_projet > 0)
 
     <script src="<?= BASEURL; ?>assets/js/projet.js"></script>
     <script>
-        CKEDITOR.replace('amelioration', {
+        CKEDITOR.replace('suggestion', {
             height: 300
         });
     </script>

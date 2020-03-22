@@ -12,7 +12,7 @@ br
 {
     content: "";
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: .5em;
 }
 
 .gras
@@ -307,7 +307,10 @@ nav .cta .dropdown .dropdown_lien a b
     padding: 32px 16px;
     text-align: center;
     margin-bottom: 8px;
-    background: linear-gradient(135deg, rgb(255, 171, 69) 0%, rgb(248, 172, 79) 35%, rgba(242,168,84,1) 51%, rgba(237,156,57,1) 71%, rgba(222,122,0,1) 100%);
+    /*background: linear-gradient(135deg, rgb(255, 171, 69) 0%, rgb(248, 172, 79) 35%, rgba(242,168,84,1) 51%, rgba(237,156,57,1) 71%, rgba(222,122,0,1) 100%);*/
+    background: url('../img/informatique.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .jumbotron img
@@ -599,6 +602,13 @@ nav .cta .dropdown .dropdown_lien a b
     line-height: 1.5;
 }
 
+.projet_contenu .projet_texte h2
+{
+    font-size: 22px;
+    color: #000;
+    font-weight: 700;
+}
+
 .projet_contenu .projet_texte strong
 {
     font-weight: 600;
@@ -618,6 +628,12 @@ nav .cta .dropdown .dropdown_lien a b
 .projet_contenu .projet_texte ul li
 {
     list-style: inside;
+    padding-left: 8px;
+}
+
+.projet_contenu .projet_texte ol li
+{
+    list-style-type: decimal;
     padding-left: 8px;
 }
 
@@ -1440,5 +1456,21 @@ nav .cta .dropdown .dropdown_lien a b
     .error_content
     {
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 1000px)
+{
+    .liste_projets
+    {
+        grid-template-columns: repeat(3, 32%);
+    }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 800px)
+{
+    .liste_projets
+    {
+        grid-template-columns: repeat(2, 49%);
     }
 }
