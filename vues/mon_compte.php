@@ -44,8 +44,8 @@ if (isset($_SESSION['utilisateur']))
             <div class="infos_container">
                 <form method="POST" action="./inc/editer_profil.php">
                     <div class="form_ligne">
-                        <label>Nom d'utilisateur</label>
-                        <input type="text" name="nom_utilisateur" value="<?= $utilisateur['nom_utilisateur']; ?>">
+                        <label for="nom_utilisateur">Nom d'utilisateur</label>
+                        <input type="text" name="nom_utilisateur" id="nom_utilisateur" value="<?= $utilisateur['nom_utilisateur']; ?>">
                     </div>
                     <div class="form_ligne">
                         <label>Adresse mail</label>

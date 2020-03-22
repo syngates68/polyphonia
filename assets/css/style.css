@@ -5,6 +5,7 @@
     --border: #E0E0E0;
     --grey: #4F4F4F;
     --links: #276F86;
+    --blue: #0f75fa;
     box-sizing: border-box;
 }
 
@@ -49,28 +50,27 @@ body
 form label
 {
     display: block;
-    margin-bottom: 16px;
-    font-size: 11px;
-    color: var(--orange_clair);
+    margin-bottom: 8px;
+    font-size: .6em;
+    color: #212529;
     letter-spacing: .5px;
-    font-weight: 600;
+    font-weight: 400;
     text-align: left;
 }
 
 form .form_ligne
 {
     width: 100%;
-    padding-bottom: 16px;
+    padding-bottom: 32px;
 }
 
 form .form_ligne input[type="text"],
 form .form_ligne input[type="mail"],
-form .form_ligne input[type="password"],
-form textarea
+form .form_ligne input[type="password"]
 {
     width: 100%;
     display: block;
-    padding: 10px;
+    padding: 8px;
     border: 1px solid var(--border);
     border-radius: 5px;
 }
@@ -110,6 +110,7 @@ nav
     width: 100%;
     position: fixed;
     z-index: 2;
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
 }
 
 nav .nav_content
@@ -127,7 +128,7 @@ nav a
     color: var(--orange);
 }
 
-nav a.btn_connexion
+nav a.btn_inscription
 {
     border: 2px solid var(--orange);
     background: var(--orange);
@@ -135,27 +136,27 @@ nav a.btn_connexion
     border-radius: 5px;
     padding: 8px 16px !important;
     transition-duration: .3s;
-    font-size: 11px;
+    font-size: 15px;
 }
 
-nav a.btn_connexion:hover
+nav a.btn_inscription:hover
 {
     background-color: #FFF;
     color: var(--orange) !important;
     transition-duration: .3s;
 }
 
-nav a.btn_inscription
+nav a.btn_connexion
 {
     border: 2px solid var(--orange_clair);
     color: var(--orange_clair) !important;
     border-radius: 5px;
     padding: 8px 16px !important;
     transition-duration: .3s;
-    font-size: 11px;
+    font-size: 15px;
 }
 
-nav a.btn_inscription:hover
+nav a.btn_connexion:hover
 {
     border: 2px solid var(--orange);
     color: var(--orange) !important;
@@ -203,9 +204,9 @@ nav .logo_polyphonia .nav_liens a
 {
     padding: 0 16px;
     letter-spacing: 2px;
-    font-size: 14px;
+    font-size: 13px;
     transition-duration: .3s;
-    color: var(--orange_clair);
+    color: var(--grey);
 }
 
 nav .logo_polyphonia .nav_liens a i
@@ -765,9 +766,25 @@ nav .cta .dropdown .dropdown_lien a b
 
 *********************************************************/
 
+.login_container
+{
+    position: relative;
+    min-height: 90vh;
+    /*background: linear-gradient(135deg, rgb(255, 171, 69) 0%, rgb(248, 172, 79) 35%, rgba(242,168,84,1) 51%, rgba(237,156,57,1) 71%, rgba(222,122,0,1) 100%);*/
+}
+
 .formulaire_connexion
 {
+    width: 25%;
+    background: #FFF;
     text-align: center;
+    padding: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
 }
 
 .formulaire_connexion img
@@ -776,30 +793,35 @@ nav .cta .dropdown .dropdown_lien a b
     height: 150px;
 }
 
+.formulaire_connexion h1
+{
+    font-size: 22px;
+    font-weight: 600;
+}
+
 .formulaire_connexion form
 {
-    width: 30%;
     margin: 32px auto;
 }
 
 .formulaire_connexion button
 {
-    display: block;
-    width: 40%;
-    margin: 16px auto 0 auto;
-    border: 1px solid var(--orange);
-    background: none;
-    color: var(--orange);
+    width: 100%;
+    margin-top: 16px;
+    border: 1px solid var(--blue);
+    background: var(--blue);
+    color: #FFF;
     font-weight: 600;
-    padding: 8px;
+    padding: 16px;
     transition-duration: .3s;
+    border-radius: 5px;
 }
 
 .formulaire_connexion button:hover
 {
     cursor: pointer;
-    background: var(--orange);
-    color: #FFF;
+    background: #FFF;
+    color: var(--blue);
     transition-duration: .3s;
 }
 
@@ -1235,9 +1257,9 @@ nav .cta .dropdown .dropdown_lien a b
     display: block;
     width: 40%;
     margin: 16px auto 0 auto;
-    border: 1px solid var(--orange);
-    background: none;
-    color: var(--orange);
+    border: 1px solid var(--blue);
+    background: var(--blue);
+    color: #FFF;
     font-weight: 600;
     padding: 8px;
     transition-duration: .3s;
@@ -1246,8 +1268,8 @@ nav .cta .dropdown .dropdown_lien a b
 .compte_content .infos_container button:hover
 {
     cursor: pointer;
-    background: var(--orange);
-    color: #FFF;
+    background: #FFF;
+    color: var(--blue);
     transition-duration: .3s;
 }
 
