@@ -122,6 +122,11 @@ nav .nav_content
     margin: 0 auto;
 }
 
+nav .on_mobile_only
+{
+    display: none;
+}
+
 nav a
 {
     text-decoration: none;
@@ -524,6 +529,11 @@ nav .cta .dropdown .dropdown_lien a b
     mix-blend-mode: screen;
 }
 
+.titre_mobile
+{
+    display: none;
+}
+
 .projet_contenu
 {
     width: 70%;
@@ -539,7 +549,7 @@ nav .cta .dropdown .dropdown_lien a b
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
+    padding: 16px 8px;
     border-bottom: 2px solid var(--orange);
 }
 
@@ -769,7 +779,7 @@ nav .cta .dropdown .dropdown_lien a b
 .login_container
 {
     position: relative;
-    min-height: 90vh;
+    min-height: 904px;
     background: url("../img/bg.png") no-repeat;
     background-size: cover;
     /*background: linear-gradient(135deg, rgb(255, 171, 69) 0%, rgb(248, 172, 79) 35%, rgba(242,168,84,1) 51%, rgba(237,156,57,1) 71%, rgba(222,122,0,1) 100%);*/
@@ -1390,6 +1400,16 @@ nav .cta .dropdown .dropdown_lien a b
         cursor: pointer;
     }
 
+    nav .on_mobile_only
+    {
+        display: block;
+    }
+
+    nav .on_mobile_only hr
+    {
+        color: #f9f9f9;
+    }
+
     nav .logo_polyphonia img
     {
         width: 30px;
@@ -1429,6 +1449,12 @@ nav .cta .dropdown .dropdown_lien a b
         padding: 35px 8px;
     }
 
+    nav a.btn_connexion,
+    nav a.btn_inscription
+    {
+        display: none;
+    }
+
     nav .cta .dropdown
     {
         right: 0;
@@ -1457,12 +1483,53 @@ nav .cta .dropdown .dropdown_lien a b
 
     .projet_header
     {
-        height: 300px;
+        height: 200px;
+    }
+
+    .projet_header .bloc_noir
+    {
+        display: none;
+    }
+
+    .projet_header .titre 
+    {
+        display: none;
+    }
+
+    .titre_mobile
+    {
+        display: block;
+        margin-top: 32px;
+        padding: 0 8px;
+        font-size: 22px;
+        text-transform: capitalize;
+        font-weight: 600;
+        text-align: center;
     }
 
     .projet_contenu
     {
         width: 100%;
+    }
+
+    .projet_contenu__top
+    {
+        display: block;
+    }
+
+    .projet_contenu .projet_actions
+    {
+        display: none;
+    }
+
+    .projet_contenu__top .projet_infos
+    {
+        justify-content: space-between;
+    }
+
+    .projet_contenu .projet_texte
+    {
+        padding: 16px 8px;
     }
 
     .nouveau_projet form
@@ -1480,6 +1547,11 @@ nav .cta .dropdown .dropdown_lien a b
         width: 100%;
     }
 
+    .login_container
+    {
+        min-height: 800px;
+    }
+
     .formulaire_connexion
     {
         width: 90%;
@@ -1488,6 +1560,32 @@ nav .cta .dropdown .dropdown_lien a b
     .formulaire_connexion form 
     {
         width: 90%;
+    }
+
+    .error_content
+    {
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: auto;
+    }
+
+    .error_page h1
+    {
+        font-size: 35px;
+    }
+
+    .error_page a 
+    {
+        width: 90%;
+    }
+
+    .error_image
+    {
+        display: none;
     }
 }
 
@@ -1507,6 +1605,32 @@ nav .cta .dropdown .dropdown_lien a b
     {
         width: 50%;
     }
+
+    .error_content
+    {
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        height: auto;
+    }
+
+    .error_page h1
+    {
+        font-size: 35px;
+    }
+
+    .error_page a 
+    {
+        width: 50%;
+    }
+
+    .error_image
+    {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 1000px)
@@ -1517,10 +1641,112 @@ nav .cta .dropdown .dropdown_lien a b
     }
 }
 
-@media only screen and (max-width: 1000px) and (min-width: 800px)
+@media only screen and (max-width: 1000px) and (min-width: 700px)
 {
     .liste_projets
     {
         grid-template-columns: repeat(2, 49%);
+    }
+
+    nav .nav_content
+    {
+        width: 100%;
+    }
+
+    nav .logo_polyphonia
+    {
+        font-size: 20px;
+    }
+
+    nav .nav_content .menu_mobile
+    {
+        display: block !important;
+        color: var(--orange);
+        cursor: pointer;
+    }
+
+    nav .on_mobile_only
+    {
+        display: block;
+    }
+
+    nav .on_mobile_only hr
+    {
+        color: #f9f9f9;
+    }
+
+    nav .logo_polyphonia img
+    {
+        width: 30px;
+        height: 30px;
+    }
+
+    nav .nav_content .nav_liens
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #FFF;
+        display: block;
+        width: 50%;
+        height: 100vh;
+        transform: translateX(-100%);
+        box-shadow: none;
+        transition-duration: .3s;
+    }
+
+    nav .nav_content .nav_liens.is_visible 
+    {
+        transform: translateX(0%);
+        transition-duration: .3s;
+        box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12);
+    }
+
+    nav .nav_content .nav_liens a 
+    {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 8px;
+    }
+
+    nav .nav_content .nav_liens .menu_mobile
+    {
+        padding: 35px 8px;
+    }
+
+    nav a.btn_connexion,
+    nav a.btn_inscription
+    {
+        display: none;
+    }
+
+    nav .cta .dropdown
+    {
+        right: 0;
+    }
+
+    .recherche_projet .recherche
+    {
+        width: 70%;
+    }
+
+    .projet_header
+    {
+        height: 400px;
+    }
+
+    .projet_contenu
+    {
+        width: 90%;
+    }
+
+    .compte_content
+    {
+        display: block;
+    }
+
+    .compte_content .infos_container form
+    {
+        width: 100%;
     }
 }

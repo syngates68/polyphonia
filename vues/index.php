@@ -16,6 +16,13 @@ if (file_exists('vues/'.$var_page.'.php'))
                     <a href="<?= BASEURL ?>blog.html">Blog</a>
                     <a href="<?= BASEURL ?>forum.html">Forum</a>
                     <a href="<?= BASEURL ?>contact.html">Contact</a>
+                    <div class="on_mobile_only">
+                    <?php if (!isset($_SESSION['utilisateur'])) : ?>
+                        <hr/>
+                        <a href="<?= BASEURL ?>connexion.html">Connexion</a>
+                        <a href="<?= BASEURL ?>inscription.html">Inscription</a>
+                    <?php endif; ?>
+                    </div>
                 </div>
             </div>
             <div class="cta">

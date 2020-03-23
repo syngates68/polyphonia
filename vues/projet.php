@@ -15,6 +15,10 @@ if ($exist_projet > 0)
             <h1><?= $projet['titre']; ?></h1>
         </div>
     </div>
+
+    <div class="titre_mobile">
+        <?= $projet['titre']; ?>
+    </div>
     
     <div class="projet_contenu">
         <div class="projet_contenu__top">
