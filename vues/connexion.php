@@ -23,6 +23,7 @@
                 <input type="password" name="pass">
             </div>
             <button type="submit" name="connexion">Se connecter</button>
+            <p class="message_connexion">Pas encore membre? <a href="<?= BASEURL; ?>inscription.html">Inscrivez-vous ici</a></p>   
         </form>
     </div>
 </div>

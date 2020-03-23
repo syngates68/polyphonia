@@ -31,6 +31,7 @@
                 <input type="password" name="pass2">
             </div>
             <button type="submit" name="inscription">S'inscrire</button>
+            <p class="message_connexion">Déjà membre? <a href="<?= BASEURL; ?>connexion.html">Connectez-vous</a></p>  
         </form>
     </div>
 </div>

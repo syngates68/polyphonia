@@ -21,6 +21,14 @@ $(document).ready(function()
     $('.dropdown').css('top', $('nav').css('height'))
 });
 
+$(window).on('resize', function()
+{
+    var hauteur = $('nav').css('height')
+
+    $('.site_content').css('padding-top', hauteur)
+    $('.dropdown').css('top', $('nav').css('height'))
+});
+
 $(document).on('click', 'nav .menu_mobile', function()
 {
     $('nav .nav_liens').toggleClass('is_visible')
