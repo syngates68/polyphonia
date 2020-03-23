@@ -16,11 +16,6 @@ br
     margin-bottom: .5em;
 }
 
-.gras
-{
-    font-weight: 600;
-}
-
 body
 {
     font-family: 'Open Sans', sans-serif;
@@ -309,7 +304,7 @@ nav .cta .dropdown .dropdown_lien a b
 
 .jumbotron
 {
-    color: #FFF;
+    color: #000;
     padding: 32px 16px;
     text-align: center;
     margin-bottom: 8px;
@@ -330,8 +325,17 @@ nav .cta .dropdown .dropdown_lien a b
     padding: 16px 0;
     line-height: 1.8;
     font-size: 20px;
-    width: 70%;
+    width: 30%;
     margin:  auto;
+}
+
+.message_presentation .surbrillance
+{
+    background: var(--orange);
+    color: #FFF;
+    font-size: 35px;
+    font-weight: 900;
+    padding: 4px;
 }
 
 .recherche_projet
@@ -344,7 +348,7 @@ nav .cta .dropdown .dropdown_lien a b
     border: 1px solid #FFF;
     border-radius: 5px;
     padding: 10px;
-    width: 32%;
+    width: 25%;
 }
 
 .pagination
@@ -776,7 +780,8 @@ nav .cta .dropdown .dropdown_lien a b
 
 *********************************************************/
 
-.login_container
+.login_container,
+.sign_container
 {
     position: relative;
     min-height: 904px;
@@ -1545,9 +1550,14 @@ nav .cta .dropdown .dropdown_lien a b
     .compte_content .infos_container form
     {
         width: 100%;
-    }
+    }   
 
     .login_container
+    {
+        min-height: 650px;
+    }
+
+    .sign_container
     {
         min-height: 800px;
     }

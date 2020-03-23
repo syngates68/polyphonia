@@ -1,4 +1,4 @@
-<div class="login_container">
+<div class="sign_container">
     <div class="formulaire_connexion">
         <img src="<?= BASEURL; ?>assets/img/logo_orange.png">
         <h1>Inscription à l'espace membre</h1>
