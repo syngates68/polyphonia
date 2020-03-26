@@ -78,6 +78,23 @@ form .form_ligne input[type="password"]
     border-radius: 5px;
 }
 
+form .form_ligne.cgu 
+{
+    display: flex;
+    align-items: baseline;
+}
+
+form .form_ligne.cgu a
+{
+    color: #000;
+}
+
+form .form_ligne.cgu label
+{
+    font-size: 14px;
+    margin-left: 8px;
+}
+
 form textarea
 {
     resize: none;
@@ -1398,6 +1415,44 @@ footer .footer_content .footer_content__div .copyright
     margin-top: 16px;
     font-size: 12px;
     text-align: right;
+}
+
+/*********************************************************
+
+    CGU
+
+*********************************************************/
+
+.date_cgu
+{
+    margin-top: 16px;
+    color: var(--grey);
+    font-size: 12px;
+    font-style: italic;
+}
+
+.cgu_content
+{
+    padding: 32px 0;
+}
+
+.cgu_content .article 
+{
+    padding: 32px 0;
+}
+
+.cgu_content h2
+{
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--orange);
+}
+
+.cgu_content p
+{
+    color: #181818;
+    line-height: 2;
+    padding: 16px 0;
 }
 
 /*********************************************************

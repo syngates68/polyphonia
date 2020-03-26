@@ -30,6 +30,10 @@
                 <label>Confirmation du mot de passe</label>
                 <input type="password" name="pass2">
             </div>
+            <div class="form_ligne cgu">
+                <input type="checkbox" name="cgu" id="cgu">
+                <label for="cgu">J'ai lu et j'accepte les <a href="<?= BASEURL; ?>cgu.html" target="_blank">Conditions Générales d'Utilisation</a></label>
+            </div>
             <button type="submit" name="inscription">S'inscrire</button>
             <p class="message_connexion">Déjà membre? <a href="<?= BASEURL; ?>connexion.html">Connectez-vous</a></p>  
         </form>

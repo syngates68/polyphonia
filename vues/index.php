@@ -68,7 +68,7 @@ if (file_exists('vues/'.$var_page.'.php'))
             <div class="footer_content__div">
                 <h3>Informations</h3>
                 <ul>
-                    <li><a href="#">Conditions générales d'utilisation</a></li>
+                    <li><a href="<?= BASEURL; ?>cgu.html">Conditions générales d'utilisation</a></li>
                     <li><a href="#">Remerciements</a></li>
                     <li><a href="#">Politique de protection des données personnelles</a></li>
                 </ul>
