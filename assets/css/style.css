@@ -16,9 +16,17 @@ br
     margin-bottom: .5em;
 }
 
+html
+{
+    height: 100%;
+}
+
 body
 {
     font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .has_modal
@@ -290,10 +298,61 @@ nav .cta .dropdown .dropdown_lien a b
     margin: 0 auto;
 }
 
+.site_content
+{
+    flex-grow: 1;
+}
+
 .container h1
 {
     font-weight: 700;
     font-size: 1.5rem;
+}
+
+footer
+{
+    background: #FFF;
+    padding: 32px;
+    border-top: 1px solid var(--orange) !important;
+}
+
+footer .footer_content
+{
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+}
+
+footer .footer_content .footer_content__div h3
+{
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+footer .footer_content .footer_content__div ul li
+{
+    padding: 8px 0;
+}
+
+footer .footer_content .footer_content__div ul li a
+{
+    text-decoration: none;
+    color: var(--grey);
+    font-size: 13px;
+}
+
+footer .footer_content .footer_content__div ul li a:hover
+{
+    color: var(--orange);
+}
+
+footer .footer_content .footer_content__div .copyright
+{
+    font-size: 13px;
+    color: var(--grey);
 }
 
 /*********************************************************
@@ -1497,6 +1556,22 @@ nav .cta .dropdown .dropdown_lien a b
         padding: 8px;
     }
 
+    footer
+    {
+        padding: 16px;
+    }
+
+    footer .footer_content
+    {
+        width: 100%;
+        display: block;
+    }
+
+    footer .footer_content .footer_content__div
+    {
+        padding: 16px 0;
+    }
+
     .message_presentation
     {
         width: 100%;
@@ -1510,6 +1585,11 @@ nav .cta .dropdown .dropdown_lien a b
     .liste_projets
     {
         display: block;
+    }
+
+    .projet .corps_projet
+    {
+        width: 100%;
     }
 
     .projet_header
@@ -1561,6 +1641,20 @@ nav .cta .dropdown .dropdown_lien a b
     .projet_contenu .projet_texte
     {
         padding: 16px 8px;
+    }
+
+    .modal_suggerer_modifications
+    {
+        width: 100%;
+        height: 500px;
+        background: #FFF;
+        padding: 8px;
+        position: fixed;
+    }
+
+    .modal_suggerer_modifications .modal_content
+    {
+        padding: 8px;
     }
 
     .nouveau_projet form
@@ -1627,6 +1721,11 @@ nav .cta .dropdown .dropdown_lien a b
 
 @media only screen and (max-width: 1400px) and (min-width: 700px)
 {
+    footer .footer_content
+    {
+        width: 100%;
+    }
+
     .container
     {
         width: 100%;
@@ -1679,6 +1778,22 @@ nav .cta .dropdown .dropdown_lien a b
 
 @media only screen and (max-width: 1000px) and (min-width: 700px)
 {
+    footer
+    {
+        padding: 16px;
+    }
+
+    footer .footer_content
+    {
+        width: 100%;
+        display: block;
+    }
+
+    footer .footer_content .footer_content__div
+    {
+        padding: 16px 0;
+    }
+
     .liste_projets
     {
         grid-template-columns: repeat(2, 49%);

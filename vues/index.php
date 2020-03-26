@@ -56,6 +56,28 @@ if (file_exists('vues/'.$var_page.'.php'))
             include($var_page.'.php');
         ?>
     </div>
+    <footer>
+        <div class="footer_content">
+            <div class="footer_content__div">
+                <h3>Polyphonia</h3>
+                <ul>
+                    <li><a href="#">Qu'est-ce que c'est?</a></li>
+                    <li><a href="#">Proposer un projet</a></li>
+                </ul>
+            </div>
+            <div class="footer_content__div">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">Conditions générales d'utilisation</a></li>
+                    <li><a href="#">Remerciements</a></li>
+                    <li><a href="#">Politique de protection des données personnelles</a></li>
+                </ul>
+            </div>
+            <div class="footer_content__div">
+                <p class="copyright">&copy; Quentin SCHIFFERLE <?= date('Y'); ?></p>
+            </div>
+        </div>
+    </footer>
 <?php
 }
 else
