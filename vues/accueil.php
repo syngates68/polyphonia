@@ -8,7 +8,10 @@
         <p>Et augmentez vos connaissances en pratiquant.</p>
     </div>
     <div class="recherche_projet">
-        <input type="text" class="recherche" placeholder="Rechercher un projet">
+        <form method="GET" action="<?= BASEURL ?>recherche/">
+            <input type="text" class="recherche" name="search" placeholder="Rechercher un projet">
+            <button type="submit"><span class="material-icons">search</span></button>
+        </form>
     </div>
 </div>
 

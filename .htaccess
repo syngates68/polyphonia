@@ -1,6 +1,9 @@
 Options +FollowSymlinks
 RewriteEngine on
 
+RewriteCond %{QUERY_STRING} (?:^|&)search=(.*)
+RewriteRule ^recherche/$ index.php?page=recherche&search=%1
+
 RewriteCond %{REQUEST_FILENAME} !(.*)\$
 RewriteRule ^([^/]+)\.html$ index.php?page=$1
 RewriteRule ^([^/]+)/([^/]+)\.html$ index.php?page=$1&slug=$2

@@ -11,7 +11,7 @@ function req_liste_projets(page, recherche)
     });
 }
 
-$(document).on('click', '.pagination li', function()
+/*$(document).on('click', '.pagination li', function()
 {
     req_liste_projets($(this).attr('page'), $('.recherche_projet input').val());
 });
@@ -19,4 +19,4 @@ $(document).on('click', '.pagination li', function()
 $(document).on('keyup', '.recherche_projet input', function()
 {
     req_liste_projets(1, $(this).val());
-});
+});*/
