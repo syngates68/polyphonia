@@ -25,3 +25,20 @@ $(document).on('change', 'input[name="avatar"]', function()
         }
     })
 });
+
+$(document).on('click', '.btn_supprimer_compte', function()
+{
+    var id_utilisateur = $(this).attr('utilisateur')
+
+    if (confirm("Êtes-vous sûr de vouloir supprimer votre compte?"))
+    {
+        $.post(baseurl + 'inc/supprimer_compte.php',
+        {
+            id_utilisateur : id_utilisateur
+        },
+        function()
+        {
+            window.location.href = baseurl + 'deconnexion.html'
+        })
+    }
+});

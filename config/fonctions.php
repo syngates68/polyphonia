@@ -169,7 +169,7 @@ function update_vues($id_projet, $vues)
 
 function check_connexion($login)
 {
-    $req = db()->prepare('SELECT * FROM utilisateurs WHERE nom_utilisateur = :login OR email = :login');
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE (nom_utilisateur = :login OR email = :login) AND actif = 1');
     $req->execute(['login' => $login]);
 
     if ($req->rowCount() > 0)
@@ -296,25 +296,34 @@ function update_avatar($avatar, $id)
     $upd->execute([$avatar, $id]);
 }
 
-function update_profil($email, $nom_utilisateur, $pass, $bio, $id)
+function update_profil($email, $nom_utilisateur,  $bio, $id)
 {
-    $sql = 'UPDATE utilisateurs SET email = :email, nom_utilisateur = :nom_utilisateur, bio = :bio';
-
-    if ($pass != '')
-        $sql .= ', pass = :pass';
-
-    $sql .= ' WHERE id = :id';
+    $sql = 'UPDATE utilisateurs SET email = :email, nom_utilisateur = :nom_utilisateur, bio = :bio WHERE id = :id';
 
     $upd = db()->prepare($sql);
     $upd->bindParam(':email', $email);
     $upd->bindParam(':nom_utilisateur', $nom_utilisateur);
     $upd->bindParam(':bio', $bio);
-    
-    if ($pass != '')
-        $upd->bindParam(':pass', $pass);
-
     $upd->bindParam(':id', $id);
     $upd->execute();
+}
+
+function update_mdp($pass, $id)
+{
+    $sql = 'UPDATE utilisateurs SET pass = :pass WHERE id = :id';
+
+    $upd = db()->prepare($sql);
+    $upd->bindParam(':pass', $pass);
+    $upd->bindParam(':id', $id);
+    $upd->execute();
+}
+
+function desactive_compte($id)
+{
+    $sql = 'UPDATE utilisateurs SET actif = 0 WHERE id = ?';
+
+    $upd = db()->prepare($sql);
+    $upd->execute([$id]);
 }
 
 function update_derniere_connexion($date_connexion, $id)

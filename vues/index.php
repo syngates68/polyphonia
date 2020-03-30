@@ -43,6 +43,10 @@ if (file_exists('vues/'.$var_page.'.php'))
                             <a href="<?= BASEURL ?>mon_compte.html"><B><?= req_utilisateur_by_id($_SESSION['utilisateur'])['nom_utilisateur']; ?></B></a>
                         </div>
                         <div class="dropdown_lien">
+                            <i class="material-icons">settings</i>
+                            <a href="<?= BASEURL ?>parametres.html">Paramètres</a>
+                        </div>
+                        <div class="dropdown_lien">
                             <i class="material-icons">power_settings_new</i>
                             <a href="<?= BASEURL ?>deconnexion.html">Déconnexion</a>
                         </div>

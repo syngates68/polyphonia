@@ -1356,6 +1356,7 @@ footer .footer_content .footer_content__div .copyright
 .compte_content .avatar_container .vos_infos p
 {
     font-size: 12px;
+    line-height: 1.5;
     color: var(--grey);
 }
 
@@ -1393,11 +1394,13 @@ footer .footer_content .footer_content__div .copyright
     width: 40%;
     margin: 16px auto 0 auto;
     border: 1px solid var(--blue);
+    border-radius: 5px;
     background: var(--blue);
     color: #FFF;
     font-weight: 600;
     padding: 8px;
     transition-duration: .3s;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
 }
 
 .compte_content .infos_container button:hover
@@ -1415,6 +1418,101 @@ footer .footer_content .footer_content__div .copyright
     margin-top: 16px;
     font-size: 12px;
     text-align: right;
+}
+
+/*********************************************************
+
+    PARAMETRES
+
+*********************************************************/
+
+.parametres
+{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 8px 0;
+}
+
+.parametres .titre_section
+{
+    font-weight: 600;
+    margin: 32px 0;
+    text-decoration: underline;
+}
+
+.parametres .avatar_container,
+.parametres .infos_container
+{
+    padding: 16px;
+}
+
+.parametres .avatar_container .avatar
+{
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    height: 0;
+}
+
+.parametres .avatar_container .avatar img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFF;
+    border: 1px solid var(--border);
+    object-fit: cover;
+}
+
+.parametres .avatar_container input
+{
+    display: none;
+}
+
+.parametres .infos_container form,
+.parametres .infos_container .supprimer_compte
+{
+    width: 70%;
+    margin: auto;
+}
+
+.parametres .infos_container .libelle_parametres
+{
+    font-size: 15px;
+    margin: 16px 0;
+}
+
+.parametres button
+{
+    display: block;
+    width: 40%;
+    margin: 16px auto 0 auto;
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+    background: var(--blue);
+    color: #FFF;
+    font-weight: 600;
+    padding: 8px;
+    transition-duration: .3s;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+.parametres button:hover
+{
+    cursor: pointer;
+    background: #FFF;
+    color: var(--blue);
+    transition-duration: .3s;
+}
+
+.parametres .infos_container .btn_supprimer_compte,
+.parametres .infos_container .btn_supprimer_compte:hover
+{
+    background: #be1515;
+    border: 1px solid #be1515;
+    color: #FFF;
 }
 
 /*********************************************************

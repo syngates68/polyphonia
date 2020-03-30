@@ -31,6 +31,7 @@ if (in_array($type, $types))
         if (move_uploaded_file($fichier_temp, $new_url))
         {
             update_avatar(str_replace('../', '', $new_url), $utilisateur['id']);
+            $_SESSION['succes'] = "Votre photo de profil a bien été modifiée.";
         }
         else
         {
