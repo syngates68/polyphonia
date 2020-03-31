@@ -329,7 +329,7 @@ nav .cta .dropdown .dropdown_lien a b
 
 .container h1
 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.5rem;
 }
 
@@ -351,7 +351,7 @@ footer .footer_content
 footer .footer_content .footer_content__div h3
 {
     color: var(--orange);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 22px;
     margin-bottom: 16px;
 }
@@ -417,7 +417,7 @@ footer .footer_content .footer_content__div .copyright
     background: var(--orange);
     color: #FFF;
     font-size: 35px;
-    font-weight: 900;
+    font-weight: 600;
     padding: 4px;
 }
 
@@ -730,7 +730,7 @@ footer .footer_content .footer_content__div .copyright
 {
     font-size: 22px;
     color: #000;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .projet_contenu .projet_texte strong
@@ -1300,8 +1300,9 @@ footer .footer_content .footer_content__div .copyright
 .compte_content .avatar_container .avatar
 {
     position: relative;
-    width: 100%;
-    padding-top: 100%;
+    margin: auto;
+    width: 70%;
+    padding-top: 70%;
     height: 0;
 }
 
@@ -1315,59 +1316,30 @@ footer .footer_content .footer_content__div .copyright
     background: #FFF;
     border: 1px solid var(--border);
     object-fit: cover;
+    border-radius: 100%;
 }
 
-.compte_content .avatar_container input
-{
-    display: none;
-}
-
-.compte_content .avatar_container .modifier_avatar
-{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: #0000008c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #FFF;
-    opacity: 0;
-    transition-duration: .3s;
-}
-
-.compte_content .avatar_container .modifier_avatar:hover
-{
-    cursor: pointer;
-    opacity: 1;
-    transition-duration: .3s;
-}
-
-.compte_content .avatar_container .modifier_avatar i
-{
-    font-size: 70px;
-}
-
-.compte_content .avatar_container .vos_infos
-{
-    padding: 32px 0;
-}
-
-.compte_content .avatar_container .vos_infos .info 
+.compte_content .infos_container .info 
 {
     padding: 8px 0;
 }
 
-.compte_content .avatar_container .vos_infos p
+.compte_content .infos_container p
 {
     font-size: 12px;
     line-height: 1.5;
     color: var(--grey);
 }
 
-.compte_content .avatar_container .vos_infos p .label 
+.compte_content .infos_container p.nom_utilisateur
+{
+    font-size: 25px;
+    color: var(--orange);
+    font-weight: 300;
+    margin-bottom: 24px;
+}
+
+.compte_content .infos_container p .label 
 {
     font-weight: 600;
     color: #000;
@@ -1377,54 +1349,15 @@ footer .footer_content .footer_content__div .copyright
     font-size: 13px;
 }
 
-.compte_content .avatar_container .vos_infos p .label i
+.compte_content .infos_container p .label i
 {
     margin-right: 8px;
     font-size: 16px;
 }
 
-.compte_content .infos_container form
+.compte_content .infos_container p em
 {
-    width: 70%;
-    margin: auto;
-}
-
-.compte_content .infos_container .libelle_parametres
-{
-    font-size: 15px;
-    margin: 16px 0;
-}
-
-.compte_content .infos_container button
-{
-    display: block;
-    width: 40%;
-    margin: 16px auto 0 auto;
-    border: 1px solid var(--blue);
-    border-radius: 5px;
-    background: var(--blue);
-    color: #FFF;
-    font-weight: 600;
-    padding: 8px;
-    transition-duration: .3s;
-    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
-}
-
-.compte_content .infos_container button:hover
-{
-    cursor: pointer;
-    background: #FFF;
-    color: var(--blue);
-    transition-duration: .3s;
-}
-
-.compte_content .infos_container .btn_supprimer_compte
-{
-    color: red;
-    display: block;
-    margin-top: 16px;
-    font-size: 12px;
-    text-align: right;
+    font-style: italic;
 }
 
 /*********************************************************
@@ -1641,7 +1574,7 @@ footer .footer_content .footer_content__div .copyright
 {
     font-size: 90px;
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--orange);
 }
 
