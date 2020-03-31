@@ -169,7 +169,7 @@ function update_vues($id_projet, $vues)
 
 function check_connexion($login)
 {
-    $req = db()->prepare('SELECT * FROM utilisateurs WHERE (nom_utilisateur = :login OR email = :login) AND actif = 1');
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE (nom_utilisateur = :login OR email = :login) AND supprime = 0');
     $req->execute(['login' => $login]);
 
     if ($req->rowCount() > 0)
@@ -281,7 +281,6 @@ function supprimer_projet($id)
     $upd->execute([$id]);
 }
 
-
 function req_rang($id)
 {
     $req = db()->prepare('SELECT rang FROM utilisateurs WHERE id = ?');
@@ -318,9 +317,25 @@ function update_mdp($pass, $id)
     $upd->execute();
 }
 
-function desactive_compte($id)
+function desactive_compte($date_desactivation, $motif_suppression, $id)
 {
-    $sql = 'UPDATE utilisateurs SET actif = 0 WHERE id = ?';
+    $sql = 'UPDATE utilisateurs SET actif = 0, date_desactive = ?, motif_supprime = ? WHERE id = ?';
+
+    $upd = db()->prepare($sql);
+    $upd->execute([$date_desactivation, $motif_suppression, $id]);
+}
+
+function supprime_compte($motif_suppression, $id)
+{
+    $sql = 'UPDATE utilisateurs SET email = NULL, nom_utilisateur = NULL, pass = NULL, bio = NULL, rang = NULL, avatar = NULL, supprime = 1, motif_supprime = ? WHERE id = ?';
+
+    $upd = db()->prepare($sql);
+    $upd->execute([$motif_suppression, $id]);
+}
+
+function reactive_compte($id)
+{
+    $sql = 'UPDATE utilisateurs SET actif = 1, date_desactive = NULL, motif_supprime = NULL WHERE id = ?';
 
     $upd = db()->prepare($sql);
     $upd->execute([$id]);
@@ -426,4 +441,12 @@ function mail_nouvelle_suggestion($nom_utilisateur, $email)
         echo $mail->ErrorInfo;
     }
     
+}
+
+function req_liste_motifs_suppression()
+{
+    $req = db()->prepare('SELECT * FROM motif_suppression');
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
 }

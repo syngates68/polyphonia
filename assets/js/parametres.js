@@ -1,7 +1,7 @@
 $(document).on('click', '#modifier_avatar', function()
 {
-    $('input[name="avatar"]').click();
-});
+    $('input[name="avatar"]').click()
+})
 
 $(document).on('change', 'input[name="avatar"]', function()
 {
@@ -24,21 +24,9 @@ $(document).on('change', 'input[name="avatar"]', function()
                 location.reload()
         }
     })
-});
+})
 
 $(document).on('click', '.btn_supprimer_compte', function()
 {
-    var id_utilisateur = $(this).attr('utilisateur')
-
-    if (confirm("Êtes-vous sûr de vouloir supprimer votre compte?"))
-    {
-        $.post(baseurl + 'inc/supprimer_compte.php',
-        {
-            id_utilisateur : id_utilisateur
-        },
-        function()
-        {
-            window.location.href = baseurl + 'deconnexion.html'
-        })
-    }
-});
+    window.location.href = baseurl + 'supprimer_compte.html'
+})

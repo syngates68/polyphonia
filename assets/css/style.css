@@ -59,6 +59,7 @@ form label
     letter-spacing: .5px;
     font-weight: 400;
     text-align: left;
+    line-height: 1.5;
 }
 
 form .form_ligne
@@ -76,6 +77,12 @@ form .form_ligne input[type="password"]
     padding: 8px;
     border: 1px solid var(--border);
     border-radius: 5px;
+}
+
+form .form_ligne select
+{
+    padding: 8px;
+    border: 1px solid var(--border);
 }
 
 form .form_ligne.cgu 
@@ -1513,6 +1520,58 @@ footer .footer_content .footer_content__div .copyright
     background: #be1515;
     border: 1px solid #be1515;
     color: #FFF;
+}
+
+/*********************************************************
+
+    SUPPRESSION COMPTE
+
+*********************************************************/
+
+.supprime_compte
+{
+    width: 50%;
+    padding: 32px 0;
+}
+
+.supprime_compte .erreur
+{
+    margin-bottom: 32px;
+}
+
+.supprime_compte p
+{
+    margin-bottom: 16px;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.supprime_compte .avertissement
+{
+    font-weight: 600;
+    font-style: italic;
+}
+
+.supprime_compte button
+{
+    color: #FFF;
+    border: none;
+    background: #0f75fa;
+    padding: 8px 32px;
+}
+
+.supprime_compte button:hover
+{
+    cursor: pointer;
+}
+
+.succes_suppression
+{
+    box-shadow: 0 0 0 1px #a3c293 inset,0 0 0 0 transparent;
+    background: #fcfff5;
+    color: #2c662d;
+    padding: 1em 1.5em;
+    font-size: 12px;
 }
 
 /*********************************************************

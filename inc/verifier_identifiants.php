@@ -16,6 +16,10 @@ if (isset($_POST['connexion']))
             {
                 $_SESSION['utilisateur'] = $utilisateur['id'];
                 update_derniere_connexion(date("Y-m-d H:i:s"), $utilisateur['id']);
+
+                if (req_utilisateur_by_id($utilisateur['id'])['actif'] == 0)
+                    reactive_compte($utilisateur['id']);
+
                 header('Location:'.BASEURL);
             }
             else
