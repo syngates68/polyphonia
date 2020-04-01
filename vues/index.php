@@ -40,7 +40,7 @@ if (file_exists('vues/'.$var_page.'.php'))
                         <?php endif; ?>
                         <div class="dropdown_lien">
                             <i class="material-icons">account_circle</i>
-                            <a href="<?= BASEURL ?>mon_compte.html"><B><?= req_utilisateur_by_id($_SESSION['utilisateur'])['nom_utilisateur']; ?></B></a>
+                            <a href="<?= BASEURL ?>utilisateur/<?= req_utilisateur_by_id($_SESSION['utilisateur'])['nom_utilisateur']; ?>.html"><B><?= req_utilisateur_by_id($_SESSION['utilisateur'])['nom_utilisateur']; ?></B></a>
                         </div>
                         <div class="dropdown_lien">
                             <i class="material-icons">settings</i>

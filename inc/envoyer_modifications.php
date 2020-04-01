@@ -5,7 +5,7 @@ include('../config/config.php');
 include('../config/fonctions.php');
 include('../config/captcha.php');
 
-if (champs_non_vides([$_POST['nom_utilisateur'], $_POST['email'], $_POST['suggestion'], $_POST['captcha']]))
+if (champs_non_vides([$_POST['email'], $_POST['suggestion'], $_POST['captcha']]))
 {
     $secret = get_secret_key();
 
@@ -14,14 +14,16 @@ if (champs_non_vides([$_POST['nom_utilisateur'], $_POST['email'], $_POST['sugges
 
     if ($responseData->success)
     {
-        mail_nouvelle_suggestion($_POST['nom_utilisateur'], $_POST['email']);
+        //mail_nouvelle_suggestion($_POST['nom_utilisateur'], $_POST['email']);
+        $_SESSION['succes'] = "Merci pour votre suggestion, elle sera analysée dès que possible et vous serez évidemment crédité en cas de prise en compte dans le projet.<br/>
+                            Cette page se fermera automatiquement dans 5 secondes.";
     }
     else
     {
-        echo "Le captcha a échoué.";
+        $_SESSION['erreur'] = "Le captcha a échoué.";
     }
 }
 else
 {
-    echo "Tous les champs sont obligatoires.";
+    $_SESSION['erreur'] = "Tous les champs sont obligatoires.";
 }

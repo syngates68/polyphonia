@@ -53,13 +53,20 @@ body
 form label
 {
     display: block;
-    margin-bottom: 8px;
-    font-size: .6em;
+    margin-bottom: 4px;
+    font-size: .7em;
     color: #212529;
     letter-spacing: .5px;
-    font-weight: 400;
+    font-weight: 600;
     text-align: left;
     line-height: 1.5;
+    transition-duration: .3s;
+}
+
+form label.actif
+{
+    color: var(--orange);
+    transition-duration: .3s;
 }
 
 form .form_ligne
@@ -117,6 +124,7 @@ form textarea
     padding: 1em 1.5em;
     margin: 8px 0;
     font-size: 12px;
+    line-height: 1.5;
 }
 
 .succes
@@ -127,6 +135,7 @@ form textarea
     padding: 1em 1.5em;
     margin: 8px 0;
     font-size: 12px;
+    line-height: 1.5;
 }
 
 nav
@@ -607,6 +616,17 @@ footer .footer_content .footer_content__div .copyright
     color: var(--grey);
 }
 
+.auteur_projet .nom_auteur a
+{
+    text-decoration: none;
+    color: var(--links);
+}
+
+.auteur_projet .nom_auteur a:hover
+{
+    text-decoration: underline;
+}
+
 /*********************************************************
 
     PAGE PROJET
@@ -720,6 +740,34 @@ footer .footer_content .footer_content__div .copyright
     font-size: 13px;
 }
 
+.projet_contenu .projet_infos img.img_auteur
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    text-align: center;
+    object-fit: cover;
+    border: 1px solid var(--orange);
+    margin-right: 5px;
+}
+
+.projet_contenu .projet_infos .auteur
+{
+    display: flex;
+    align-items: center;
+}
+
+.projet_contenu .projet_infos .auteur a 
+{
+    color: var(--links);
+    text-decoration: none;
+}
+
+.projet_contenu .projet_infos .auteur a:hover
+{
+    text-decoration: underline;
+}
+
 .projet_contenu .projet_texte
 {
     padding: 36px;
@@ -778,6 +826,12 @@ footer .footer_content .footer_content__div .copyright
     color: #000;
     padding: 16px 0;
     font-style: italic;
+    font-size: 16px;
+}
+
+.projet_contenu__footer .message a
+{
+    font-size: 16px;
 }
 
 .projet_contenu__footer .message .nota_bene
@@ -797,89 +851,32 @@ footer .footer_content .footer_content__div .copyright
     color: var(--links);
 }
 
-.modal_suggerer_modifications
+
+/*********************************************************
+
+    SUGGERER UNE MODIFICATION
+
+*********************************************************/
+
+.form_modification form
 {
-    opacity: 0;
-    pointer-events: none;
-    z-index: 4;
     width: 50%;
-    height: 800px;
-    background: #FFF;
-    border-radius: 2px;
-    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14),0 9px 46px 8px rgba(0,0,0,0.12),0 11px 15px -7px rgba(0,0,0,0.2);
-    overflow-y: scroll;
-    transition-duration: .3s;
-    padding: 32px 64px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.modal_suggerer_modifications.is_visible
-{
-    opacity: 1;
-    pointer-events: initial;
-    transition-duration: .3s;
-}
-
-.modal_suggerer_modifications .modal_title
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 32px;
-}
-
-.modal_suggerer_modifications .modal_title .titre
-{
-    display: flex;
-    align-items: center;
-    color: var(--orange);
-    font-size: 22px;
-}
-
-.modal_suggerer_modifications .modal_title .close_modal
-{
-    cursor: pointer;
-}
-
-.modal_suggerer_modifications .modal_title .titre span
-{
-    margin-right: 8px;
-}
-
-.modal_suggerer_modifications .modal_content
-{
-    padding: 32px;
-}
-
-.modal_suggerer_modifications .g-recaptcha div
-{
     margin: 0 auto;
+    padding: 16px;
 }
 
-.modal_suggerer_modifications .button
+.form_modification form .button
 {
     text-align: center;
-    padding: 16px 0;
+    padding: 16px;
 }
 
-.modal_suggerer_modifications .button button
+.form_modification form .button button
 {
     border: none;
-    border-radius: 2px;
-    text-transform: uppercase;
-    font-size: 11px;
+    background: #0f75fa;
     color: #FFF;
-    padding: 16px;
-    text-decoration: none;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-    background: #2c662d;
-}
-
-.modal_suggerer_modifications .button button:hover
-{
+    padding: 8px 32px;
     cursor: pointer;
 }
 
@@ -1324,6 +1321,13 @@ footer .footer_content .footer_content__div .copyright
     padding: 8px 0;
 }
 
+.compte_content .infos_container .info.biographie
+{
+    border-left: 2px solid var(--orange);
+    padding-left: 16px;
+    margin: 16px;
+}
+
 .compte_content .infos_container p
 {
     font-size: 12px;
@@ -1347,6 +1351,21 @@ footer .footer_content .footer_content__div .copyright
     align-items: center;
     margin-bottom: 4px;
     font-size: 13px;
+}
+
+.compte_content .infos_container p .label.fb
+{
+    color: #3b5998;
+}
+
+.compte_content .infos_container p .label.twitter
+{
+    color: #00acee;
+}
+
+.compte_content .infos_container p .label.discord
+{
+    color: #7289da;
 }
 
 .compte_content .infos_container p .label i

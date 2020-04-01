@@ -15,20 +15,20 @@
             ?>
 
             <div class="form_ligne">
-                <label>Adresse mail</label>
-                <input type="mail" name="email">
+                <label for="mail">Adresse mail</label>
+                <input type="mail" id="mail" name="email">
             </div>
             <div class="form_ligne">
-                <label>Nom d'utilisateur</label>
-                <input type="text" name="nom_utilisateur">
+                <label for="nom_utilisateur">Nom d'utilisateur</label>
+                <input type="text" id="nom_utilisateur" name="nom_utilisateur">
             </div>
             <div class="form_ligne">
-                <label>Mot de passe</label>
-                <input type="password" name="pass">
+                <label for="pass">Mot de passe</label>
+                <input type="password" id="pass" name="pass">
             </div>
             <div class="form_ligne">
-                <label>Confirmation du mot de passe</label>
-                <input type="password" name="pass2">
+                <label for="pass2">Confirmation du mot de passe</label>
+                <input type="password" id="pass2" name="pass2">
             </div>
             <div class="form_ligne cgu">
                 <input type="checkbox" name="cgu" id="cgu">

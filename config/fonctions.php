@@ -87,7 +87,7 @@ function count_nbr_projets($recherche = NULL)
 
 function req_by_slug($slug)
 {
-    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.tags, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
+    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.tags, u.nom_utilisateur, u.avatar FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
     $req->execute([$slug]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -212,6 +212,14 @@ function req_utilisateur_by_id($id)
 {
     $req = db()->prepare('SELECT * FROM utilisateurs WHERE id = ?');
     $req->execute([$id]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0];
+}
+
+function req_utilisateur_by_nom_utilisateur($nom_utilisateur)
+{
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE nom_utilisateur = ?');
+    $req->execute([$nom_utilisateur]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }

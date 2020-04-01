@@ -33,3 +33,13 @@ $(document).on('click', 'nav .menu_mobile', function()
 {
     $('nav .nav_liens').toggleClass('is_visible')
 });
+
+$(document).on('focus', '.form_ligne input', function()
+{
+    $('label[for="' + $(this).attr('id') + '"]').addClass('actif')
+});
+
+$(document).on('focusout', '.form_ligne input', function()
+{
+    $('label[for="' + $(this).attr('id') + '"]').removeClass('actif')
+});

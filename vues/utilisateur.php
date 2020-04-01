@@ -1,10 +1,16 @@
 <?php
-if (isset($_SESSION['utilisateur']))
+$id_utilisateur = (isset($_SESSION['utilisateur'])) ? $_SESSION['utilisateur'] : NULL;
+$titre = 'Votre compte';
+
+if (verifie_nom_utilisateur($_GET['slug']) > 0)
 {
-    $utilisateur = req_utilisateur_by_id($_SESSION['utilisateur']);
+    $utilisateur = req_utilisateur_by_nom_utilisateur($_GET['slug']);
+
+    if (req_utilisateur_by_nom_utilisateur($_GET['slug'])['id'] != $id_utilisateur)
+        $titre = 'Compte de '.$_GET['slug'];
 ?>
     <div class="container">
-        <h1>Votre compte</h1>
+        <h1><?= $titre; ?></h1>
         <div class="compte_content">
             <div class="avatar_container">
                 <div class="avatar">
@@ -25,7 +31,7 @@ if (isset($_SESSION['utilisateur']))
                     <p><span class="label"><i class="material-icons">calendar_today</i>Dernière connexion le</span></p>
                     <p><?= formate_date($utilisateur['derniere_connexion']); ?></p>
                 </div>
-                <div class="info">
+                <div class="info biographie">
                     <p><span class="label"><i class="material-icons">edit</i>Biographie</span></p>
                     <?php if ($utilisateur['bio'] != NULL && $utilisateur['bio'] != '') : ?>
                         <?= $utilisateur['bio']; ?>
@@ -34,15 +40,15 @@ if (isset($_SESSION['utilisateur']))
                     <?php endif; ?>
                 </div>
                 <div class="info">
-                    <p><span class="label">Facebook</span></p>
+                    <p><span class="label fb">Facebook</span></p>
                     <p><em>Non renseigné</em></p>
                 </div>
                 <div class="info">
-                    <p><span class="label">Twitter</span></p>
+                    <p><span class="label twitter">Twitter</span></p>
                     <p><em>Non renseigné</em></p>
                 </div>
                 <div class="info">
-                    <p><span class="label">Discord</span></p>
+                    <p><span class="label discord">Discord</span></p>
                     <p><em>Non renseigné</em></p>
                 </div>
             </div>

@@ -15,12 +15,12 @@
             ?>
 
             <div class="form_ligne">
-                <label>Nom d'utilisateur ou adresse mail</label>
-                <input type="text" name="login">
+                <label for="login">Nom d'utilisateur ou adresse mail</label>
+                <input type="text" id="login" name="login">
             </div>
             <div class="form_ligne">
-                <label>Mot de passe</label>
-                <input type="password" name="pass">
+                <label for="pass">Mot de passe</label>
+                <input type="password" id="pass" name="pass">
             </div>
             <button type="submit" name="connexion">Se connecter</button>
             <p class="message_connexion">Pas encore membre? <a href="<?= BASEURL; ?>inscription.html">Inscrivez-vous ici</a></p>   
