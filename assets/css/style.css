@@ -107,6 +107,7 @@ form .form_ligne.cgu label
 {
     font-size: 14px;
     margin-left: 8px;
+    font-weight: 500;
 }
 
 form textarea
@@ -563,6 +564,17 @@ footer .footer_content .footer_content__div .copyright
     letter-spacing: 1px;
 }
 
+.projet .titre_projet a 
+{
+    color: #000;
+    text-decoration: none;
+}
+
+.projet .titre_projet a:hover 
+{
+    text-decoration: underline;
+}
+
 .projet .description_projet
 {
     font-size: 12px;
@@ -851,6 +863,36 @@ footer .footer_content .footer_content__div .copyright
     color: var(--links);
 }
 
+.projet_introuvable
+{
+    padding: 32px 0;
+}
+
+.projet_introuvable img
+{
+    margin: 32px 0;
+    max-width: 100%;
+}
+
+.projet_introuvable p
+{
+    line-height: 1.5;
+}
+
+.projet_introuvable a
+{
+    color: var(--links);
+}
+
+.projet_introuvable .recherche_projet form
+{
+    margin: 0;
+}
+
+.projet_introuvable .recherche_projet input
+{
+    border: 1px solid var(--border);
+}
 
 /*********************************************************
 
@@ -1856,6 +1898,21 @@ footer .footer_content .footer_content__div .copyright
         width: 90%;
     }
 
+    .form_modification form
+    {
+        width: 100%;
+    }
+
+    .parametres
+    {
+        display: block;
+    }
+
+    .parametres .infos_container form 
+    {
+        width: 100%;
+    }
+
     .error_content
     {
         display: block;
@@ -1903,6 +1960,11 @@ footer .footer_content .footer_content__div .copyright
     .formulaire_connexion
     {
         width: 50%;
+    }
+
+    .form_modification form
+    {
+        width: 100%;
     }
 
     .error_content

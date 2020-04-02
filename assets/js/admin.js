@@ -1,13 +1,25 @@
+/**
+ * Permet de simuler le clic sur l'input file caché
+ */
 $(document).on('click', '.clickable', function()
 {
     $('#illustration').click();
 });
 
+/**
+ * Permet d'appeler la fonction de prévisualisation au changement de l'input file
+ */
 $(document).on('change', '#illustration', function()
 {
     readURL(this);
 });
 
+/**
+ * 
+ * @param {*} input 
+ * 
+ * Permet de prévisualiser l'image avant upload
+ */
 function readURL(input){
     if (input.files && input.files[0]) {
 
@@ -38,7 +50,9 @@ function readURL(input){
     }
 }
 
-//Remettre projet en brouillon
+/**
+ * Permet de remettre un projet en brouillon
+ */
 $(document).on('click', '.tbl_contenu .tbl_actions .remettre_brouillon', function(e)
 {
     e.preventDefault();
@@ -58,7 +72,9 @@ $(document).on('click', '.tbl_contenu .tbl_actions .remettre_brouillon', functio
     }
 });
 
-//Supprimer projet
+/**
+ * Permet de supprimer un projet
+ */
 $(document).on('click', '.tbl_contenu .tbl_actions .supprimer', function(e)
 {
     e.preventDefault();
@@ -80,7 +96,9 @@ $(document).on('click', '.tbl_contenu .tbl_actions .supprimer', function(e)
     }
 });
 
-//Système de tags
+/**
+ * Permet de rajouter des tags
+ */
 $(document).on('keyup', 'input[name="nouveau_tag"]', function(e)
 {
     if (e.key == ';' || e.code == 'Space')
@@ -92,6 +110,9 @@ $(document).on('keyup', 'input[name="nouveau_tag"]', function(e)
     }
 });
 
+/**
+ * Permet de supprimer des tags
+ */
 $(document).on('click', '.tags_container .tag', function()
 {
     if (confirm("Supprimer ce tag?"))

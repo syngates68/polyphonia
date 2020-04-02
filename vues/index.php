@@ -1,5 +1,5 @@
 <?php
-if (file_exists('vues/'.$var_page.'.php'))
+if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
 {
 ?>
     <nav>
@@ -32,7 +32,7 @@ if (file_exists('vues/'.$var_page.'.php'))
                 <?php else : ?>
                     <a href="#" id="dropdown"><img class="avatar" src="<?= BASEURL; ?><?= req_utilisateur_by_id($_SESSION['utilisateur'])['avatar']; ?>"></a>
                     <div class="dropdown">
-                        <?php if (req_rang($_SESSION['utilisateur']) == 'admin') : ?>
+                        <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] == 'admin') : ?>
                         <div class="dropdown_lien">
                             <i class="material-icons">how_to_reg</i>
                             <a href="<?= BASEURL ?>administration.html">Administration</a>
@@ -85,4 +85,9 @@ if (file_exists('vues/'.$var_page.'.php'))
 <?php
 }
 else
+{
     include('404.php');
+
+    if (isset($_SESSION['not_found']))
+        unset($_SESSION['not_found']);
+}

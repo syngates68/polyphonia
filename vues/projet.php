@@ -57,7 +57,7 @@ if (isset($_GET['slug']))
     <?php
     }
     else
-        header('Location:'.BASEURL);
+        include('projet_introuvable.php');
 }
 else
-    header('Location:'.BASEURL);
+    include('projet_introuvable.php');

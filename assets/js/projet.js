@@ -1,3 +1,6 @@
+/**
+ * Permet d'envoyer les données du formulaire de suggestions de modification
+ */
 $('.form_modification form').submit(function()
 {
     let email = $('.form_modification input[name="email"]').val()

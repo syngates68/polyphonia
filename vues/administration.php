@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_SESSION['utilisateur']) && (req_rang($_SESSION['utilisateur']) == 'admin'))
+if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] == 'admin'))
 {
 
 ?>

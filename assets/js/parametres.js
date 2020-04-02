@@ -1,8 +1,14 @@
+/**
+ * Permet de simuler le clic sur l'input file caché
+ */
 $(document).on('click', '#modifier_avatar', function()
 {
     $('input[name="avatar"]').click()
 })
 
+/**
+ * Permet de mettre à jour l'avatar au changement de l'input file
+ */
 $(document).on('change', 'input[name="avatar"]', function()
 {
     var fd = new FormData()
@@ -26,6 +32,9 @@ $(document).on('change', 'input[name="avatar"]', function()
     })
 })
 
+/**
+ * Permet de rediriger ver la page de suppression du compte
+ */
 $(document).on('click', '.btn_supprimer_compte', function()
 {
     window.location.href = baseurl + 'supprimer_compte.html'

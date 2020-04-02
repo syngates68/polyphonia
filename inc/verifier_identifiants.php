@@ -24,18 +24,21 @@ if (isset($_POST['connexion']))
             }
             else
             {
+                $_SESSION['_login'] = $_POST['login'];
                 $_SESSION['erreur'] = 'Aucun compte ne correspond aux informations rentrées.';
                 header('Location:'.BASEURL.'connexion.html');
             }
         }
         else
         {
+            $_SESSION['_login'] = $_POST['login'];
             $_SESSION['erreur'] = 'Aucun compte ne correspond aux informations rentrées.';
             header('Location:'.BASEURL.'connexion.html');
         }
     }
     else
     {
+        $_SESSION['_login'] = $_POST['login'];
         $_SESSION['erreur'] = 'Tous les champs sont obligatoires.';
         header('Location:'.BASEURL.'connexion.html');
     }

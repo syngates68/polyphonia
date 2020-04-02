@@ -1,3 +1,6 @@
+<?php 
+if (!isset($_SESSION['utilisateur'])) : 
+?>
 <div class="login_container">
     <div class="formulaire_connexion">
         <img src="<?= BASEURL; ?>assets/img/logo_orange.png">
@@ -16,7 +19,7 @@
 
             <div class="form_ligne">
                 <label for="login">Nom d'utilisateur ou adresse mail</label>
-                <input type="text" id="login" name="login">
+                <input type="text" id="login" name="login" <?php if (isset($_SESSION['_login'])) : ?> value="<?= $_SESSION['_login']; ?>" <?php unset($_SESSION['_login']); endif; ?>>
             </div>
             <div class="form_ligne">
                 <label for="pass">Mot de passe</label>
@@ -27,3 +30,7 @@
         </form>
     </div>
 </div>
+<?php
+else:
+    header('Location:'.BASEURL);
+endif;

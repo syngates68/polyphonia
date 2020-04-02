@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 20 mars 2020 à 17:17
+-- Généré le :  ven. 03 avr. 2020 à 00:07
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -31,25 +31,42 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `nom_utilisateur` varchar(255) NOT NULL,
-  `pass` text NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `nom_utilisateur` varchar(255) DEFAULT NULL,
+  `pass` text,
   `bio` text,
-  `rang` varchar(255) NOT NULL,
-  `avatar` varchar(255) NOT NULL DEFAULT 'assets/utilisateurs/default.jpg',
+  `rang` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT 'assets/utilisateurs/default.jpg',
   `date_inscription` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `derniere_connexion` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `actif` int(11) NOT NULL DEFAULT '1',
+  `date_desactive` datetime DEFAULT NULL,
+  `supprime` int(11) NOT NULL DEFAULT '0',
+  `motif_supprime` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `motif_supprime` (`motif_supprime`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`id`, `email`, `nom_utilisateur`, `pass`, `bio`, `rang`, `avatar`, `date_inscription`, `derniere_connexion`) VALUES
-(1, 'quentin.schifferle@gmail.com', 'syngates68', '$2y$10$EWs0.V.uJ2ajUorWRECawe5oqb0GY9kTvT/e1si0stbWONSSMpU1y', '<p>Bonjour, je me pr&eacute;nomme Quentin et je suis en train de cr&eacute;er le site actuellement, c&#39;est cool non? Aller, abonne toi et l&acirc;che un pouce bleu hein!</p>\r\n', 'admin', 'assets/utilisateurs/syngates68/syngates68.jpeg', '2020-03-03 21:03:34', '2020-03-19 22:22:14'),
-(2, 'compte@test.com', 'compte_test', '$2y$10$8U2BtePDwvnvragJQ9cTb.5FjlBSyCMdLhvqWovjwg1Zn0.jHd6z6', NULL, 'externe', 'assets/utilisateurs/compte_test/compte_test.jpeg', '2020-03-10 08:43:17', '2020-03-17 21:57:13'),
-(3, 'mimi-couchot@live.fr', 'skytten712_', '$2y$10$29GI1Ftx.N3db428naS/8.zf3LcHQxqrc2YzNmxgohjWHlOCQds3G', NULL, 'externe', 'assets/utilisateurs/default.jpg', '2020-03-17 22:55:43', '2020-03-18 22:04:06');
+INSERT INTO `utilisateurs` (`id`, `email`, `nom_utilisateur`, `pass`, `bio`, `rang`, `avatar`, `date_inscription`, `derniere_connexion`, `actif`, `date_desactive`, `supprime`, `motif_supprime`) VALUES
+(1, 'quentin.schifferle@gmail.com', 'syngates68', '$2y$10$a2DRQuvtUYxU3OMwmoILkOLMPfJXo/sW3SzZltdhSCZiPkMaoyrfa', '<p>Bonjour, je me pr&eacute;nomme Quentin et je suis en train de cr&eacute;er le site actuellement, c&#39;est cool non? Aller, abonne toi et l&acirc;che un pouce bleu hein! Je v&eacute;rifie les param&egrave;tres pour voir si tout fonctionne!</p>\r\n\r\n<p>Apparemment tout fonctionne bien c&#39;est vachement cool! Bon y a encore plein de trucs &agrave; v&eacute;rifier, mais &ccedil;a avance je suis content!</p>\r\n', 'admin', 'assets/utilisateurs/syngates68/syngates68.jpeg', '2020-03-03 21:03:34', '2020-04-02 23:34:52', 1, NULL, 0, NULL),
+(2, 'compte@test.com', 'compte_test', '$2y$10$8U2BtePDwvnvragJQ9cTb.5FjlBSyCMdLhvqWovjwg1Zn0.jHd6z6', NULL, 'externe', 'assets/utilisateurs/compte_test/compte_test.jpeg', '2020-03-10 08:43:17', '2020-04-02 23:17:05', 1, NULL, 0, NULL),
+(3, 'mimi-couchot@live.fr', 'skytten712_', '$2y$10$29GI1Ftx.N3db428naS/8.zf3LcHQxqrc2YzNmxgohjWHlOCQds3G', NULL, 'externe', 'assets/utilisateurs/default.jpg', '2020-03-17 22:55:43', '2020-03-30 23:54:04', 0, NULL, 0, NULL),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, '2020-03-31 21:54:56', '2020-03-31 21:55:06', 1, NULL, 1, 1),
+(5, NULL, NULL, NULL, NULL, NULL, NULL, '2020-03-31 22:06:09', '2020-03-31 22:06:16', 1, NULL, 1, 3);
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  ADD CONSTRAINT `utilisateurs_ibfk_1` FOREIGN KEY (`motif_supprime`) REFERENCES `motif_suppression` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

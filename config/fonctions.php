@@ -3,10 +3,20 @@
 include('database.php');
 
 require dirname(__DIR__).'/vendor/autoload.php';
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+/*use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;*/
 
-function req_liste_projets($page, $nbr_par_page, $admin = false, $recherche = NULL)
+/**
+ * req_liste_projets
+ * 
+ * @param null|int $page
+ * @param null|int $nbr_par_page
+ * @param bool $admin
+ * @param null|string $recherche
+ * 
+ * @return array
+ */
+function req_liste_projets(?int $page, ?int $nbr_par_page, bool $admin = false, ?string $recherche = NULL)
 {
     $where = '';
     $limit = '';
@@ -49,7 +59,15 @@ function req_liste_projets($page, $nbr_par_page, $admin = false, $recherche = NU
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function req_nbr_pages($nbr_par_page, $recherche = NULL)
+/**
+ * req_nbr_pages
+ * 
+ * @param int $nbr_par_page
+ * @param null|string $recherche
+ * 
+ * @return int
+ */
+function req_nbr_pages(int $nbr_par_page, ?string $recherche = NULL)
 {
     $where = ' WHERE brouillon = 0 AND actif = 1';
 
@@ -68,7 +86,14 @@ function req_nbr_pages($nbr_par_page, $recherche = NULL)
     return ceil($nbr/$nbr_par_page);
 }
 
-function count_nbr_projets($recherche = NULL)
+/**
+ * count_nbr_projets
+ * 
+ * @param null|string $recherche
+ * 
+ * @return int
+ */
+function count_nbr_projets(?string $recherche = NULL)
 {
     $where = ' WHERE brouillon = 0 AND actif = 1';
 
@@ -85,7 +110,14 @@ function count_nbr_projets($recherche = NULL)
     return $count->fetch(PDO::FETCH_NUM)[0];
 }
 
-function req_by_slug($slug)
+/**
+ * req_by_slug
+ * 
+ * @param string $slug
+ * 
+ * @return array
+ */
+function req_by_slug(string $slug)
 {
     $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.tags, u.nom_utilisateur, u.avatar FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
     $req->execute([$slug]);
@@ -93,7 +125,14 @@ function req_by_slug($slug)
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
-function count_by_slug($slug)
+/**
+ * count_by_slug
+ *
+ * @param string $slug
+ * 
+ * @return array
+ */
+function count_by_slug(string $slug)
 {
     $req = db()->prepare("SELECT COUNT(*) FROM projets WHERE slug = ?");
     $req->execute([$slug]);
@@ -101,17 +140,39 @@ function count_by_slug($slug)
     return $req->fetch(PDO::FETCH_NUM)[0];
 }
 
-function formate_date($date)
+/**
+ * formate_date
+ *
+ * @param string $date
+ * 
+ * @return string
+ */
+function formate_date(string $date)
 {
     return date("d/m/Y", strtotime($date)); 
 }
 
-function formate_date_heure($date)
+/**
+ * formate_date_heure
+ *
+ * @param string $date
+ * 
+ * @return string
+ */
+function formate_date_heure(string $date)
 {
     return date("d/m/Y à H:i:s", strtotime($date)); 
 }
 
-function extrait_texte($texte, $slug, $longueur, $id_projet)
+/**
+ * extrait_texte
+ *
+ * @param string $texte
+ * @param int $longueur
+ * 
+ * @return string
+ */
+function extrait_texte(string $texte, int $longueur)
 {
     if (strlen($texte) <= $longueur)
         return $texte;
@@ -122,10 +183,19 @@ function extrait_texte($texte, $slug, $longueur, $id_projet)
     if ($espace > 0)
         $texte = substr($texte, 0, $espace);
 
-    return $texte.'...<br/><a class="btn_lire_projet" projet="'.$id_projet.'" href="'.BASEURL.'projet/'.$slug.'.html">En savoir plus</a>';
+    return $texte.'...';
 }
 
-function slugify($string, $delimiter = '-') {
+/**
+ * slugify
+ *
+ * @param string $string
+ * @param string $delimiter
+ * 
+ * @return string
+ */
+function slugify(string $string, string $delimiter = '-') 
+{
 	$oldLocale = setlocale(LC_ALL, '0');
 	setlocale(LC_ALL, 'en_US.UTF-8');
 	$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $string);
@@ -137,7 +207,18 @@ function slugify($string, $delimiter = '-') {
 	return $clean;
 }
 
-function ajouter_projet($titre, $contenu, $id_utilisateur, $illustration, $tags)
+/**
+ * ajouter_projet
+ *
+ * @param string $titre
+ * @param string $contenu
+ * @param int $id_utilisateur
+ * @param string $illustration
+ * @param null|string $tags
+ * 
+ * @return void
+ */
+function ajouter_projet(string $titre, string $contenu, int $id_utilisateur, string $illustration, ?string $tags)
 {
     $slug = slugify($titre);
 
@@ -145,7 +226,18 @@ function ajouter_projet($titre, $contenu, $id_utilisateur, $illustration, $tags)
     $ins->execute([$titre, $contenu, $illustration, $id_utilisateur, $slug, $tags]);
 }
 
-function brouillon_projet($titre, $contenu, $illustration, $id_utilisateur, $tags)
+/**
+ * brouillon_projet
+ *
+ * @param null|string $titre
+ * @param null|string $contenu
+ * @param null|string $illustration
+ * @param int $id_utilisateur
+ * @param null|string $tags
+ * 
+ * @return void
+ */
+function brouillon_projet(?string $titre, ?string $contenu, ?string $illustration, int $id_utilisateur, ?string $tags)
 {
     $date_sauvegarde = date("Y-m-d H:i:s");
 
@@ -153,7 +245,14 @@ function brouillon_projet($titre, $contenu, $illustration, $id_utilisateur, $tag
     $ins->execute([$titre, $contenu, $id_utilisateur, $illustration, $date_sauvegarde, $tags]);
 }
 
-function req_by_id($id_projet)
+/**
+ * req_by_id
+ *
+ * @param int $id_projet
+ * 
+ * @return array
+ */
+function req_by_id(int $id_projet)
 {
     $req = db()->prepare("SELECT * FROM projets WHERE id = ?");
     $req->execute([$id_projet]);
@@ -161,13 +260,28 @@ function req_by_id($id_projet)
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
-function update_vues($id_projet, $vues)
+/**
+ * update_vues
+ *
+ * @param int $id_projet
+ * @param int $vues
+ * 
+ * @return void
+ */
+function update_vues(int $id_projet, int $vues)
 {
     $upd = db()->prepare("UPDATE projets SET vues = ? WHERE id = ?");
     $upd->execute([$vues, $id_projet]);
 }
 
-function check_connexion($login)
+/**
+ * check_connexion
+ *
+ * @param string $login
+ * 
+ * @return int|array
+ */
+function check_connexion(string $login)
 {
     $req = db()->prepare('SELECT * FROM utilisateurs WHERE (nom_utilisateur = :login OR email = :login) AND supprime = 0');
     $req->execute(['login' => $login]);
@@ -178,13 +292,35 @@ function check_connexion($login)
         return 0;
 }
 
-function update_projet($titre, $contenu, $id, $illustration, $tags)
+/**
+ * update_projet
+ *
+ * @param string $titre
+ * @param string $contenu
+ * @param int $id
+ * @param string $illustration
+ * @param null|string $tags
+ * 
+ * @return void
+ */
+function update_projet(string $titre, string $contenu, int $id, string $illustration, ?string $tags)
 {
     $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, tags = ? WHERE id = ?');
     $upd->execute([$titre, $contenu, $illustration, $tags, $id]);
 }
 
-function update_brouillon($titre, $contenu, $illustration, $id, $tags)
+/**
+ * update_brouillon
+ *
+ * @param null|string $titre
+ * @param null|string $contenu
+ * @param null|string $illustration
+ * @param int $id
+ * @param null|string $tags
+ * 
+ * @return void
+ */
+function update_brouillon(?string $titre, ?string $contenu, ?string $illustration, int $id, ?string $tags)
 {
     $date_sauvegarde = date("Y-m-d H:i:s");
 
@@ -192,7 +328,18 @@ function update_brouillon($titre, $contenu, $illustration, $id, $tags)
     $upd->execute([$titre, $contenu, $illustration, $date_sauvegarde, $tags, $id]);
 }
 
-function valider_brouillon($titre, $contenu, $illustration, $id, $tags)
+/**
+ * valider_brouillon
+ *
+ * @param string $titre
+ * @param string $contenu
+ * @param string $illustration
+ * @param int $id
+ * @param null|string $tags
+ * 
+ * @return void
+ */
+function valider_brouillon(string $titre, string $contenu, string $illustration, int $id, ?string $tags)
 {
     $slug = slugify($titre);
 
@@ -200,15 +347,14 @@ function valider_brouillon($titre, $contenu, $illustration, $id, $tags)
     $upd->execute([$titre, utf8_encode($contenu), $illustration, $slug, $tags, $id]);
 }
 
-function req_nom_utilisateur($id)
-{
-    $req = db()->prepare('SELECT nom_utilisateur FROM utilisateurs WHERE id = ?');
-    $req->execute([$id]);
-
-    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nom_utilisateur'];
-}
-
-function req_utilisateur_by_id($id)
+/**
+ * req_utilisateur_by_id
+ *
+ * @param int $id
+ * 
+ * @return array
+ */
+function req_utilisateur_by_id(int $id)
 {
     $req = db()->prepare('SELECT * FROM utilisateurs WHERE id = ?');
     $req->execute([$id]);
@@ -216,7 +362,14 @@ function req_utilisateur_by_id($id)
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
-function req_utilisateur_by_nom_utilisateur($nom_utilisateur)
+/**
+ * req_utilisateur_by_nom_utilisateur
+ *
+ * @param string $nom_utilisateur
+ * 
+ * @return array
+ */
+function req_utilisateur_by_nom_utilisateur(string $nom_utilisateur)
 {
     $req = db()->prepare('SELECT * FROM utilisateurs WHERE nom_utilisateur = ?');
     $req->execute([$nom_utilisateur]);
@@ -224,7 +377,14 @@ function req_utilisateur_by_nom_utilisateur($nom_utilisateur)
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
-function upload_image($fichier)
+/**
+ * upload_image
+ *
+ * @param array $fichier
+ * 
+ * @return array
+ */
+function upload_image(array $fichier)
 {
     $max_size = 1000000;
     $types = array('image/jpg', 'image/png', 'image/jpeg');
@@ -277,33 +437,56 @@ function upload_image($fichier)
     return [$msg, $url];
 }
 
-function remettre_brouillon($id)
+/**
+ * remettre_brouillon
+ *
+ * @param int $id
+ * 
+ * @return void
+ */
+function remettre_brouillon(int $id)
 {
     $upd = db()->prepare('UPDATE projets SET brouillon = 1 WHERE id = ?');
     $upd->execute([$id]);
 }
 
-function supprimer_projet($id)
+/**
+ * supprimer_projet
+ *
+ * @param int $id
+ * @return void
+ */
+function supprimer_projet(int $id)
 {
     $upd = db()->prepare('UPDATE projets SET actif = 0 WHERE id = ?');
     $upd->execute([$id]);
 }
 
-function req_rang($id)
-{
-    $req = db()->prepare('SELECT rang FROM utilisateurs WHERE id = ?');
-    $req->execute([$id]);
-
-    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['rang'];
-}
-
-function update_avatar($avatar, $id)
+/**
+ * update_avatar
+ *
+ * @param string $avatar
+ * @param int $id
+ * 
+ * @return void
+ */
+function update_avatar(string $avatar, int $id)
 {
     $upd = db()->prepare('UPDATE utilisateurs SET avatar = ? WHERE id = ?');
     $upd->execute([$avatar, $id]);
 }
 
-function update_profil($email, $nom_utilisateur,  $bio, $id)
+/**
+ * update_profil
+ *
+ * @param string $email
+ * @param string $nom_utilisateur
+ * @param null|string $bio
+ * @param string $id
+ * 
+ * @return void
+ */
+function update_profil(string $email, string $nom_utilisateur, ?string $bio, int $id)
 {
     $sql = 'UPDATE utilisateurs SET email = :email, nom_utilisateur = :nom_utilisateur, bio = :bio WHERE id = :id';
 
@@ -315,7 +498,15 @@ function update_profil($email, $nom_utilisateur,  $bio, $id)
     $upd->execute();
 }
 
-function update_mdp($pass, $id)
+/**
+ * update_mdp
+ *
+ * @param string $pass
+ * @param int $id
+ * 
+ * @return void
+ */
+function update_mdp(string $pass, int $id)
 {
     $sql = 'UPDATE utilisateurs SET pass = :pass WHERE id = :id';
 
@@ -325,7 +516,16 @@ function update_mdp($pass, $id)
     $upd->execute();
 }
 
-function desactive_compte($date_desactivation, $motif_suppression, $id)
+/**
+ * desactive_compte
+ *
+ * @param string $date_desactivation
+ * @param int $motif_suppression
+ * @param int $id
+ * 
+ * @return void
+ */
+function desactive_compte(string $date_desactivation, int $motif_suppression, int $id)
 {
     $sql = 'UPDATE utilisateurs SET actif = 0, date_desactive = ?, motif_supprime = ? WHERE id = ?';
 
@@ -333,7 +533,15 @@ function desactive_compte($date_desactivation, $motif_suppression, $id)
     $upd->execute([$date_desactivation, $motif_suppression, $id]);
 }
 
-function supprime_compte($motif_suppression, $id)
+/**
+ * supprime_compte
+ *
+ * @param int $motif_suppression
+ * @param int $id
+ * 
+ * @return void
+ */
+function supprime_compte(int $motif_suppression, int $id)
 {
     $sql = 'UPDATE utilisateurs SET email = NULL, nom_utilisateur = NULL, pass = NULL, bio = NULL, rang = NULL, avatar = NULL, supprime = 1, motif_supprime = ? WHERE id = ?';
 
@@ -341,7 +549,14 @@ function supprime_compte($motif_suppression, $id)
     $upd->execute([$motif_suppression, $id]);
 }
 
-function reactive_compte($id)
+/**
+ * reactive_compte
+ *
+ * @param int $id
+ * 
+ * @return void
+ */
+function reactive_compte(int $id)
 {
     $sql = 'UPDATE utilisateurs SET actif = 1, date_desactive = NULL, motif_supprime = NULL WHERE id = ?';
 
@@ -349,13 +564,28 @@ function reactive_compte($id)
     $upd->execute([$id]);
 }
 
-function update_derniere_connexion($date_connexion, $id)
+/**
+ * update_derniere_connexion
+ *
+ * @param string $date_connexion
+ * @param int $id
+ * 
+ * @return void
+ */
+function update_derniere_connexion(string $date_connexion, int $id)
 {
     $upd = db()->prepare('UPDATE utilisateurs SET derniere_connexion = ? WHERE id = ?');
     $upd->execute([$date_connexion, $id]);
 }
 
-function champs_non_vides($champs)
+/**
+ * champs_non_vides
+ *
+ * @param array $champs
+ * 
+ * @return int
+ */
+function champs_non_vides(array $champs)
 {
     $non_vides = 1;
 
@@ -371,7 +601,14 @@ function champs_non_vides($champs)
     return $non_vides;
 }
 
-function verifie_nom_utilisateur($nom_utilisateur)
+/**
+ * verifie_nom_utilisateur
+ *
+ * @param string $nom_utilisateur
+ * 
+ * @return int
+ */
+function verifie_nom_utilisateur(string $nom_utilisateur)
 {
     $req = db()->prepare('SELECT COUNT(*) as nb FROM utilisateurs WHERE nom_utilisateur = ?');
     $req->execute([$nom_utilisateur]);
@@ -379,7 +616,14 @@ function verifie_nom_utilisateur($nom_utilisateur)
     return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
 }
 
-function verifie_email($email)
+/**
+ * verifie_email
+ *
+ * @param string $email
+ * 
+ * @return int
+ */
+function verifie_email(string $email)
 {
     $req = db()->prepare('SELECT COUNT(*) as nb FROM utilisateurs WHERE email = ?');
     $req->execute([$email]);
@@ -387,7 +631,16 @@ function verifie_email($email)
     return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
 }
 
-function ajouter_utilisateur($email, $nom_utilisateur, $pass)
+/**
+ * ajouter_utilisateur
+ *
+ * @param string $email
+ * @param string $nom_utilisateur
+ * @param string $pass
+ * 
+ * @return void
+ */
+function ajouter_utilisateur(string $email, string $nom_utilisateur, string $pass)
 {
     $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang) VALUES(?, ?, ?, ?, "externe")');
     $ins->execute(
@@ -401,7 +654,20 @@ function ajouter_utilisateur($email, $nom_utilisateur, $pass)
     mkdir('../assets/utilisateurs/'.$nom_utilisateur);
 }
 
-function get_mail()
+/**
+ * req_liste_motifs_suppression
+ *
+ * @return array
+ */
+function req_liste_motifs_suppression()
+{
+    $req = db()->prepare('SELECT * FROM motif_suppression');
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/*function get_mail()
 {
     define('MAIL_HOST', 'localhost');
     define('MAIL_SMTPAUTH', false);
@@ -449,12 +715,4 @@ function mail_nouvelle_suggestion($nom_utilisateur, $email)
         echo $mail->ErrorInfo;
     }
     
-}
-
-function req_liste_motifs_suppression()
-{
-    $req = db()->prepare('SELECT * FROM motif_suppression');
-    $req->execute();
-
-    return $req->fetchAll(PDO::FETCH_ASSOC);
-}
+}*/

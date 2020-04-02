@@ -1,3 +1,10 @@
+/**
+ * 
+ * @param {*} page 
+ * @param {*} recherche 
+ * 
+ * Permet de récupérer la liste des projets selon la page et la recherche
+ */
 function req_liste_projets(page, recherche)
 {
     $.post(baseurl + 'inc/liste_projets.php',

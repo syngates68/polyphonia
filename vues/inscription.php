@@ -1,3 +1,6 @@
+<?php 
+if (!isset($_SESSION['utilisateur'])) : 
+?>
 <div class="sign_container">
     <div class="formulaire_connexion">
         <img src="<?= BASEURL; ?>assets/img/logo_orange.png">
@@ -16,19 +19,19 @@
 
             <div class="form_ligne">
                 <label for="mail">Adresse mail</label>
-                <input type="mail" id="mail" name="email">
+                <input type="mail" id="mail" name="email" <?php if (isset($_SESSION['_email'])) : ?> value="<?= $_SESSION['_email']; ?>" <?php unset($_SESSION['_email']); endif; ?>>
             </div>
             <div class="form_ligne">
                 <label for="nom_utilisateur">Nom d'utilisateur</label>
-                <input type="text" id="nom_utilisateur" name="nom_utilisateur">
+                <input type="text" id="nom_utilisateur" name="nom_utilisateur" <?php if (isset($_SESSION['_nom_utilisateur'])) : ?> value="<?= $_SESSION['_nom_utilisateur']; ?>" <?php unset($_SESSION['_nom_utilisateur']); endif; ?>>
             </div>
             <div class="form_ligne">
                 <label for="pass">Mot de passe</label>
-                <input type="password" id="pass" name="pass">
+                <input type="password" id="pass" name="pass" <?php if (isset($_SESSION['_pass'])) : ?> value="<?= $_SESSION['_pass']; ?>" <?php unset($_SESSION['_pass']); endif; ?>>
             </div>
             <div class="form_ligne">
                 <label for="pass2">Confirmation du mot de passe</label>
-                <input type="password" id="pass2" name="pass2">
+                <input type="password" id="pass2" name="pass2" <?php if (isset($_SESSION['_pass2'])) : ?> value="<?= $_SESSION['_pass2']; ?>" <?php unset($_SESSION['_pass2']); endif; ?>>
             </div>
             <div class="form_ligne cgu">
                 <input type="checkbox" name="cgu" id="cgu">
@@ -39,3 +42,7 @@
         </form>
     </div>
 </div>
+<?php 
+else :
+    header('Location:'.BASEURL);
+endif;

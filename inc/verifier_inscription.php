@@ -23,36 +23,60 @@ if (isset($_POST['inscription']))
                         }
                         else
                         {
+                            $_SESSION['_email'] = $_POST['email'];
+                            $_SESSION['_nom_utilisateur'] = $_POST['nom_utilisateur'];
+                            $_SESSION['_pass'] = $_POST['pass'];
+                            $_SESSION['_pass2'] = $_POST['pass2'];
                             $_SESSION['erreur'] = "Cette adresse mail n'est pas disponible.";
                             header('Location:'.BASEURL.'inscription.html');
                         }
                     }
                     else
                     {
+                        $_SESSION['_email'] = $_POST['email'];
+                        $_SESSION['_nom_utilisateur'] = $_POST['nom_utilisateur'];
+                        $_SESSION['_pass'] = $_POST['pass'];
+                        $_SESSION['_pass2'] = $_POST['pass2'];
                         $_SESSION['erreur'] = "Ce nom d'utilisateur n'est pas disponible.";
                         header('Location:'.BASEURL.'inscription.html');
                     }
                 }
                 else
                 {
+                    $_SESSION['_email'] = $_POST['email'];
+                    $_SESSION['_nom_utilisateur'] = $_POST['nom_utilisateur'];
+                    $_SESSION['_pass'] = $_POST['pass'];
+                    $_SESSION['_pass2'] = $_POST['pass2'];
                     $_SESSION['erreur'] = "Les deux mots de passe doivent être identiques.";
                     header('Location:'.BASEURL.'inscription.html');
                 }
             }
             else
             {
+                $_SESSION['_email'] = $_POST['email'];
+                $_SESSION['_nom_utilisateur'] = $_POST['nom_utilisateur'];
+                $_SESSION['_pass'] = $_POST['pass'];
+                $_SESSION['_pass2'] = $_POST['pass2'];
                 $_SESSION['erreur'] = "L'adresse mail doit être au format correct abc@domaine.com.";
                 header('Location:'.BASEURL.'inscription.html');
             }
         }
         else
         {
+            $_SESSION['_email'] = $_POST['email'];
+            $_SESSION['_nom_utilisateur'] = $_POST['nom_utilisateur'];
+            $_SESSION['_pass'] = $_POST['pass'];
+            $_SESSION['_pass2'] = $_POST['pass2'];
             $_SESSION['erreur'] = "Vous devez accepter les Conditions Générales d'Utilisation pour vous inscrire.";
             header('Location:'.BASEURL.'inscription.html');
         }
     }
     else
     {
+        $_SESSION['_email'] = $_POST['email'];
+        $_SESSION['_nom_utilisateur'] = $_POST['nom_utilisateur'];
+        $_SESSION['_pass'] = $_POST['pass'];
+        $_SESSION['_pass2'] = $_POST['pass2'];
         $_SESSION['erreur'] = "Tous les champs sont obligatoires.";
         header('Location:'.BASEURL.'inscription.html');
     }

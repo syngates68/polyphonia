@@ -23,13 +23,15 @@ $nbr_pages = req_nbr_pages(20, $_POST['recherche']);
         foreach($liste_projets as $projet) :
     ?>
     <div class="projet">
-        <div class="image_projet">
-            <img src="<?= BASEURL ?><?= $projet['illustration']; ?>">
-        </div>
+        <a href="<?= BASEURL; ?>projet/<?= $projet['slug']; ?>.html">
+            <div class="image_projet">
+                <img src="<?= BASEURL ?><?= $projet['illustration']; ?>">
+            </div>
+        </a>
         <div class="corps_projet">
-            <div class="titre_projet"><?= $projet['titre']; ?></div>
+            <div class="titre_projet"><a href="<?= BASEURL; ?>projet/<?= $projet['slug']; ?>.html"><?= $projet['titre']; ?></a></div>
             <div class="description_projet">
-                <?= extrait_texte($projet['contenu'], $projet['slug'], 710, $projet['id_projet']); ?>
+                <?= extrait_texte($projet['contenu'], 710); ?>
             </div>
         </div>
         <div class="footer_projet">
