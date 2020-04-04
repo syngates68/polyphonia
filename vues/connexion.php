@@ -26,6 +26,10 @@ if (!isset($_SESSION['utilisateur'])) :
                 <input type="password" id="pass" name="pass">
             </div>
             <button type="submit" name="connexion">Se connecter</button>
+            <div class="form_ligne cgu">
+                <input type="checkbox" name="remember_me" id="remember_me">
+                <label for="remember_me">Se souvenir de moi
+            </div>
             <p class="message_connexion">Pas encore membre? <a href="<?= BASEURL; ?>inscription.html">Inscrivez-vous ici</a></p>   
         </form>
     </div>

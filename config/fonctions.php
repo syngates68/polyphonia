@@ -667,6 +667,19 @@ function req_liste_motifs_suppression()
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * req_liste_utilisateurs
+ *
+ * @return array
+ */
+function req_liste_utilisateurs()
+{
+    $req = db()->prepare('SELECT * FROM utilisateurs');
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
 /*function get_mail()
 {
     define('MAIL_HOST', 'localhost');

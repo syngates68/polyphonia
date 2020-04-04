@@ -20,6 +20,9 @@ if (isset($_POST['connexion']))
                 if (req_utilisateur_by_id($utilisateur['id'])['actif'] == 0)
                     reactive_compte($utilisateur['id']);
 
+                if (isset($_POST['remember_me']))
+                    setcookie('auth', $utilisateur['id'] . '----' . sha1($utilisateur['nom_utilisateur'] . $utilisateur['pass']), time() + 3600 * 24 * 3, '/', '', false, true);
+
                 header('Location:'.BASEURL);
             }
             else

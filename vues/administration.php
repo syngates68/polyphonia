@@ -5,7 +5,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
 
 ?>
     <div class="container">
-        <h1>Espace d'administration</h1>
+        <h1>Admin - Liste des projets</h1>
 
         <a href="<?= BASEURL; ?>nouveau_projet.html" class="btn btn_nouveau_projet">Ajouter un projet</a>
 

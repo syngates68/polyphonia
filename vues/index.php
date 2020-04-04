@@ -12,10 +12,16 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                 </div>
                 <div class="nav_liens">
                     <i class="material-icons menu_mobile">close</i>
-                    <a class="actif" href="<?= BASEURL ?>">Accueil</a>
-                    <a href="<?= BASEURL ?>blog.html">Blog</a>
-                    <a href="<?= BASEURL ?>forum.html">Forum</a>
-                    <a href="<?= BASEURL ?>contact.html">Contact</a>
+                    <?php if (!in_array($var_page, $pages_admin)) : ?>
+                    <a <?php if ($var_page == "accueil") : ?> class="actif" <?php endif; ?> href="<?= BASEURL ?>">Accueil</a>
+                        <a href="<?= BASEURL ?>blog.html">Blog</a>
+                        <a href="<?= BASEURL ?>forum.html">Forum</a>
+                        <a href="<?= BASEURL ?>contact.html">Contact</a>
+                    <?php else : ?>
+                        <a href="<?= BASEURL ?>">Retour au site</a>
+                        <a href="<?= BASEURL ?>administration.html">Projets</a>
+                        <a href="<?= BASEURL ?>liste_utilisateurs.html">Utilisateurs</a>
+                    <?php endif; ?>
                     <div class="on_mobile_only">
                     <?php if (!isset($_SESSION['utilisateur'])) : ?>
                         <hr/>
