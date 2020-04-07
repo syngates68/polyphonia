@@ -3,6 +3,8 @@
 $titre = null;
 $illustration = null;
 $contenu = null;
+$nom_photographe = null;
+$lien_photo = null;
 $tags = null;
 $btn = "Ajouter";
 $btn_name = "ajouter_projet";
@@ -16,6 +18,8 @@ if (isset($_SESSION['id_projet']))
     $titre = $projet['titre'];
     $illustration = $projet['illustration'];
     $contenu = $projet['contenu'];
+    $nom_photographe = $projet['nom_photographe'];
+    $lien_photo = $projet['lien_photo'];
     $tags = $projet['tags'];
 
     /* Edition d'un projet */
@@ -56,6 +60,16 @@ if (isset($_SESSION['id_projet']))
                 </div>
             </div>
             <input type="file" id="illustration" name="illustration" style="display:none;">
+        </div>
+        <div class="group_form_ligne">
+            <div class="form_ligne">
+                <label>Nom du photographe</label>
+                <input type="text" name="nom_photographe" value="<?= $nom_photographe; ?>">
+            </div>
+            <div class="form_ligne">
+                <label>Lien de la photo</label>
+                <input type="text" name="lien_photo" value="<?= $lien_photo; ?>">
+            </div>
         </div>
         <div class="form_ligne">
             <label>Tags</label>

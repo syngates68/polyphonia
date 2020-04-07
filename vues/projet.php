@@ -43,6 +43,9 @@ if (isset($_GET['slug']))
                 <?= nl2br($projet['contenu']); ?>
             </div>
             <div class="projet_contenu__footer">
+                <?php if ($projet['nom_photographe'] != NULL) : ?>
+                    <p class="copyright_image">Photo par <?= $projet['nom_photographe']; ?> (<a href="<?= $projet['lien_photo']; ?>" target="_blank"><?= $projet['lien_photo']; ?></a>)</p>
+                <?php endif; ?>
                 <div class="message">
                     <span class="nota_bene">N.B. :</span><br/>
                     Les projets proposés sur Polyphonia sont faits pour vous donner des idées de projets intéressants à faire, et ils ne sont en rien exhaustifs,

@@ -47,7 +47,7 @@ function req_liste_projets(?int $page, ?int $nbr_par_page, bool $admin = false, 
         
     $where .= ' p.actif = 1';
 
-    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, p.tags, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
+    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
 
     $req = db()->prepare($sql);
     
@@ -119,7 +119,7 @@ function count_nbr_projets(?string $recherche = NULL)
  */
 function req_by_slug(string $slug)
 {
-    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.tags, u.nom_utilisateur, u.avatar FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
+    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur, u.avatar FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
     $req->execute([$slug]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -215,15 +215,17 @@ function slugify(string $string, string $delimiter = '-')
  * @param int $id_utilisateur
  * @param string $illustration
  * @param null|string $tags
+ * @param null|string $nom_photographe
+ * @param null|string $lien_photo
  * 
  * @return void
  */
-function ajouter_projet(string $titre, string $contenu, int $id_utilisateur, string $illustration, ?string $tags)
+function ajouter_projet(string $titre, string $contenu, int $id_utilisateur, string $illustration, ?string $tags, ?string $nom_photographe, ?string $lien_photo)
 {
     $slug = slugify($titre);
 
-    $ins = db()->prepare('INSERT INTO projets(titre, contenu, illustration, id_redacteur, slug, tags) VALUES (?, ?, ?, ?, ?, ?)');
-    $ins->execute([$titre, $contenu, $illustration, $id_utilisateur, $slug, $tags]);
+    $ins = db()->prepare('INSERT INTO projets(titre, contenu, illustration, id_redacteur, slug, tags, nom_photographe, lien_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+    $ins->execute([$titre, $contenu, $illustration, $id_utilisateur, $slug, $tags, $nom_photographe, $lien_photo]);
 }
 
 /**
@@ -234,15 +236,17 @@ function ajouter_projet(string $titre, string $contenu, int $id_utilisateur, str
  * @param null|string $illustration
  * @param int $id_utilisateur
  * @param null|string $tags
+ * @param null|string $nom_photographe
+ * @param null|string $lien_photo
  * 
  * @return void
  */
-function brouillon_projet(?string $titre, ?string $contenu, ?string $illustration, int $id_utilisateur, ?string $tags)
+function brouillon_projet(?string $titre, ?string $contenu, ?string $illustration, int $id_utilisateur, ?string $tags, ?string $nom_photographe, ?string $lien_photo)
 {
     $date_sauvegarde = date("Y-m-d H:i:s");
 
-    $ins = db()->prepare('INSERT INTO projets(titre, contenu, id_redacteur, illustration, brouillon, date_sauvegarde, tags) VALUES (?, ?, ?, ?, 1, ?, ?)');
-    $ins->execute([$titre, $contenu, $id_utilisateur, $illustration, $date_sauvegarde, $tags]);
+    $ins = db()->prepare('INSERT INTO projets(titre, contenu, id_redacteur, illustration, brouillon, date_sauvegarde, tags, nom_photographe, lien_photo) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?)');
+    $ins->execute([$titre, $contenu, $id_utilisateur, $illustration, $date_sauvegarde, $tags, $nom_photographe, $lien_photo]);
 }
 
 /**
@@ -300,13 +304,15 @@ function check_connexion(string $login)
  * @param int $id
  * @param string $illustration
  * @param null|string $tags
+ * @param null|string $nom_photographe
+ * @param null|string $lien_photo
  * 
  * @return void
  */
-function update_projet(string $titre, string $contenu, int $id, string $illustration, ?string $tags)
+function update_projet(string $titre, string $contenu, int $id, string $illustration, ?string $tags, ?string $nom_photographe, ?string $lien_photo)
 {
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, tags = ? WHERE id = ?');
-    $upd->execute([$titre, $contenu, $illustration, $tags, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, tags = ?, nom_photographe = ?, lien_photo = ? WHERE id = ?');
+    $upd->execute([$titre, $contenu, $illustration, $tags, $nom_photographe, $lien_photo, $id]);
 }
 
 /**
@@ -317,15 +323,17 @@ function update_projet(string $titre, string $contenu, int $id, string $illustra
  * @param null|string $illustration
  * @param int $id
  * @param null|string $tags
+ * @param null|string $nom_photographe
+ * @param null|string $lien_photo
  * 
  * @return void
  */
-function update_brouillon(?string $titre, ?string $contenu, ?string $illustration, int $id, ?string $tags)
+function update_brouillon(?string $titre, ?string $contenu, ?string $illustration, int $id, ?string $tags, ?string $nom_photographe, ?string $lien_photo)
 {
     $date_sauvegarde = date("Y-m-d H:i:s");
 
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, date_sauvegarde = ?, tags = ? WHERE id = ?');
-    $upd->execute([$titre, $contenu, $illustration, $date_sauvegarde, $tags, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, date_sauvegarde = ?, tags = ?, nom_photographe = ?, lien_photo = ? WHERE id = ?');
+    $upd->execute([$titre, $contenu, $illustration, $date_sauvegarde, $tags, $nom_photographe, $lien_photo, $id]);
 }
 
 /**
@@ -336,15 +344,17 @@ function update_brouillon(?string $titre, ?string $contenu, ?string $illustratio
  * @param string $illustration
  * @param int $id
  * @param null|string $tags
+ * @param null|string $nom_photographe
+ * @param null|string $lien_photo
  * 
  * @return void
  */
-function valider_brouillon(string $titre, string $contenu, string $illustration, int $id, ?string $tags)
+function valider_brouillon(string $titre, string $contenu, string $illustration, int $id, ?string $tags, ?string $nom_photographe, ?string $lien_photo)
 {
     $slug = slugify($titre);
 
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, slug = ?, brouillon = 0, tags = ? WHERE id = ?');
-    $upd->execute([$titre, utf8_encode($contenu), $illustration, $slug, $tags, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, slug = ?, brouillon = 0, tags = ?, nom_photographe = ?, lien_photo = ? WHERE id = ?');
+    $upd->execute([$titre, utf8_encode($contenu), $illustration, $slug, $tags, $nom_photographe, $lien_photo, $id]);
 }
 
 /**

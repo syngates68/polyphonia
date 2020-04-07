@@ -17,7 +17,7 @@ if (isset($_POST['ajouter_projet']))
 
             if (substr($rep[0], 0, 1) == 1)
             {
-                ajouter_projet($_POST['titre'], $_POST['contenu'], $_SESSION['utilisateur'], str_replace('../', '', $rep[1]), $_POST['tags']);
+                ajouter_projet($_POST['titre'], $_POST['contenu'], $_SESSION['utilisateur'], str_replace('../', '', $rep[1]), $_POST['tags'], $_POST['nom_photographe'], $_POST['lien_photo']);
 
                 $_SESSION['succes'] = 'Votre projet <B>'.$_POST['titre'].'</B> a bien été ajouté.';
                 header('Location:'.BASEURL.'nouveau_projet.html');
@@ -60,7 +60,7 @@ if (isset($_POST['enregistrer_brouillon']))
             $illustration = $rep[1];
     }
 
-    brouillon_projet($titre, $contenu, str_replace('../', '', $illustration), $_SESSION['utilisateur'], $_POST['tags']);
+    brouillon_projet($titre, $contenu, str_replace('../', '', $illustration), $_SESSION['utilisateur'], $_POST['tags'], $_POST['nom_photographe'], $_POST['lien_photo']);
                         
     $_SESSION['succes'] = 'Votre projet <B>'.$_POST['titre'].'</B> a bien été enregistré en brouillon.';
     header('Location:'.BASEURL.'nouveau_projet.html');

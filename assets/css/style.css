@@ -110,6 +110,19 @@ form .form_ligne.cgu label
     font-weight: 500;
 }
 
+.group_form_ligne
+{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-bottom: 32px;
+}
+
+.group_form_ligne .form_ligne
+{
+    padding: 8px;
+}
+
 form textarea
 {
     resize: none;
@@ -551,17 +564,19 @@ footer .footer_content .footer_content__div .copyright
 
 .projet .corps_projet
 {
-    padding: 16px 8px;
+    padding: 8px;
     width: 90%;
     margin: 0 auto;
 }
 
 .projet .titre_projet
 {
-    font-size: 18px;
-    min-height: 40px;
+    font-size: 15px;
     text-transform: capitalize;
     letter-spacing: 1px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
 }
 
 .projet .titre_projet a 
@@ -586,11 +601,11 @@ footer .footer_content .footer_content__div .copyright
 
 .projet .footer_projet
 {
-    margin: 24px auto 16px auto;
+    margin: 0 auto 16px auto;
     padding: 16px 8px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 90%;
 }
 
@@ -619,7 +634,7 @@ footer .footer_content .footer_content__div .copyright
 .auteur_projet .nom_auteur,
 .date_projet .date
 {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--grey);
 }
 
@@ -822,10 +837,23 @@ footer .footer_content .footer_content__div .copyright
     padding-left: 32px;
 }
 
+.projet_contenu .projet_texte blockquote
+{
+    border-left: 2px solid var(--orange);
+    margin-left: 16px;
+    padding-left: 16px;
+    font-style: italic;
+}
+
 .projet_contenu__footer
 {
     border-top: 2px solid var(--orange);
     padding: 16px;
+}
+
+.projet_contenu__footer .copyright_image
+{
+    font-size: 12px;
 }
 
 .projet_contenu__footer .message 
@@ -1940,6 +1968,11 @@ footer .footer_content .footer_content__div .copyright
 
 @media only screen and (max-width: 1400px) and (min-width: 700px)
 {
+    .message_presentation
+    {
+        width: 50%;
+    }
+
     footer .footer_content
     {
         width: 100%;

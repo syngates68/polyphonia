@@ -30,9 +30,9 @@ $nbr_pages = req_nbr_pages(20, $_POST['recherche']);
         </a>
         <div class="corps_projet">
             <div class="titre_projet"><a href="<?= BASEURL; ?>projet/<?= $projet['slug']; ?>.html" class="btn_lire_projet" projet="<?= $projet['id_projet']; ?>"><?= $projet['titre']; ?></a></div>
-            <div class="description_projet">
-                <?= extrait_texte($projet['contenu'], 710); ?>
-            </div>
+            <!--<div class="description_projet">
+                extrait_texte($projet['contenu'], 710);
+            </div>-->
         </div>
         <div class="footer_projet">
             <div class="infos_projet">
