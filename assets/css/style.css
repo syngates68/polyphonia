@@ -538,8 +538,8 @@ footer .footer_content .footer_content__div .copyright
 .liste_projets
 {
     display: grid;
-    grid-template-columns: repeat(4, 24%);
-    column-gap: 16px;
+    grid-template-columns: repeat(4, 22%);
+    column-gap: 57px;
 }
 
 .projet
@@ -1819,6 +1819,8 @@ footer .footer_content .footer_content__div .copyright
     .liste_projets
     {
         display: block;
+        width: 90%;
+        margin: auto;
     }
 
     .projet .corps_projet
@@ -2030,6 +2032,7 @@ footer .footer_content .footer_content__div .copyright
     .liste_projets
     {
         grid-template-columns: repeat(3, 32%);
+        column-gap: 19px;
     }
 }
 
@@ -2054,6 +2057,7 @@ footer .footer_content .footer_content__div .copyright
     .liste_projets
     {
         grid-template-columns: repeat(2, 49%);
+        column-gap: 13px;
     }
 
     nav .nav_content
