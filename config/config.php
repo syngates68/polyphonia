@@ -8,5 +8,6 @@ $pages_admin = [
     "brouillon",
     "editer_projet",
     "nouveau_projet",
-    "liste_utilisateurs"
+    "liste_utilisateurs",
+    "nouvel_utilisateur"
 ];

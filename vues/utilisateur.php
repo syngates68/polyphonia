@@ -16,6 +16,11 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0)
                 <div class="avatar">
                     <img src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>">
                 </div>
+                <?php if (req_utilisateur_by_nom_utilisateur($_GET['slug'])['id'] != $id_utilisateur) : ?>
+                    <div class="btn_container">
+                        <a href="<?= BASEURL; ?>message/<?= $_GET['slug']; ?>.html">Envoyer un message</a>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="infos_container">
                 <p class="nom_utilisateur"><?= $utilisateur['nom_utilisateur']; ?></p>
@@ -41,15 +46,27 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0)
                 </div>
                 <div class="info">
                     <p><span class="label fb">Facebook</span></p>
-                    <p><em>Non renseigné</em></p>
+                    <?php if ($utilisateur['facebook'] != NULL) : ?>
+                        <a target="_blank" href="<?= $utilisateur['facebook']; ?>"><?= $utilisateur['facebook']; ?></a>
+                    <?php else : ?>
+                        <p><em>Non renseigné</em></p>
+                    <?php endif; ?>
                 </div>
                 <div class="info">
                     <p><span class="label twitter">Twitter</span></p>
-                    <p><em>Non renseigné</em></p>
+                    <?php if ($utilisateur['twitter'] != NULL) : ?>
+                        <a target="_blank" href="<?= $utilisateur['twitter']; ?>"><?= $utilisateur['twitter']; ?></a>
+                    <?php else : ?>
+                        <p><em>Non renseigné</em></p>
+                    <?php endif; ?>
                 </div>
                 <div class="info">
                     <p><span class="label discord">Discord</span></p>
-                    <p><em>Non renseigné</em></p>
+                    <?php if ($utilisateur['discord'] != NULL) : ?>
+                        <a target="_blank" href="<?= $utilisateur['discord']; ?>"><?= $utilisateur['discord']; ?></a>
+                    <?php else : ?>
+                        <p><em>Non renseigné</em></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

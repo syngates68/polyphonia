@@ -18,7 +18,14 @@ if (isset($_POST['inscription']))
                     {
                         if (verifie_email($_POST['email']) == 0)
                         {
+                            //Message de bienvenue aux nouveaux membres
+                            $message = "Bienvenue sur Polyphonia ".$_POST['nom_utilisateur']." j'espère que tu trouveras ton bonheur sur le site.
+                            Ce message est un message automatique envoyé aux nouveaux membres lors de leur inscription, si tu découvres le site et que tu as besoin d'aide, n'hésite pas à me contacter je me ferais un plaisir de te guider afin que tu puisses avoir la meilleure expérience possible sur le site.
+                            Merci d'avoir rejoint l'aventure,<br/>
+                            Quentin.";
                             ajouter_utilisateur($_POST['email'], $_POST['nom_utilisateur'], $_POST['pass']);
+                            ajoute_messagerie(1, req_utilisateur_by_nom_utilisateur($_POST['nom_utilisateur'])['id']);
+                            ajouter_message(req_id_messagerie(1, req_utilisateur_by_nom_utilisateur($_POST['nom_utilisateur'])['id']), 1, req_utilisateur_by_nom_utilisateur($_POST['nom_utilisateur'])['id'], $message);
                             header('Location:'.BASEURL.'connexion.html');
                         }
                         else

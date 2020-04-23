@@ -7,11 +7,11 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
     <div class="container">
         <h1>Admin - Liste des utilisateurs</h1>
 
-        <a href="<?= BASEURL; ?>nouveau_projet.html" class="btn btn_nouveau_projet">Ajouter un utilisateur</a>
+        <a href="<?= BASEURL; ?>nouvel_utilisateur.html" class="btn btn_nouveau_projet">Ajouter un utilisateur</a>
 
         <div class="administration">
             <div class="tbl_header">
-                <div class="tbl_header__col">Avatar</div>
+                <div class="tbl_header__col">ID</div>
                 <div class="tbl_header__col">Nom d'utilisateur</div>
                 <div class="tbl_header__col">Adresse mail</div>
                 <div class="tbl_header__col">Membre depuis le</div>
@@ -23,25 +23,29 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
         $liste_utilisateurs = req_liste_utilisateurs();
         foreach($liste_utilisateurs as $utilisateur) :
 
-        $avatar = ($utilisateur['avatar'] != NULL) ? $utilisateur['avatar'] : 'assets/img/aucune_image.png';
         $nom_utilisateur = ($utilisateur['nom_utilisateur'] != NULL) ? $utilisateur['nom_utilisateur'] : 'Compte supprimé';
         ?>
             
-        <div class="tbl_contenu">
+        <div class="tbl_contenu <?php if ($utilisateur['motif_suppression'] != NULL) : ?> compte_supprime <?php endif; ?>">
                 <div class="tbl_contenu__col">
-                    <img class="avatar" src="<?= BASEURL; ?><?= $avatar; ?>">
+                    <?= $utilisateur['id']; ?>
                 </div>
                 <div class="tbl_contenu__col">
                     <span class="titre"><?= $nom_utilisateur; ?></span>
+                    <?php if ($utilisateur['rang'] == 'admin') : ?> <br/> Administrateur <?php endif; ?>
+                    <?php if ($utilisateur['motif_suppression'] != NULL) : ?> <br/>(Motif : <?= $utilisateur['motif_suppression']; ?>) <?php endif; ?>
                 </div>
                 <div class="tbl_contenu__col">
                     <?= $utilisateur['email']; ?>
                 </div>
                 <div class="tbl_contenu__col">
                     <?= formate_date($utilisateur['date_inscription']); ?>
+                    <br/><?php if ($utilisateur['motif_suppression'] == NULL) : ?> (Dernière connexion le <?= formate_date($utilisateur['derniere_connexion']); ?>) <?php endif; ?>
                 </div>
                 <div class="tbl_contenu__col tbl_actions">
-        
+                    <?php if ($utilisateur['motif_suppression'] == NULL) : ?>
+                        <a href="#" class="btn_administration fiche_utilisateur">Fiche utilisateur</a>
+                    <?php endif; ?>
                 </div>
             </div>
             

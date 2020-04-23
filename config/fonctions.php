@@ -665,6 +665,29 @@ function ajouter_utilisateur(string $email, string $nom_utilisateur, string $pas
 }
 
 /**
+ * ajouter_utilisateur_admin
+ *
+ * @param string $email
+ * @param string $nom_utilisateur
+ * @param string $pass
+ * 
+ * @return void
+ */
+function ajouter_utilisateur_admin(string $email, string $nom_utilisateur, string $pass)
+{
+    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang) VALUES(?, ?, ?, ?, "admin")');
+    $ins->execute(
+    [
+        $email,
+        $nom_utilisateur,
+        password_hash($pass, PASSWORD_BCRYPT),
+        date('Y-m-d H:i:s')
+    ]);
+
+    mkdir('../assets/utilisateurs/'.$nom_utilisateur);
+}
+
+/**
  * req_liste_motifs_suppression
  *
  * @return array
@@ -684,10 +707,72 @@ function req_liste_motifs_suppression()
  */
 function req_liste_utilisateurs()
 {
-    $req = db()->prepare('SELECT * FROM utilisateurs');
+    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.rang, u.date_inscription, u.derniere_connexion, u.supprime, ms.libelle as motif_suppression FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime ORDER BY u.id');
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function req_nbr_messages_non_lus_by_user($id_utilisateur)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM messages WHERE id_reception = $id_utilisateur AND lu = 0");
+    $count->execute();
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function ajouter_message($id_messagerie, $id_envoi, $id_reception, $message)
+{
+    $ins = db()->prepare('INSERT INTO messages(id_messagerie, id_envoi, id_reception, contenu) VALUES (?, ?, ?, ?)');
+    $ins->execute([$id_messagerie, $id_envoi, $id_reception, $message]);
+}
+
+function req_messages_by_conversation($id_utilisateur_1, $id_utilisateur_2)
+{
+    $req = db()->prepare("SELECT m.id_envoi, m.contenu, m.date_envoi, m.lu, m.date_lecture, u.nom_utilisateur, u.avatar FROM messages m LEFT JOIN utilisateurs u ON m.id_envoi = u.id WHERE (m.id_envoi = $id_utilisateur_1 AND m.id_reception = $id_utilisateur_2) OR (m.id_envoi = $id_utilisateur_2 AND m.id_reception = $id_utilisateur_1) ORDER BY m.id DESC");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function req_messages_by_user($id_utilisateur)
+{
+    $req = db()->prepare("SELECT ms.id, ms.id_utilisateur_1, ms.id_utilisateur_2, (SELECT contenu FROM messages WHERE id_messagerie = ms.id ORDER BY id DESC LIMIT 1) as dernier_message, (SELECT date_envoi FROM messages WHERE id_messagerie = ms.id ORDER BY id DESC LIMIT 1) as date_dernier_message, (SELECT lu FROM messages WHERE id_messagerie = ms.id ORDER BY id DESC LIMIT 1) as lu, (SELECT id_envoi FROM messages WHERE id_messagerie = ms.id ORDER BY id DESC LIMIT 1) as id_envoi FROM messagerie ms WHERE ms.id_utilisateur_1 = $id_utilisateur OR ms.id_utilisateur_2 = $id_utilisateur ORDER BY (SELECT date_envoi FROM messages WHERE id_messagerie = ms.id ORDER BY id DESC LIMIT 1) DESC");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function req_id_messagerie($id_utilisateur_1, $id_utilisateur_2)
+{
+    $req = db()->prepare("SELECT id FROM messagerie WHERE (id_utilisateur_1 = $id_utilisateur_1 AND id_utilisateur_2 = $id_utilisateur_2) OR (id_utilisateur_1 = $id_utilisateur_2 AND id_utilisateur_2 = $id_utilisateur_1)");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['id'];
+}
+
+function ajoute_messagerie($id_utilisateur_1, $id_utilisateur_2)
+{
+    $ins = db()->prepare('INSERT INTO messagerie(id_utilisateur_1, id_utilisateur_2) VALUES (?, ?)');
+    $ins->execute([$id_utilisateur_1, $id_utilisateur_2]);
+}
+
+function set_message_as_lus($id_reception, $id_envoi)
+{
+    $req = db()->prepare("SELECT * FROM messages WHERE id_envoi = $id_envoi AND id_reception = $id_reception AND lu = 0");
+    $req->execute();
+
+    foreach ($req->fetchAll(PDO::FETCH_ASSOC) as $message)
+    {
+        $upd = db()->prepare("UPDATE messages SET lu = 1, date_lecture = ? WHERE id = ?");
+        $upd->execute([date("Y-m-d H:i:s"), $message['id']]);
+    }
+}
+
+function ajouter_compte_social($type_reseau, $lien, $id_utilisateur)
+{
+    $upd = db()->prepare("UPDATE utilisateurs SET $type_reseau = ? WHERE id = ?");
+    $upd->execute([$lien, $id_utilisateur]);
 }
 
 /*function get_mail()

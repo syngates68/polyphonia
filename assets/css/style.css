@@ -77,7 +77,8 @@ form .form_ligne
 
 form .form_ligne input[type="text"],
 form .form_ligne input[type="mail"],
-form .form_ligne input[type="password"]
+form .form_ligne input[type="password"],
+form .form_ligne textarea
 {
     width: 100%;
     display: block;
@@ -126,8 +127,9 @@ form .form_ligne.cgu label
 form textarea
 {
     resize: none;
-    min-height: 500px;
+    min-height: 50px;
     font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
 }
 
 .erreur
@@ -273,12 +275,34 @@ nav .logo_polyphonia .nav_liens a i
 nav .logo_polyphonia .nav_liens a.actif
 {
     color: var(--orange);
+    font-weight: 700;
 }
 
 nav .logo_polyphonia .nav_liens a:hover
 {
     color: var(--orange);
     transition-duration: .3s;
+}
+
+nav .cta
+{
+    position: relative;
+}
+
+nav .cta .notification
+{
+    position: absolute;
+    bottom: 0;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #FFF;
+    background: var(--orange);
 }
 
 nav .cta .avatar
@@ -293,7 +317,7 @@ nav .cta .avatar
 nav .cta .dropdown
 {
     display: none;
-    position: absolute;
+    position: fixed;
     right: 10%;
     background: #FFF;
     padding: 0 16px;
@@ -319,7 +343,8 @@ nav .cta .dropdown_lien i
     margin-right: 8px;
 }
 
-nav .cta .dropdown .dropdown_lien a
+nav .cta .dropdown .dropdown_lien a,
+nav .cta .dropdown .dropdown_lien button
 {
     color: #000;
     transition-duration: .3s;
@@ -327,14 +352,34 @@ nav .cta .dropdown .dropdown_lien a
     font-size: 13px;
 }
 
-nav .cta .dropdown .dropdown_lien a:hover
+nav .cta .dropdown_lien form
+{
+    text-align: center;
+}
+
+nav .cta .dropdown .dropdown_lien button
+{
+    border: none;
+    background: none;
+}
+
+nav .cta .dropdown .dropdown_lien a:hover,
+nav .cta .dropdown .dropdown_lien button:hover
 {
     color: var(--orange);
     transition-duration: .3s;
+    cursor: pointer;
 }
 
 nav .cta .dropdown .dropdown_lien a b 
 {
+    font-weight: 600;
+}
+
+nav .cta .dropdown .dropdown_lien.has_notification,
+nav .cta .dropdown .dropdown_lien.has_notification a
+{
+    color: var(--orange);
     font-weight: 600;
 }
 
@@ -343,6 +388,7 @@ nav .cta .dropdown .dropdown_lien a b
     padding: 24px 48px;
     width: 80%;
     margin: 0 auto;
+    height: 100%;
 }
 
 .site_content
@@ -1106,6 +1152,11 @@ footer .footer_content .footer_content__div .copyright
     min-height: 120px;
 }
 
+.administration .tbl_contenu.compte_supprime
+{
+    background: #ffe3e3;
+}
+
 .administration .tbl_contenu.brouillon 
 {
     background: #c7edff;
@@ -1121,11 +1172,6 @@ footer .footer_content .footer_content__div .copyright
     width: 70%;
     height: 100px;
     object-fit: cover;
-}
-
-.administration .tbl_contenu img.avatar
-{
-    width: 50%;
 }
 
 .administration .tbl_contenu .label_brouillon
@@ -1164,7 +1210,8 @@ footer .footer_content .footer_content__div .copyright
     color: #000;
 }
 
-.administration .tbl_actions .btn_administration.remettre_brouillon
+.administration .tbl_actions .btn_administration.remettre_brouillon,
+.administration .tbl_actions .btn_administration.fiche_utilisateur
 {
     background: #1976D2;
 }
@@ -1263,14 +1310,16 @@ footer .footer_content .footer_content__div .copyright
     cursor: pointer;
 }
 
-.nouveau_projet .form_footer
+.nouveau_projet .form_footer,
+.nouvel_utilisateur .form_footer
 {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.nouveau_projet button
+.nouveau_projet button,
+.nouvel_utilisateur button
 {
     margin: 16px 8px;
     background: #388E3C;
@@ -1346,6 +1395,26 @@ footer .footer_content .footer_content__div .copyright
     border-left-color: crimson; 
 }
 
+.nouvel_utilisateur form
+{
+    width: 50%;
+    padding: 16px;
+    margin: 0 auto;
+}
+
+.nouvel_utilisateur .genere_mdp
+{
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--links);
+    cursor: pointer;
+}
+
+.nouvel_utilisateur .genere_mdp:hover
+{
+    text-decoration: underline;
+}
+
 /*********************************************************
 
     MON COMPTE
@@ -1386,6 +1455,24 @@ footer .footer_content .footer_content__div .copyright
     border-radius: 100%;
 }
 
+.compte_content .avatar_container .btn_container
+{
+    text-align: center;
+    padding: 16px 0;
+}
+
+.compte_content .avatar_container .btn_container a
+{
+    color: var(--orange);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.compte_content .avatar_container .btn_container a:hover
+{
+    text-decoration: underline;
+}
+
 .compte_content .infos_container .info 
 {
     padding: 8px 0;
@@ -1398,11 +1485,17 @@ footer .footer_content .footer_content__div .copyright
     margin: 16px;
 }
 
-.compte_content .infos_container p
+.compte_content .infos_container p,
+.compte_content .infos_container a
 {
     font-size: 12px;
     line-height: 1.5;
     color: var(--grey);
+}
+
+.compte_content .infos_container a
+{
+    color: var(--links);
 }
 
 .compte_content .infos_container p.nom_utilisateur
@@ -1594,6 +1687,215 @@ footer .footer_content .footer_content__div .copyright
     color: #2c662d;
     padding: 1em 1.5em;
     font-size: 12px;
+}
+
+/*********************************************************
+
+    LISTE DES MESSAGES
+
+*********************************************************/
+
+.mes_messages
+{
+    margin-top: 32px;
+}
+
+.mes_messages a
+{
+    text-decoration: none;
+    color: #000;
+}
+
+.mes_messages .message
+{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 4fr 5fr 4fr;
+    padding: 16px 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.mes_messages .message.non_lu
+{
+    background: #d6d6d6;
+}
+
+.mes_messages .message img
+{
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+.mes_messages .message .nom_utilisateur
+{
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.mes_messages .message .nom_utilisateur .badge_admin
+{
+    font-size: 10px;
+    color: #01c90b;
+    border-radius: 2px;
+}
+
+.mes_messages .message .contenu
+{
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.mes_messages .message .date_message
+{
+    font-size: 12px;
+    color: var(--grey);
+    text-align: right;
+}
+
+/*********************************************************
+
+    MESSAGES
+
+*********************************************************/
+
+.messages_top
+{
+    background: #bebebe;
+    padding: 16px;
+    font-weight: 600;
+}
+
+.form_message
+{
+    margin-top: 16px;
+}
+
+.form_message .form_ligne
+{
+    padding-bottom: 8px;
+}
+
+.form_message button
+{
+    color: #FFF;
+    border: none;
+    background: #0f75fa;
+    padding: 8px 32px;
+}
+.form_message button:hover
+{
+    cursor: pointer;
+}
+
+.messages_container
+{
+    margin-top: 32px;
+}
+
+.messages_container .message
+{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 16px 0;
+}
+
+.messages_container .message img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid var(--orange);
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+.messages_container .message .message_contenu
+{
+    border-radius: 5px;
+    padding: 16px;
+    line-height: 1.7;
+    margin-left: 20px;
+    position: relative;
+    font-size: 14px;
+}
+
+.messages_container .message .message_contenu:before
+{
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    position: absolute;
+    left: -20px;
+}
+
+.messages_container .message .message_contenu.message_contenu.message_utilisateur:before
+{
+    border-top: 20px solid #dddcdc;
+}
+
+.messages_container .message .message_contenu.message_contenu.message_interlocuteur:before
+{
+    border-top: 20px solid var(--orange);
+}
+
+.messages_container .message .message_contenu.message_utilisateur
+{
+    background: #dddcdc;
+}
+
+.messages_container .message .message_contenu.message_interlocuteur
+{
+    background: var(--orange);
+    color: #FFF;
+}
+
+.messages_container .message .message_contenu .date_message
+{
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+/*********************************************************
+
+    BLOG
+
+*********************************************************/
+
+.blog_container
+{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.blog_article
+{
+    padding: 32px 0;
+}
+
+.blog_article h2
+{
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--orange);
+}
+
+.blog_article p
+{
+    line-height: 1.5;
+}
+
+.blog_article .infos_article
+{
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--grey);
 }
 
 /*********************************************************
@@ -1939,6 +2241,16 @@ footer .footer_content .footer_content__div .copyright
     .parametres .infos_container form 
     {
         width: 100%;
+    }
+
+    .mes_messages .message
+    {
+        display: block;
+    }
+
+    .mes_messages .message .nom_utilisateur
+    {
+        margin-bottom: 16px;
     }
 
     .error_content

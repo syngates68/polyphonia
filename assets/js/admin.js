@@ -129,3 +129,37 @@ $(document).on('click', '.tags_container .tag', function()
         }
     }
 });
+
+/**
+ * Permet de générer un MDP aléatoirement
+ */
+$(document).on('click', '.nouvel_utilisateur .genere_mdp', function()
+{
+    $('input[name="pass"]').val('')
+    
+    var chars = "0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMONPQRSTUVWXYZ"
+    chars = chars.split('')
+    var spec = "_*"
+    spec = spec.split('')
+    var rand = ""
+
+    for (var i = 0; i < 9; i++)
+    {
+        if (i == 6)
+            rand = rand + spec[getRandomIntInclusive(0, spec.length - 1)]
+        else
+            rand = rand + chars[getRandomIntInclusive(0, chars.length - 1)]
+    }
+
+    $('input[name="pass"]').val(rand)
+});
+
+/**
+ * Permet d'obtenir un nombre aléatoire
+ */
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min +1)) + min;
+}

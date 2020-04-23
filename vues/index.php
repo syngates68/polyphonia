@@ -13,8 +13,8 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                 <div class="nav_liens">
                     <i class="material-icons menu_mobile">close</i>
                     <?php if (!in_array($var_page, $pages_admin)) : ?>
-                    <a <?php if ($var_page == "accueil") : ?> class="actif" <?php endif; ?> href="<?= BASEURL ?>">Accueil</a>
-                        <a href="<?= BASEURL ?>blog.html">Blog</a>
+                        <a <?php if ($var_page == "accueil") : ?> class="actif" <?php endif; ?> href="<?= BASEURL ?>">Accueil</a>
+                        <a <?php if ($var_page == "blog") : ?> class="actif" <?php endif; ?> href="<?= BASEURL ?>blog.html">Blog</a>
                         <a href="<?= BASEURL ?>forum.html">Forum</a>
                         <a href="<?= BASEURL ?>contact.html">Contact</a>
                     <?php else : ?>
@@ -52,11 +52,27 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                             <i class="material-icons">settings</i>
                             <a href="<?= BASEURL ?>parametres.html">Paramètres</a>
                         </div>
+                        <div class="dropdown_lien <?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>has_notification<?php endif; ?>">
+                            <i class="material-icons">chat<?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) == 0) : ?>_bubble<?php endif; ?></i>
+                            <a href="<?= BASEURL ?>mes_messages.html">Messages <?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>(<?= req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']); ?>)<?php endif; ?></a>
+                        </div>
+                        <div class="dropdown_lien">
+                            <i class="material-icons">notifications_active</i>
+                            <a href="<?= BASEURL ?>messages.html">Notifications</a>
+                        </div>
                         <div class="dropdown_lien">
                             <i class="material-icons">power_settings_new</i>
-                            <a href="<?= BASEURL ?>deconnexion.html">Déconnexion</a>
+                            <form method="POST" action="<?= BASEURL; ?>inc/deconnexion.php">
+                                <button type="submit">Déconnexion</button>
+                            </form>
                         </div>
                     </div>
+                    <!-- Notifications -->
+                    <?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>
+                        <div class="notification">
+                            <?= req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']); ?>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>

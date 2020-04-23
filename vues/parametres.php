@@ -66,6 +66,22 @@ if (isset($_SESSION['utilisateur']))
                     </div>
                     <button type="submit" name="editer_mdp">Modifier</button>
                 </form>
+                <form method="POST" action="./inc/reseaux_sociaux.php">
+                    <div class="titre_section">Réseaux sociaux :</div>
+                    <div class="form_ligne">
+                        <label>Facebook (facultatif)</label>
+                        <input type="text" name="facebook" placeholder="Lien de votre compte Facebook" value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['facebook']; ?>">
+                    </div>
+                    <div class="form_ligne">
+                        <label>Twitter (facultatif)</label>
+                        <input type="text" name="twitter" placeholder="Lien de votre compte Twitter" value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['twitter']; ?>">
+                    </div>
+                    <div class="form_ligne">
+                        <label>Discord (facultatif)</label>
+                        <input type="text" name="discord" placeholder="Lien de votre compte Discord" value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['discord']; ?>">
+                    </div>
+                    <button type="submit" name="editer_social">Modifier</button>
+                </form>
                 <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] != 'admin') : ?>
                 <div class="supprimer_compte">
                     <div class="titre_section">Suppression du compte :</div>
