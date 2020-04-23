@@ -34,6 +34,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                     <span class="titre"><?= $nom_utilisateur; ?></span>
                     <?php if ($utilisateur['rang'] == 'admin') : ?> <br/> Administrateur <?php endif; ?>
                     <?php if ($utilisateur['motif_suppression'] != NULL) : ?> <br/>(Motif : <?= $utilisateur['motif_suppression']; ?>) <?php endif; ?>
+                    <?php if ($utilisateur['bloque'] == 1) : ?> <br/>(Compte bloqué) <?php endif; ?>
                 </div>
                 <div class="tbl_contenu__col">
                     <?= $utilisateur['email']; ?>
@@ -45,6 +46,9 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 <div class="tbl_contenu__col tbl_actions">
                     <?php if ($utilisateur['motif_suppression'] == NULL) : ?>
                         <a href="#" class="btn_administration fiche_utilisateur">Fiche utilisateur</a>
+                        <?php if ($utilisateur['rang'] != 'admin') : ?> 
+                        <a href="#" utilisateur="<?= $utilisateur['id']; ?>" class="btn_administration <?php if($utilisateur['bloque'] == 1) : ?>de<?php endif; ?>bloquer_utilisateur"><?php if($utilisateur['bloque'] == 1) : ?>Débloquer<?php else : ?>Bloquer<?php endif; ?></a> 
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div>

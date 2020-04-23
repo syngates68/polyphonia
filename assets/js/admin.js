@@ -155,6 +155,48 @@ $(document).on('click', '.nouvel_utilisateur .genere_mdp', function()
 });
 
 /**
+ * Permet de bloquer un utilisateur
+ */
+$(document).on('click', '.bloquer_utilisateur', function(e)
+{
+    e.preventDefault()
+    if (confirm("Confirmer le blocage de cet utilisateur?"))
+    {
+        $.post(baseurl + 'inc/bloquer_utilisateur.php',
+        {
+            id_utilisateur : $(this).attr('utilisateur'),
+            bloque : 1
+        },
+        function(data)
+        {
+            alert(data);
+            location.reload();
+        });
+    }
+})
+
+/**
+ * Permet de débloquer un utilisateur
+ */
+$(document).on('click', '.debloquer_utilisateur', function(e)
+{
+    e.preventDefault()
+    if (confirm("Confirmer le déblocage de cet utilisateur?"))
+    {
+        $.post(baseurl + 'inc/bloquer_utilisateur.php',
+        {
+            id_utilisateur : $(this).attr('utilisateur'),
+            bloque : 0
+        },
+        function(data)
+        {
+            alert(data);
+            location.reload();
+        });
+    }
+})
+
+/**
  * Permet d'obtenir un nombre aléatoire
  */
 

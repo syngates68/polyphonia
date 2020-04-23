@@ -62,7 +62,7 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                         </div>
                         <div class="dropdown_lien">
                             <i class="material-icons">power_settings_new</i>
-                            <form method="POST" action="<?= BASEURL; ?>inc/deconnexion.php">
+                            <form method="POST" action="<?= BASEURL ?>inc/deconnexion.php">
                                 <button type="submit">Déconnexion</button>
                             </form>
                         </div>

@@ -707,7 +707,7 @@ function req_liste_motifs_suppression()
  */
 function req_liste_utilisateurs()
 {
-    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.rang, u.date_inscription, u.derniere_connexion, u.supprime, ms.libelle as motif_suppression FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime ORDER BY u.id');
+    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.rang, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, ms.libelle as motif_suppression FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime ORDER BY u.id');
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -773,6 +773,12 @@ function ajouter_compte_social($type_reseau, $lien, $id_utilisateur)
 {
     $upd = db()->prepare("UPDATE utilisateurs SET $type_reseau = ? WHERE id = ?");
     $upd->execute([$lien, $id_utilisateur]);
+}
+
+function bloquer_utilisateur($id_utilisateur, $bloque)
+{
+    $upd = db()->prepare("UPDATE utilisateurs SET bloque = ? WHERE id = ?");
+    $upd->execute([$bloque, $id_utilisateur]);
 }
 
 /*function get_mail()

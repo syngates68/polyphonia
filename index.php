@@ -1,12 +1,23 @@
 <?php
-    session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-    include("config/config.php");
-    include("config/fonctions.php");
-    include("config/captcha.php");
-    include("config/cookies.php");
+include("config/config.php");
+include("config/fonctions.php");
+include("config/captcha.php");
+include("config/cookies.php");
+
+//En cas de blocage de compte on déconnecte l'utilisateur
+if (isset($_SESSION['utilisateur']) && req_utilisateur_by_id($_SESSION['utilisateur'])['bloque'] == 1)
+{
+    session_destroy();
+    setcookie('auth', '', time() - 3600, '/', '', false, true);
+    
+    header('Location:'.BASEURL);
+}
+
+ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -35,3 +46,7 @@
     <script src="<?= BASEURL; ?>assets/js/main.js"></script>
 </body>
 </html>
+
+<?php 
+$content = ob_get_clean();
+echo $content;

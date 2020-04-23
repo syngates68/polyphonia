@@ -14,16 +14,25 @@ if (isset($_POST['connexion']))
 
             if (password_verify($_POST['pass'], $utilisateur['pass']))
             {
-                $_SESSION['utilisateur'] = $utilisateur['id'];
-                update_derniere_connexion(date("Y-m-d H:i:s"), $utilisateur['id']);
-
-                if (req_utilisateur_by_id($utilisateur['id'])['actif'] == 0)
-                    reactive_compte($utilisateur['id']);
-
-                if (isset($_POST['remember_me']))
-                    setcookie('auth', $utilisateur['id'] . '----' . sha1($utilisateur['nom_utilisateur'] . $utilisateur['pass']), time() + 3600 * 24 * 3, '/', '', false, true);
-
-                header('Location:'.BASEURL);
+                if ($utilisateur['bloque'] == 0)
+                {
+                    $_SESSION['utilisateur'] = $utilisateur['id'];
+                    update_derniere_connexion(date("Y-m-d H:i:s"), $utilisateur['id']);
+    
+                    if (req_utilisateur_by_id($utilisateur['id'])['actif'] == 0)
+                        reactive_compte($utilisateur['id']);
+    
+                    if (isset($_POST['remember_me']))
+                        setcookie('auth', $utilisateur['id'] . '----' . sha1($utilisateur['nom_utilisateur'] . $utilisateur['pass']), time() + 3600 * 24 * 3, '/', '', false, true);
+    
+                    header('Location:'.BASEURL);
+                }
+                else
+                {
+                    $_SESSION['_login'] = $_POST['login'];
+                    $_SESSION['erreur'] = 'Votre compte a été bloqué.';
+                    header('Location:'.BASEURL.'connexion.html');
+                }
             }
             else
             {
