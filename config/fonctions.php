@@ -535,12 +535,12 @@ function update_mdp(string $pass, int $id)
  * 
  * @return void
  */
-function desactive_compte(string $date_desactivation, int $motif_suppression, int $id)
+function desactive_compte(string $date_desactivation, int $id)
 {
-    $sql = 'UPDATE utilisateurs SET actif = 0, date_desactive = ?, motif_supprime = ? WHERE id = ?';
+    $sql = 'UPDATE utilisateurs SET actif = 0, date_desactive = ? WHERE id = ?';
 
     $upd = db()->prepare($sql);
-    $upd->execute([$date_desactivation, $motif_suppression, $id]);
+    $upd->execute([$date_desactivation, $id]);
 }
 
 /**
@@ -707,7 +707,7 @@ function req_liste_motifs_suppression()
  */
 function req_liste_utilisateurs()
 {
-    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.rang, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, ms.libelle as motif_suppression FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime ORDER BY u.id');
+    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.rang, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, ms.libelle as motif_suppression FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime ORDER BY u.id');
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -729,7 +729,7 @@ function ajouter_message($id_messagerie, $id_envoi, $id_reception, $message)
 
 function req_messages_by_conversation($id_utilisateur_1, $id_utilisateur_2)
 {
-    $req = db()->prepare("SELECT m.id_envoi, m.contenu, m.date_envoi, m.lu, m.date_lecture, u.nom_utilisateur, u.avatar FROM messages m LEFT JOIN utilisateurs u ON m.id_envoi = u.id WHERE (m.id_envoi = $id_utilisateur_1 AND m.id_reception = $id_utilisateur_2) OR (m.id_envoi = $id_utilisateur_2 AND m.id_reception = $id_utilisateur_1) ORDER BY m.id DESC");
+    $req = db()->prepare("SELECT m.id as id_message, m.id_envoi, m.contenu, m.date_envoi, m.lu, m.date_lecture, u.nom_utilisateur, u.avatar, (SELECT id FROM messages WHERE (id_envoi = $id_utilisateur_1 AND id_reception = $id_utilisateur_2) OR (id_envoi = $id_utilisateur_2 AND id_reception = $id_utilisateur_1) ORDER BY id DESC LIMIT 1) as id_dernier_message FROM messages m LEFT JOIN utilisateurs u ON m.id_envoi = u.id WHERE (m.id_envoi = $id_utilisateur_1 AND m.id_reception = $id_utilisateur_2) OR (m.id_envoi = $id_utilisateur_2 AND m.id_reception = $id_utilisateur_1) ORDER BY m.id DESC");
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -775,10 +775,24 @@ function ajouter_compte_social($type_reseau, $lien, $id_utilisateur)
     $upd->execute([$lien, $id_utilisateur]);
 }
 
-function bloquer_utilisateur($id_utilisateur, $bloque)
+function bloquer_utilisateur($id_utilisateur, $bloque, $motif_bloque)
 {
-    $upd = db()->prepare("UPDATE utilisateurs SET bloque = ? WHERE id = ?");
-    $upd->execute([$bloque, $id_utilisateur]);
+    $upd = db()->prepare("UPDATE utilisateurs SET bloque = ?, motif_bloque = ? WHERE id = ?");
+    $upd->execute([$bloque, $motif_bloque, $id_utilisateur]);
+}
+
+function ajouter_fichier_projet($id_projet, $chemin_fichier, $nom_fichier, $type_fichier)
+{
+    $ins = db()->prepare("INSERT INTO fichiers_projet(id_projet, chemin_fichier, nom_fichier, type_fichier) VALUES (?, ?, ?, ?)");
+    $ins->execute([$id_projet, $chemin_fichier, $nom_fichier, $type_fichier]);
+}
+
+function req_fichiers_by_projet($id_projet)
+{
+    $req = db()->prepare("SELECT * FROM fichiers_projet WHERE id_projet = ?");
+    $req->execute([$id_projet]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /*function get_mail()

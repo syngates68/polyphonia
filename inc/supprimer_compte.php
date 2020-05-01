@@ -24,7 +24,7 @@ if (isset($_POST['supprimer_compte']))
                     //Désactivation du compte
                     if ($_POST['type_suppression'] == '0')
                     {
-                        desactive_compte(date("Y-m-d H:i:s"), $_POST['motif_suppression'], $_SESSION['utilisateur']);
+                        desactive_compte(date("Y-m-d H:i:s"), $_SESSION['utilisateur']);
                     }
                     else
                     {

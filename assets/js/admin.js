@@ -51,6 +51,30 @@ function readURL(input){
 }
 
 /**
+ * Permet d'afficher les boutons d'action
+ */
+$(document).on('click', '.tbl_contenu .tbl_actions .afficher_actions', function()
+{
+
+    /*$('.dropdown_menu').each(function()
+    {
+        if ($(this).css('display') != 'none')
+            $(this).hide()
+    })*/
+
+    if ($('#' + $(this).attr('dropdown')).css('display') == 'none')
+    {
+        $('#' + $(this).attr('dropdown')).show()
+        $(this).addClass('actif')
+    }
+    else
+    {
+        $('#' + $(this).attr('dropdown')).hide()
+        $(this).removeClass('actif')
+    }
+});
+
+/**
  * Permet de remettre un projet en brouillon
  */
 $(document).on('click', '.tbl_contenu .tbl_actions .remettre_brouillon', function(e)
@@ -131,6 +155,21 @@ $(document).on('click', '.tags_container .tag', function()
 });
 
 /**
+ * Permet d'ajouter des fichiers au projet
+ */
+$(document).on('click', '.ajouter_fichier', function()
+{
+    $.post(baseurl + 'inc/ajouter_fichier.php',
+    {
+
+    },
+    function(data)
+    {
+        $('.inputs_file').append(data)
+    })
+});
+
+/**
  * Permet de générer un MDP aléatoirement
  */
 $(document).on('click', '.nouvel_utilisateur .genere_mdp', function()
@@ -160,12 +199,29 @@ $(document).on('click', '.nouvel_utilisateur .genere_mdp', function()
 $(document).on('click', '.bloquer_utilisateur', function(e)
 {
     e.preventDefault()
+    $('.modal_bloquer_utilisateur').show()
+    $('.has_modal').addClass('is_visible')
+
+    $.post(baseurl + 'inc/modal_bloquer_utilisateur.php',
+    {
+        id_utilisateur : $(this).attr('utilisateur')
+    },
+    function(data)
+    {
+        $('.modal_bloquer_utilisateur .modal_content').html('')
+        $('.modal_bloquer_utilisateur .modal_content').append(data)
+    });
+})
+
+$(document).on('click', '.valider_blocage', function()
+{
     if (confirm("Confirmer le blocage de cet utilisateur?"))
     {
         $.post(baseurl + 'inc/bloquer_utilisateur.php',
         {
             id_utilisateur : $(this).attr('utilisateur'),
-            bloque : 1
+            bloque : 1,
+            motif_blocage : $('#motif_blocage').val()
         },
         function(data)
         {
@@ -173,6 +229,12 @@ $(document).on('click', '.bloquer_utilisateur', function(e)
             location.reload();
         });
     }
+})
+
+$(document).on('click', '.annuler_blocage', function()
+{
+    $('.modal_bloquer_utilisateur').hide()
+    $('.has_modal').removeClass('is_visible')
 })
 
 /**
@@ -186,7 +248,8 @@ $(document).on('click', '.debloquer_utilisateur', function(e)
         $.post(baseurl + 'inc/bloquer_utilisateur.php',
         {
             id_utilisateur : $(this).attr('utilisateur'),
-            bloque : 0
+            bloque : 0,
+            motif_blocage : null
         },
         function(data)
         {
@@ -194,6 +257,29 @@ $(document).on('click', '.debloquer_utilisateur', function(e)
             location.reload();
         });
     }
+})
+
+$(document).on('click', '.fiche_utilisateur', function(e)
+{
+    e.preventDefault()
+    $('.modal_fiche_utilisateur').show()
+    $('.has_modal').addClass('is_visible')
+
+    $.post(baseurl + 'inc/fiche_utilisateur.php',
+    {
+        id_utilisateur : $(this).attr('utilisateur')
+    },
+    function(data)
+    {
+        $('.modal_fiche_utilisateur').html('')
+        $('.modal_fiche_utilisateur').append(data)
+    });
+})
+
+$(document).on('click', '.fermer', function()
+{
+    $('.modal_fiche_utilisateur').hide()
+    $('.has_modal').removeClass('is_visible')
 })
 
 /**

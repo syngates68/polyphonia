@@ -7,10 +7,17 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
     <div class="container">
         <h1>Admin - Liste des projets</h1>
 
-        <a href="<?= BASEURL; ?>nouveau_projet.html" class="btn btn_nouveau_projet">Ajouter un projet</a>
-
         <div class="administration">
+            <div class="tbl_top">
+                <div class="admin_cta">
+                    <span class="material-icons" title="Supprimer les éléments sélectionnés">delete</span>
+                </div>
+                <div class="admin_btn">
+                    <a href="<?= BASEURL; ?>nouveau_projet.html" class="btn btn_nouveau_projet"><span class="material-icons">add</span>Ajouter un projet</a>
+                </div>
+            </div>
             <div class="tbl_header">
+                <div class="tbl_header__col"><input type="checkbox"></div>
                 <div class="tbl_header__col">Illustration</div>
                 <div class="tbl_header__col">Titre</div>
                 <div class="tbl_header__col">Vues</div>
@@ -28,6 +35,9 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
         ?>
             
         <div class="tbl_contenu <?php if ($projet['brouillon'] == 1) : ?> brouillon <?php endif; ?>">
+                <div class="tbl_contenu__col">
+                    <input type="checkbox">
+                </div>
                 <div class="tbl_contenu__col">
                     <img src="<?= BASEURL; ?><?= $illustration; ?>">
                 </div>
@@ -47,13 +57,24 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                     <?php endif; ?>
                 </div>
                 <div class="tbl_contenu__col tbl_actions">
-                    <?php if ($projet['brouillon'] == 0) : ?>
-                        <a href="<?= BASEURL ?>editer_projet/<?= $projet['id_projet']; ?>.html" class="btn_administration editer">Editer le projet</a>
-                        <a href="#" class="btn_administration remettre_brouillon" projet="<?= $projet['id_projet']; ?>">Remettre en brouillon</a>
-                    <?php else : ?>
-                        <a href="<?= BASEURL ?>brouillon/<?= $projet['id_projet']; ?>.html" class="btn_administration brouillon">Reprendre brouillon</a>
-                    <?php endif; ?>
-                    <a href="#" class="btn_administration supprimer" type="<?php if ($projet['brouillon'] == 0) : ?>projet<?php else : ?>brouillon<?php endif; ?>" projet="<?= $projet['id_projet']; ?>">Supprimer</a>
+                    <span class="material-icons afficher_actions" dropdown="dropdown_menu_<?= $projet['id_projet']; ?>">more_horiz</span>
+                    <div class="dropdown_menu" id="dropdown_menu_<?= $projet['id_projet']; ?>">
+                        <?php if ($projet['brouillon'] == 0) : ?>
+                            <div class="dropdown_lien">
+                                <a href="<?= BASEURL ?>editer_projet/<?= $projet['id_projet']; ?>.html" class="btn_administration editer"><span class="material-icons">create</span>Editer le projet</a>
+                            </div>
+                            <div class="dropdown_lien">
+                                <a href="#" class="btn_administration remettre_brouillon" projet="<?= $projet['id_projet']; ?>"><span class="material-icons">file_copy</span>Remettre en brouillon</a>
+                            </div>
+                        <?php else : ?>
+                            <div class="dropdown_lien">
+                                <a href="<?= BASEURL ?>brouillon/<?= $projet['id_projet']; ?>.html" class="btn_administration brouillon"><span class="material-icons">file_copy</span>Reprendre brouillon</a>
+                            </div>
+                        <?php endif; ?>
+                        <div class="dropdown_lien">
+                            <a href="#" class="btn_administration supprimer" type="<?php if ($projet['brouillon'] == 0) : ?>projet<?php else : ?>brouillon<?php endif; ?>" projet="<?= $projet['id_projet']; ?>"><span class="material-icons">delete</span>Supprimer</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             

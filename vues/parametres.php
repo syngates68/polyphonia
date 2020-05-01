@@ -30,7 +30,9 @@ if (isset($_SESSION['utilisateur']))
                 <div class="avatar">
                     <img src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>">
                 </div>
-                <button id="modifier_avatar">Modifier</button>
+                <div class="bloc_button">
+                    <button id="modifier_avatar">Modifier</button>
+                </div>
                 <input type="file" name="avatar" utilisateur="<?= $utilisateur['id']; ?>">
             </div>
             <div class="infos_container">
@@ -45,10 +47,12 @@ if (isset($_SESSION['utilisateur']))
                         <input type="mail" name="email" value="<?= $utilisateur['email']; ?>">
                     </div>
                     <div class="form_ligne">
-                        <label>Biographie</label>
+                        <label>Biographie (facultatif)</label>
                         <textarea name="bio" id="biographie"><?= $utilisateur['bio']; ?></textarea>
                     </div>
-                    <button type="submit" name="editer_profil">Modifier</button>
+                    <div class="bloc_button">
+                        <button type="submit" name="editer_profil">Modifier</button>
+                    </div>
                 </form>
                 <form method="POST" action="./inc/editer_mdp.php">
                     <div class="titre_section">Mot de passe :</div>
@@ -64,7 +68,9 @@ if (isset($_SESSION['utilisateur']))
                         <label>Confirmer mot de passe</label>
                         <input type="password" name="confirm_pass">
                     </div>
-                    <button type="submit" name="editer_mdp">Modifier</button>
+                    <div class="bloc_button">
+                        <button type="submit" name="editer_mdp">Modifier</button>
+                    </div>
                 </form>
                 <form method="POST" action="./inc/reseaux_sociaux.php">
                     <div class="titre_section">Réseaux sociaux :</div>
@@ -80,12 +86,16 @@ if (isset($_SESSION['utilisateur']))
                         <label>Discord (facultatif)</label>
                         <input type="text" name="discord" placeholder="Lien de votre compte Discord" value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['discord']; ?>">
                     </div>
-                    <button type="submit" name="editer_social">Modifier</button>
+                    <div class="bloc_button">
+                        <button type="submit" name="editer_social">Modifier</button>
+                    </div>
                 </form>
                 <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] != 'admin') : ?>
                 <div class="supprimer_compte">
                     <div class="titre_section">Suppression du compte :</div>
-                    <button class="btn_supprimer_compte" utilisateur="<?= $_SESSION['utilisateur']; ?>">Supprimer mon compte</button>
+                    <div class="bloc_button">
+                        <button class="btn_supprimer_compte" utilisateur="<?= $_SESSION['utilisateur']; ?>">Supprimer mon compte</button>
+                    </div>
                 </div>
                 <?php endif; ?>
             </div>

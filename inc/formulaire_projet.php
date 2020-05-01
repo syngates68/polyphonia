@@ -88,6 +88,10 @@ if (isset($_SESSION['id_projet']))
             <input type="text" name="nouveau_tag" placeholder="Ajouter un tag">
             <input type="hidden" name="tags" value="<?= $tags; ?>">
         </div>
+        <div class="form_ligne">
+            <label>Fichiers joints (facultatif) <span class="ajouter_fichier">Ajouter</span></label>
+            <div class="inputs_file"></div>
+        </div>
     </div>
     <div class="bloc_formulaire droite">
         <label>Contenu</label>

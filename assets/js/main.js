@@ -54,7 +54,8 @@ $(document).on('click', 'nav .menu_mobile', function()
  */
 $(document).on('focus', '.form_ligne input', function()
 {
-    $('label[for="' + $(this).attr('id') + '"]').addClass('actif')
+    if ($(this).attr('type') != 'radio' && $(this).attr('type') != 'checkbox')
+        $('label[for="' + $(this).attr('id') + '"]').addClass('actif')
 });
 
 /**

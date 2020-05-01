@@ -30,6 +30,28 @@ if (isset($_POST['editer_projet']))
             {
                 update_projet($_POST['titre'], $_POST['contenu'], $_GET['id'], str_replace('../', '', $illustration), $_POST['tags'], $_POST['nom_photographe'], $_POST['lien_photo']);
     
+                //Vérification des fichiers joints
+                if (!empty($_POST['nom_fichier']))
+                {
+                    for ($i = 0; $i < sizeof($_POST['nom_fichier']); $i++)
+                    {
+                        if (trim($_POST['nom_fichier'][$i]) != '')
+                        {
+                            if ($_FILES['fichier']['name'][$i] != '')
+                            {
+                                if (move_uploaded_file($_FILES['fichier']['tmp_name'][$i], '../assets/projets/fichiers/'.$_FILES['fichier']['name'][$i]))
+                                {
+                                    ajouter_fichier_projet($_GET['id'], 'assets/projets/fichiers/'.$_FILES['fichier']['name'][$i], $_POST['nom_fichier'][$i], $_FILES['fichier']['type'][$i]);
+                                }
+                                else
+                                {
+                                    $_SESSION['erreur'] = "Le fichier ".$_FILES['fichier']['name'][$i]." n'a pas pu être uploadé.";
+                                }
+                            }
+                        } 
+                    }
+                }
+
                 $_SESSION['succes'] = "Le projet a bien été édité";
                 header('Location:'.BASEURL.'editer_projet/'.$_GET['id'].'.html');
             }

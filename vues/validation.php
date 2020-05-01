@@ -1,4 +1,8 @@
-<?php if (isset($_SESSION['compte_supprime'])) : ?>
+<?php 
+if (isset($_SESSION['compte_supprime'])) : 
+    session_destroy();
+    setcookie('auth', '', time() - 3600, '/', '', false, true);
+?>
 <div class="container">
     <div class="succes_suppression">
         Votre compte a bien été désactivé, nous sommes désolé de vous voir partir 
@@ -7,8 +11,7 @@
     </div>
     <meta http-equiv="refresh" content="5;URL=<?= BASEURL; ?>"> 
 </div>
-<?php 
-    unset($_SESSION['compte_supprime']);
+<?php
     else :
         header('Location:'.BASEURL);
     endif;

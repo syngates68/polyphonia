@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2048</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+</head>
+<style>
+    body{ font-family: 'Roboto', sans-serif; }
+    .score-container{ display: inline-block; border-radius: 5px; font-weight: bold; padding: 15px; font-size: 25px; box-sizing: border-box; background: #BBADA0; color: #EEE4DA; height: 100px; width: 400px; margin-left: 50px; vertical-align: top; text-transform: uppercase; text-align: center; }
+    .score{ font-size: 40px; font-weight: 800; color: #FFF; }
+    .container{ position: relative; width: 830px; height: 830px; display: inline-block; }
+    .game{ width: 800px; height: 800px; background: #BBADA0; padding: 15px; display: flex; flex-wrap: wrap; justify-content: space-between; border-radius: 5px; position: relative; }
+    .game-over{ animation: apparition 0.5s; position: absolute; width: 100%; height: 100%; font-size: 75px; line-height: 800px; text-align: center; color: #FFF; font-weight: 800; background: #00000067; z-index: 3; display: none; }
+    .game-over span{ vertical-align: middle; display: inline-block; line-height: 2; }
+    .game-over span .btnPlayAgain{ cursor: pointer; font-size: 30px; background: #BBADA0; border-radius: 5px; }
+    .victoire{ animation: apparition 0.5s; position: absolute; width: 100%; height: 100%; font-size: 75px; text-align: center; line-height: 800px; color: #FFF; font-weight: 800; background: #00000067; z-index: 3; display: none; }
+    .victoire span{ text-transform: uppercase; vertical-align: middle; display: inline-block; line-height: 2; }
+    .victoire span .btnPlayAgain{ cursor: pointer; font-size: 30px; background: #BBADA0; border-radius: 5px; }
+    .btn-continuer{ background: #36df00; color: #FFF; padding: 10px; border-radius: 5px; }
+    .carre{ width: 185px; height: 185px; background: #CDC1B4; position: relative; }
+    .bloc{ position: absolute; width: 100%; height: 100%; text-align: center; color: #746B62; z-index: 2; transition: left 0.1s, right 0.1s, top 0.1s, bottom 0.1s; }
+    .bloc span{ font-size: 75px; font-weight: 600; line-height: 185px; }
+    .bloc2{ background: #EEE4DA; }
+    .bloc4{ background: #EDE0C8; }
+    .bloc8{ background: #F2B179; color: #FBFFFF; }
+    .bloc16{ background: #EC8D53; color: #FFFFFA; }
+    .bloc32{ background: #F57C5F; color: #FFFAFF; }
+    .bloc64{ background: #E95937; color: #FEFFFD; }
+    .bloc128{ background: #EDCF72; color: #FEFFFD; }
+    .bloc256{ background: #EDCC61; color: #FEFFFD; }
+    .bloc512{ background: #ebc855; color: #FEFFFD; }
+    .bloc1024{ background: #fcd144; color: #FEFFFD; }
+    .bloc2048{ background: #EDC22E; color: #FEFFFD; }
+    .bloc4096{ background: #B784AB; color: #FEFFFD; }
+    .bloc8192{ background: #bd72ab; color: #FEFFFD; }
+    .bloc16384{ background: #c25baa; color: #FEFFFD; }
+
+    @keyframes resize{
+        0% { transform : scale(0); }
+        100% { transform : scale(1); }
+    }
+
+    @keyframes apparition{
+        0% { opacity : 0; }
+        100% { opacity : 1; }
+    }
+
+    @keyframes pop{
+        0% { transform : scale(1); }
+        50%{ transform: scale(1.1); }
+        100% { transform : scale(1); }
+    }
+
+    .new{ animation: resize 0.5s; }
+    .combined{ animation: pop 0.5s; }
+</style>
+<body>
+
+    <div class="container" id="container"></div>
+    <div class="score-container">
+        Score
+        <br/>
+        <span class="score" id="score"></span>
+    </div>
+<script>
+    /*
+    * Grille du jeu
+    */
+    var grid = [
+        [0, 0, 0, 0], 
+        [0, 0, 0, 0], 
+        [0, 0, 0, 0], 
+        [0, 0, 0, 0]
+    ];
+
+    var score = 0;
+    var win = false; //Si à true, le joueur a atteint 2048
+    var movable = true;
+    var over = false;
+
+    window.addEventListener("DOMContentLoaded", function(){
+        displayGrid(grid);
+        setScore(score);
+        addTile();
+    });
+    var codeAccept = [37, 38, 39, 40]; //Liste des touches valides
+    document.addEventListener("keydown", function(e){ if (codeAccept.indexOf(e.keyCode) != "-1" && over != true && movable == true) processCode(e.keyCode); });
+
+    /*
+    * Fonction permettant l'affichage de la grille
+    */
+    function displayGrid(grid)
+    {
+        var html = '';
+        html += '<div class="game-over" id="game_over"><span> GAME OVER <br/> <div class="btnPlayAgain" onclick="playAgain()">Recommencer</div> </span></div>';
+        html += '<div class="victoire" id="victory"><span> vous avez gagn&eacute; <br/> <div class="btnPlayAgain" onclick="continuer()">Continuer</div> </span></div>';
+        html += '<div class="game">';
+
+        for (var i = 0; i < grid.length; i++)
+        {
+            for (var j = 0; j < grid.length; j++)
+            {
+                html += '<div class="carre" coordX="'+ j +'" coordY="'+ i +'">';
+                    if (grid[i][j] != 0)
+                    {
+                        html += '<div class="bloc bloc'+ grid[i][j] +'" coordX="'+ j +'" coordY="'+ i +'"><span>'+ grid[i][j] +'</span></div>';
+                    }
+                html += '</div>';
+            }
+        }
+
+        html += '</div>';
+        var container = document.getElementById('container');
+        container.innerHTML = html;
+    }
+
+    /*
+    * Fonction affichant le message en cas de défaite
+    */
+    function gameOver()
+    {
+        var gameover = document.getElementById('game_over');
+        movable = false;
+        gameover.style.display = 'block';
+    }
+
+    /*
+    * Fonction gérant l'affichage en cas de victoire
+    */
+    function victory()
+    {
+        //movable = false;
+        win = true;
+        var victoire = document.getElementById('victory');
+        victoire.style.display = 'block';
+    }
+
+    /*
+    * Fonction permettant de recommencer le jeu
+    */
+    function playAgain()
+    {
+        grid = [
+            [0, 0, 0, 0], 
+            [0, 0, 0, 0], 
+            [0, 0, 0, 0], 
+            [0, 0, 0, 0]
+        ];
+        score = 0;
+        setScore(score);
+        movable = true;
+        over = false;
+        addTile();
+    }
+
+    /*
+    * Fonction permettant de continuer une fois 2048 atteint
+    */
+    function continuer()
+    {
+        var victoire = document.getElementById('victory');
+        victoire.style.display = 'none';
+        movable = true;
+    }
+
+    /*
+    * Fonction permettant de récupérer un élément grâce à ses coordonnées
+    */
+    function getByCoord(X, Y)
+    {
+        return document.querySelector('.carre[coordX="'+X+'"][coordY="'+Y+'"]');
+    }
+
+    /*
+    * Fonction permettant de rajouter une tuile de manière aléatoire (2 ou 4)
+    */
+    function addTile()
+    {
+        var cases_vides = [];
+
+        for (var i = 0; i < grid.length; i++)
+        {
+            for (var j = 0; j < grid.length; j++)
+            {
+                if (grid[i][j] == 0)
+                {
+                    cases_vides.push(i + ' ' + j);
+                }
+            }
+        }
+
+        var nbrs = [2, 2, 2, 2, 2, 2, 4];
+        var rand = cases_vides[Math.floor(Math.random() * cases_vides.length)];
+        rand = rand.split(" ");
+        var nbr = nbrs[Math.floor(Math.random() * nbrs.length)];
+
+        grid[rand[0]][rand[1]] = nbr;
+        displayGrid(grid);
+        var elmt = getByCoord(rand[1], rand[0]);
+        var bloc = elmt.children[0];
+        bloc.classList.add('new');
+
+        cases_vides = [];
+
+        for (var i = 0; i < grid.length; i++)
+        {
+            for (var j = 0; j < grid.length; j++)
+            {
+                if (grid[i][j] == 0)
+                {
+                    cases_vides.push(i + ' ' + j);
+                }
+            }
+        }
+
+
+        if (cases_vides.length == 0)
+        {
+            verifyMovement(grid);
+        }
+    }
+
+    /*
+    * Fonction permettant de savoir s'il reste des mouvements possibles lorsque la grille est pleine
+    * Si movement = 0 alors le jeu est fini
+    */
+    function verifyMovement(grid)
+    {
+        var row = [];
+        for (var i = 0; i < grid.length; i++)
+        {
+            row[i] = [];
+            for (var j = 0; j < grid.length; j++)
+            {
+                row[i].push(grid[j][i]);
+            }
+        }
+
+        var col = [];
+        for (var k = 0; k < grid.length; k++)
+        {
+            col.push(grid[k]);
+        }
+
+        var movement = 0;
+        //Parcourt des lignes
+        for (var l = 0; l < row.length; l++)
+        {
+            var ligne = row[l];
+            for (var n = 0; n < ligne.length; n++)
+            {
+                var a = ligne[n];
+                var b = ligne[n + 1];
+
+                if (a == b)
+                {
+                    movement = 1;
+                    break;
+                }
+            }
+        }
+
+        if (movement == 0)
+        {
+            for (var m = 0; m < col.length; m++)
+            {
+                var colonne = col[m];
+                for (var o = 0; o < colonne.length; o++)
+                {
+                    var a = colonne[o];
+                    var b = colonne[o + 1];
+
+                    if (a == b)
+                    {
+                        movement = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (movement == 0)
+        {
+            gameOver();
+        }
+    }
+
+    /*
+    * Fonction gérant les mouvements selon la touche choisie
+    */
+    function processCode(code)
+    {
+        var copy = saveGrid(grid); //On sauvegarde la grille précédente
+
+        switch (code) {
+            case 37 :
+                moveLeft();
+                break;
+            case 38 :
+                moveUp();
+                break;
+            case 39 :
+                moveRight();
+                break;
+            case 40 :
+                moveDown();
+                break;
+        }
+
+        var compared =  compare(copy, grid); //On compare les grilles
+        if (compared)
+        {
+            addTile();
+        }
+    }
+
+    /*
+    * Fonction permettant de conserver la grille avant déplacement
+    */
+    function saveGrid(grid)
+    {
+        var copy = [
+            [0, 0, 0, 0], 
+            [0, 0, 0, 0], 
+            [0, 0, 0, 0], 
+            [0, 0, 0, 0]
+        ];
+
+        for (var i = 0; i < 4; i++)
+        {
+            for (var j = 0; j < 4; j++)
+            {
+                copy[i][j] = grid[i][j];
+            }
+        }
+
+        return copy;
+    }
+
+    /*
+    * Fonction permettant de comparer 2 grilles
+    */
+    function compare(grid1, grid2)
+    {
+        for (var i = 0; i < 4; i++)
+        {
+            for (var j = 0; j < 4; j++)
+            {
+                if (grid1[i][j] != grid2[i][j])
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function moveUp(){
+        var row = [];
+        for (var i = 0; i < grid.length; i++)
+        {
+            row[i] = [];
+            for (var j = 0; j < grid.length; j++)
+            {
+                row[i].push(grid[j][i]);
+            }
+        }
+        
+        for (var k = 0; k < row.length; k++)
+        {
+            var arr = slideAfter(row[k]);
+            arr = combineLeft(arr);
+            arr = slideAfter(arr);
+            for (var l = 0; l < arr.length; l++)
+            {
+                grid[l][k] = arr[l];
+            }
+        }
+        displayGrid(grid);
+    }
+
+    function moveLeft(){
+        var col = [];
+        for (var i = 0; i < grid.length; i++)
+        {
+            col.push(grid[i]);
+        }
+        
+        for (var j = 0; j < col.length; j++)
+        {
+            var arr = slideAfter(col[j]);
+            arr = combineLeft(arr);
+            arr = slideAfter(arr);
+            for (var k = 0; k < arr.length; k++)
+            {
+                grid[j][k] = arr[k];
+            }
+        }
+        displayGrid(grid);
+    }
+
+    function moveDown(){
+        var row = [];
+        for (var i = 0; i < grid.length; i++)
+        {
+            row[i] = [];
+            for (var j = 0; j < grid.length; j++)
+            {
+                row[i].push(grid[j][i]);
+            }
+        }
+        
+        for (var k = 0; k < row.length; k++)
+        {
+            var arr = slideBefore(row[k]);
+            arr = combineRight(arr);
+            arr = slideBefore(arr);
+            for (var l = 0; l < arr.length; l++)
+            {
+                grid[l][k] = arr[l];
+            }
+        }
+        displayGrid(grid);
+    }
+
+    function moveRight(){
+        var col = [];
+        for (var i = 0; i < grid.length; i++)
+        {
+            col.push(grid[i]);
+        }
+        
+        for (var j = 0; j < col.length; j++)
+        {
+            var arr = slideBefore(col[j]);
+            arr = combineRight(arr);
+            arr = slideBefore(arr);
+            for (var k = 0; k < arr.length; k++)
+            {
+                grid[j][k] = arr[k];
+            }
+        }
+        displayGrid(grid);
+    }
+
+    /*
+    * Fonction permettant de déplacer les éléments d'une ligne ou d'une colonne (Droite ou bas)
+    */
+    function slideBefore(row)
+    {
+        zeros = [];
+        numbers = [];
+        for (var i = 0; i < row.length; i++)
+        {
+            if (row[i] == 0)
+            {
+                zeros.push(row[i]);
+            }
+            else
+            {
+                numbers.push(row[i]);
+            }
+        }
+
+        return zeros.concat(numbers);
+    }
+
+    /*
+    * Fonction permettant de déplacer les éléments d'une ligne ou d'une colonne (Gauche ou haut)
+    */
+    function slideAfter(row)
+    {
+        zeros = [];
+        numbers = [];
+        for (var i = 0; i < row.length; i++)
+        {
+            if (row[i] == 0)
+            {
+                zeros.push(row[i]);
+            }
+            else
+            {
+                numbers.push(row[i]);
+            }
+        }
+
+        return numbers.concat(zeros);
+    }
+
+    /*
+    * Permet de combiner 2 tuiles identiques (Gauche et Haut)
+    */
+    function combineLeft(row)
+    {
+        for (var i = 0; i < row.length; i++)
+        {
+            var a = row[i];
+            var b = row[i + 1];
+
+            if (a == b)
+            {
+                row[i] = a + b;
+                row[i + 1] = 0;
+                score += row[i];
+                setScore(score);
+                if (row[i] == 2048 && win == false)
+                {
+                    victory();
+                }
+            }
+        }
+
+        return row;
+    }
+
+    /*
+    * Permet de combiner 2 tuiles identiques (Droite et Bas)
+    */
+    function combineRight(row)
+    {
+        for (var i = (row.length - 1); i >= 0; i--)
+        {
+            var a = row[i];
+            var b = row[i - 1];
+
+            if (a == b)
+            {
+                row[i] = a + b;
+                row[i - 1] = 0;
+                score += row[i];
+                setScore(score);
+                if (row[i] == 2048 && win == false)
+                {
+                    victory();
+                }
+
+            }
+        }
+
+        return row;
+    }
+
+    /*
+    * Fonction permettant de modifier le score
+    */
+    function setScore(score)
+    {
+        var span = document.getElementById('score');
+        span.innerText = '';
+        span.innerText = score;
+    }
+
+
+</script>
+
+</body>
+</html>

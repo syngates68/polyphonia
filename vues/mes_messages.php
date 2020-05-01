@@ -9,7 +9,7 @@
                         <img src="<?= BASEURL; ?><?= req_utilisateur_by_id($id_utilisateur)['avatar']; ?>">
                         <div class="nom_utilisateur">
                             <?= req_utilisateur_by_id($id_utilisateur)['nom_utilisateur']; ?>
-                            <?php if(req_utilisateur_by_id($id_utilisateur)['rang'] == 'admin') : ?><span class="badge_admin">Administrateur</span><?php endif; ?>
+                            <?php if(req_utilisateur_by_id($id_utilisateur)['rang'] == 'admin') : ?><span class="badge_admin material-icons">verified_user</span><?php endif; ?>
                         </div>
                         <div class="contenu">
                             <?= extrait_texte($message['dernier_message'], 200); ?>
