@@ -29,6 +29,137 @@ body
     flex-direction: column;
 }
 
+.btn
+{
+    border-radius: 4px;
+    font-weight: 500;
+    padding: 10px 24px;
+    transition-duration: .3s;
+    margin: 0 2px;
+    background: none;
+    text-decoration: none;
+}
+
+.btn:hover
+{
+    background: none;
+    cursor: pointer;
+}
+
+.btn-flex
+{
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.btn span
+{
+    margin-right: 4px;
+    font-size: 17px;
+}
+
+.btn-grey
+{
+    border: 1px solid var(--border);
+}
+
+.btn-blue
+{
+    border: 1px solid #0f75fa;
+    background: #0f75fa;
+    color: #FFF;
+}
+
+.btn-blue:hover
+{
+    color: #0f75fa;
+}
+
+.btn-outline-blue
+{
+    color: #0f75fa;
+    border: 1px solid #0f75fa;
+}
+
+.btn-outline-blue:hover
+{
+    color: #FFF;
+    background: #0f75fa;
+}
+
+.btn-green
+{
+    border: 1px solid #2c662d;
+    background: #2c662d;
+    color: #FFF;
+}
+
+.btn-green:hover
+{
+    color: #2c662d;
+}
+
+.btn-outline-green
+{
+    color: #2c662d;
+    border: 1px solid #2c662d;
+}
+
+.btn-outline-green:hover
+{
+    color: #FFF;
+    background: #2c662d;
+}
+
+.btn-red
+{
+    border: 1px solid #d60242;
+    background: #d60242;
+    color: #FFF;
+}
+
+.btn-red:hover
+{
+    color: #d60242;
+}
+
+.btn-outline-red
+{
+    color: #d60242;
+    border: 1px solid #d60242;
+}
+
+.btn-outline-red:hover
+{
+    color: #FFF;
+    background: #d60242;
+}
+
+.btn-orange
+{
+    border: 1px solid var(--orange);
+    background: var(--orange);
+    color: #FFF;
+}
+
+.btn-orange:hover
+{
+    color: var(--orange);
+}
+
+.btn-outline-orange
+{
+    color: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+.btn-outline-orange:hover
+{
+    color: #FFF;
+    background: var(--orange);
+}
+
 .has_modal
 {
     position: fixed;
@@ -963,6 +1094,12 @@ footer .footer_content .footer_content__div .copyright
     cursor: pointer;
 }
 
+.projet_contenu__footer .succes
+{
+    width: 50%;
+    margin: 8px auto;
+}
+
 .projet_contenu__footer .bloc_suggerer_modifications
 {
     display: none;
@@ -1027,15 +1164,6 @@ footer .footer_content .footer_content__div .copyright
 {
     text-align: center;
     padding: 16px;
-}
-
-.form_modification form .button button
-{
-    border: none;
-    background: #0f75fa;
-    color: #FFF;
-    padding: 8px 32px;
-    cursor: pointer;
 }
 
 /*********************************************************
@@ -1128,7 +1256,7 @@ footer .footer_content .footer_content__div .copyright
 
 *********************************************************/
 
-.btn_nouveau_projet
+/*.btn_nouveau_projet
 {
     display: flex;
     align-items: center;
@@ -1145,7 +1273,7 @@ footer .footer_content .footer_content__div .copyright
     cursor: pointer;
     text-decoration: none;
     transition-duration: .3s;
-}
+}*/
 
 .btn_nouveau_projet span
 {
@@ -1328,46 +1456,6 @@ footer .footer_content .footer_content__div .copyright
     font-size: 17px;
 }
 
-/*.administration .tbl_actions .btn_administration
-{
-    border: none;
-    border-radius: 2px;
-    text-transform: uppercase;
-    font-size: 11px;
-    color: #FFF;
-    padding: 16px 8px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 5px 0;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-}*/
-
-/*.administration .tbl_actions .btn_administration.editer,
-.administration .tbl_actions .btn_administration.debloquer_utilisateur
-{
-    background: #388E3C;
-}
-
-.administration .tbl_actions .btn_administration.brouillon
-{
-    background: #e0f7fa;
-    color: #000;
-}
-
-.administration .tbl_actions .btn_administration.remettre_brouillon,
-.administration .tbl_actions .btn_administration.fiche_utilisateur
-{
-    background: #1976D2;
-}
-
-.administration .tbl_actions .btn_administration.supprimer,
-.administration .tbl_actions .btn_administration.bloquer_utilisateur
-{
-    background: #cc0e0e;
-}*/
-
 .nouveau_projet
 {
     margin-top: 16px;
@@ -1463,26 +1551,6 @@ footer .footer_content .footer_content__div .copyright
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.nouveau_projet button,
-.nouvel_utilisateur button
-{
-    margin: 16px 8px;
-    background: #388E3C;
-    color: #FFF;
-    padding: 14px 16px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    font-size: 11px;
-    text-transform: uppercase;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-}
-
-.nouveau_projet .btn_enregistrer_brouillon
-{
-    background: #1976D2;
 }
 
 .nouveau_projet .tags_container
@@ -1673,21 +1741,6 @@ footer .footer_content .footer_content__div .copyright
 {
     color: var(--grey);
     font-weight: 600;
-}
-
-.modal_bloquer_utilisateur .modal_content button,
-.modal_fiche_utilisateur .modal_content button
-{
-    border: none;
-    cursor: pointer;
-    padding: 10px 16px;
-    border-radius: 5px;
-}
-
-.modal_bloquer_utilisateur .modal_content button.valider_blocage
-{
-    background: #d60242;
-    color: #FFF;
 }
 
 /*********************************************************
@@ -1885,25 +1938,6 @@ footer .footer_content .footer_content__div .copyright
 {
     text-align: center;
     padding: 8px 0;
-}
-
-.parametres button
-{
-    border: 1px solid var(--blue);
-    border-radius: 4px;
-    background: var(--blue);
-    color: #FFF;
-    font-weight: 500;
-    padding: 10px 24px;
-    transition-duration: .3s;
-}
-
-.parametres button:hover
-{
-    cursor: pointer;
-    background: #FFF;
-    color: var(--blue);
-    transition-duration: .3s;
 }
 
 .parametres .infos_container .btn_supprimer_compte,
@@ -2542,6 +2576,11 @@ footer .footer_content .footer_content__div .copyright
     {
         width: 100% !important;
         object-fit: contain;
+    }
+
+    .projet_contenu__footer .succes
+    {
+        width: 100%;
     }
 
     .nouveau_projet form

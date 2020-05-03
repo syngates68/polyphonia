@@ -13,7 +13,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                     <span class="material-icons" title="Supprimer les éléments sélectionnés">delete</span>
                 </div>
                 <div class="admin_btn">
-                    <a href="<?= BASEURL; ?>nouvel_utilisateur.html" class="btn btn_nouveau_projet"><span class="material-icons">add</span>Ajouter un utilisateur</a>
+                    <a href="<?= BASEURL; ?>nouvel_utilisateur.html" class="btn btn-flex btn-orange"><span class="material-icons">add</span>Ajouter un utilisateur</a>
                 </div>
             </div>
             <div class="tbl_header">

@@ -8,5 +8,5 @@ include('../config/fonctions.php');
 
 <textarea id="motif_blocage" rows="10"></textarea>
 
-<button class="valider_blocage" utilisateur="<?= $_POST['id_utilisateur']; ?>">Bloquer</button>
-<button class="annuler_blocage">Annuler</button>
+<button class="btn btn-red valider_blocage" utilisateur="<?= $_POST['id_utilisateur']; ?>">Bloquer</button>
+<button class="btn btn-grey annuler_blocage">Annuler</button>

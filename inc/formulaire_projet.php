@@ -110,12 +110,12 @@ if (isset($_SESSION['id_projet']))
 </div>
 
 <div class="form_footer">
-    <button type="submit" name="<?= $btn_name; ?>"><?= $btn; ?></button>
+    <button class="btn btn-blue" type="submit" name="<?= $btn_name; ?>"><?= $btn; ?></button>
 
     <?php 
     if (!isset($_SESSION['modification'])) : 
     ?>
-        <button type="submit" name="<?= $btn_brouillon_name; ?>" class="btn_enregistrer_brouillon"><?= $btn_brouillon; ?></button>
+        <button class="btn btn-outline-green" type="submit" name="<?= $btn_brouillon_name; ?>" class="btn_enregistrer_brouillon"><?= $btn_brouillon; ?></button>
     <?php 
     endif;
     ?>

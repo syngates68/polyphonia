@@ -41,5 +41,5 @@ $utilisateur = req_utilisateur_by_id($_POST['id_utilisateur']);
             <?php endif; ?></p>
         </div>
     </div>
-    <button class="fermer">Fermer</button>
+    <button class="btn btn-grey fermer">Fermer</button>
 </div>

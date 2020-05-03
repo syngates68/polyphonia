@@ -43,7 +43,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                     <span class="genere_mdp">Générer aléatoirement</span>
                 </div> 
                 <div class="form_footer">
-                    <button type="submit" name="ajouter_utilisateur">Valider</button>
+                    <button class="btn btn-blue" type="submit" name="ajouter_utilisateur">Valider</button>
                 </div>
             </form>
         </div>

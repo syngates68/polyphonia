@@ -40,3 +40,5 @@ $(document).on('click', '.suggerer_modifications', function()
         })
     }
 })
+
+setTimeout(function() { $('.projet_contenu__footer .succes').slideUp() }, 4000)

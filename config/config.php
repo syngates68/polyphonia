@@ -3,7 +3,7 @@
 if ($_SERVER['SERVER_NAME'] == '192.168.1.41')
     define("BASEURL", "http://192.168.1.41/polyphonia_new/");
 else
-    define("BASEURL", "http://localhost/polyphonia");
+    define("BASEURL", "http://localhost/polyphonia/");
 
 if ($_SERVER['SERVER_NAME'] == '192.168.1.41' || $_SERVER['SERVER_NAME'] == 'localhost')
     define("DEV", true);

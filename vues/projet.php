@@ -63,6 +63,7 @@ if (isset($_GET['slug']))
                     Si vous ne vous pensez pas avoir le niveau pour une partie du projet, ne vous bloquez pas pour autant, vous pouvez ne pas faire cette partie ou simplement la
                     remplacer par autre chose.
                 </div>
+                <?php if (isset($_SESSION['succes'])) : ?><div class="succes"><?= $_SESSION['succes']; ?></div><?php unset($_SESSION['succes']); endif; ?>
                 <div class="bloc_suggerer_modifications"></div>
             </div>
         </div>

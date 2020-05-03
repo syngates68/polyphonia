@@ -31,7 +31,7 @@ if (isset($_SESSION['utilisateur']))
                     <img src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>">
                 </div>
                 <div class="bloc_button">
-                    <button id="modifier_avatar">Modifier</button>
+                    <button class="btn btn-blue" id="modifier_avatar">Modifier</button>
                 </div>
                 <input type="file" name="avatar" utilisateur="<?= $utilisateur['id']; ?>">
             </div>
@@ -51,7 +51,7 @@ if (isset($_SESSION['utilisateur']))
                         <textarea name="bio" id="biographie"><?= $utilisateur['bio']; ?></textarea>
                     </div>
                     <div class="bloc_button">
-                        <button type="submit" name="editer_profil">Modifier</button>
+                        <button class="btn btn-blue" type="submit" name="editer_profil">Modifier</button>
                     </div>
                 </form>
                 <form method="POST" action="./inc/editer_mdp.php">
@@ -69,7 +69,7 @@ if (isset($_SESSION['utilisateur']))
                         <input type="password" name="confirm_pass">
                     </div>
                     <div class="bloc_button">
-                        <button type="submit" name="editer_mdp">Modifier</button>
+                        <button class="btn btn-blue" type="submit" name="editer_mdp">Modifier</button>
                     </div>
                 </form>
                 <form method="POST" action="./inc/reseaux_sociaux.php">
@@ -87,14 +87,14 @@ if (isset($_SESSION['utilisateur']))
                         <input type="text" name="discord" placeholder="Lien de votre compte Discord" value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['discord']; ?>">
                     </div>
                     <div class="bloc_button">
-                        <button type="submit" name="editer_social">Modifier</button>
+                        <button class="btn btn-blue" type="submit" name="editer_social">Modifier</button>
                     </div>
                 </form>
                 <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] != 'admin') : ?>
                 <div class="supprimer_compte">
                     <div class="titre_section">Suppression du compte :</div>
                     <div class="bloc_button">
-                        <button class="btn_supprimer_compte" utilisateur="<?= $_SESSION['utilisateur']; ?>">Supprimer mon compte</button>
+                        <button class="btn btn_supprimer_compte" utilisateur="<?= $_SESSION['utilisateur']; ?>">Supprimer mon compte</button>
                     </div>
                 </div>
                 <?php endif; ?>
