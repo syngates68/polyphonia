@@ -41,20 +41,19 @@ if (isset($_GET['slug']))
             </div>
             <div class="projet_texte">
                 <?= nl2br($projet['contenu']); ?>
-                <?php if (sizeof(req_fichiers_by_projet($projet['id_projet'])) > 0) : ?>
+                <?php if (req_fichiers_by_projet($projet['id_projet']) != 0) : ?>
                 <div class="fichiers_joints">
-                    <?= sizeof(req_fichiers_by_projet($projet['id_projet'])); ?> fichier(s) joint(s) : 
+                    Fichier joint : 
+                    <?php $fichier = req_fichiers_by_projet($projet['id_projet']); ?>
                     <ul>
-                        <?php foreach (req_fichiers_by_projet($projet['id_projet']) as $fichier) : ?>
-                            <li><a download="<?= $fichier['nom_fichier']; ?>" href="<?= BASEURL; ?><?= $fichier['chemin_fichier']; ?>"><?= $fichier['nom_fichier']; ?></a> (<?= $fichier['type_fichier']; ?>)</li>
-                        <?php endforeach; ?>
+                        <li><a download="<?= $fichier['nom_fichier']; ?>" href="<?= BASEURL; ?><?= $fichier['chemin_fichier']; ?>"><?= $fichier['nom_fichier']; ?>.zip</a></li>
                     </ul>
                 </div>
                 <?php endif; ?>
             </div>
             <div class="projet_contenu__footer">
                 <?php if ($projet['nom_photographe'] != NULL) : ?>
-                    <p class="copyright_image">Photo par <?= $projet['nom_photographe']; ?> (<a href="<?= $projet['lien_photo']; ?>" target="_blank"><?= $projet['lien_photo']; ?></a>)</p>
+                    <p class="copyright_image">Photo par <?= $projet['nom_photographe']; ?> (<a href="<?= $projet['lien_photo']; ?>" target="_blank">Voir la photo</a>)</p>
                 <?php endif; ?>
                 <div class="message">
                     <span class="nota_bene">N.B. :</span><br/>

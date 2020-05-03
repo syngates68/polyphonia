@@ -710,7 +710,7 @@ footer .footer_content .footer_content__div .copyright
 
 .projet_header
 {
-    height: 700px;
+    height: 500px;
     position: relative;
 }
 
@@ -721,20 +721,23 @@ footer .footer_content .footer_content__div .copyright
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.445);
+    /*background: rgba(0, 0, 0, 0.445);*/
+    background: linear-gradient(rgba(0, 0, 0, 0.719) 0%, rgba(0, 0, 0, 0.445) 50%, rgba(0, 0, 0, 0) 90%);
 }
 
 .projet_header .titre
 {
     position: absolute;
-    background: #FFF;
+    /*background: #FFF;*/
     height: 70px;
     line-height: 70px;
-    font-size: 25px;
+    font-size: 50px;
     text-align: center;
     width: 100%;
     top: calc(50% - 50px);
-    mix-blend-mode: screen;
+    /*mix-blend-mode: screen;*/
+    color: #FFF;
+    font-weight: 300;
 }
 
 .titre_mobile
@@ -863,14 +866,14 @@ footer .footer_content .footer_content__div .copyright
 .projet_contenu .projet_texte
 {
     padding: 36px;
-    line-height: 1.5;
+    line-height: 2;
 }
 
 .projet_contenu .projet_texte h2
 {
     font-size: 22px;
     color: #000;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .projet_contenu .projet_texte strong
@@ -1526,11 +1529,16 @@ footer .footer_content .footer_content__div .copyright
     border-left-color: crimson; 
 }
 
-.nouveau_projet .ajouter_fichier
+.nouveau_projet .inputs_file
+{
+    text-align: left;
+}
+
+.nouveau_projet .inputs_file a 
 {
     color: var(--links);
-    text-decoration: underline;
-    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
 }
 
 .nouveau_projet .nouveau_fichier

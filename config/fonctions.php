@@ -781,10 +781,10 @@ function bloquer_utilisateur($id_utilisateur, $bloque, $motif_bloque)
     $upd->execute([$bloque, $motif_bloque, $id_utilisateur]);
 }
 
-function ajouter_fichier_projet($id_projet, $chemin_fichier, $nom_fichier, $type_fichier)
+function ajouter_fichier_projet($id_projet, $chemin_fichier, $nom_fichier)
 {
-    $ins = db()->prepare("INSERT INTO fichiers_projet(id_projet, chemin_fichier, nom_fichier, type_fichier) VALUES (?, ?, ?, ?)");
-    $ins->execute([$id_projet, $chemin_fichier, $nom_fichier, $type_fichier]);
+    $ins = db()->prepare("INSERT INTO fichiers_projet(id_projet, chemin_fichier, nom_fichier) VALUES (?, ?, ?)");
+    $ins->execute([$id_projet, $chemin_fichier, $nom_fichier]);
 }
 
 function req_fichiers_by_projet($id_projet)
@@ -792,7 +792,10 @@ function req_fichiers_by_projet($id_projet)
     $req = db()->prepare("SELECT * FROM fichiers_projet WHERE id_projet = ?");
     $req->execute([$id_projet]);
 
-    return $req->fetchAll(PDO::FETCH_ASSOC);
+    if ($req->rowCount() == 0)
+        return 0;
+    else
+        return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
 /*function get_mail()

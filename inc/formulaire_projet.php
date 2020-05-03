@@ -89,8 +89,18 @@ if (isset($_SESSION['id_projet']))
             <input type="hidden" name="tags" value="<?= $tags; ?>">
         </div>
         <div class="form_ligne">
-            <label>Fichiers joints (facultatif) <span class="ajouter_fichier">Ajouter</span></label>
-            <div class="inputs_file"></div>
+            <label>Fichier joint (facultatif)</label>
+            <div class="inputs_file">
+                <?php if ((!isset($_SESSION['id_projet'])) || (isset($_SESSION['id_projet']) && req_fichiers_by_projet($_SESSION['id_projet']) == 0)) : ?>
+                    <div class="nouveau_fichier">
+                        <input type="file" name="fichier">
+                        <input type="text" name="nom_fichier" placeholder="Nom du fichier">
+                    </div>
+                <?php else : ?>
+                    <?php $fichier = req_fichiers_by_projet($_SESSION['id_projet']); ?>
+                    <a href="<?= BASEURL; ?><?= $fichier['chemin_fichier']; ?>"><?= req_fichiers_by_projet($_SESSION['id_projet'])['nom_fichier']; ?>.zip</a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
     <div class="bloc_formulaire droite">

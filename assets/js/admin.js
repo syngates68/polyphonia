@@ -155,21 +155,6 @@ $(document).on('click', '.tags_container .tag', function()
 });
 
 /**
- * Permet d'ajouter des fichiers au projet
- */
-$(document).on('click', '.ajouter_fichier', function()
-{
-    $.post(baseurl + 'inc/ajouter_fichier.php',
-    {
-
-    },
-    function(data)
-    {
-        $('.inputs_file').append(data)
-    })
-});
-
-/**
  * Permet de générer un MDP aléatoirement
  */
 $(document).on('click', '.nouvel_utilisateur .genere_mdp', function()
@@ -201,6 +186,9 @@ $(document).on('click', '.bloquer_utilisateur', function(e)
     e.preventDefault()
     $('.modal_bloquer_utilisateur').show()
     $('.has_modal').addClass('is_visible')
+
+    $(this).closest('.dropdown_menu').hide()
+    $('.afficher_actions[dropdown="' + $(this).closest('.dropdown_menu').attr('id') + '"]').removeClass('actif')
 
     $.post(baseurl + 'inc/modal_bloquer_utilisateur.php',
     {
@@ -264,6 +252,9 @@ $(document).on('click', '.fiche_utilisateur', function(e)
     e.preventDefault()
     $('.modal_fiche_utilisateur').show()
     $('.has_modal').addClass('is_visible')
+
+    $(this).closest('.dropdown_menu').hide()
+    $('.afficher_actions[dropdown="' + $(this).closest('.dropdown_menu').attr('id') + '"]').removeClass('actif')
 
     $.post(baseurl + 'inc/fiche_utilisateur.php',
     {

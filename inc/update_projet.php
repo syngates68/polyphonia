@@ -33,22 +33,19 @@ if (isset($_POST['editer_projet']))
                 //Vérification des fichiers joints
                 if (!empty($_POST['nom_fichier']))
                 {
-                    for ($i = 0; $i < sizeof($_POST['nom_fichier']); $i++)
+                    if (trim($_POST['nom_fichier']) != '')
                     {
-                        if (trim($_POST['nom_fichier'][$i]) != '')
+                        if ($_FILES['fichier']['name'] != '')
                         {
-                            if ($_FILES['fichier']['name'][$i] != '')
+                            if (move_uploaded_file($_FILES['fichier']['tmp_name'], '../assets/projets/fichiers/'.$_FILES['fichier']['name']))
                             {
-                                if (move_uploaded_file($_FILES['fichier']['tmp_name'][$i], '../assets/projets/fichiers/'.$_FILES['fichier']['name'][$i]))
-                                {
-                                    ajouter_fichier_projet($_GET['id'], 'assets/projets/fichiers/'.$_FILES['fichier']['name'][$i], $_POST['nom_fichier'][$i], $_FILES['fichier']['type'][$i]);
-                                }
-                                else
-                                {
-                                    $_SESSION['erreur'] = "Le fichier ".$_FILES['fichier']['name'][$i]." n'a pas pu être uploadé.";
-                                }
+                                ajouter_fichier_projet($_GET['id'], 'assets/projets/fichiers/'.$_FILES['fichier']['name'], $_POST['nom_fichier']);
                             }
-                        } 
+                            else
+                            {
+                                $_SESSION['erreur'] = "Le fichier ".$_FILES['fichier']['name']." n'a pas pu être uploadé.";
+                            }
+                        }
                     }
                 }
 
