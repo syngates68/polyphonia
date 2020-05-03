@@ -956,6 +956,18 @@ footer .footer_content .footer_content__div .copyright
     text-decoration: underline;
 }
 
+.projet_contenu__footer .message .suggerer_modifications
+{
+    color: var(--links);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.projet_contenu__footer .bloc_suggerer_modifications
+{
+    display: none;
+}
+
 .projet_contenu__footer .message b
 {
     font-weight: 600;

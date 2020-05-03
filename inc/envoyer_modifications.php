@@ -5,14 +5,26 @@ include('../config/config.php');
 include('../config/fonctions.php');
 include('../config/captcha.php');
 
-if (champs_non_vides([$_POST['email'], $_POST['suggestion'], $_POST['captcha']]))
+$captcha_fait = true;
+
+if (!DEV && !isset($_SESSION['utilisateur']) && !champs_non_vides([$_POST['captcha']]))
+    $captcha_fait = false;
+
+if (champs_non_vides([$_POST['email'], $_POST['suggestion']]) && $captcha_fait)
 {
-    $secret = get_secret_key();
+    $captcha_reussi = true;
 
-    $verify = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['captcha']);
-    $responseData = json_decode($verify);
+    if (!DEV && !isset($_SESSION['utilisateur']))
+    {
+        $secret = get_secret_key();
+        $verify = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['captcha']);
+        $responseData = json_decode($verify);
 
-    if ($responseData->success)
+        if (!$responseData->success)
+            $captcha_reussi = false;
+    }
+
+    if ($captcha_reussi)
     {
         //mail_nouvelle_suggestion($_POST['nom_utilisateur'], $_POST['email']);
         $_SESSION['succes'] = "Merci pour votre suggestion, elle sera analysée dès que possible et vous serez évidemment crédité en cas de prise en compte dans le projet.<br/>
