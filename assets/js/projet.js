@@ -20,3 +20,23 @@ $('.form_modification form').submit(function()
 
     return false;
 });
+
+$(document).on('click', '.suggerer_modifications', function()
+{
+    if ($('.bloc_suggerer_modifications').css('display') == 'none')
+    {
+        $.get(baseurl + 'inc/suggerer_modification.php', 
+        {
+    
+        },
+        function(data)
+        {
+            $('.bloc_suggerer_modifications').html(data)
+            $('.bloc_suggerer_modifications').slideDown()
+            //SmoothScroll vers le bloc
+            var speed = 750
+            $('html, body').animate( { scrollTop: $('.bloc_suggerer_modifications').offset().top }, speed )
+            return false;
+        })
+    }
+})
