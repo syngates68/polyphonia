@@ -16,7 +16,7 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0 && isset($_SESSION['utilisateur']
             <input type="hidden" name="id_envoi" value="<?= $_SESSION['utilisateur']; ?>">
             <input type="hidden" name="id_reception" value="<?= req_utilisateur_by_nom_utilisateur($_GET['slug'])['id']; ?>">
             <div class="form_ligne">
-                <textarea placeholder="Votre message" name="message"></textarea>
+                <textarea placeholder="Votre message" id="message" name="message"></textarea>
             </div>
             <div class="ligne_button">
                 <button type="button" id="emoji-button"><span class="material-icons">insert_emoticon</span></button>
@@ -49,7 +49,10 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0 && isset($_SESSION['utilisateur']
     </div>
     <script>
         const button = document.querySelector('#emoji-button');
-        const picker = new EmojiButton({autoHide : false});
+        const picker = new EmojiButton({
+            autoHide : false,
+            emojisPerRow : 6
+        });
 
         picker.on('emoji', emoji => {
             document.querySelector('textarea').value += emoji;
@@ -58,6 +61,25 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0 && isset($_SESSION['utilisateur']
         button.addEventListener('click', () => {
             picker.togglePicker(button);
         });
+    </script>
+    <script>
+        var autoExpand = function(field)
+        {
+            field.style.height = 'inherit';
+
+            var computed = window.getComputedStyle(field);
+            var height = parseInt(computed.getPropertyValue('border-top-width'), 10) 
+                        + parseInt(computed.getPropertyValue('padding-top'), 10) 
+                        + field.scrollHeight 
+                        + parseInt(computed.getPropertyValue('padding-bottom'), 10) 
+                        + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+            field.style.height = height + 'px';
+        };
+
+        document.addEventListener('input', function (event) {
+            if (event.target.tagName.toLowerCase() !== 'textarea') return;
+            autoExpand(event.target);
+        }, false);
     </script>
 <?php
 }

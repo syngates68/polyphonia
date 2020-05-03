@@ -126,9 +126,9 @@ form .form_ligne.cgu label
 
 form textarea
 {
-    resize: vertical;
-    min-height: 100px;
-    max-height: 500px;
+    min-height: 5em;
+    max-height: 50vh;
+    resize: none;
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
 }
