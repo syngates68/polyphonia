@@ -12,7 +12,8 @@
                             <?php if(req_utilisateur_by_id($id_utilisateur)['rang'] == 'admin') : ?><span class="badge_admin material-icons">verified_user</span><?php endif; ?>
                         </div>
                         <div class="contenu">
-                            <?= extrait_texte($message['dernier_message'], 200); ?>
+                            <?php $envoi = ($message['id_envoi'] == $_SESSION['utilisateur']) ? 'Vous' : req_utilisateur_by_id($message['id_envoi'])['nom_utilisateur']; ?>
+                            <?= $envoi.' : '.extrait_texte($message['dernier_message'], 200); ?>
                         </div>
                         <div class="date_message">
                             <?= formate_date_heure($message['date_dernier_message']); ?>
