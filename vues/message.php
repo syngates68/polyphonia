@@ -1,5 +1,5 @@
 <?php
-if (verifie_nom_utilisateur($_GET['slug']) > 0)
+if (verifie_nom_utilisateur($_GET['slug']) > 0 && isset($_SESSION['utilisateur']))
 {
     set_message_as_lus($_SESSION['utilisateur'], req_utilisateur_by_nom_utilisateur($_GET['slug'])['id']);
 ?>
@@ -7,7 +7,7 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0)
         <div class="messages_top">
             <img src="<?= BASEURL; ?><?= req_utilisateur_by_nom_utilisateur($_GET['slug'])['avatar']; ?>">
             <div class="infos_messagerie">
-                <span class="titre_conversation">Conversation avec <a href="<?= BASEURL; ?>utilisateur/<?= $_GET['slug']; ?>.html"><?= $_GET['slug']; ?></a></span>
+                <span class="titre_conversation"><a href="<?= BASEURL; ?>utilisateur/<?= $_GET['slug']; ?>.html"><?= $_GET['slug']; ?></a></span>
                 <div class="derniere_connexion">Vu pour la dernière fois le <?= formate_date(req_utilisateur_by_nom_utilisateur($_GET['slug'])['derniere_connexion']); ?></div>
             </div>
         </div>
@@ -18,7 +18,11 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0)
             <div class="form_ligne">
                 <textarea placeholder="Votre message" name="message"></textarea>
             </div>
-            <button type="submit">Envoyer</button>
+            <div class="ligne_button">
+                <button type="button" id="emoji-button"><span class="material-icons">insert_emoticon</span></button>
+                <button type="button" class="ajouter_photo"><span class="material-icons">camera_alt</span></button>
+                <button type="submit" class="btn-send"><span class="material-icons">send</span></button>
+            </div>
         </form>
         <div class="messages_container">
             <?php if (sizeof(req_messages_by_conversation($_SESSION['utilisateur'], req_utilisateur_by_nom_utilisateur($_GET['slug'])['id'])) > 0) : ?>
@@ -43,6 +47,18 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0)
             <?php endif; ?>
         </div>
     </div>
+    <script>
+        const button = document.querySelector('#emoji-button');
+        const picker = new EmojiButton({autoHide : false});
+
+        picker.on('emoji', emoji => {
+            document.querySelector('textarea').value += emoji;
+        });
+
+        button.addEventListener('click', () => {
+            picker.togglePicker(button);
+        });
+    </script>
 <?php
 }
 else

@@ -126,8 +126,9 @@ form .form_ligne.cgu label
 
 form textarea
 {
-    resize: none;
-    min-height: 50px;
+    resize: vertical;
+    min-height: 100px;
+    max-height: 500px;
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
 }
@@ -1977,11 +1978,14 @@ footer .footer_content .footer_content__div .copyright
     grid-template-columns: 1fr 4fr 5fr 4fr;
     padding: 16px 8px;
     border-bottom: 1px solid var(--border);
+    color: #696969;
+    font-weight: 300;
 }
 
 .mes_messages .message.non_lu
 {
-    background: #d6d6d6;
+    font-weight: 700;
+    color: #000;
 }
 
 .mes_messages .message img
@@ -2074,16 +2078,37 @@ footer .footer_content .footer_content__div .copyright
     padding-bottom: 8px;
 }
 
+.form_message .ligne_button
+{
+    display: flex;
+    align-items: center;
+}
+
 .form_message button
 {
-    color: #FFF;
     border: none;
-    background: #0f75fa;
-    padding: 8px 32px;
+    background: #FFF;
 }
+
+.form_message button span
+{
+    font-size: 22px;
+}
+
 .form_message button:hover
 {
     cursor: pointer;
+}
+
+.form_message button.btn-send
+{
+    color: #0f75fa;
+}
+
+.form_message button#emoji-button span,
+.form_message button.ajouter_photo span
+{
+    color: #a7a7a7;
 }
 
 .messages_container
@@ -2565,6 +2590,11 @@ footer .footer_content .footer_content__div .copyright
     .mes_messages .message .nom_utilisateur
     {
         margin-bottom: 16px;
+    }
+
+    .mes_messages .message .date_message
+    {
+        margin-top: 16px;
     }
 
     .error_content
