@@ -6,7 +6,7 @@ include('../config/fonctions.php');
 
 if (!empty($_POST['message']) && trim($_POST['message']) != '')
 {
-    if (sizeof(req_id_messagerie($_POST['id_envoi'], $_POST['id_reception'])) == 0)
+    if (count_id_messagerie($_POST['id_envoi'], $_POST['id_reception']) == 0)
         ajoute_messagerie($_POST['id_envoi'], $_POST['id_reception']);
 
     $id_messagerie = req_id_messagerie($_POST['id_envoi'], $_POST['id_reception']);

@@ -1,6 +1,11 @@
 <div class="container">
     <h1>Vos messages</h1>
     <div class="mes_messages">
+        <div class="bloc-nouveau-message">
+            <button class="btn btn-orange btn-nouveau-message">Nouveau message</button>
+            <div class="formulaire_nouveau_message">
+            </div>
+        </div>
         <?php if (sizeof(req_messages_by_user($_SESSION['utilisateur'])) > 0) : ?>
             <?php foreach (req_messages_by_user($_SESSION['utilisateur']) as $message) : ?>
                 <?php $id_utilisateur = ($message['id_utilisateur_1'] != $_SESSION['utilisateur']) ? $message['id_utilisateur_1'] : $message['id_utilisateur_2']; ?>
@@ -25,4 +30,5 @@
             <p class="no_message">Aucun message</p>
         <?php endif; ?>
     </div>
+    <script src="<?= BASEURL; ?>assets/js/messages.js"></script>
 </div>

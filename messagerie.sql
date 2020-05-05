@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 03 mai 2020 à 15:41
+-- Généré le :  mar. 05 mai 2020 à 23:40
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `messagerie` (
   `id_utilisateur_2` int(11) NOT NULL,
   `date_ouverture` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `messagerie`
@@ -43,7 +43,13 @@ CREATE TABLE IF NOT EXISTS `messagerie` (
 
 INSERT INTO `messagerie` (`id`, `id_utilisateur_1`, `id_utilisateur_2`, `date_ouverture`) VALUES
 (9, 1, 2, '2020-05-03 12:10:47'),
-(10, 1, 9, '2020-05-03 15:09:02');
+(10, 1, 9, '2020-05-03 15:09:02'),
+(11, 7, 1, '2020-05-03 16:38:00'),
+(14, 1, 12, '2020-05-04 00:01:36'),
+(15, 1, 3, '2020-05-04 23:50:55'),
+(16, 1, 13, '2020-05-04 23:57:24'),
+(17, 8, 1, '2020-05-05 00:08:07'),
+(18, 8, 7, '2020-05-05 00:09:51');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,12 +1,18 @@
 /**
  * Permet d'ajouter une vue à chaque clic sur un projet
  */
-$(document).on('click', '.projet .btn_lire_projet', function(){
+$(document).on('click', '.projet .btn_lire_projet', function(e){
+    e.preventDefault()
+    var href = $(this).attr('href')
     var id_projet = $(this).attr('projet')
 
     $.post(baseurl + 'inc/ajouter_vue.php',
     {
         id_projet : id_projet
+    },
+    function()
+    {
+        location.href= href
     })
 });
 

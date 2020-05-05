@@ -24,6 +24,7 @@ if (isset($_GET['slug']))
         </div>
         
         <div class="projet_contenu">
+            <?php if (isset($_SESSION['succes'])) : ?><div class="succes"><?= $_SESSION['succes']; ?></div><?php unset($_SESSION['succes']); endif; ?>
             <div class="projet_contenu__top">
                 <div class="projet_actions">
                     <a href="<?= BASEURL; ?>exporter_pdf.php?id=<?= $projet['id_projet']; ?>" class="exporter_pdf"><i class="material-icons">description</i>Exporter en PDF</a>
@@ -63,7 +64,6 @@ if (isset($_GET['slug']))
                     Si vous ne vous pensez pas avoir le niveau pour une partie du projet, ne vous bloquez pas pour autant, vous pouvez ne pas faire cette partie ou simplement la
                     remplacer par autre chose.
                 </div>
-                <?php if (isset($_SESSION['succes'])) : ?><div class="succes"><?= $_SESSION['succes']; ?></div><?php unset($_SESSION['succes']); endif; ?>
                 <div class="bloc_suggerer_modifications"></div>
             </div>
         </div>

@@ -33,9 +33,11 @@ ob_start();
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="<?= BASEURL; ?>assets/js/emoji-button-3.0.3.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="icon" type="image/png" href="<?= BASEURL ?>assets/img/favicon.png" />
     <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         var baseurl = "<?= BASEURL; ?>"
     </script>

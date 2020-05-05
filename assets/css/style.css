@@ -29,6 +29,43 @@ body
     flex-direction: column;
 }
 
+.ui-autocomplete 
+{
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1 !important;
+}
+
+.ui-autocomplete > li > div 
+{
+    display: flex;
+    align-items: center;
+    padding: 8px 20px !important;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333333;
+    white-space: nowrap;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.ui-autocomplete > li > div:hover
+{
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+    color: #000;
+}
+
+.ui-autocomplete > li > div img
+{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
 .btn
 {
     border-radius: 4px;
@@ -884,7 +921,15 @@ footer .footer_content .footer_content__div .copyright
     line-height: 30px;
     color: var(--grey);
     background: #FFF;
-    /*border: 1px solid var(--border);*/
+    position: relative;
+}
+
+.projet_contenu .succes
+{
+    width: 50%;
+    position: fixed;
+    top: 100px;
+    left: 25%;
 }
 
 .projet_contenu__top
@@ -1092,12 +1137,6 @@ footer .footer_content .footer_content__div .copyright
     color: var(--links);
     text-decoration: underline;
     cursor: pointer;
-}
-
-.projet_contenu__footer .succes
-{
-    width: 50%;
-    margin: 8px auto;
 }
 
 .projet_contenu__footer .bloc_suggerer_modifications
@@ -2017,6 +2056,48 @@ footer .footer_content .footer_content__div .copyright
     color: #000;
 }
 
+.mes_messages .bloc-nouveau-message
+{
+    padding-bottom: 32px;
+}
+
+.mes_messages .formulaire_nouveau_message
+{
+    width: 50%;
+    margin: 32px auto 0 auto;
+    display: none;
+}
+
+.mes_messages .formulaire_nouveau_message .error_message
+{
+    display: none;
+    margin-top: 8px;
+    font-size: 11px;
+    color: red;
+}
+
+.mes_messages .formulaire_nouveau_message .ligne_button
+{
+    display: flex;
+    align-items: center;
+}
+
+.mes_messages .formulaire_nouveau_message button#emoji-button
+{
+    border: none;
+    background: #FFF;
+}
+
+.mes_messages .formulaire_nouveau_message button#emoji-button span
+{
+    font-size: 22px;
+}
+
+.mes_messages .formulaire_nouveau_message button#emoji-button:hover
+{
+    cursor: pointer;
+}
+
 .mes_messages .message
 {
     display: grid;
@@ -2578,9 +2659,10 @@ footer .footer_content .footer_content__div .copyright
         object-fit: contain;
     }
 
-    .projet_contenu__footer .succes
+    .projet_contenu .succes
     {
-        width: 100%;
+        width: 90%;
+        left: 5%;
     }
 
     .nouveau_projet form
@@ -2600,7 +2682,7 @@ footer .footer_content .footer_content__div .copyright
 
     .login_container
     {
-        min-height: 650px;
+        min-height: 700px;
     }
 
     .sign_container
@@ -2629,6 +2711,11 @@ footer .footer_content .footer_content__div .copyright
     }
 
     .parametres .infos_container form 
+    {
+        width: 100%;
+    }
+
+    .mes_messages .formulaire_nouveau_message
     {
         width: 100%;
     }

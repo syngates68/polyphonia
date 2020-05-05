@@ -8,7 +8,6 @@ include('../config/captcha.php');
 
 <div class="form_modification">
     <form method="POST" action="../inc/envoyer_modifications.php">
-        <div class="erreur" style="display:none"></div>
         <div class="form_ligne">
             <label for="mail">Adresse mail</label>
             <input type="mail" id="mail" name="email" <?php if (isset($_SESSION['utilisateur'])) : ?> value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['email']; ?>" disabled <?php endif; ?> >
@@ -24,6 +23,7 @@ include('../config/captcha.php');
         <div class="button">
             <button class="btn btn-blue" type="submit" name="envoyer">Envoyer</button>
         </div>
+        <div class="erreur" style="display:none"></div>
     </form>
 </div>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>

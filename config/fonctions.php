@@ -1,10 +1,9 @@
 <?php
-
 include('database.php');
 
 require dirname(__DIR__).'/vendor/autoload.php';
-/*use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;*/
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 /**
  * req_liste_projets
@@ -287,7 +286,7 @@ function update_vues(int $id_projet, int $vues)
  */
 function check_connexion(string $login)
 {
-    $req = db()->prepare('SELECT * FROM utilisateurs WHERE (nom_utilisateur = :login OR email = :login) AND supprime = 0');
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE (nom_utilisateur = :login OR email = :login) AND supprime = 0 AND confirm = 1');
     $req->execute(['login' => $login]);
 
     if ($req->rowCount() > 0)
@@ -385,6 +384,14 @@ function req_utilisateur_by_nom_utilisateur(string $nom_utilisateur)
     $req->execute([$nom_utilisateur]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
+}
+
+function count_utilisateur_by_nom_utilisateur($nom_utilisateur)
+{
+    $req = db()->prepare('SELECT COUNT(*) as nb FROM utilisateurs WHERE nom_utilisateur = ?');
+    $req->execute([$nom_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
 }
 
 /**
@@ -647,18 +654,20 @@ function verifie_email(string $email)
  * @param string $email
  * @param string $nom_utilisateur
  * @param string $pass
+ * @param string $code
  * 
  * @return void
  */
-function ajouter_utilisateur(string $email, string $nom_utilisateur, string $pass)
+function ajouter_utilisateur(string $email, string $nom_utilisateur, string $pass, string $code)
 {
-    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang) VALUES(?, ?, ?, ?, "externe")');
+    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang, code_confirm) VALUES(?, ?, ?, ?, "externe", ?)');
     $ins->execute(
     [
         $email,
         $nom_utilisateur,
         password_hash($pass, PASSWORD_BCRYPT),
-        date('Y-m-d H:i:s')
+        date('Y-m-d H:i:s'),
+        $code
     ]);
 
     mkdir('../assets/utilisateurs/'.$nom_utilisateur);
@@ -675,7 +684,7 @@ function ajouter_utilisateur(string $email, string $nom_utilisateur, string $pas
  */
 function ajouter_utilisateur_admin(string $email, string $nom_utilisateur, string $pass)
 {
-    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang) VALUES(?, ?, ?, ?, "admin")');
+    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang, confirm) VALUES(?, ?, ?, ?, "admin", 1)');
     $ins->execute(
     [
         $email,
@@ -713,6 +722,14 @@ function req_liste_utilisateurs()
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function req_liste_utilisateurs_actifs($id_utilisateur)
+{
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE supprime = 0 AND actif = 1 AND id != ?');
+    $req->execute([$id_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function req_nbr_messages_non_lus_by_user($id_utilisateur)
 {
     $count = db()->prepare("SELECT COUNT(*) as nb FROM messages WHERE id_reception = $id_utilisateur AND lu = 0");
@@ -741,6 +758,14 @@ function req_messages_by_user($id_utilisateur)
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function count_id_messagerie($id_utilisateur_1, $id_utilisateur_2)
+{
+    $req = db()->prepare("SELECT COUNT(*) as nb FROM messagerie WHERE (id_utilisateur_1 = $id_utilisateur_1 AND id_utilisateur_2 = $id_utilisateur_2) OR (id_utilisateur_1 = $id_utilisateur_2 AND id_utilisateur_2 = $id_utilisateur_1)");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
 }
 
 function req_id_messagerie($id_utilisateur_1, $id_utilisateur_2)
@@ -798,30 +823,67 @@ function req_fichiers_by_projet($id_projet)
         return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
-/*function get_mail()
+function confirme_compte($id)
 {
-    define('MAIL_HOST', 'localhost');
+    $upd = db()->prepare("UPDATE utilisateurs SET confirm = 1 WHERE id = ?");
+    $upd->execute([$id]);
+}
+
+function envoi_mail($type, $email, $infos)
+{
+    define('MAIL_HOST', 'smtp.orange.fr');
     define('MAIL_SMTPAUTH', false);
-    define('MAIL_SMTPSECURE', null);
-    define('MAIL_PORT', 1025);
+    define('MAIL_SMTPSECURE', 'ssl');
+    define('MAIL_PORT', 465);
     define('SMTP_DEBUG', 1);
 
     $mail = new PHPMailer(true);
 
     $mail->CharSet = 'UTF-8';
-    $mail->isMail();
+    $mail->isSMTP();
     $mail->isHTML(true);
     $mail->SMTPDebug = SMTP_DEBUG;
     $mail->Host = MAIL_HOST;
     $mail->SMTPAuth = MAIL_SMTPAUTH;                       
     $mail->SMTPSecure = MAIL_SMTPSECURE;                            
     $mail->Port = MAIL_PORT;
-    $mail->setFrom("quentin.schifferle@gmail.com", "Polyphonia");
+    $mail->From = "quentin.schifferle@gmail.com";
+    $mail->FromName = "Polyphonia";
 
-    return $mail;
+    if (DEV)
+        $mail->addAddress('quentin.schifferle@gmail.com', "");
+    else
+        $mail->addAddress($email, "");
+
+    $body = '<body style="font-family: \'Roboto\', sans-serif;font-size:25px;width:660px; padding: 10px;">';
+    $body .= '<h1 style="text-align:center;color:#fa940f;">Polyphonia</h1>';
+    $body .= '<p>Bonjour '.$infos['nom_utilisateur'].'</p>';
+    if ($type == 'inscription')
+    {
+        $body .= '<p>Nous sommes ravis de vous compter parmis nos membres.</p>';
+        $body .= '<p>Afin de confirmer votre inscription, veuillez rentrer le code suivant dans le champs indiqué sur Polyphonia : <B>'.$infos['code'].'</B></p>';
+    }
+    $body .= '<p>Cordialement,</p>';
+    $body .= '<p><strong>L\'équipe administrative de Polyphonia</strong></p>';
+    $body .= '</body>';
+
+    try
+    {
+        if ($type == 'inscription')
+        {
+            $mail->Subject = "Confirmation d'inscription à Polyphonia";
+            $mail->Body = $body;
+            $mail->AltBody = "";
+            $mail->send();
+        }
+    }
+    catch(Exception $e)
+    {
+        echo $mail->ErrorInfo;
+    }
 }
 
-function mail_nouvelle_suggestion($nom_utilisateur, $email)
+/*function mail_nouvelle_suggestion($nom_utilisateur, $email)
 {
     $mail = get_mail();
     $body = '<body style="font-family: \'Roboto\', sans-serif;font-size:15px;width:660px; padding: 10px;">';

@@ -41,4 +41,4 @@ $(document).on('click', '.suggerer_modifications', function()
     }
 })
 
-setTimeout(function() { $('.projet_contenu__footer .succes').slideUp() }, 4000)
+setTimeout(function() { $('.projet_contenu .succes').slideUp() }, 4000)

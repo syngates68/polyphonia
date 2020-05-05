@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 03 mai 2020 à 15:40
+-- Généré le :  mar. 05 mai 2020 à 23:40
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `lu` int(11) NOT NULL DEFAULT '0',
   `date_lecture` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `messages`
@@ -64,7 +64,32 @@ INSERT INTO `messages` (`id`, `id_messagerie`, `id_envoi`, `id_reception`, `cont
 (45, 9, 1, 2, 'Hey', '2020-05-03 15:31:22', 1, '2020-05-03 15:32:15'),
 (46, 9, 2, 1, 'Yooooo 😃', '2020-05-03 15:32:30', 1, '2020-05-03 15:34:46'),
 (47, 9, 2, 1, 'Tu m\'écrivais pour quoi du coup? 😅', '2020-05-03 15:35:37', 1, '2020-05-03 15:35:51'),
-(48, 9, 1, 2, 'Ah bah juste comme ça 😂', '2020-05-03 15:35:59', 1, '2020-05-03 15:36:16');
+(48, 9, 1, 2, 'Ah bah juste comme ça 😂', '2020-05-03 15:35:59', 1, '2020-05-03 15:36:16'),
+(49, 9, 1, 2, 'Top le système pour le moment 😀', '2020-05-03 16:09:09', 1, '2020-05-03 16:45:27'),
+(50, 9, 1, 2, 'Coucou maggle ❤️', '2020-05-03 16:21:32', 1, '2020-05-03 16:45:27'),
+(51, 10, 1, 9, 'J\'ai vu que tu maîtrisais le PHP depuis un long moment maintenant, est-ce que malgré tout tu trouves des projets qui t\'intéressent sur le site ? Parce qu\'avec ton niveau tout doit paraître mega simple au vu des projets que je propose 😅', '2020-05-03 16:23:36', 1, '2020-05-03 16:24:03'),
+(52, 10, 9, 1, 'Ça fait 15 ans que je fais du PHP oui, donc des projets j\'en ai vu passer haha mais en soit il y a toujours de nouvelles choses à apprendre ! Là je bosse sur le projet de vente d\'instruments de musique qui m\'intéresse bien, et malgré tout j\'éprouve toujours quelques difficultés (que je m\'inflige moi même évidemment), j\'ai par exemple essayé d\'inclure un système de paiement par carte via L\'API du Crédit Mutuel mais ça n\'est pas aussi simple que ce que j\'imaginais 😢 Mais c\'est aussi ça le défi, et puis tu le dis toi même, les projets proposés sont exhaustifs, donc j\'essaie toujours de me rajouter de petits défis pour complexifier le tout 😉', '2020-05-03 16:26:58', 1, '2020-05-03 16:27:32'),
+(53, 10, 1, 9, 'Ah ouiiii effectivement je vois 😄 Bah écoute tu as raison, c\'est ce que j\'imaginais en créant le site, que les gens puissent chercher à aller plus loin que ce que je proposais, et je trouve l\'idée géniale, bon courage à toi en tout cas 😀', '2020-05-03 16:29:01', 1, '2020-05-03 22:46:14'),
+(54, 11, 7, 1, 'Salut, excuse moi de te déranger, je viens de lire le projet concernant la création de son propre 2048, et j\'aimerais bien me lancer dedans, mais je ne sais pas vraiment quel langage choisir, tu me conseillerais quoi ? Pour info je code généralement en Python 🙂 Merci d\'avance et bonne journée à toi ! ', '2020-05-03 16:38:00', 1, '2020-05-03 16:38:20'),
+(55, 11, 1, 7, 'Salut, t\'en fais pas tu me déranges pas du tout ☺️ Bah écoute Python peut être intéressant pour ce projet, je l\'avais fait en Javascript à l\'époque, mais à ce niveau là tout langage de script peut permettre de faire ce projet, je dirais comme conseil qu\'il faut choisir un langage que tu maîtrises bien, parce que mine de rien c\'est pas un projet facile du tout, je connaissais pas plus que ça le Javascript pure quand j\'ai commencé ce projet à l\'époque (c\'était un défi personnel que je m\'étais lancé 😅) et j\'ai bien bien galéré pour le faire, donc vraiment le mieux c\'est de faire ce que tu connais, à moins de vouloir apprendre un autre langage à travers ce projet et dans ce cas là comme dit, tout langage de script est bon à prendre ! En espérant t\'avoir bien aiguillé 😉', '2020-05-03 16:41:44', 1, '2020-05-05 00:00:30'),
+(56, 9, 1, 2, 'Salut Nathan, je viens de voir la réponse que tu as posté concernant le projet de gestion d\'un cabinet dentaire, beaucoup de personnes l\'ont signalé donc comme je te connais bien, je vais rien faire de plus que supprimer ton message, mais la prochaine fois je devrais bloquer ton compte, et ça m\'embêterait bien donc j\'espère que ce message suffira à ne plus que ça se reproduise ! Je sais que parfois ça peut être dur de garder son calme mais j\'essaie de garder le site comme une zone calme et où les gens s\'entraident sans se rentrer dedans, donc ce genre de message n\'est pas vraiment appréciable ! Enfin voilà, je pense que tu es assez intelligent pour comprendre ça ', '2020-05-03 16:45:04', 1, '2020-05-03 16:45:27'),
+(57, 9, 2, 1, 'Salut Quentin, effectivement j\'ai perdu mon calme, merci de ta compréhension et de ta patience, ça ne se reproduira plus c\'est promis 🖐️🙂', '2020-05-03 16:46:14', 1, '2020-05-03 16:46:24'),
+(58, 9, 1, 2, 'Tant mieux, bonne journée à toi 🙂', '2020-05-03 16:46:47', 1, '2020-05-03 16:46:52'),
+(59, 10, 1, 9, 'Dis moi j\'ai une question, je bosse actuellement sur le site et j\'aimerais ajouter un système qui permet de valider directement son compte depuis le mail et non en rentrant un code de confirmation comme actuellement, tu sais comment faire ? ', '2020-05-03 22:44:47', 1, '2020-05-03 22:46:14'),
+(62, 14, 1, 12, 'Bienvenue sur Polyphonia lapoutre j\'espère que tu trouveras ton bonheur sur le site.\r\n                            Ce message est un message automatique envoyé aux nouveaux membres lors de leur inscription, si tu découvres le site et que tu as besoin d\'aide, n\'hésite pas à me contacter je me ferais un plaisir de te guider afin que tu puisses avoir la meilleure expérience possible sur le site.\r\n                            Merci d\'avoir rejoint l\'aventure,<br/>\r\n                            Quentin.', '2020-05-04 00:01:36', 1, '2020-05-04 00:02:03'),
+(63, 10, 9, 1, 'Je suppose que ce qui te pose problème c\'est la validation automatique sur la page du site ? Enfin si tu vois de quoi je parle ! Généralement les sites qui proposent ça mettent leur page à jour automatiquement une fois que tu as cliqué sur un lien ou un bouton après au pire c\'est pas plus grave que ça si tu le fais pas ! Et même en soi tu peux garder le simple principe de code de confirmation, ça fonctionne très bien comme ça pourquoi tu voudrais changer ? 🤔', '2020-05-04 00:24:05', 1, '2020-05-04 00:24:17'),
+(64, 10, 1, 9, 'Bonne question 😅😅😅 Bah en soi c\'est mon problème, je veux changer pour changer, et je trouve le système de validation via un lien beaucoup plus \"pro\" mais en fait t\'as raison, je vais garder ce système et pas me casser la tête plus que ça ', '2020-05-04 00:25:36', 0, NULL),
+(65, 9, 1, 2, 'Yo 🙂', '2020-05-04 15:48:16', 1, '2020-05-04 15:48:30'),
+(66, 9, 2, 1, 'Kesta?', '2020-05-04 15:48:35', 1, '2020-05-04 15:49:09'),
+(67, 9, 1, 2, 'Coucou', '2020-05-04 23:32:03', 1, '2020-05-04 23:37:26'),
+(68, 9, 1, 2, 'Ca va?', '2020-05-04 23:33:16', 1, '2020-05-04 23:37:26'),
+(69, 9, 1, 2, 'test', '2020-05-04 23:36:37', 1, '2020-05-04 23:37:26'),
+(70, 9, 2, 1, 'Coucou BG ❤️', '2020-05-04 23:37:36', 1, '2020-05-04 23:38:54'),
+(71, 15, 1, 3, 'Bonjour ma chérie ❤️', '2020-05-04 23:50:55', 0, NULL),
+(72, 16, 1, 13, 'Bienvenue sur Polyphonia squeezie j\'espère que tu trouveras ton bonheur sur le site.\r\n                            Ce message est un message automatique envoyé aux nouveaux membres lors de leur inscription, si tu découvres le site et que tu as besoin d\'aide, n\'hésite pas à me contacter je me ferais un plaisir de te guider afin que tu puisses avoir la meilleure expérience possible sur le site.\r\n                            Merci d\'avoir rejoint l\'aventure,<br/>\r\n                            Quentin.', '2020-05-04 23:57:24', 1, '2020-05-04 23:57:57'),
+(73, 17, 8, 1, 'Yo 🖐️', '2020-05-05 00:08:07', 1, '2020-05-05 00:08:26'),
+(74, 18, 8, 7, 'Wesh Ludo 🤸‍♂️', '2020-05-05 00:09:51', 1, '2020-05-05 00:10:10'),
+(75, 17, 1, 8, 'Ca va la street? ✌️', '2020-05-05 23:18:38', 0, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
