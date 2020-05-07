@@ -1,13 +1,16 @@
 $(document).on('click', '.btn-nouveau-message', function()
 {
-    $.get(baseurl + 'inc/nouveau_message.php',
+    if ($('.formulaire_nouveau_message').css('display') == 'none')
     {
-
-    },
-    function(data)
-    {
-        $('.formulaire_nouveau_message').html(data).slideDown()
-    })
+        $.get(baseurl + 'inc/nouveau_message.php',
+        {
+    
+        },
+        function(data)
+        {
+            $('.formulaire_nouveau_message').html(data).slideDown()
+        })
+    }
 })
 
 $('.formulaire_nouveau_message').submit(function()

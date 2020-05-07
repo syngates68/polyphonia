@@ -110,21 +110,6 @@ function count_nbr_projets(?string $recherche = NULL)
 }
 
 /**
- * req_by_slug
- * 
- * @param string $slug
- * 
- * @return array
- */
-function req_by_slug(string $slug)
-{
-    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.date_ajout, p.slug, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur, u.avatar FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.slug = ?");
-    $req->execute([$slug]);
-
-    return $req->fetchAll(PDO::FETCH_ASSOC)[0];
-}
-
-/**
  * count_by_slug
  *
  * @param string $slug
@@ -135,6 +120,21 @@ function count_by_slug(string $slug)
 {
     $req = db()->prepare("SELECT COUNT(*) FROM projets WHERE slug = ?");
     $req->execute([$slug]);
+
+    return $req->fetch(PDO::FETCH_NUM)[0];
+}
+
+/**
+ * count_by_id
+ *
+ * @param int $id
+ * 
+ * @return array
+ */
+function count_by_id(int $id)
+{
+    $req = db()->prepare("SELECT COUNT(*) FROM projets WHERE id = ? AND brouillon = 0 AND actif = 1");
+    $req->execute([$id]);
 
     return $req->fetch(PDO::FETCH_NUM)[0];
 }
@@ -257,7 +257,7 @@ function brouillon_projet(?string $titre, ?string $contenu, ?string $illustratio
  */
 function req_by_id(int $id_projet)
 {
-    $req = db()->prepare("SELECT * FROM projets WHERE id = ?");
+    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.slug, p.vues, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur, u.avatar FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.id = ?");
     $req->execute([$id_projet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -827,6 +827,14 @@ function confirme_compte($id)
 {
     $upd = db()->prepare("UPDATE utilisateurs SET confirm = 1 WHERE id = ?");
     $upd->execute([$id]);
+}
+
+function req_last_inserted_project()
+{
+    $req = db()->prepare("SELECT id FROM projets ORDER BY id DESC LIMIT 1");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['id'];
 }
 
 function envoi_mail($type, $email, $infos)

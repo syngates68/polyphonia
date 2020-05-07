@@ -304,23 +304,53 @@ form textarea
 .erreur
 {
     box-shadow: 0 0 0 1px #e0b4b4 inset,0 0 0 0 transparent;
-    background-color: #fff6f6;
-    color: #9f3a38;
-    padding: 1em 1.5em;
+    background-color: #ECC8C5;
+    color: #BF3938;
+    padding: 0 21px;
     margin: 8px 0;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #BD8181;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.erreur::before
+{
+    font-family: "Material Icons";
+    content: "\e000";
+    font-size: 35px;
+    font-weight: 300;
+    margin-right: 8px;
 }
 
 .succes
 {
     box-shadow: 0 0 0 1px #a3c293 inset,0 0 0 0 transparent;
-    background-color: #fcfff5;
-    color: #2c662d;
-    padding: 1em 1.5em;
+    background-color: #DEF2D6;
+    color: #597151;
+    padding: 0 21px;
     margin: 8px 0;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #B0CCA5;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.succes::before
+{
+    font-family: "Material Icons";
+    content: "\e5ca";
+    font-size: 35px;
+    font-weight: 300;
+    margin-right: 8px;
 }
 
 .erreur b,
@@ -1046,7 +1076,8 @@ footer .footer_content .footer_content__div .copyright
     line-height: 2;
 }
 
-.projet_contenu .projet_texte h2
+.projet_contenu .projet_texte h2,
+.projet_contenu .projet_texte h3
 {
     font-size: 22px;
     color: #000;
@@ -1100,6 +1131,15 @@ footer .footer_content .footer_content__div .copyright
     display: block;
     width: 50%;
     margin: 0 auto;
+}
+
+.projet_contenu .projet_texte pre
+{
+    background: #363636;
+    color: #FFF;
+    line-height: 0.8;
+    padding: 8px;
+    max-width: 100%;
 }
 
 .projet_contenu__footer

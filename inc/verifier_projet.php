@@ -18,7 +18,7 @@ if (isset($_POST['ajouter_projet']))
             if (substr($rep[0], 0, 1) == 1)
             {
                 ajouter_projet($_POST['titre'], $_POST['contenu'], $_SESSION['utilisateur'], str_replace('../', '', $rep[1]), $_POST['tags'], $_POST['nom_photographe'], $_POST['lien_photo']);
-                
+
                 //Vérification des fichiers joints
                 if (!empty($_POST['nom_fichier']))
                 {
@@ -26,9 +26,9 @@ if (isset($_POST['ajouter_projet']))
                     {
                         if ($_FILES['fichier']['name'] != '')
                         {
-                            if (move_uploaded_file($_FILES['fichier']['tmp_name'], '../assets/projets/fichiers/'.$_FILES['fichier']['name']))
+                            if (move_uploaded_file($_FILES['fichier']['tmp_name'], '../assets/projets/fichiers/'.req_last_inserted_project().'/'.$_FILES['fichier']['name']))
                             {
-                                ajouter_fichier_projet($_GET['id'], 'assets/projets/fichiers/'.$_FILES['fichier']['name'], $_POST['nom_fichier']);
+                                ajouter_fichier_projet($_GET['id'], 'assets/projets/fichiers/'.req_last_inserted_project().'/'.$_FILES['fichier']['name'], $_POST['nom_fichier']);
                             }
                             else
                             {

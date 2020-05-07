@@ -5,7 +5,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
     if (isset($_GET['slug'])) 
     { 
         $projet = req_by_id($_GET['slug']);
-        $_SESSION['id_projet'] = $projet['id'];
+        $_SESSION['id_projet'] = $projet['id_projet'];
 ?>
     <div class="container">
         <h1>Reprendre le brouillon</h1>
@@ -30,7 +30,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
             endif;
             ?>
 
-            <form method="POST" action="../inc/update_brouillon.php?id=<?= $projet['id']; ?>" enctype="multipart/form-data">
+            <form method="POST" action="../inc/update_brouillon.php?id=<?= $projet['id_projet']; ?>" enctype="multipart/form-data">
                 <?php include('./inc/formulaire_projet.php'); ?>
             </form>
         </div>
