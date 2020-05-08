@@ -27,12 +27,8 @@ $(document).on('submit', '.recherche_projet form', function()
     }
 });
 
-/*$(document).on('click', '.pagination li', function()
+$(document).on('click', '.pagination li', function(e)
 {
-    req_liste_projets($(this).attr('page'), $('.recherche_projet input').val());
+    e.preventDefault();
+    req_liste_projets($(this).attr('page'), null);
 });
-
-$(document).on('keyup', '.recherche_projet input', function()
-{
-    req_liste_projets(1, $(this).val());
-});*/

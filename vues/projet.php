@@ -48,6 +48,10 @@ if (isset($_GET['slug']))
                     </div>   
                 </div>
                 <div class="projet_texte">
+                    <?php if ($projet['date_update'] != NULL) : ?>
+                        <p class="label_maj">Mis à jour le <?= formate_date($projet['date_update']); ?> par <?= $projet['utilisateur_update']; ?></p>
+                    <?php endif; ?>
+
                     <?= nl2br($projet['contenu']); ?>
                     <?php if (req_fichiers_by_projet($projet['id_projet']) != 0) : ?>
                     <div class="fichiers_joints">

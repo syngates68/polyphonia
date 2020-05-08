@@ -7,6 +7,16 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
     <div class="container">
         <h1>Admin - Liste des projets</h1>
 
+        <?php
+            //Message de succès
+            if (isset($_SESSION['succes'])) : 
+        ?>
+                <div class="succes" style="float:left;"><?= $_SESSION['succes']; ?></div>
+        <?php
+            unset($_SESSION['succes']); 
+            endif;
+        ?>
+
         <div class="administration">
             <div class="tbl_top">
                 <div class="admin_cta">
@@ -54,6 +64,9 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                     <?= formate_date($projet['date_ajout']); ?>
                     <?php if ($projet['brouillon'] == 1 && $projet['date_sauvegarde'] != NULL) : ?>
                         <p class="label_brouillon">(Dernière sauvegarde le <?= formate_date_heure($projet['date_sauvegarde']); ?>)</p>
+                    <?php endif; ?>
+                    <?php if ($projet['brouillon'] == 0 && $projet['date_update'] != NULL) : ?>
+                        <p class="label_brouillon">(Mis à jour <?= formate_date_heure($projet['date_update']); ?>)</p>
                     <?php endif; ?>
                 </div>
                 <div class="tbl_contenu__col tbl_actions">

@@ -303,16 +303,18 @@ form textarea
 
 .erreur
 {
-    box-shadow: 0 0 0 1px #e0b4b4 inset,0 0 0 0 transparent;
-    background-color: #ECC8C5;
-    color: #BF3938;
-    padding: 0 21px;
+    background-color: #fff4f4;
+    color: #ff4343;
+    padding: 4px 16px;
     margin: 8px 0;
     font-size: 14px;
     line-height: 1.5;
     border-radius: 5px;
-    border: 1px solid #BD8181;
-    font-weight: 500;
+    border-top: 1px solid #e6c3c3;
+    border-right: 1px solid #e6c3c3;
+    border-bottom: 1px solid #e6c3c3;
+    border-left: 7px solid #ff4343;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -322,23 +324,25 @@ form textarea
 {
     font-family: "Material Icons";
     content: "\e000";
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 300;
     margin-right: 8px;
 }
 
 .succes
 {
-    box-shadow: 0 0 0 1px #a3c293 inset,0 0 0 0 transparent;
-    background-color: #DEF2D6;
-    color: #597151;
-    padding: 0 21px;
+    background-color: #ecfcf2;
+    color: #2fa552;
+    padding: 4px 16px;
     margin: 8px 0;
     font-size: 14px;
     line-height: 1.5;
     border-radius: 5px;
-    border: 1px solid #B0CCA5;
-    font-weight: 500;
+    border-top: 1px solid #daebd3;
+    border-right: 1px solid #daebd3;
+    border-bottom: 1px solid #daebd3;
+    border-left: 7px solid #2fa552;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -347,8 +351,8 @@ form textarea
 .succes::before
 {
     font-family: "Material Icons";
-    content: "\e5ca";
-    font-size: 35px;
+    content: "\e86c";
+    font-size: 25px;
     font-weight: 300;
     margin-right: 8px;
 }
@@ -1076,6 +1080,13 @@ footer .footer_content .footer_content__div .copyright
     line-height: 2;
 }
 
+.projet_contenu .projet_texte .label_maj
+{
+    font-style: italic;
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
 .projet_contenu .projet_texte h2,
 .projet_contenu .projet_texte h3
 {
@@ -1370,6 +1381,7 @@ footer .footer_content .footer_content__div .copyright
 {
     margin-top: 16px;
     background: #f5f5f577;
+    clear: left;
 }
 
 .administration .tbl_top 
@@ -1543,9 +1555,16 @@ footer .footer_content .footer_content__div .copyright
     border-radius: 5px;
 }
 
+.nouveau_projet .erreur,
+.nouveau_projet .succes
+{
+    float: left;
+}
+
 .nouveau_projet form
 {
     text-align: center;
+    clear: left;
 }
 
 .nouveau_projet form .formulaire
@@ -1993,6 +2012,42 @@ footer .footer_content .footer_content__div .copyright
     background: #FFF;
     border: 1px solid var(--border);
     object-fit: cover;
+}
+
+.parametres .avatar_container .avatar .change_avatar
+{
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.473);
+    padding: 8px;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition-duration: .3s;
+}
+
+.parametres .avatar_container .avatar .change_avatar:hover
+{
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.473);
+    padding: 8px;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 1;
+    transition-duration: .3s;
 }
 
 .parametres .avatar_container input

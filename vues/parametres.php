@@ -29,9 +29,7 @@ if (isset($_SESSION['utilisateur']))
                 <div class="titre_section">Photo de profil :</div>
                 <div class="avatar">
                     <img src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>">
-                </div>
-                <div class="bloc_button">
-                    <button class="btn btn-blue" id="modifier_avatar">Modifier</button>
+                    <div class="change_avatar" id="change_avatar">Cliquer ou déposer une photo</div>
                 </div>
                 <input type="file" name="avatar" utilisateur="<?= $utilisateur['id']; ?>">
             </div>

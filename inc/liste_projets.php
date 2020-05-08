@@ -2,7 +2,7 @@
 include('../config/config.php');
 include('../config/fonctions.php');
 
-$nbr_pages = req_nbr_pages(20, $_POST['recherche']);
+$nbr_pages = req_nbr_pages(12, $_POST['recherche']);
 ?>
 
 <div class="pagination">
@@ -15,11 +15,11 @@ $nbr_pages = req_nbr_pages(20, $_POST['recherche']);
     </ul>
 </div>
 
-        <div class="nbr_projets"><?= count_nbr_projets($_POST['recherche']); ?> projet<?php if (count_nbr_projets($_POST['recherche']) > 1) : ?>s<?php endif; ?></div>
+<div class="nbr_projets"><?= count_nbr_projets($_POST['recherche']); ?> projet<?php if (count_nbr_projets($_POST['recherche']) > 1) : ?>s<?php endif; ?></div>
 
 <div class="liste_projets">
     <?php 
-        $liste_projets = req_liste_projets($_POST['page'], 20, false, $_POST['recherche']);
+        $liste_projets = req_liste_projets($_POST['page'], 12, false, $_POST['recherche']);
         foreach($liste_projets as $projet) :
     ?>
     <div class="projet">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 05 mai 2020 à 23:40
--- Version du serveur :  5.7.23
--- Version de PHP :  7.2.10
+-- Généré le :  ven. 08 mai 2020 à 12:53
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projets`
+-- Base de données :  `polyphonia`
 --
 
 -- --------------------------------------------------------
@@ -38,8 +38,11 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `date_envoi` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lu` int(11) NOT NULL DEFAULT '0',
   `date_lecture` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  KEY `id_envoi` (`id_envoi`),
+  KEY `id_reception` (`id_reception`),
+  KEY `id_messagerie` (`id_messagerie`)
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `messages`
@@ -89,7 +92,24 @@ INSERT INTO `messages` (`id`, `id_messagerie`, `id_envoi`, `id_reception`, `cont
 (72, 16, 1, 13, 'Bienvenue sur Polyphonia squeezie j\'espère que tu trouveras ton bonheur sur le site.\r\n                            Ce message est un message automatique envoyé aux nouveaux membres lors de leur inscription, si tu découvres le site et que tu as besoin d\'aide, n\'hésite pas à me contacter je me ferais un plaisir de te guider afin que tu puisses avoir la meilleure expérience possible sur le site.\r\n                            Merci d\'avoir rejoint l\'aventure,<br/>\r\n                            Quentin.', '2020-05-04 23:57:24', 1, '2020-05-04 23:57:57'),
 (73, 17, 8, 1, 'Yo 🖐️', '2020-05-05 00:08:07', 1, '2020-05-05 00:08:26'),
 (74, 18, 8, 7, 'Wesh Ludo 🤸‍♂️', '2020-05-05 00:09:51', 1, '2020-05-05 00:10:10'),
-(75, 17, 1, 8, 'Ca va la street? ✌️', '2020-05-05 23:18:38', 0, NULL);
+(75, 17, 1, 8, 'Ca va la street? ✌️', '2020-05-05 23:18:38', 0, NULL),
+(76, 19, 1, 14, 'Bienvenue sur Polyphonia camilles68 j\'espère que tu trouveras ton bonheur sur le site.\r\n                            Ce message est un message automatique envoyé aux nouveaux membres lors de leur inscription, si tu découvres le site et que tu as besoin d\'aide, n\'hésite pas à me contacter je me ferais un plaisir de te guider afin que tu puisses avoir la meilleure expérience possible sur le site.\r\n                            Merci d\'avoir rejoint l\'aventure,<br/>\r\n                            Quentin.', '2020-05-06 00:00:03', 1, '2020-05-06 00:01:24'),
+(77, 9, 1, 2, 'Wsh!', '2020-05-07 22:39:43', 0, NULL),
+(78, 15, 1, 3, 'Tu comptes te connecter un jour wolah? 😂😂😂', '2020-05-07 23:30:49', 0, NULL);
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`id_envoi`) REFERENCES `utilisateurs` (`id`),
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`id_reception`) REFERENCES `utilisateurs` (`id`),
+  ADD CONSTRAINT `messages_ibfk_3` FOREIGN KEY (`id_envoi`) REFERENCES `utilisateurs` (`id`),
+  ADD CONSTRAINT `messages_ibfk_4` FOREIGN KEY (`id_reception`) REFERENCES `utilisateurs` (`id`),
+  ADD CONSTRAINT `messages_ibfk_5` FOREIGN KEY (`id_messagerie`) REFERENCES `messagerie` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

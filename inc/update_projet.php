@@ -28,7 +28,7 @@ if (isset($_POST['editer_projet']))
 
             if ($msg == '')
             {
-                update_projet($_POST['titre'], $_POST['contenu'], $_GET['id'], str_replace('../', '', $illustration), $_POST['tags'], $_POST['nom_photographe'], $_POST['lien_photo']);
+                update_projet($_POST['titre'], $_POST['contenu'], $_GET['id'], str_replace('../', '', $illustration), $_POST['tags'], $_POST['nom_photographe'], $_POST['lien_photo'], date("Y-m-d H:i:s"), $_SESSION['utilisateur']);
     
                 //Vérification des fichiers joints
                 if (!empty($_POST['nom_fichier']))
@@ -50,7 +50,7 @@ if (isset($_POST['editer_projet']))
                 }
 
                 $_SESSION['succes'] = "Le projet a bien été édité";
-                header('Location:'.BASEURL.'editer_projet/'.$_GET['id'].'.html');
+                header('Location:'.BASEURL.'administration.html');
             }
             else
             {

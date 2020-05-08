@@ -46,7 +46,7 @@ function req_liste_projets(?int $page, ?int $nbr_par_page, bool $admin = false, 
         
     $where .= ' p.actif = 1';
 
-    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.slug, p.vues, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
+    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.date_update, p.slug, p.vues, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur".$where." ORDER BY p.id DESC".$limit;
 
     $req = db()->prepare($sql);
     
@@ -257,7 +257,7 @@ function brouillon_projet(?string $titre, ?string $contenu, ?string $illustratio
  */
 function req_by_id(int $id_projet)
 {
-    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.slug, p.vues, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur, u.avatar FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.id = ?");
+    $req = db()->prepare("SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_update, p.slug, p.vues, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur, u.avatar, u2.nom_utilisateur as utilisateur_update FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur LEFT JOIN utilisateurs u2 ON u2.id = p.id_update WHERE p.id = ?");
     $req->execute([$id_projet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -305,13 +305,15 @@ function check_connexion(string $login)
  * @param null|string $tags
  * @param null|string $nom_photographe
  * @param null|string $lien_photo
+ * @param string $date_updaye
+ * @param int $id_update
  * 
  * @return void
  */
-function update_projet(string $titre, string $contenu, int $id, string $illustration, ?string $tags, ?string $nom_photographe, ?string $lien_photo)
+function update_projet(string $titre, string $contenu, int $id, string $illustration, ?string $tags, ?string $nom_photographe, ?string $lien_photo, string $date_update, int $id_update)
 {
-    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, tags = ?, nom_photographe = ?, lien_photo = ? WHERE id = ?');
-    $upd->execute([$titre, $contenu, $illustration, $tags, $nom_photographe, $lien_photo, $id]);
+    $upd = db()->prepare('UPDATE projets SET titre = ?, contenu = ?, illustration = ?, tags = ?, nom_photographe = ?, lien_photo = ?, date_update = ?, id_update = ? WHERE id = ?');
+    $upd->execute([$titre, $contenu, $illustration, $tags, $nom_photographe, $lien_photo, $date_update, $id_update, $id]);
 }
 
 /**

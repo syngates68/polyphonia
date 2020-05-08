@@ -27,7 +27,7 @@
                 </a>
             <?php endforeach; ?>
         <?php else : ?>
-            <p class="no_message">Aucun message</p>
+            <div class="erreur">Aucun message</div>
         <?php endif; ?>
     </div>
     <script src="<?= BASEURL; ?>assets/js/messages.js"></script>

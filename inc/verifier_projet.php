@@ -38,8 +38,8 @@ if (isset($_POST['ajouter_projet']))
                     }
                 }
                 
-                $_SESSION['succes'] = 'Votre projet <B>'.$_POST['titre'].'</B> a bien été ajouté.';
-                header('Location:'.BASEURL.'nouveau_projet.html');
+                $_SESSION['succes'] = 'Votre projet a bien été ajouté.';
+                header('Location:'.BASEURL.'administration.html');
             }
             else
             {
@@ -81,6 +81,6 @@ if (isset($_POST['enregistrer_brouillon']))
 
     brouillon_projet($titre, $contenu, str_replace('../', '', $illustration), $_SESSION['utilisateur'], $_POST['tags'], $_POST['nom_photographe'], $_POST['lien_photo']);
                         
-    $_SESSION['succes'] = 'Votre projet <B>'.$_POST['titre'].'</B> a bien été enregistré en brouillon.';
+    $_SESSION['succes'] = 'Votre projet a bien été enregistré en brouillon.';
     header('Location:'.BASEURL.'nouveau_projet.html');
 }

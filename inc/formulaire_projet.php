@@ -1,10 +1,10 @@
 <?php 
 
-$titre = null;
+$titre = (isset($_SESSION['_titre'])) ? $_SESSION['_titre'] : null;
 $illustration = null;
-$contenu = null;
-$nom_photographe = null;
-$lien_photo = null;
+$contenu = (isset($_SESSION['_contenu'])) ? $_SESSION['_contenu'] : null;
+$nom_photographe = (isset($_SESSION['_nom_photographe'])) ? $_SESSION['_nom_photographe'] : null;
+$lien_photo = (isset($_SESSION['_lien_photo'])) ? $_SESSION['_lien_photo'] : null;
 $tags = null;
 $btn = "Ajouter";
 $btn_name = "ajouter_projet";
