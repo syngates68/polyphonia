@@ -41,4 +41,69 @@ $(document).on('click', '.suggerer_modifications', function()
     }
 })
 
-setTimeout(function() { $('.projet_contenu .succes').slideUp() }, 4000)
+setTimeout(function() { $('.succes_vanishing').slideUp() }, 4000)
+
+$(document).on('click', '.aide .btn_nouveau_sujet', function()
+{
+    if ($('.aide .nouveau_sujet').css('display') == 'none')
+    {
+        $.post(baseurl + 'inc/nouveau_sujet.php',
+        {
+            
+        },
+        function(data)
+        {
+            $('.aide .nouveau_sujet').html(data).slideDown()
+        })
+    }
+})
+
+$(document).ready(function()
+{
+    var actif = $('.projet_actions a.actif').attr('id')
+    
+    if (actif == 'description')
+    {
+        $.post(baseurl + 'inc/contenu_projet.php',
+        {
+            id_projet : $('input[name="id_projet"]').val()
+        },
+        function(data)
+        {
+            $('.contenu_page').html(data)
+        })
+    }
+})
+
+$(document).on('click', '.projet_actions a', function(e)
+{
+    e.preventDefault()
+    if (!$(this).hasClass('actif'))
+    {
+        $('.projet_actions .actif').removeClass('actif')
+        $(this).addClass('actif')
+    }
+
+    if ($(this).attr('id') == 'description')
+    {
+        $.post(baseurl + 'inc/contenu_projet.php',
+        {
+            id_projet : $('input[name="id_projet"]').val()
+        },
+        function(data)
+        {
+            $('.contenu_page').html(data)
+        })
+    }
+    else if ($(this).attr('id') == 'aide')
+    {
+        $.post(baseurl + 'inc/aide_projet.php',
+        {
+            id_projet : $('input[name="id_projet"]').val()
+        },
+        function(data)
+        {
+            $('.contenu_page').html(data)
+        })
+    }
+})

@@ -58,7 +58,7 @@ $(document).on('click', 'nav .menu_mobile', function()
 /**
  * Permet de mettre le label en couleur lors du focus sur un input
  */
-$(document).on('focus', '.form_ligne input', function()
+$(document).on('focus', '.form_ligne input, .form_ligne textarea', function()
 {
     if ($(this).attr('type') != 'radio' && $(this).attr('type') != 'checkbox')
         $('label[for="' + $(this).attr('id') + '"]').addClass('actif')
@@ -67,7 +67,7 @@ $(document).on('focus', '.form_ligne input', function()
 /**
  * Permet de retirer la couleur du label lorsque l'input perd le focus
  */
-$(document).on('focusout', '.form_ligne input', function()
+$(document).on('focusout', '.form_ligne input, .form_ligne textarea', function()
 {
     $('label[for="' + $(this).attr('id') + '"]').removeClass('actif')
 });

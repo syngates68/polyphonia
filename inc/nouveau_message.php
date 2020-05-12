@@ -21,22 +21,23 @@ $utilisateurs =  req_liste_utilisateurs_actifs($_SESSION['utilisateur']);
         <button class="btn btn-blue" type="submit">Envoyer</button>
     </div>
 </form>
+<?php 
+$tags = [];
+foreach ($utilisateurs as $utilisateur) :
+    array_push($tags, ["value" => $utilisateur['nom_utilisateur'], "image" => BASEURL.$utilisateur['avatar']]);
+endforeach; 
+?>
 <script>
     $(function() 
     {
         var availableTags = [
-            <?php foreach ($utilisateurs as $utilisateur) : ?>
-                {
-                    value: "<?= $utilisateur['nom_utilisateur']; ?>",
-                    image: "<?= BASEURL.$utilisateur['avatar']; ?>"
-                },
-            <?php endforeach; ?>
+            <?= json_encode($tags); ?>
         ];
 
-        availableTags.sort();
+        availableTags[0].sort();
 
         $("#destinataire").autocomplete({
-            source: availableTags
+            source: availableTags[0]
         })
         .data("ui-autocomplete")
         ._renderMenu = function(ul, items) 

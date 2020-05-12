@@ -30,7 +30,7 @@ if (isset($_POST['connexion']))
                 else
                 {
                     $_SESSION['_login'] = $_POST['login'];
-                    $_SESSION['erreur'] = 'Votre compte a été bloqué pour le motif suivant : <br/><B>'.$utilisateur['motif_bloque'].'</B>';
+                    $_SESSION['erreur'] = 'Votre compte a été bloqué pour le motif suivant : '.$utilisateur['motif_bloque'];
                     header('Location:'.BASEURL.'connexion.html');
                 }
             }

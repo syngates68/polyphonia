@@ -839,6 +839,66 @@ function req_last_inserted_project()
     return $req->fetchAll(PDO::FETCH_ASSOC)[0]['id'];
 }
 
+function count_sujets_by_projet($id_projet)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_sujet WHERE id_projet = ?");
+    $count->execute([$id_projet]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_sujets_by_projet($id_projet)
+{
+    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id_projet = ? ORDER BY a.id DESC");
+    $req->execute([$id_projet]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function ajouter_sujet($titre, $contenu, $id_utilisateur, $id_projet)
+{
+    $ins = db()->prepare("INSERT INTO aide_sujet(titre_sujet, contenu_sujet, id_utilisateur, id_projet) VALUES(?, ?, ?, ?)");
+    $ins->execute([$titre, $contenu, $id_utilisateur, $id_projet]);
+}
+
+function count_sujet_by_id($id_sujet)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_sujet WHERE id = ?");
+    $count->execute([$id_sujet]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_sujet_by_id($id_sujet)
+{
+    $count = db()->prepare("SELECT a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.id_utilisateur, a.resolu, u.nom_utilisateur, u.avatar FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id = ?");
+    $count->execute([$id_sujet]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0];
+}
+
+function count_reponses_by_sujet($id_sujet)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_contenu WHERE id_sujet = ?");
+    $count->execute([$id_sujet]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_reponses_by_sujet($id_sujet)
+{
+    $req = db()->prepare("SELECT c.contenu, c.note, c.date_post, u.nom_utilisateur, u.avatar FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = ?");
+    $req->execute([$id_sujet]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function ajouter_reponse_sujet($reponse, $id_utilisateur, $id_sujet)
+{
+    $ins = db()->prepare("INSERT INTO aide_contenu(contenu, id_utilisateur, id_sujet) VALUES (?, ?, ?)");
+    $ins->execute([$reponse, $id_utilisateur, $id_sujet]);
+}
+
 function envoi_mail($type, $email, $infos)
 {
     define('MAIL_HOST', 'smtp.orange.fr');

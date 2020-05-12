@@ -1,7 +1,7 @@
 /**
  * Permet de simuler le clic sur l'input file caché
  */
-$(document).on('click', '.clickable', function()
+$(document).on('click', '.nouveau_projet #clickable', function()
 {
     $('#illustration').click();
 });
@@ -9,7 +9,7 @@ $(document).on('click', '.clickable', function()
 /**
  * Permet d'appeler la fonction de prévisualisation au changement de l'input file
  */
-$(document).on('change', '#illustration', function()
+$(document).on('change', '.nouveau_projet #illustration', function()
 {
     readURL(this);
 });
@@ -123,7 +123,7 @@ $(document).on('click', '.tbl_contenu .tbl_actions .supprimer', function(e)
 /**
  * Permet de rajouter des tags
  */
-$(document).on('keyup', 'input[name="nouveau_tag"]', function(e)
+$(document).on('keyup', '.nouveau_projet input[name="nouveau_tag"]', function(e)
 {
     if (e.key == ';' || e.code == 'Space')
     {
@@ -137,7 +137,7 @@ $(document).on('keyup', 'input[name="nouveau_tag"]', function(e)
 /**
  * Permet de supprimer des tags
  */
-$(document).on('click', '.tags_container .tag', function()
+$(document).on('click', '.nouveau_projet .tags_container .tag', function()
 {
     if (confirm("Supprimer ce tag?"))
     {
@@ -181,7 +181,7 @@ $(document).on('click', '.nouvel_utilisateur .genere_mdp', function()
 /**
  * Permet de bloquer un utilisateur
  */
-$(document).on('click', '.bloquer_utilisateur', function(e)
+$(document).on('click', '.administration .bloquer_utilisateur', function(e)
 {
     e.preventDefault()
     $('.modal_bloquer_utilisateur').show()
@@ -228,7 +228,7 @@ $(document).on('click', '.annuler_blocage', function()
 /**
  * Permet de débloquer un utilisateur
  */
-$(document).on('click', '.debloquer_utilisateur', function(e)
+$(document).on('click', '.administration .debloquer_utilisateur', function(e)
 {
     e.preventDefault()
     if (confirm("Confirmer le déblocage de cet utilisateur?"))
@@ -247,7 +247,7 @@ $(document).on('click', '.debloquer_utilisateur', function(e)
     }
 })
 
-$(document).on('click', '.fiche_utilisateur', function(e)
+$(document).on('click', '.administration .fiche_utilisateur', function(e)
 {
     e.preventDefault()
     $('.modal_fiche_utilisateur').show()
