@@ -887,7 +887,7 @@ function count_reponses_by_sujet($id_sujet)
 
 function req_reponses_by_sujet($id_sujet)
 {
-    $req = db()->prepare("SELECT c.contenu, c.note, c.date_post, u.nom_utilisateur, u.avatar FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = ?");
+    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, u.nom_utilisateur, u.avatar FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = ?");
     $req->execute([$id_sujet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -897,6 +897,66 @@ function ajouter_reponse_sujet($reponse, $id_utilisateur, $id_sujet)
 {
     $ins = db()->prepare("INSERT INTO aide_contenu(contenu, id_utilisateur, id_sujet) VALUES (?, ?, ?)");
     $ins->execute([$reponse, $id_utilisateur, $id_sujet]);
+}
+
+function req_utilisateurs_sujet($id_sujet)
+{
+    $req = db()->prepare("(SELECT DISTINCT(id_utilisateur) FROM aide_contenu WHERE id_sujet = :id_sujet) UNION (SELECT id_utilisateur FROM aide_sujet WHERE id = :id_sujet)");
+    $req->execute(['id_sujet' => $id_sujet]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function ajouter_notification($id_utilisateur, $contenu, $lien)
+{
+    $ins = db()->prepare("INSERT INTO notifications(id_utilisateur, contenu, lien_notification) VALUES (?, ?, ?)");
+    $ins->execute([$id_utilisateur, $contenu, $lien]);
+}
+
+function sujet_resolu($id_sujet, $resolu)
+{
+    $upd = db()->prepare("UPDATE aide_sujet SET resolu = ? WHERE id = ?");
+    $upd->execute([$resolu, $id_sujet]);
+}
+
+function req_note_by_reponse($id_reponse)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM note_reponse WHERE id_reponse = ?");
+    $count->execute([$id_reponse]);
+
+    if ($count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'] == 0)
+        return 0;
+    
+    $req = db()->prepare("SELECT SUM(note) as note FROM note_reponse WHERE id_reponse = ?");
+    $req->execute([$id_reponse]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['note'];
+}
+
+function req_note_by_utilisateur_reponse($id_reponse, $id_utilisateur)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM note_reponse WHERE id_reponse = ? AND id_utilisateur = ?");
+    $count->execute([$id_reponse, $id_utilisateur]);
+
+    if ($count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'] == 0)
+        return 0;
+
+    $req = db()->prepare("SELECT note FROM note_reponse WHERE id_reponse = ? AND id_utilisateur = ?");
+    $req->execute([$id_reponse, $id_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['note'];
+}
+
+function ajouter_note($note, $id_reponse, $id_utilisateur)
+{
+    $ins = db()->prepare("INSERT INTO note_reponse(id_utilisateur, id_reponse, note) VALUES (?, ?, ?)");
+    $ins->execute([$id_utilisateur, $id_reponse, $note]);
+}
+
+function delete_note($id_reponse, $id_utilisateur)
+{
+    $del = db()->prepare("DELETE FROM note_reponse WHERE id_reponse = ? AND id_utilisateur = ?");
+    $del->execute([$id_reponse, $id_utilisateur]);
 }
 
 function envoi_mail($type, $email, $infos)

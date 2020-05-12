@@ -46,7 +46,7 @@ if (isset($_GET['slug']))
                             <img src="<?= BASEURL; ?>assets/img/calendar.svg">
                             <span class="date_ajout"><?= formate_date($projet['date_ajout']); ?></span>
                         </div>
-                    </div>   
+                    </div>
                 </div>
                 <input type="hidden" name="id_projet" value="<?= $projet['id_projet']; ?>">
                 <div class="contenu_page"></div>

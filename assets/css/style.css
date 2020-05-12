@@ -1521,12 +1521,14 @@ footer .footer_content .footer_content__div .copyright
     cursor: pointer;
 }
 
-.reponse_sujet .votes span.good:hover
+.reponse_sujet .votes span.good:hover,
+.reponse_sujet .votes span.good.actif
 {
     color: var(--blue);
 }
 
-.reponse_sujet .votes span.bad:hover
+.reponse_sujet .votes span.bad:hover,
+.reponse_sujet .votes span.bad.actif
 {
     color: #d60242;
 }
@@ -3125,6 +3127,36 @@ footer .footer_content .footer_content__div .copyright
 
     .mes_messages .message .date_message
     {
+        margin-top: 16px;
+    }
+
+    .post_sujet .content .content_top
+    {
+        display: block;
+    }
+
+    .post_sujet .avatar_container
+    {
+        width: 15%;
+        padding-top: 15%;
+    }
+
+    .post_sujet .content
+    {
+        padding: 0;
+    }
+
+    .post_sujet .content .content_top .description
+    {
+        display: block;
+        width: 100%;
+    }
+
+    .post_sujet .content .content_top .description .actions
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin-top: 16px;
     }
 
