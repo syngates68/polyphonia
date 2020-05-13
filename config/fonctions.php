@@ -740,6 +740,14 @@ function req_nbr_messages_non_lus_by_user($id_utilisateur)
     return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
 }
 
+function req_nbr_notifications_non_lus_by_user($id_utilisateur)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM notifications WHERE id_utilisateur = $id_utilisateur AND lu = 0");
+    $count->execute();
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
 function ajouter_message($id_messagerie, $id_envoi, $id_reception, $message)
 {
     $ins = db()->prepare('INSERT INTO messages(id_messagerie, id_envoi, id_reception, contenu) VALUES (?, ?, ?, ?)');
@@ -911,6 +919,20 @@ function ajouter_notification($id_utilisateur, $contenu, $lien)
 {
     $ins = db()->prepare("INSERT INTO notifications(id_utilisateur, contenu, lien_notification) VALUES (?, ?, ?)");
     $ins->execute([$id_utilisateur, $contenu, $lien]);
+}
+
+function req_notifications_by_user($id_utilisateur)
+{
+    $req = db()->prepare("SELECT * FROM notifications WHERE id_utilisateur = ? ORDER BY id DESC");
+    $req->execute([$id_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function notification_lu($id_notif)
+{
+    $upd = db()->prepare("UPDATE notifications SET lu = 1 WHERE id = ?");
+    $upd->execute([$id_notif]);
 }
 
 function sujet_resolu($id_sujet, $resolu)

@@ -1266,6 +1266,12 @@ footer .footer_content .footer_content__div .copyright
     padding: 32px 0;
 }
 
+.projet_contenu .aide .nouveau_sujet .button_ligne
+{
+    display: flex;
+    align-items: center;
+}
+
 .projet_contenu .aide a
 {
     text-decoration: none;
@@ -1462,6 +1468,12 @@ footer .footer_content .footer_content__div .copyright
     color: var(--grey);
 }
 
+.post_sujet .content .contenu pre,
+.reponse_sujet .reponse pre
+{
+    margin: 16px 0;
+}
+
 .sujet_container .nbr_reponses
 {
     margin-top: 32px;
@@ -1536,6 +1548,32 @@ footer .footer_content .footer_content__div .copyright
 .sujet_container form
 {
     margin-top: 32px;
+}
+
+.sujet_container form .button_ligne
+{
+    display: flex;
+    align-items: center;
+}
+
+.sujet_container form .code
+{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.sujet_container form .code span
+{
+    font-size: 18px;
+    color: var(--grey);
+    transition-duration: .3s;
+}
+
+.sujet_container form .code span:hover
+{
+    color: var(--orange);
+    transition-duration: .3s;
 }
 
 /*********************************************************
@@ -2718,6 +2756,59 @@ footer .footer_content .footer_content__div .copyright
 
 /*********************************************************
 
+    NOTIFICATIONS
+
+*********************************************************/
+
+.mes_notifications
+{
+    padding: 16px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.mes_notifications a
+{
+    color: #000;
+    text-decoration: none;
+}
+
+.mes_notifications .notification
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 8px;
+    border-bottom: 2px solid var(--grey);
+}
+
+.mes_notifications .notification.non_lu
+{
+    background: var(--border);
+}
+
+.mes_notifications .notification .titre_notif
+{
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.mes_notifications .notification .titre_notif span
+{
+    font-size: 25px;
+    margin-right: 8px;
+}
+
+.mes_notifications .notification .date_notif
+{
+    color: var(--grey);
+    font-size: 12px;
+}
+
+/*********************************************************
+
     BLOG
 
 *********************************************************/
@@ -3035,7 +3126,7 @@ footer .footer_content .footer_content__div .copyright
 
     .projet_contenu .projet_actions
     {
-        display: none;
+        /*display: none;*/
     }
 
     .projet_contenu__top .projet_infos
@@ -3130,6 +3221,16 @@ footer .footer_content .footer_content__div .copyright
         margin-top: 16px;
     }
 
+    .projet_contenu .aide
+    {
+        padding: 8px;
+    }
+
+    .projet_contenu .aide .nouveau_sujet form
+    {
+        width: 90%;
+    }
+
     .post_sujet .content .content_top
     {
         display: block;
@@ -3158,6 +3259,22 @@ footer .footer_content .footer_content__div .copyright
         align-items: center;
         justify-content: space-between;
         margin-top: 16px;
+    }
+
+    .mes_notifications
+    {
+        width: 100%;
+    }
+
+    .mes_notifications .notification
+    {
+        display: block;
+    }
+
+    .mes_notifications .notification .date_notif
+    {
+        margin-top: 16px;
+        text-align: right;
     }
 
     .error_content

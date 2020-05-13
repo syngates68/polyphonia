@@ -34,7 +34,7 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                             <?php endif; ?>
                         </div>
                     </div>
-                    <p class="contenu"><?= nl2br($sujet['contenu']); ?></p>
+                    <div class="contenu"><?= nl2br($sujet['contenu']); ?></div>
                 </div>
             </div>
             <div class="nbr_reponses"><?= count_reponses_by_sujet($_GET['slug']); ?> <?= (count_reponses_by_sujet($_GET['slug']) > 1) ? "réponses" : "réponse"; ?></div>
@@ -72,7 +72,9 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                     <input type="hidden" name="utilisateur" value="<?= $_SESSION['utilisateur']; ?>">
                     <input type="hidden" name="sujet" value="<?= $_GET['slug']; ?>">
                     <input type="hidden" name="posteur" value="<?= $sujet['id_utilisateur']; ?>">
-                    <button type="submit" class="btn btn-blue">Répondre</button>
+                    <div class="button_ligne">
+                        <button type="submit" class="btn btn-blue">Répondre</button>
+                    </div>
                 </form>
             </div>
             <?php endif; ?>

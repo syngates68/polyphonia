@@ -7,14 +7,21 @@
         <label for="contenu">Votre sujet</label>
         <textarea name="contenu" id="contenu"></textarea>
     </div>
-    <button type="submit" class="btn btn-blue">Envoyer</button>
+    <div class="button_ligne">
+        <button type="submit" class="btn btn-blue">Envoyer</button>
+    </div>
 </form>
 
+<script>
+    CKEDITOR.replace('contenu', {
+        height: 200
+    });
+</script>
 <script>
 $('.nouveau_sujet form').submit(function()
 {
     var titre = $('input[name="sujet"]').val()
-    var contenu = $('textarea[name="contenu"]').val()
+    var contenu = CKEDITOR.instances['contenu'].getData()
 
     $.post(baseurl + 'inc/ajouter_sujet.php',
     {

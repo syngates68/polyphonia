@@ -56,9 +56,9 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                             <i class="material-icons">chat<?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) == 0) : ?>_bubble<?php endif; ?></i>
                             <a href="<?= BASEURL ?>mes_messages.html">Messages <?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>(<?= req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']); ?>)<?php endif; ?></a>
                         </div>
-                        <div class="dropdown_lien">
-                            <i class="material-icons">notifications_active</i>
-                            <a href="<?= BASEURL ?>messages.html">Notifications</a>
+                            <div class="dropdown_lien <?php if (req_nbr_notifications_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>has_notification<?php endif; ?>">
+                            <i class="material-icons">notifications<?php if (req_nbr_notifications_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>_active<?php endif; ?></i>
+                            <a href="<?= BASEURL ?>notifications.html">Notifications <?php if (req_nbr_notifications_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>(<?= req_nbr_notifications_non_lus_by_user($_SESSION['utilisateur']); ?>)<?php endif; ?></a>
                         </div>
                         <div class="dropdown_lien">
                             <i class="material-icons">power_settings_new</i>
@@ -68,9 +68,9 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                         </div>
                     </div>
                     <!-- Notifications -->
-                    <?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>
+                    <?php if (req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) > 0 || req_nbr_notifications_non_lus_by_user($_SESSION['utilisateur']) > 0) : ?>
                         <div class="notification">
-                            <?= req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']); ?>
+                            <?= req_nbr_messages_non_lus_by_user($_SESSION['utilisateur']) + req_nbr_notifications_non_lus_by_user($_SESSION['utilisateur']); ?>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>

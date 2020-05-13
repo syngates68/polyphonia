@@ -35,9 +35,16 @@ ob_start();
     <script src="<?= BASEURL; ?>assets/js/emoji-button-3.0.3.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="icon" type="image/png" href="<?= BASEURL ?>assets/img/favicon.png" />
-    <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+    <!--<script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>-->
+    <script src="<?= BASEURL; ?>assets/ckeditor/ckeditor.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Highlight JS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/railscasts.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
     <script>
         var baseurl = "<?= BASEURL; ?>"
     </script>

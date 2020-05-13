@@ -13,8 +13,8 @@ if (champs_non_vides([$_POST['reponse']]))
     {
         if ($utilisateur['id_utilisateur'] != $_POST['id_utilisateur'])
         {
-            $contenu = "Une nouvelle réponse a été ajouté au sujet ".req_sujet_by_id($_POST['id_sujet'])['titre'];
-            ajouter_notification($utilisateur['id_utilisateur'], $contenu, BASEURL.'sujet/'.$_POST['id_sujet'].'.html');
+            $contenu = "Une nouvelle réponse a été ajoutée au sujet ".req_sujet_by_id($_POST['id_sujet'])['titre'];
+            ajouter_notification($utilisateur['id_utilisateur'], $contenu, 'sujet/'.$_POST['id_sujet'].'.html');
         }
     }
 }
