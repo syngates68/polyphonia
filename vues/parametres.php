@@ -26,7 +26,7 @@ if (isset($_SESSION['utilisateur']))
         ?>
         <div class="parametres">
             <div class="avatar_container">
-                <div class="titre_section">Photo de profil</div>
+                <div class="titre_section"><span class="material-icons">image</span>Photo de profil</div>
                 <div class="avatar">
                     <img src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>">
                     <div class="change_avatar" id="change_avatar">Cliquer ou déposer une photo</div>
@@ -35,7 +35,7 @@ if (isset($_SESSION['utilisateur']))
             </div>
             <div class="infos_container">
                 <form method="POST" action="./inc/editer_profil.php">
-                    <div class="titre_section">Informations du compte</div>
+                    <div class="titre_section"><span class="material-icons">person</span>Informations du compte</div>
                     <div class="form_ligne">
                         <label for="nom_utilisateur">Nom d'utilisateur</label>
                         <input type="text" name="nom_utilisateur" id="nom_utilisateur" value="<?= $utilisateur['nom_utilisateur']; ?>">
@@ -53,7 +53,7 @@ if (isset($_SESSION['utilisateur']))
                     </div>
                 </form>
                 <form method="POST" action="./inc/editer_mdp.php">
-                    <div class="titre_section">Mot de passe</div>
+                    <div class="titre_section"><span class="material-icons">lock</span>Mot de passe</div>
                     <div class="form_ligne">
                         <label>Mot de passe actuel</label>
                         <input type="password" name="pass">
@@ -70,8 +70,15 @@ if (isset($_SESSION['utilisateur']))
                         <button class="btn btn-blue" type="submit" name="editer_mdp">Modifier</button>
                     </div>
                 </form>
+                <div class="notifications">
+                    <div class="titre_section"><span class="material-icons">notifications</span>Notifications</div>
+                    <div class="form_ligne">
+                        <input type="checkbox" name="notifications" <?php if ($utilisateur['notifications'] == 1) : ?>checked<?php endif; ?>>
+                        <label>Recevoir les notifications</label>
+                    </div>
+                </div>
                 <form method="POST" action="./inc/reseaux_sociaux.php">
-                    <div class="titre_section">Réseaux sociaux</div>
+                    <div class="titre_section"><span class="material-icons">group</span>Réseaux sociaux</div>
                     <div class="form_ligne">
                         <label>Facebook (facultatif)</label>
                         <input type="text" name="facebook" placeholder="Lien de votre compte Facebook" value="<?= req_utilisateur_by_id($_SESSION['utilisateur'])['facebook']; ?>">
@@ -88,7 +95,7 @@ if (isset($_SESSION['utilisateur']))
                         <button class="btn btn-blue" type="submit" name="editer_social">Modifier</button>
                     </div>
                 </form>
-                <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] != 'admin') : ?>
+                <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] != 1 && req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] != 2) : ?>
                 <div class="supprimer_compte">
                     <div class="titre_section">Suppression du compte</div>
                     <div class="bloc_button">

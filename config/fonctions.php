@@ -163,6 +163,58 @@ function formate_date_heure(string $date)
     return date("d/m/Y à H:i:s", strtotime($date)); 
 }
 
+function ecart_date($date)
+{
+    setlocale(LC_TIME, 'fra_fra');
+    $now = time();
+    $created = strtotime($date);
+    // La différence est en seconde
+    //echo $now;
+    $diff = $now-$created;
+    $m = ($diff)/(60); // on obtient des minutes
+    $h = ($diff)/(60*60); // ici des heures
+    $j = ($diff)/(60*60*24); // jours
+    $s = ($diff)/(60*60*24*7); // semaines
+    $mo = ($diff)/(60*60*24*7*4); //mois
+    $a = ($diff)/(60*60*24*7*4*12); // années
+    if ($diff < 60) { // "à l'instant"
+        return 'À l\'instant';
+    }
+    elseif ($m < 60) { // "il y a x minutes"
+        $minute = (floor($m) == 1) ? 'minute' : 'minutes';
+        return 'Il y a '.floor($m).' '.$minute;
+    }
+    elseif ($h < 24) { // " il y a x heures"
+        $heure = (floor($h) <= 1) ? 'heure' : 'heures';
+        $dateFormated = 'Il y a '.floor($h).' '.$heure;
+        return $dateFormated;
+    }
+    elseif ($j < 7) { // " il y a x jours"
+        //$jour = (floor($j) <= 1) ? 'jour' : 'jours';
+        if (floor($j) <= 1){
+            $dateFormated = 'Hier';
+        }
+        else{
+            $dateFormated = 'Il y a '.floor($j).' jours';
+        }
+        return $dateFormated;
+    }
+    elseif ($s < 5) { // " il y a x semaines"
+        $semaine = (floor($s) <= 1) ? 'semaine' : 'semaines';
+        $dateFormated = 'Il y a '.floor($s).' '.$semaine;
+        return $dateFormated;
+    }
+    elseif ($mo < 12){
+        $dateFormated = 'Il y a '.floor($mo).' mois';
+        return $dateFormated;
+    }
+    else{
+        $annees = (floor($a) <= 1) ? 'an' : 'ans';
+        $dateFormated = 'Il y a '.floor($a).' '.$annees;
+        return $dateFormated;
+    }
+}
+
 /**
  * extrait_texte
  *
@@ -562,7 +614,7 @@ function desactive_compte(string $date_desactivation, int $id)
  */
 function supprime_compte(int $motif_suppression, int $id)
 {
-    $sql = 'UPDATE utilisateurs SET email = NULL, nom_utilisateur = NULL, pass = NULL, bio = NULL, rang = NULL, avatar = NULL, supprime = 1, motif_supprime = ? WHERE id = ?';
+    $sql = 'UPDATE utilisateurs SET email = NULL, nom_utilisateur = NULL, pass = NULL, bio = NULL, id_droit = NULL, avatar = NULL, supprime = 1, motif_supprime = ? WHERE id = ?';
 
     $upd = db()->prepare($sql);
     $upd->execute([$motif_suppression, $id]);
@@ -662,7 +714,7 @@ function verifie_email(string $email)
  */
 function ajouter_utilisateur(string $email, string $nom_utilisateur, string $pass, string $code)
 {
-    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang, code_confirm) VALUES(?, ?, ?, ?, "externe", ?)');
+    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, id_droit, code_confirm) VALUES(?, ?, ?, ?, 4, ?)');
     $ins->execute(
     [
         $email,
@@ -686,7 +738,7 @@ function ajouter_utilisateur(string $email, string $nom_utilisateur, string $pas
  */
 function ajouter_utilisateur_admin(string $email, string $nom_utilisateur, string $pass)
 {
-    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, rang, confirm) VALUES(?, ?, ?, ?, "admin", 1)');
+    $ins = db()->prepare('INSERT INTO utilisateurs(email, nom_utilisateur, pass, derniere_connexion, id_droit, confirm) VALUES(?, ?, ?, ?, 2, 1)');
     $ins->execute(
     [
         $email,
@@ -718,7 +770,7 @@ function req_liste_motifs_suppression()
  */
 function req_liste_utilisateurs()
 {
-    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.rang, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, ms.libelle as motif_suppression FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime ORDER BY u.id');
+    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, ms.libelle as motif_suppression, d.libelle as rang FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime LEFT JOIN droits d ON u.id_droit = d.id ORDER BY u.id');
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -857,7 +909,7 @@ function count_sujets_by_projet($id_projet)
 
 function req_sujets_by_projet($id_projet)
 {
-    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id_projet = ? ORDER BY a.id DESC");
+    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id_projet = ? ORDER BY a.id DESC");
     $req->execute([$id_projet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -879,7 +931,7 @@ function count_sujet_by_id($id_sujet)
 
 function req_sujet_by_id($id_sujet)
 {
-    $count = db()->prepare("SELECT a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.id_utilisateur, a.resolu, u.nom_utilisateur, u.avatar FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id = ?");
+    $count = db()->prepare("SELECT a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.id_utilisateur, a.resolu, a.ouvert, u.nom_utilisateur, u.avatar FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id = ?");
     $count->execute([$id_sujet]);
 
     return $count->fetchAll(PDO::FETCH_ASSOC)[0];
@@ -895,7 +947,7 @@ function count_reponses_by_sujet($id_sujet)
 
 function req_reponses_by_sujet($id_sujet)
 {
-    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, u.nom_utilisateur, u.avatar FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = ?");
+    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, u.nom_utilisateur, u.avatar, d.libelle as rang FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur LEFT JOIN droits d ON d.id = u.id_droit WHERE c.id_sujet = ? ORDER BY c.id");
     $req->execute([$id_sujet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -915,10 +967,10 @@ function req_utilisateurs_sujet($id_sujet)
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function ajouter_notification($id_utilisateur, $contenu, $lien)
+function ajouter_notification($id_utilisateur, $contenu, $type, $lien)
 {
-    $ins = db()->prepare("INSERT INTO notifications(id_utilisateur, contenu, lien_notification) VALUES (?, ?, ?)");
-    $ins->execute([$id_utilisateur, $contenu, $lien]);
+    $ins = db()->prepare("INSERT INTO notifications(id_utilisateur, contenu, type_notification, lien_notification) VALUES (?, ?, ?, ?)");
+    $ins->execute([$id_utilisateur, $contenu, $type, $lien]);
 }
 
 function req_notifications_by_user($id_utilisateur)
@@ -939,6 +991,12 @@ function sujet_resolu($id_sujet, $resolu)
 {
     $upd = db()->prepare("UPDATE aide_sujet SET resolu = ? WHERE id = ?");
     $upd->execute([$resolu, $id_sujet]);
+}
+
+function fermer_sujet($id_sujet)
+{
+    $upd = db()->prepare("UPDATE aide_sujet SET ouvert = 0 WHERE id = ?");
+    $upd->execute([$id_sujet]);
 }
 
 function req_note_by_reponse($id_reponse)
@@ -979,6 +1037,82 @@ function delete_note($id_reponse, $id_utilisateur)
 {
     $del = db()->prepare("DELETE FROM note_reponse WHERE id_reponse = ? AND id_utilisateur = ?");
     $del->execute([$id_reponse, $id_utilisateur]);
+}
+
+function update_notifications($actif, $id_utilisateur)
+{
+    $upd = db()->prepare("UPDATE utilisateurs SET notifications = ? WHERE id = ?");
+    $upd->execute([$actif, $id_utilisateur]);
+}
+
+function req_reponses_by_user($id_utilisateur)
+{
+    $req = db()->prepare("SELECT * FROM aide_contenu WHERE id_utilisateur = ?");
+    $req->execute([$id_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function req_sujets_by_user($id_utilisateur, $resolu, $ouvert)
+{
+    $sql = "SELECT * FROM aide_sujet WHERE id_utilisateur = ?";
+    if ($resolu != NULL)
+        $sql .= " AND resolu = 1";
+    if ($ouvert != NULL)
+        $sql .= " AND ouvert = 0";
+
+    $req = db()->prepare($sql);
+    $req->execute([$id_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function req_projets_by_user($id_utilisateur)
+{
+    $req = db()->prepare("SELECT * FROM projets WHERE id_redacteur = ?");
+    $req->execute([$id_utilisateur]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function delete_reponses_by_user($id_utilisateur)
+{
+    $del = db()->prepare("DELETE FROM aide_contenu WHERE id_utilisateur = ?");
+    $del->execute([$id_utilisateur]);
+}
+
+function ajouter_favoris($id_projet, $id_utilisateur)
+{
+    $ins = db()->prepare("INSERT INTO favoris(id_projet, id_utilisateur) VALUES (?, ?)");
+    $ins->execute([$id_projet, $id_utilisateur]);
+}
+
+function delete_favoris($id_projet, $id_utilisateur)
+{
+    $del = db()->prepare("DELETE FROM favoris WHERE id_projet = ? AND id_utilisateur = ?");
+    $del->execute([$id_projet, $id_utilisateur]);
+}
+
+function req_liste_rangs()
+{
+    $req = db()->prepare("SELECT * FROM droits");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function req_rang_by_id($id_rang)
+{
+    $req = db()->prepare("SELECT libelle FROM droits WHERE id = ?");
+    $req->execute([$id_rang]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['libelle'];
+}
+
+function update_droit_user($id_utilisateur, $id_droit)
+{
+    $upd = db()->prepare("UPDATE utilisateurs SET id_droit = ? WHERE id = ?");
+    $upd->execute([$id_droit, $id_utilisateur]);
 }
 
 function envoi_mail($type, $email, $infos)

@@ -267,10 +267,23 @@ $(document).on('click', '.administration .fiche_utilisateur', function(e)
     });
 })
 
-$(document).on('click', '.fermer', function()
+$(document).on('click', '.fermer, .close', function()
 {
     $('.modal_fiche_utilisateur').hide()
     $('.has_modal').removeClass('is_visible')
+})
+
+$(document).on('change', 'select[name="rang"]', function()
+{
+    $.post(baseurl + 'inc/changer_rang.php',
+    {
+        id_utilisateur : $('input[name="utilisateur"]').val(),
+        id_droit : $(this).val()
+    },
+    function()
+    {
+        location.reload()
+    })
 })
 
 /**

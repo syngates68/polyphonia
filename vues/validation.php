@@ -4,7 +4,7 @@ if (isset($_SESSION['compte_supprime'])) :
     setcookie('auth', '', time() - 3600, '/', '', false, true);
 ?>
 <div class="container">
-    <div class="succes_suppression">
+    <div class="succes">
         Votre compte a bien été désactivé, nous sommes désolé de vous voir partir 
         et espérons que votre temps passé sur Polyphonia vous aura plu malgré tout!<br/>
         Vous allez-être redirigé automatiquement.

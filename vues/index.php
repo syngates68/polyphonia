@@ -21,6 +21,7 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                         <a href="<?= BASEURL ?>">Retour au site</a>
                         <a href="<?= BASEURL ?>administration.html">Projets</a>
                         <a href="<?= BASEURL ?>liste_utilisateurs.html">Utilisateurs</a>
+                        <a href="<?= BASEURL ?>liste_utilisateurs.html">Statistiques</a>
                     <?php endif; ?>
                     <div class="on_mobile_only">
                     <?php if (!isset($_SESSION['utilisateur'])) : ?>
@@ -38,7 +39,7 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                 <?php else : ?>
                     <a href="#" id="dropdown"><img class="avatar" src="<?= BASEURL; ?><?= req_utilisateur_by_id($_SESSION['utilisateur'])['avatar']; ?>"></a>
                     <div class="dropdown">
-                        <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] == 'admin') : ?>
+                        <?php if (req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2) : ?>
                         <div class="dropdown_lien">
                             <i class="material-icons">how_to_reg</i>
                             <a href="<?= BASEURL ?>administration.html">Administration</a>

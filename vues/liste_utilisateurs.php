@@ -1,11 +1,21 @@
 <?php
 
-if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisateur'])['rang'] == 'admin'))
+if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2))
 {
 
 ?>
     <div class="container">
         <h1>Admin - Liste des utilisateurs</h1>
+
+        <?php
+            //Message de succès
+            if (isset($_SESSION['succes'])) : 
+        ?>
+                <div class="succes" style="float:left;"><?= $_SESSION['succes']; ?></div>
+        <?php
+            unset($_SESSION['succes']); 
+            endif;
+        ?>
 
         <div class="administration">
             <div class="tbl_top">
@@ -43,7 +53,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 <div class="tbl_contenu__col">
                     <?php if ($utilisateur['motif_suppression'] == NULL) : ?><img class="photo_profil" src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>"><br/><?php endif; ?>
                     <span class="titre"><?= $nom_utilisateur; ?></span>
-                    <?php if ($utilisateur['rang'] == 'admin') : ?> <br/> Administrateur <?php endif; ?>
+                    <?php if ($utilisateur['rang'] == 'superadmin' || $utilisateur['rang'] == 'administrateur') : ?> <br/> Administrateur <?php endif; ?>
                     <?php if ($utilisateur['motif_suppression'] != NULL) : ?> <br/>(Motif : <?= $utilisateur['motif_suppression']; ?>) <?php endif; ?>
                     <?php if ($utilisateur['bloque'] == 1) : ?> <br/>(Compte bloqué) <?php endif; ?>
                 </div>
@@ -61,11 +71,16 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                             <div class="dropdown_lien">
                                 <a href="#" utilisateur="<?= $utilisateur['id']; ?>" class="btn_administration fiche_utilisateur"><span class="material-icons">folder_shared</span>Fiche utilisateur</a>
                             </div>
-                            <?php if ($utilisateur['rang'] != 'admin') : ?> 
+                            <?php
+                            //On laisse la possibilité au superadmin de gérer tous les types d'utilisateur, et les administrateurs tous les utilisateurs saufs les autres admins et superadmins
+                            if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 && ($utilisateur['rang'] != 'superadmin')) || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 && ($utilisateur['rang'] != 'administrateur' && $utilisateur['rang'] != 'superadmin')) : 
+                            ?> 
                                 <div class="dropdown_lien">
                                     <a href="#" utilisateur="<?= $utilisateur['id']; ?>" class="btn_administration <?php if($utilisateur['bloque'] == 1) : ?>de<?php endif; ?>bloquer_utilisateur"><?php if($utilisateur['bloque'] == 1) : ?><span class="material-icons">check_circle</span>Débloquer<?php else : ?><span class="material-icons">block</span>Bloquer<?php endif; ?></a> 
                                 </div>
-                            <?php endif; ?>
+                            <?php 
+                            endif; 
+                            ?>
                         </div>
                     <?php endif; ?>
                 </div>

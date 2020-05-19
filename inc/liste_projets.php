@@ -32,15 +32,13 @@ $nbr_pages = req_nbr_pages(12, $_POST['recherche']);
             <div class="titre_projet"><a href="<?= BASEURL; ?>projet/<?= $projet['slug'].'-'.$projet['id_projet']; ?>.html" class="btn_lire_projet" projet="<?= $projet['id_projet']; ?>"><?= $projet['titre']; ?></a></div>
         </div>
         <div class="footer_projet">
-            <div class="infos_projet">
-                <div class="auteur_projet">
-                    <img src="<?= BASEURL ?>assets/img/user.svg">
-                    <div class="nom_auteur"><a href="<?= BASEURL; ?>utilisateur/<?= $projet['nom_utilisateur']; ?>.html"><?= $projet['nom_utilisateur']; ?></a></div>
-                </div>
-                <div class="date_projet">
-                    <img src="<?= BASEURL ?>assets/img/calendar.svg">
-                    <div class="date"><?= formate_date($projet['date_ajout']); ?></div>
-                </div>
+            <div class="auteur_projet">
+                <img src="<?= BASEURL ?>assets/img/user.svg">
+                <div class="nom_auteur"><a href="<?= BASEURL; ?>utilisateur/<?= $projet['nom_utilisateur']; ?>.html"><?= $projet['nom_utilisateur']; ?></a></div>
+            </div>
+            <div class="date_projet">
+                <img src="<?= BASEURL ?>assets/img/calendar.svg">
+                <div class="date"><?= formate_date($projet['date_ajout']); ?></div>
             </div>
         </div>
     </div>

@@ -2,4 +2,16 @@
 include('../config/config.php');
 include('../config/fonctions.php');
 
-notification_lu($_POST['id_notif']);
+if (stripos($_POST['id_notif'], ';') != '-1')
+{
+    $tab = explode(';', $_POST['id_notif']);
+
+    for ($i = 0; $i < sizeof($tab); $i++)
+    {
+        notification_lu($tab[$i]);
+    }
+}
+else
+{
+    notification_lu($_POST['id_notif']);
+}

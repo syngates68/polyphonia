@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 23:45
+-- Généré le :  mar. 19 mai 2020 à 23:44
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -25,52 +25,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `note_reponse`
+-- Structure de la table `favoris`
 --
 
-DROP TABLE IF EXISTS `note_reponse`;
-CREATE TABLE IF NOT EXISTS `note_reponse` (
+DROP TABLE IF EXISTS `favoris`;
+CREATE TABLE IF NOT EXISTS `favoris` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_projet` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
-  `id_reponse` int(11) NOT NULL,
-  `note` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `note_reponse`
+-- Déchargement des données de la table `favoris`
 --
 
-INSERT INTO `note_reponse` (`id`, `id_utilisateur`, `id_reponse`, `note`) VALUES
-(10, 6, 8, -1),
-(11, 2, 8, -1),
-(12, 8, 8, -1),
-(13, 8, 2, 1),
-(14, 1, 4, 1),
-(15, 1, 8, -1),
-(18, 1, 10, -1),
-(19, 1, 11, 1),
-(20, 1, 19, 1),
-(21, 2, 19, 1),
-(22, 2, 20, 1),
-(23, 1, 16, 1),
-(24, 1, 12, 1),
-(26, 1, 9, 1),
-(38, 1, 2, 1),
-(41, 1, 3, 1),
-(44, 1, 22, 1),
-(45, 1, 21, 1),
-(46, 1, 23, -1),
-(47, 15, 7, 1),
-(48, 15, 6, 1),
-(49, 15, 5, 1),
-(50, 15, 23, -1),
-(51, 2, 24, 1),
-(52, 15, 27, 1),
-(53, 1, 27, 1),
-(54, 1, 33, 1),
-(55, 1, 41, 1),
-(56, 7, 31, -1);
+INSERT INTO `favoris` (`id`, `id_projet`, `id_utilisateur`) VALUES
+(1, 32, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

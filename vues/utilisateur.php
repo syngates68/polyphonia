@@ -39,7 +39,7 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0)
                 <div class="info biographie">
                     <p><span class="label"><i class="material-icons">edit</i>Biographie</span></p>
                     <?php if ($utilisateur['bio'] != NULL && $utilisateur['bio'] != '') : ?>
-                        <?= $utilisateur['bio']; ?>
+                        <?= nl2br($utilisateur['bio']); ?>
                     <?php else : ?>
                         <p style="color:red;">Aucune bio</p>
                     <?php endif; ?>

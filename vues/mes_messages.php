@@ -14,7 +14,7 @@
                         <img src="<?= BASEURL; ?><?= req_utilisateur_by_id($id_utilisateur)['avatar']; ?>">
                         <div class="nom_utilisateur">
                             <?= req_utilisateur_by_id($id_utilisateur)['nom_utilisateur']; ?>
-                            <?php if(req_utilisateur_by_id($id_utilisateur)['rang'] == 'admin') : ?><span class="badge_admin material-icons">verified_user</span><?php endif; ?>
+                            <?php if(req_utilisateur_by_id($id_utilisateur)['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2) : ?><span class="badge_admin material-icons">verified_user</span><?php endif; ?>
                         </div>
                         <div class="contenu">
                             <?php $envoi = ($message['id_envoi'] == $_SESSION['utilisateur']) ? 'Vous' : req_utilisateur_by_id($message['id_envoi'])['nom_utilisateur']; ?>

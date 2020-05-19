@@ -87,3 +87,16 @@ function uploadImage(image)
         }
     })
 }
+
+$(document).on('change', 'input[name="notifications"]', function()
+{
+    if ($(this).is(':checked'))
+        var actif = 1
+    else
+        var actif = 0
+
+    $.post(baseurl + 'inc/activer_notifications.php',
+    {
+        actif : actif
+    })
+})

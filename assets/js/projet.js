@@ -43,67 +43,36 @@ $(document).on('click', '.suggerer_modifications', function()
 
 setTimeout(function() { $('.succes_vanishing').slideUp() }, 4000)
 
-$(document).on('click', '.aide .btn_nouveau_sujet', function()
+$(document).on('click', '.page_aide', function()
 {
-    if ($('.aide .nouveau_sujet').css('display') == 'none')
-    {
-        $.post(baseurl + 'inc/nouveau_sujet.php',
-        {
-            
-        },
-        function(data)
-        {
-            $('.aide .nouveau_sujet').html(data).slideDown()
-        })
-    }
+    location.href = $(this).attr('href')
 })
 
-$(document).ready(function()
+$(document).on('click', '.ajouter_favoris', function()
 {
-    var actif = $('.projet_actions a.actif').attr('id')
-    
-    if (actif == 'description')
+    $.post(baseurl + 'inc/favoris.php',
     {
-        $.post(baseurl + 'inc/contenu_projet.php',
-        {
-            id_projet : $('input[name="id_projet"]').val()
-        },
-        function(data)
-        {
-            $('.contenu_page').html(data)
-        })
-    }
+        favoris : 1,
+        id_projet : $(this).attr('id').replace('favoris_', '')
+    },
+    function()
+    {
+        $('.succes_favoris').slideDown()
+        $(this).html('<span class="material-icons">favorite</span>Retirer des favoris')
+        $(this).removeClass('ajouter_favoris').addClass('retirer_favoris')
+    })
 })
 
-$(document).on('click', '.projet_actions a', function(e)
+$(document).on('click', '.retirer_favoris', function()
 {
-    e.preventDefault()
-    if (!$(this).hasClass('actif'))
+    $.post(baseurl + 'inc/favoris.php',
     {
-        $('.projet_actions .actif').removeClass('actif')
-        $(this).addClass('actif')
-    }
-
-    if ($(this).attr('id') == 'description')
+        favoris : 0,
+        id_projet : $(this).attr('id').replace('favoris_', '')
+    },
+    function()
     {
-        $.post(baseurl + 'inc/contenu_projet.php',
-        {
-            id_projet : $('input[name="id_projet"]').val()
-        },
-        function(data)
-        {
-            $('.contenu_page').html(data)
-        })
-    }
-    else if ($(this).attr('id') == 'aide')
-    {
-        $.post(baseurl + 'inc/aide_projet.php',
-        {
-            id_projet : $('input[name="id_projet"]').val()
-        },
-        function(data)
-        {
-            $('.contenu_page').html(data)
-        })
-    }
+        $(this).html('<span class="material-icons">favorite</span>Ajouter aux favoris')
+        $(this).removeClass('retirer_favoris').addClass('ajouter_favoris')
+    })
 })

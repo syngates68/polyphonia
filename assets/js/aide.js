@@ -1,3 +1,20 @@
+setTimeout(function() { $('.succes_vanishing').slideUp() }, 4000)
+
+$(document).on('click', '.aide .btn_nouveau_sujet', function()
+{
+    if ($('.aide .nouveau_sujet').css('display') == 'none')
+    {
+        $.post(baseurl + 'inc/nouveau_sujet.php',
+        {
+            
+        },
+        function(data)
+        {
+            $('.aide .nouveau_sujet').html(data).slideDown()
+        })
+    }
+})
+
 $('.sujet_container form').submit(function()
 {
     var reponse = CKEDITOR.instances['reponse'].getData()
@@ -123,4 +140,26 @@ $(document).on('click', '.bad', function()
         note : '-1',
         id_reponse : id_reponse
     })
+})
+
+$(document).on('click', '.actions .fermer', function()
+{
+    if (confirm("Confirmer la fermeture de ce sujet?"))
+    {
+        var id_sujet = $(this).attr('id').replace('fermer_', '')
+    
+        $.post(baseurl + 'inc/fermer_sujet.php',
+        {
+            id_sujet : id_sujet
+        },
+        function()
+        {
+            location.reload()
+        })
+    }
+})
+
+$(document).on('click', '.page_projet', function()
+{
+    location.href = $(this).attr('href')
 })

@@ -7,12 +7,24 @@ if (isset($_SESSION['utilisateur'])) :
         <?php 
         if (sizeof(req_notifications_by_user($_SESSION['utilisateur'])) > 0)
         {
+        ?>
+            <button type="button" class="btn btn-blue marquer_lu">Tout marquer comme lu</button><br/>
+        <?php
             foreach(req_notifications_by_user($_SESSION['utilisateur']) as $notification)
             {
             ?>
                 <a href="<?= BASEURL.$notification['lien_notification']; ?>" id="lien_<?= $notification['id']; ?>">
-                    <div class="notification <?php if ($notification['lu'] == 0) : ?> non_lu <?php endif; ?>">
-                        <div class="titre_notif"><span class="material-icons">help_outline</span><?= $notification['contenu']; ?></div>
+                    <div id="notification_<?= $notification['id']; ?>" class="notification <?php if ($notification['lu'] == 0) : ?> non_lu <?php endif; ?>">
+                        <div class="titre_notif">
+                            <span class="material-icons">
+                                <?php if ($notification['type_notification'] == 'reponse') : ?>
+                                    help_outline
+                                <?php elseif ($notification['type_notification'] == 'sujet_ferme') : ?>
+                                    highlight_off
+                                <?php endif; ?>
+                            </span>
+                            <?= $notification['contenu']; ?>
+                        </div>
                         <div class="date_notif"><?= formate_date_heure($notification['date_ajout']); ?></div>
                     </div>
                 </a>

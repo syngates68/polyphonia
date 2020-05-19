@@ -35,14 +35,7 @@ $('.nouveau_sujet form').submit(function()
             $('.aide .erreur_sujet').html(data).slideDown()
         else
         {
-            $.post(baseurl + 'inc/aide_projet.php',
-            {
-                id_projet : $('input[name="id_projet"]').val()
-            },
-            function(data)
-            {
-                $('.contenu_page').html(data)
-            })
+            location.reload()
         }
     })
     return false

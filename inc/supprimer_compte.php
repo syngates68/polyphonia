@@ -16,7 +16,8 @@ if (isset($_POST['supprimer_compte']))
                 {
                     if (!isset($_POST['garder_commentaires']) && $_POST['type_suppression'] == 1)
                     {
-                        //SUPPRIMER LES COMMENTAIRES LAISSES PAR L'UTILISATEUR
+                        //On supprime toutes les réponses laissés sur des sujets
+                        delete_reponses_by_user($_SESSION['utilisateur']);
                     }
 
                     $_SESSION['compte_supprime'] = true;
