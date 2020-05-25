@@ -5,97 +5,77 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
 
 ?>
     <div class="container">
-        <h1>Admin - Liste des projets</h1>
+        <h1>Admin - Tableau de bord</h1>
 
-        <?php
-            //Message de succès
-            if (isset($_SESSION['succes'])) : 
-        ?>
-                <div class="succes" style="float:left;"><?= $_SESSION['succes']; ?></div>
-        <?php
-            unset($_SESSION['succes']); 
-            endif;
-        ?>
+        <div class="tabor">
 
-        <div class="administration">
-            <div class="tbl_top">
-                <div class="admin_cta">
-                    <span class="material-icons" title="Supprimer les éléments sélectionnés">delete</span>
+            <a href="<?= BASEURL; ?>liste_projets.html">
+                <div class="admin-card">
+                    <span class="material-icons">description</span>
+                    <h3>Gestion des projets</h3>
                 </div>
-                <div class="admin_btn">
-                    <a href="<?= BASEURL; ?>nouveau_projet.html" class="btn btn-flex btn-orange"><span class="material-icons">add</span>Ajouter un projet</a>
-                </div>
-            </div>
-            <div class="tbl_header">
-                <div class="tbl_header__col"><input type="checkbox"></div>
-                <div class="tbl_header__col">Illustration</div>
-                <div class="tbl_header__col">Titre</div>
-                <div class="tbl_header__col">Vues</div>
-                <div class="tbl_header__col">Date d'ajout</div>
-                <div class="tbl_header__col"></div>
-            </div>
+            </a>
 
-        <?php
+            <a href="<?= BASEURL; ?>liste_utilisateurs.html">
+                <div class="admin-card">
+                    <span class="material-icons">account_circle</span>
+                    <h3>Gestion des utilisateurs</h3>
+                </div>
+            </a>
 
-        $liste_projets = req_liste_projets(NULL, NULL, true);
-        foreach($liste_projets as $projet) :
+            <a href="#">
+                <div class="admin-card">
+                    <span class="material-icons">equalizer</span>
+                    <h3>Statistiques</h3>
+                </div>
+            </a>
 
-            $illustration = ($projet['illustration'] != NULL) ? $projet['illustration'] : 'assets/img/aucune_image.png';
-
-        ?>
-            
-        <div class="tbl_contenu <?php if ($projet['brouillon'] == 1) : ?> brouillon <?php endif; ?>">
-                <div class="tbl_contenu__col">
-                    <input type="checkbox">
-                </div>
-                <div class="tbl_contenu__col">
-                    <img src="<?= BASEURL; ?><?= $illustration; ?>">
-                </div>
-                <div class="tbl_contenu__col">
-                    <span class="titre"><?= $projet['titre']; ?></span>
-                    <?php if ($projet['brouillon'] == 1) : ?>
-                        <p class="label_brouillon">(Brouillon)</p>
-                    <?php endif; ?>
-                </div>
-                <div class="tbl_contenu__col">
-                    <?= $projet['vues']; ?>
-                </div>
-                <div class="tbl_contenu__col">
-                    <?= formate_date($projet['date_ajout']); ?>
-                    <?php if ($projet['brouillon'] == 1 && $projet['date_sauvegarde'] != NULL) : ?>
-                        <p class="label_brouillon">(Dernière sauvegarde le <?= formate_date_heure($projet['date_sauvegarde']); ?>)</p>
-                    <?php endif; ?>
-                    <?php if ($projet['brouillon'] == 0 && $projet['date_update'] != NULL) : ?>
-                        <p class="label_brouillon">(Mis à jour <?= formate_date_heure($projet['date_update']); ?>)</p>
-                    <?php endif; ?>
-                </div>
-                <div class="tbl_contenu__col tbl_actions">
-                    <span class="material-icons afficher_actions" dropdown="dropdown_menu_<?= $projet['id_projet']; ?>">more_horiz</span>
-                    <div class="dropdown_menu" id="dropdown_menu_<?= $projet['id_projet']; ?>">
-                        <?php if ($projet['brouillon'] == 0) : ?>
-                            <div class="dropdown_lien">
-                                <a href="<?= BASEURL ?>editer_projet/<?= $projet['id_projet']; ?>.html" class="btn_administration editer"><span class="material-icons">create</span>Editer le projet</a>
-                            </div>
-                            <div class="dropdown_lien">
-                                <a href="#" class="btn_administration remettre_brouillon" projet="<?= $projet['id_projet']; ?>"><span class="material-icons">file_copy</span>Remettre en brouillon</a>
-                            </div>
-                        <?php else : ?>
-                            <div class="dropdown_lien">
-                                <a href="<?= BASEURL ?>brouillon/<?= $projet['id_projet']; ?>.html" class="btn_administration brouillon"><span class="material-icons">file_copy</span>Reprendre brouillon</a>
-                            </div>
-                        <?php endif; ?>
-                        <div class="dropdown_lien">
-                            <a href="#" class="btn_administration supprimer" type="<?php if ($projet['brouillon'] == 0) : ?>projet<?php else : ?>brouillon<?php endif; ?>" projet="<?= $projet['id_projet']; ?>"><span class="material-icons">delete</span>Supprimer</a>
+            <a href="#">
+                <div class="admin-card">
+                    <span class="material-icons">report_problem</span>
+                    <h3>Signalements</h3>
+                    <?php if (req_nbr_signalements() > 0) : ?>
+                        <div class="notification">
+                            <?= req_nbr_signalements(); ?>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
-            </div>
-            
-        <?php
-        endforeach;
-        ?>
+            </a>
+
+            <a href="#">
+                <div class="admin-card">
+                    <span class="material-icons">emoji_objects</span>
+                    <h3>Suggestions</h3>
+                </div>
+            </a>
 
         </div>
+
+        <div class="statistiques_tabor">
+            <h2><span class="material-icons">equalizer</span>Statistiques quotidiennes (comparaison à la veille)</h2>
+            <div class="stat">
+                <span class="material-icons">description</span>
+                <?php $nbr_projets = req_nbr_projets_jour(date("d/m/y")); ?>
+                <?= $nbr_projets ?> <?= ($nbr_projets > 1) ? "nouveaux projets ajoutés" : "nouveau projet ajouté"; ?>
+                <?php $comp_p = $nbr_projets - req_nbr_projets_jour(strftime("%d/%m/%Y", mktime(0, 0, 0, date('m'), date('d')-1, date('y')))); ?>
+                <B>(<?php if ($comp_p == 0) : ?>=<?php elseif ($comp_p > 0) : ?>+<?= $comp_p; ?><?php else : ?><?= $comp_p; ?><?php endif; ?>)</B>
+            </div>
+            <div class="stat">
+                <span class="material-icons">chat</span>
+                <?php $nbr_sujets = req_nbr_sujets_jour(date("d/m/Y")); ?>
+                <?= $nbr_sujets ?> <?= ($nbr_sujets > 1) ? "nouveaux sujets ouverts" : "nouveau sujet ouvert"; ?>
+                <?php $comp_s = $nbr_sujets - req_nbr_sujets_jour(strftime("%d/%m/%Y", mktime(0, 0, 0, date('m'), date('d')-1, date('y')))); ?>
+                <B>(<?php if ($comp_s == 0) : ?>=<?php elseif ($comp_s > 0) : ?>+<?= $comp_s; ?><?php else : ?><?= $comp_s; ?><?php endif; ?>)</B>
+            </div>
+            <div class="stat">
+                <span class="material-icons">person</span>
+                <?php $nbr_inscrits = req_nbr_inscrits_jour(date("d/m/Y")); ?>
+                <?= $nbr_inscrits ?> <?= ($nbr_inscrits > 1) ? "nouveaux inscrits" : "nouvel inscrit"; ?>
+                <?php $comp_i = $nbr_inscrits - req_nbr_inscrits_jour(strftime("%d/%m/%Y", mktime(0, 0, 0, date('m'), date('d')-1, date('y')))); ?>
+                <B>(<?php if ($comp_i == 0) : ?>=<?php elseif ($comp_i > 0) : ?>+<?= $comp_i; ?><?php else : ?><?= $comp_i; ?><?php endif; ?>)</B>
+            </div>
+        </div>
+
         <script src="<?= BASEURL; ?>assets/js/admin.js"></script>
     </div>
 <?php

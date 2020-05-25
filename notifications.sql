@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 23:45
+-- Généré le :  lun. 25 mai 2020 à 12:09
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `date_ajout` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lu` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `notifications`
@@ -81,7 +81,8 @@ INSERT INTO `notifications` (`id`, `id_utilisateur`, `contenu`, `type_notificati
 (35, 2, '<p>Une nouvelle réponse a été ajoutée au sujet <b>Je n\'arrive pas à récuper les données de l\'aquarium</b></p>', 'reponse', 'sujet/27.html', '2020-05-18 11:49:05', 0),
 (36, 7, '<p>Une nouvelle réponse a été ajoutée au sujet <b>Ne fermez pas ce sujet SVP...</b></p>', 'reponse', 'sujet/28.html', '2020-05-18 23:23:20', 1),
 (37, 7, '<p>Votre sujet <b>Ne fermez pas ce sujet SVP...</b> a été fermé par un modérateur</p>', 'sujet_ferme', 'sujet/28.html', '2020-05-18 23:23:24', 1),
-(38, 1, '<p>Une nouvelle réponse a été ajoutée au sujet <b>Besoin d\'aide</b></p>', 'reponse', 'sujet/3.html', '2020-05-19 21:24:12', 1);
+(38, 1, '<p>Une nouvelle réponse a été ajoutée au sujet <b>Besoin d\'aide</b></p>', 'reponse', 'sujet/3.html', '2020-05-19 21:24:12', 1),
+(39, 18, '<p>Une nouvelle réponse a été ajoutée au sujet <b>Projet pas adapté aux débutants</b></p>', 'reponse', 'sujet/31.html', '2020-05-22 16:58:24', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

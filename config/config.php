@@ -15,5 +15,6 @@ $pages_admin = [
     "editer_projet",
     "nouveau_projet",
     "liste_utilisateurs",
+    "liste_projets",
     "nouvel_utilisateur"
 ];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 23:44
+-- Généré le :  lun. 25 mai 2020 à 12:09
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -25,23 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `favoris`
+-- Structure de la table `signalements`
 --
 
-DROP TABLE IF EXISTS `favoris`;
-CREATE TABLE IF NOT EXISTS `favoris` (
+DROP TABLE IF EXISTS `signalements`;
+CREATE TABLE IF NOT EXISTS `signalements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_projet` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `motif` varchar(255) NOT NULL,
+  `id_type` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
+  `date_signalement` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `lu` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `favoris`
+-- Déchargement des données de la table `signalements`
 --
 
-INSERT INTO `favoris` (`id`, `id_projet`, `id_utilisateur`) VALUES
-(1, 32, 1);
+INSERT INTO `signalements` (`id`, `type`, `motif`, `id_type`, `id_utilisateur`, `date_signalement`, `lu`) VALUES
+(1, 'sujet', 'Il ne s\'agit que d\'un test, il ne parle de rien', 29, 1, '2020-05-20 16:52:16', 0),
+(2, 'sujet', 'C\'est même pas du français', 4, 1, '2020-05-22 16:05:13', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

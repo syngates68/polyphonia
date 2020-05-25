@@ -69,7 +69,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                         <span class="material-icons afficher_actions" dropdown="dropdown_menu_<?= $utilisateur['id']; ?>">more_horiz</span>
                         <div class="dropdown_menu" id="dropdown_menu_<?= $utilisateur['id']; ?>">
                             <div class="dropdown_lien">
-                                <a href="#" utilisateur="<?= $utilisateur['id']; ?>" class="btn_administration fiche_utilisateur"><span class="material-icons">folder_shared</span>Fiche utilisateur</a>
+                                <a class="btn_administration fiche_utilisateur" href="<?= BASEURL; ?>inc/fiche_utilisateur?id_utilisateur=<?= $utilisateur['id']; ?>" rel="modal:open"><span class="material-icons">folder_shared</span>Fiche utilisateur</a>
                             </div>
                             <?php
                             //On laisse la possibilité au superadmin de gérer tous les types d'utilisateur, et les administrateurs tous les utilisateurs saufs les autres admins et superadmins
@@ -100,7 +100,10 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
             </div>
         </div>
 
-        <div class="modal_fiche_utilisateur">
+        <!--<div class="modal_fiche_utilisateur">
+        </div>-->
+
+        <div id="modal_fiche_utilisateur" class="modal modal_fiche_utilisateur" style="display:none;">
         </div>
 
         <script src="<?= BASEURL; ?>assets/js/admin.js"></script>

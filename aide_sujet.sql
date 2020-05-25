@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 23:44
+-- Généré le :  lun. 25 mai 2020 à 12:07
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `aide_sujet` (
   PRIMARY KEY (`id`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_projet` (`id_projet`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `aide_sujet`
@@ -76,7 +76,9 @@ INSERT INTO `aide_sujet` (`id`, `titre_sujet`, `contenu_sujet`, `id_utilisateur`
 (26, 'gfgfgfggghghg', '<p>gfg</p>', 1, 32, '2020-05-15 10:55:14', 0, 0),
 (27, 'Je n\'arrive pas à récuper les données de l\'aquarium', '<p>Bonjour &agrave; tous 🙂</p><p>J&#39;ai essay&eacute; de mettre en place la r&eacute;cup&eacute;ration des donn&eacute;es de l&#39;aquarium afin de les afficher &agrave; l&#39;utilisateur, pour cela je fais ceci :</p><pre><code class=\"language-javascript\">$(document).on(\'click\', \'.mes_notifications a\', function(e)\n{\n    e.preventDefault()\n    var href = $(this).attr(\'href\')\n    var id_notif = $(this).attr(\'id\').replace(\'lien_\', \'\')\n\n    $.post(baseurl + \'inc/notification_lu.php\',\n    {\n        id_notif : id_notif\n    },\n    function()\n    {\n        location.href = href\n    })\n})</code></pre><p>Cependant rien ne se passe, ai-je fait une erreur quelque part?</p><p>Merci d&#39;avance &agrave; ceux qui prendront le temps de me r&eacute;pondre 😀</p>', 1, 32, '2020-05-18 11:38:37', 1, 1),
 (28, 'Ne fermez pas ce sujet SVP...', '<p>PLEASE!!!!!</p>', 7, 32, '2020-05-18 23:22:42', 0, 0),
-(29, 'Je test les différents types de caractères', '<p>Ce texte devrait appara&icirc;tre en <strong>gras</strong> et celui-ci en <em>italique</em>.</p><p>L&agrave; il devrait y avoir une liste:</p><ul><li>Avec des petits points devant<ul><li>Et l&agrave; un peu plus avanc&eacute;</li></ul></li></ul><blockquote><p>Et &ccedil;a c&#39;est une citation</p></blockquote>', 1, 32, '2020-05-18 23:44:45', 1, 1);
+(29, 'Je test les différents types de caractères', '<p>Ce texte devrait appara&icirc;tre en <strong>gras</strong> et celui-ci en <em>italique</em>.</p><p>L&agrave; il devrait y avoir une liste:</p><ul><li>Avec des petits points devant<ul><li>Et l&agrave; un peu plus avanc&eacute;</li></ul></li></ul><blockquote><p>Et &ccedil;a c&#39;est une citation</p></blockquote>', 1, 32, '2020-05-18 23:44:45', 1, 1),
+(30, 'Qu\'est ce qu\'un aquarium?', '<p>Je ne sais pas du tout...</p>', 1, 32, '2020-05-22 14:17:01', 0, 1),
+(31, 'Projet pas adapté aux débutants', '<p>Salut &agrave; tous,</p><p>je travaille actuellement sur ce projet, et je voulais ouvrir ce sujet pour dire que ce dernier n&#39;est pas adapt&eacute; aux d&eacute;butants, je pense que c&#39;est quelque chose qui devrait &ecirc;tre dit dans le projet, car beaucoup risquent de se lancer &agrave; coeur perdu dedans, et vite perdre pied.</p><p>Je tiens &agrave; pr&eacute;ciser que cela n&#39;est en aucun cas une critique du site, bien au contraire ! 🙂 C&#39;est simplement que je pense que &ccedil;a pourrait &ecirc;tre bien de l&#39;indiquer, car vraiment il n&#39;est pas &eacute;vident du tout. D&#39;ailleurs je pense que &ccedil;a serait bien d&#39;indiquer quels sujets sont plut&ocirc;t pour d&eacute;butants (gestion d&#39;un blog, cr&eacute;ation d&#39;un portfolio) ou plut&ocirc;t pour des d&eacute;veloppeurs exp&eacute;riment&eacute;s, je suis ouvert au d&eacute;bat, en tout cas je pense que &ccedil;a serait une bonne id&eacute;e de pouvoir trier tout &ccedil;a!</p><p>Merci d&#39;avoir pris le temps de lire mon post 😀</p>', 18, 4, '2020-05-22 16:51:51', 1, 1);
 
 --
 -- Contraintes pour les tables déchargées

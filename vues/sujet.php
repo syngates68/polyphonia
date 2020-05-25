@@ -7,13 +7,30 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
     ?>
         <div class="container sujet_container">
             <h1 class="titre_sujet"><?= $sujet['titre']; ?></h1>
-            <?php if ($sujet['resolu'] == 1) : ?>
+            <?php 
+            //Message de succès après signalement
+            if (isset($_SESSION['succes'])) : 
+            ?>
+                <div class="succes succes_vanishing">
+                    <?= $_SESSION['succes']; ?>
+                </div>
+            <?php 
+            unset($_SESSION['succes']);
+            endif;
+            
+            //Message de sujet résolu
+            if ($sujet['resolu'] == 1) : ?>
                 <div class="succes">Ce sujet a été résolu.</div>
-            <?php endif; ?>
+            <?php
+            endif;
 
-            <?php if ($sujet['ouvert'] == 0) : ?>
+            //Message de sujet fermé
+            if ($sujet['ouvert'] == 0) : ?>
                 <div class="erreur">Ce sujet a été fermé.</div>
-            <?php endif; ?>
+            <?php 
+            endif; 
+            ?>
+
             <div class="post_sujet">
                 <div class="avatar_container">
                     <img class="avatar" src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
@@ -40,7 +57,7 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                     <?php if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 3) && $sujet['resolu'] == 0) : ?>
                                         <span id="fermer_<?= $_GET['slug']; ?>" class="fermer">Fermer le sujet</span>
                                     <?php endif; ?>
-                                    <span class="signaler">Signaler</span>
+                                    <a href="#signaler_sujet_<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -103,14 +120,23 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                     </div>
                 </form>
             </div>
+            <script>
+                CKEDITOR.replace('reponse', {
+                    height: 200
+                });
+            </script>
             <?php endif; ?>
         </div>
+        <!-- Modal de signalement -->
+        <div id="signaler_sujet_<?= $_GET['slug']; ?>" class="modal modal_signaler_sujet">
+            <h2>Signaler un sujet</h2>
+            <div class="erreur" style="display:none;"></div>
+            <p>Vous êtes sur le point de signaler ce sujet.</p>
+            <p>Veuillez indiquer ci-dessous le motif de votre signalement.</p>
+            <input type="text" name="motif">
+            <button class="btn btn-outline-blue signaler_sujet">Envoyer</button>
+        </div>
         <script src="<?= BASEURL; ?>assets/js/aide.js"></script>
-        <script>
-            CKEDITOR.replace('reponse', {
-                height: 200
-            });
-        </script>
     <?php
     }
     else

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 23:45
+-- Généré le :  lun. 25 mai 2020 à 12:08
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `messagerie` (
   PRIMARY KEY (`id`),
   KEY `id_utilisateur_1` (`id_utilisateur_1`),
   KEY `id_utilisateur_2` (`id_utilisateur_2`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `messagerie`
@@ -55,7 +55,8 @@ INSERT INTO `messagerie` (`id`, `id_utilisateur_1`, `id_utilisateur_2`, `date_ou
 (19, 1, 14, '2020-05-06 00:00:03'),
 (20, 1, 15, '2020-05-14 23:35:22'),
 (21, 2, 15, '2020-05-14 23:45:17'),
-(24, 1, 6, '2020-05-18 23:57:56');
+(24, 1, 6, '2020-05-18 23:57:56'),
+(25, 1, 18, '2020-05-22 16:46:38');
 
 --
 -- Contraintes pour les tables déchargées

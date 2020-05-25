@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 23:45
+-- Généré le :  lun. 25 mai 2020 à 12:09
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `note_reponse` (
   `id_reponse` int(11) NOT NULL,
   `note` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `note_reponse`
@@ -70,7 +70,8 @@ INSERT INTO `note_reponse` (`id`, `id_utilisateur`, `id_reponse`, `note`) VALUES
 (53, 1, 27, 1),
 (54, 1, 33, 1),
 (55, 1, 41, 1),
-(56, 7, 31, -1);
+(56, 7, 31, -1),
+(57, 18, 44, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

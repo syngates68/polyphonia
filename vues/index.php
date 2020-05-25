@@ -19,9 +19,7 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                         <a href="<?= BASEURL ?>contact.html">Contact</a>
                     <?php else : ?>
                         <a href="<?= BASEURL ?>">Retour au site</a>
-                        <a href="<?= BASEURL ?>administration.html">Projets</a>
-                        <a href="<?= BASEURL ?>liste_utilisateurs.html">Utilisateurs</a>
-                        <a href="<?= BASEURL ?>liste_utilisateurs.html">Statistiques</a>
+                        <a href="<?= BASEURL ?>administration.html">Tableau de bord</a>
                     <?php endif; ?>
                     <div class="on_mobile_only">
                     <?php if (!isset($_SESSION['utilisateur'])) : ?>

@@ -47,32 +47,3 @@ $(document).on('click', '.page_aide', function()
 {
     location.href = $(this).attr('href')
 })
-
-$(document).on('click', '.ajouter_favoris', function()
-{
-    $.post(baseurl + 'inc/favoris.php',
-    {
-        favoris : 1,
-        id_projet : $(this).attr('id').replace('favoris_', '')
-    },
-    function()
-    {
-        $('.succes_favoris').slideDown()
-        $(this).html('<span class="material-icons">favorite</span>Retirer des favoris')
-        $(this).removeClass('ajouter_favoris').addClass('retirer_favoris')
-    })
-})
-
-$(document).on('click', '.retirer_favoris', function()
-{
-    $.post(baseurl + 'inc/favoris.php',
-    {
-        favoris : 0,
-        id_projet : $(this).attr('id').replace('favoris_', '')
-    },
-    function()
-    {
-        $(this).html('<span class="material-icons">favorite</span>Ajouter aux favoris')
-        $(this).removeClass('retirer_favoris').addClass('ajouter_favoris')
-    })
-})

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 25 mai 2020 à 12:07
+-- Généré le :  lun. 25 mai 2020 à 12:08
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -25,25 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `droits`
+-- Structure de la table `motif_suppression`
 --
 
-DROP TABLE IF EXISTS `droits`;
-CREATE TABLE IF NOT EXISTS `droits` (
+DROP TABLE IF EXISTS `motif_suppression`;
+CREATE TABLE IF NOT EXISTS `motif_suppression` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `droits`
+-- Déchargement des données de la table `motif_suppression`
 --
 
-INSERT INTO `droits` (`id`, `libelle`) VALUES
-(1, 'superadmin'),
-(2, 'administrateur'),
-(3, 'modérateur'),
-(4, 'utilisateur');
+INSERT INTO `motif_suppression` (`id`, `libelle`) VALUES
+(1, 'Mon compte ne m\'est d\'aucune utilité'),
+(2, 'J\'ai un autre compte'),
+(3, 'Le site ne répond pas à mes attentes'),
+(4, 'Autre');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

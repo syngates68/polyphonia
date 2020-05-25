@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 23:43
+-- Généré le :  lun. 25 mai 2020 à 12:06
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `aide_contenu` (
   `id_sujet` int(11) NOT NULL,
   `date_post` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `aide_contenu`
@@ -81,7 +81,8 @@ INSERT INTO `aide_contenu` (`id`, `contenu`, `id_utilisateur`, `id_sujet`, `date
 (40, '<p>Ok apparemment le strtolower aide pas</p>', 1, 29, '2020-05-19 21:16:53'),
 (41, '<p>Alors je test mb_strtolower</p>', 1, 29, '2020-05-19 21:18:07'),
 (42, '<p>Je suis mod&eacute;rateur...BITCH! 🐼</p>', 7, 3, '2020-05-19 21:24:12'),
-(43, '<p>C&#39;est tr&egrave;s long</p>', 1, 2, '2020-05-19 23:41:31');
+(43, '<p>C&#39;est tr&egrave;s long</p>', 1, 2, '2020-05-19 23:41:31'),
+(44, '<p>Salut &agrave; toi lastreetdu68 et merci pour ce message 😀</p><p>Je suis assez d&#39;accord avec toi concernant la difficult&eacute; de ce projet, bien qu&#39;il est indiqu&eacute; que chacun peut le faire de la mani&egrave;re dont il le souhaite, et je pense qu&#39;un d&eacute;butant pourrait r&eacute;ussir pas mal de choses malgr&eacute; tout dans ce projet.</p><p>En tout cas, si jamais tu as d&#39;autres remarques concernant des projets, je t&#39;invite &agrave; remplir le formulaire de <strong>suggestion de modification</strong> qui se trouve en bas de page de chaque projet 😉 Ca permet de mieux trier ces suggestions et d&#39;&eacute;viter qu&#39;elles se noient dans les diff&eacute;rents sujets d&#39;aide.</p><p>Pour ce qui est de trier selon la difficult&eacute;, c&#39;est une remarque qui m&#39;a &eacute;t&eacute; faite de nombreuses fois et j&#39;y travaille justement, il y aura des projets qui seront pour les d&eacute;butants, d&#39;autres pour des interm&eacute;diaires et enfin plut&ocirc;t pour des personnes plus exp&eacute;riment&eacute;es.</p><p>J&#39;esp&egrave;re avoir bien r&eacute;pondu &agrave; ton sujet en tout cas, bonne journ&eacute;e &agrave; toi 😉</p>', 1, 31, '2020-05-22 16:58:24');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

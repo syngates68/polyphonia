@@ -2,10 +2,9 @@
 include('../config/config.php');
 include('../config/fonctions.php');
 
-$utilisateur = req_utilisateur_by_id($_POST['id_utilisateur']);
+$utilisateur = req_utilisateur_by_id($_GET['id_utilisateur']);
 ?>
 
-<div class="close">x</div>
 <div class="modal_title">
     <h5>Fiche utilisateur de <?= $utilisateur['nom_utilisateur']; ?></h5>
 </div>

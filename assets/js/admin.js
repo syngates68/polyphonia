@@ -250,27 +250,11 @@ $(document).on('click', '.administration .debloquer_utilisateur', function(e)
 $(document).on('click', '.administration .fiche_utilisateur', function(e)
 {
     e.preventDefault()
-    $('.modal_fiche_utilisateur').show()
-    $('.has_modal').addClass('is_visible')
-
-    $(this).closest('.dropdown_menu').hide()
-    $('.afficher_actions[dropdown="' + $(this).closest('.dropdown_menu').attr('id') + '"]').removeClass('actif')
-
-    $.post(baseurl + 'inc/fiche_utilisateur.php',
+    this.blur()
+    $.get(this.href, function(html) 
     {
-        id_utilisateur : $(this).attr('utilisateur')
-    },
-    function(data)
-    {
-        $('.modal_fiche_utilisateur').html('')
-        $('.modal_fiche_utilisateur').append(data)
-    });
-})
-
-$(document).on('click', '.fermer, .close', function()
-{
-    $('.modal_fiche_utilisateur').hide()
-    $('.has_modal').removeClass('is_visible')
+        $(html).appendTo('modal_fiche_utilisateur').modal();
+    })
 })
 
 $(document).on('change', 'select[name="rang"]', function()

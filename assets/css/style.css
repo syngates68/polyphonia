@@ -29,6 +29,42 @@ body
     flex-direction: column;
 }
 
+.jquery-modal.blocker
+{
+    z-index: 4;
+}
+
+.jquery-modal .modal h2
+{
+    font-weight: 700;
+    color: var(--orange);
+    font-size: 25px;
+    margin-bottom: 16px;
+}
+
+.jquery-modal .modal p
+{
+    font-weight: 400;
+    line-height: 1.666;
+    color: #5e6c76;
+    font-size: 12px;
+}
+
+.jquery-modal .modal input
+{
+    border: 1px solid var(--border);
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.jquery-modal .modal button
+{
+    margin-top: 8px;
+}
+
 .ui-autocomplete 
 {
     max-height: 300px;
@@ -1293,6 +1329,11 @@ footer .footer_content .footer_content__div .copyright
     font-size: 1.5rem;
 }
 
+.aide .aide_top h2
+{
+    margin-top: 8px;
+}
+
 .aide .aide_top button
 {
     display: flex;
@@ -1346,6 +1387,14 @@ footer .footer_content .footer_content__div .copyright
 {
     color: #d60242;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.aide .sujet_ferme span
+{
+    margin-right: 4px;
+    font-size: 17px;
 }
 
 .aide .sujet .bloc_droit
@@ -1363,7 +1412,7 @@ footer .footer_content .footer_content__div .copyright
 
 .aide .sujet .titre_sujet
 {
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 8px;
 }
 
@@ -1376,7 +1425,17 @@ footer .footer_content .footer_content__div .copyright
 .aide .sujet .badge_resolu
 {
     color: #17a319;
+    margin-bottom: 8px;
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.aide .sujet .badge_resolu span
+{
+    margin-right: 4px;
+    font-size: 17px;
 }
 
 /*********************************************************
@@ -1830,6 +1889,89 @@ footer .footer_content .footer_content__div .copyright
     transition-duration: .3s;
 }*/
 
+.tabor
+{
+    display: grid;
+    grid-template-columns: repeat(4, 22%);
+    column-gap: 57px;
+    padding: 32px;
+}
+
+.tabor a
+{
+    text-decoration: none;
+}
+
+.admin-card
+{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+    padding: 16px;
+    border-radius: 5px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    position: relative;
+}
+
+.admin-card span
+{
+    margin-right: 8px;
+}
+
+.admin-card .notification
+{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #FFF;
+    background: #0f75fa;
+}
+
+.statistiques_tabor h2
+{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+.statistiques_tabor h2 span
+{
+    margin-right: 8px;
+}
+
+.statistiques_tabor .stat
+{
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.statistiques_tabor .stat span
+{
+    margin-right: 8px;
+    font-size: 17px;
+}
+
+.statistiques_tabor .stat b
+{
+    font-weight: 600;
+    margin-left: 8px;
+}
+
 .btn_nouveau_projet span
 {
     margin-right: 8px;
@@ -2216,46 +2358,13 @@ footer .footer_content .footer_content__div .copyright
     text-decoration: underline;
 }
 
-.modal_fiche_utilisateur
-{
-    overflow-y: scroll;
-}
-
-.modal_fiche_utilisateur .close
-{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    background: #000;
-    color: #FFF;
-    border-radius: 100%;
-    font-size: 15px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.modal_fiche_utilisateur h2
-{
-    font-weight: 600;
-    font-size: 19px;
-    color: var(--grey);
-    display: flex;
-    align-items: center;
-}
-
-.modal_fiche_utilisateur h2 span
+.jquery-modal h2 span
 {
     font-size: 25px;
     margin-right: 8px;
 }
 
-.modal_bloquer_utilisateur,
-.modal_fiche_utilisateur
+.modal_bloquer_utilisateur
 {
     position: fixed;
     width: 50%;
@@ -2269,8 +2378,7 @@ footer .footer_content .footer_content__div .copyright
     border-radius: 15px;
 }
 
-.modal_bloquer_utilisateur .modal_title,
-.modal_fiche_utilisateur .modal_title
+.modal_bloquer_utilisateur .modal_title
 {
     padding: 48px 16px;
     text-align: center;
@@ -2279,47 +2387,33 @@ footer .footer_content .footer_content__div .copyright
     border-bottom: 1px solid var(--grey);
 }
 
-.modal_bloquer_utilisateur .modal_title h5,
-.modal_fiche_utilisateur .modal_title h5
+.modal_bloquer_utilisateur .modal_title h5
 {
     font-size: 30px;
 }
 
 .modal_bloquer_utilisateur .modal_content,
-.modal_fiche_utilisateur .modal_content
+.jquery-modal .modal_content
 {
-    padding: 32px;
     line-height: 2;
     font-size: 11px;
 }
 
-.modal_fiche_utilisateur .modal_content .fiche
-{
-    display: grid;
-    grid-template-columns: repeat(2, 50%);
-}
-
-.modal_fiche_utilisateur .modal_content .bloc_gauche,
-.modal_fiche_utilisateur .modal_content .bloc_droit
-{
-    padding: 16px;
-}
-
-.modal_fiche_utilisateur .modal_content .fiche .nom_utilisateur
+.jquery-modal .modal_content .fiche .nom_utilisateur
 {
     font-weight: 600;
     font-size: 25px;
     color: var(--orange);
 }
 
-.modal_fiche_utilisateur .modal_content .statistiques .stat
+.jquery-modal .modal_content .statistiques .stat
 {
     font-weight: 600;
     font-size: 13px;
     padding: 0 8px;
 }
 
-.modal_fiche_utilisateur .modal_content img
+.jquery-modal .modal_content img
 {
     width: 200px;
     height: 200px;
@@ -2338,14 +2432,14 @@ footer .footer_content .footer_content__div .copyright
     padding: 8px;
 }
 
-.modal_fiche_utilisateur .modal_content .infos
+.jquery-modal .modal_content .infos
 {
     display: grid;
     grid-template-columns: repeat(2, 50%);
     padding: 8px 0;
 }
 
-.modal_fiche_utilisateur .modal_content .infos .titre
+.jquery-modal .modal_content .infos .titre
 {
     color: var(--grey);
     font-weight: 600;
@@ -3531,6 +3625,11 @@ footer .footer_content .footer_content__div .copyright
     .form_modification form
     {
         width: 100%;
+    }
+
+    .blog_container
+    {
+        width: 70%;
     }
 
     .error_content

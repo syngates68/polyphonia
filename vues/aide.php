@@ -20,7 +20,10 @@ if (isset($_GET['slug']))
         ?>
             <div class="aide">
                 <div class="aide_top">
-                    <h1>Page d'aide : <?= req_by_id($id_projet)['titre']; ?> </h1>
+                    <div class="aide_titre">
+                        <h1>Page d'aide</h1>
+                        <h2><?= req_by_id($id_projet)['titre']; ?></h2>
+                    </div>
                     <button class="btn btn-orange page_projet" href="<?= BASEURL; ?>projet/<?= $_GET['slug']; ?>.html"><span class="material-icons">description</span>Page projet</button>
                 </div>
                 <?php 
@@ -50,16 +53,19 @@ if (isset($_GET['slug']))
                 <a href="<?= BASEURL; ?>sujet/<?= $sujet['id']; ?>.html">
                     <div class="sujet">
                         <div class="bloc_gauche">
-                            <div class="titre_sujet"><?= $sujet['titre']; ?> <?php if ($sujet['resolu'] == 1) : ?><span class="badge_resolu">Résolu</span><?php endif; ?></div>
+                            <div class="titre_sujet"><?= $sujet['titre']; ?></div>
+                            <?php if ($sujet['resolu'] == 1) : ?>
+                                <div class="badge_resolu"><span class="material-icons">check_circle_outline</span>Résolu</div>
+                            <?php endif; ?>
                             <div class="infos">
                                 <?php if ($sujet['ouvert'] == 1) : ?>
                                     <?php if ($sujet['date_derniere_reponse'] == NULL) : ?>
-                                        Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= strtolower(ecart_date($sujet['date_sujet'])); ?>
+                                        Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= mb_strtolower(ecart_date($sujet['date_sujet'])); ?>
                                     <?php else : ?>
                                         Dernière réponse par <?= $sujet['nom_utilisateur_derniere_reponse']; ?> <?= mb_strtolower(ecart_date($sujet['date_derniere_reponse'])); ?>
                                     <?php endif; ?>
                                 <?php else : ?>
-                                    <span class="sujet_ferme">Ce sujet a été fermé</span>
+                                    <span class="sujet_ferme"><span class="material-icons">cancel</span>Ce sujet a été fermé</span>
                                 <?php endif; ?>
                             </div>
                         </div>

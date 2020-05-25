@@ -32,7 +32,6 @@ if (isset($_GET['slug']))
             
             <div class="projet_contenu">
                 <?php if (isset($_SESSION['succes'])) : ?><div class="succes succes_vanishing"><?= $_SESSION['succes']; ?></div><?php unset($_SESSION['succes']); endif; ?>
-                    <div class="succes succes_favoris succes_vanishing" style="display:none;">Le projet a bien été ajouté à vos favoris</div>
                     <div class="projet_contenu__top">
                     <div class="projet_actions">
                         <button class="btn btn-orange page_aide" href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html"><span class="material-icons">help_outline</span>Page d'aide</button>

@@ -39,7 +39,7 @@ if (isset($_POST['ajouter_projet']))
                 }
                 
                 $_SESSION['succes'] = 'Votre projet a bien été ajouté.';
-                header('Location:'.BASEURL.'administration.html');
+                header('Location:'.BASEURL.'liste_projets.html');
             }
             else
             {

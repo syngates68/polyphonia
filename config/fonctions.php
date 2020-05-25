@@ -1115,6 +1115,44 @@ function update_droit_user($id_utilisateur, $id_droit)
     $upd->execute([$id_droit, $id_utilisateur]);
 }
 
+function ajouter_signalement($type, $motif, $id_type, $id_utilisateur)
+{
+    $ins = db()->prepare("INSERT INTO signalements(type, motif, id_type, id_utilisateur) VALUES (?, ?, ?, ?)");
+    $ins->execute([$type, $motif, $id_type, $id_utilisateur]);
+}
+
+function req_nbr_projets_jour($date_jour)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM projets WHERE DATE_FORMAT(date_ajout, '%d/%m/%Y') LIKE ?");
+    $count->execute([$date_jour]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_nbr_sujets_jour($date_jour)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_sujet WHERE DATE_FORMAT(date_sujet, '%d/%m/%Y') LIKE ?");
+    $count->execute([$date_jour]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_nbr_inscrits_jour($date_jour)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM utilisateurs WHERE DATE_FORMAT(date_inscription, '%d/%m/%Y') LIKE ?");
+    $count->execute([$date_jour]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_nbr_signalements()
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM signalements WHERE lu = 0");
+    $count->execute();
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
 function envoi_mail($type, $email, $infos)
 {
     define('MAIL_HOST', 'smtp.orange.fr');
