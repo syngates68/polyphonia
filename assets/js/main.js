@@ -22,8 +22,25 @@ $(document).on('click', '.projet .btn_lire_projet', function(e){
 $(document).on('click', 'nav #dropdown', function(e)
 {
     e.preventDefault()
-    $('.dropdown').toggle('is_visible')
+    if (!$('.dropdown').hasClass('is_visible'))
+        $('.dropdown').addClass('is_visible')
+    else
+        $('.dropdown').removeClass('is_visible')
 });
+
+window.onclick = function(event) {
+    if (!event.target.matches('.avatar')) 
+    {
+        var dropdowns = document.getElementsByClassName("dropdown");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) 
+        {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('is_visible'))
+                openDropdown.classList.remove('is_visible');
+        }
+    }
+}
 
 /**
  * Permet de placer le dropdown selon la hauteur de la barre de navigation

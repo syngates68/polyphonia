@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 25 mai 2020 à 12:07
+-- Généré le :  mar. 26 mai 2020 à 12:02
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS `droits`;
 CREATE TABLE IF NOT EXISTS `droits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
+  `libelle_site` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -39,11 +40,11 @@ CREATE TABLE IF NOT EXISTS `droits` (
 -- Déchargement des données de la table `droits`
 --
 
-INSERT INTO `droits` (`id`, `libelle`) VALUES
-(1, 'superadmin'),
-(2, 'administrateur'),
-(3, 'modérateur'),
-(4, 'utilisateur');
+INSERT INTO `droits` (`id`, `libelle`, `libelle_site`) VALUES
+(1, 'superadmin', 'Administrateur'),
+(2, 'admin', 'Administrateur'),
+(3, 'moderateur', 'Modérateur'),
+(4, 'utilisateur', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

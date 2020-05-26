@@ -584,18 +584,22 @@ nav .cta .avatar
 
 nav .cta .dropdown
 {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
     position: fixed;
     right: 10%;
     background: #FFF;
     padding: 0 16px;
     border: 1px solid var(--orange);
     z-index: 2;
+    transition-duration: .3s;
 }
 
 nav .cta .dropdown.is_visible
 {
-    display: block;
+    opacity: 1;
+    transition-duration: .3s;
+    pointer-events: initial;
 }
 
 nav .cta .dropdown_lien
@@ -1953,7 +1957,7 @@ footer .footer_content .footer_content__div .copyright
 
 .statistiques_tabor .stat
 {
-    padding: 8px 16px;
+    padding: 16px;
     font-size: 13px;
     font-weight: 300;
     display: flex;
@@ -1963,7 +1967,7 @@ footer .footer_content .footer_content__div .copyright
 .statistiques_tabor .stat span
 {
     margin-right: 8px;
-    font-size: 17px;
+    font-size: 22px;
 }
 
 .statistiques_tabor .stat b
@@ -2013,10 +2017,11 @@ footer .footer_content .footer_content__div .copyright
 .administration .tbl_contenu
 {
     display: grid;
-    grid-template-columns: 1fr 4fr 4fr 4fr 4fr 4fr;
+    grid-template-columns: 1fr 4fr 4fr 4fr 4fr 3fr 4fr;
     align-items: center;
     padding: 8px;
-    text-align: center;
+    line-height: 1.7;
+    /*text-align: center;*/
 }
 
 .administration .tbl_header .tbl_header__col
@@ -2050,19 +2055,41 @@ footer .footer_content .footer_content__div .copyright
     min-height: 120px;
 }
 
-.administration .tbl_contenu.compte_supprime
+.administration .tbl_contenu .statut
 {
-    background: #ffe3e3;
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-weight: 600;
 }
 
-.administration .tbl_contenu.compte_bloque
+.administration .tbl_contenu .statut.en_ligne
 {
-    background: #ffd589;
+    border: 1px solid #17a319;
+    color: #17a319;
 }
 
-.administration .tbl_contenu.brouillon 
+.administration .tbl_contenu .statut.brouillon
 {
-    background: #c7edff;
+    border: 1px solid #3b5998;
+    color: #3b5998;
+}
+
+.administration .tbl_contenu .statut.bloque
+{
+    border: 1px solid #fcba64;
+    color: #fcba64;
+}
+
+.administration .tbl_contenu .statut.supprime
+{
+    border: 1px solid #be1515;
+    color: #be1515;
+}
+
+.administration .tbl_contenu .statut.inactif
+{
+    border: 1px solid var(--grey);
+    color: var(--grey);
 }
 
 .administration .tbl_contenu .titre
@@ -2085,18 +2112,10 @@ footer .footer_content .footer_content__div .copyright
     object-fit: cover;
 }
 
-.administration .tbl_contenu .label_brouillon
-{
-    font-size: 12px;
-    margin-top: 8px;
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--grey);
-}
-
 .administration .tbl_actions
 {
     position: relative;
+    text-align: center;
 }
 
 .administration .tbl_actions .afficher_actions:hover
@@ -2121,25 +2140,22 @@ footer .footer_content .footer_content__div .copyright
     border: 1px solid var(--border);
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-    padding: 8px;
     background: #FFF;
     position: absolute;
     top: 17px;
     z-index: 2;
 }
 
-.administration .tbl_actions .dropdown_menu .dropdown_lien
-{
-    padding: 8px 0;
-}
-
 .administration .tbl_actions .dropdown_menu .dropdown_lien .btn_administration
 {
     display: flex;
     align-items: center;
-    color: #000;
+    color: var(--grey);
     text-decoration: none;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
 }
 
 .administration .tbl_actions .dropdown_menu .dropdown_lien .btn_administration:hover
@@ -2150,8 +2166,13 @@ footer .footer_content .footer_content__div .copyright
 
 .administration .tbl_actions .dropdown_menu .dropdown_lien .btn_administration span
 {
-    margin-right: 4px;
-    font-size: 17px;
+    margin-right: 8px;
+    font-size: 23px;
+}
+
+.administration .tbl_actions .dropdown_menu:last-child
+{
+    border-bottom: none;
 }
 
 .nouveau_projet

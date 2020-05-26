@@ -82,9 +82,9 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                         <?php else : ?>
                                             compte supprimé
                                         <?php endif; ?>
-                                        <?php if ($reponse['rang'] == 'superadmin' || $reponse['rang'] == 'administrateur' || $reponse['rang'] == 'modérateur') : ?>
+                                        <?php if ($reponse['rang'] == 'superadmin' || $reponse['rang'] == 'admin' || $reponse['rang'] == 'moderateur') : ?>
                                             <span class="badge_rang">
-                                                <?= ucfirst($reponse['rang']); ?>
+                                                <?= $reponse['libelle_site']; ?>
                                             </span>
                                         <?php endif; ?>
                                         <p class="date_post"><?= ecart_date($reponse['date_post']); ?></p>

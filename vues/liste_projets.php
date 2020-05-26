@@ -32,6 +32,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 <div class="tbl_header__col">Titre</div>
                 <div class="tbl_header__col">Vues</div>
                 <div class="tbl_header__col">Date d'ajout</div>
+                <div class="tbl_header__col">Statut</div>
                 <div class="tbl_header__col"></div>
             </div>
 
@@ -44,7 +45,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
 
         ?>
             
-        <div class="tbl_contenu <?php if ($projet['brouillon'] == 1) : ?> brouillon <?php endif; ?>">
+        <div class="tbl_contenu">
                 <div class="tbl_contenu__col">
                     <input type="checkbox">
                 </div>
@@ -53,9 +54,6 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 </div>
                 <div class="tbl_contenu__col">
                     <span class="titre"><?= $projet['titre']; ?></span>
-                    <?php if ($projet['brouillon'] == 1) : ?>
-                        <p class="label_brouillon">(Brouillon)</p>
-                    <?php endif; ?>
                 </div>
                 <div class="tbl_contenu__col">
                     <?= $projet['vues']; ?>
@@ -67,6 +65,13 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                     <?php endif; ?>
                     <?php if ($projet['brouillon'] == 0 && $projet['date_update'] != NULL) : ?>
                         <p class="label_brouillon">(Mis à jour <?= formate_date_heure($projet['date_update']); ?>)</p>
+                    <?php endif; ?>
+                </div>
+                <div class="tbl_contenu__col">
+                    <?php if ($projet['brouillon'] == 0) : ?> 
+                        <span class="statut en_ligne">En ligne</span>
+                    <?php else : ?>
+                        <span class="statut brouillon">Brouillon</span>
                     <?php endif; ?>
                 </div>
                 <div class="tbl_contenu__col tbl_actions">

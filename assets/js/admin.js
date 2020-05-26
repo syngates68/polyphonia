@@ -64,12 +64,12 @@ $(document).on('click', '.tbl_contenu .tbl_actions .afficher_actions', function(
 
     if ($('#' + $(this).attr('dropdown')).css('display') == 'none')
     {
-        $('#' + $(this).attr('dropdown')).show()
+        $('#' + $(this).attr('dropdown')).show().addClass('show')
         $(this).addClass('actif')
     }
     else
     {
-        $('#' + $(this).attr('dropdown')).hide()
+        $('#' + $(this).attr('dropdown')).hide().removeClass('show')
         $(this).removeClass('actif')
     }
 });
@@ -278,4 +278,9 @@ function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min +1)) + min;
+}
+
+window.onclick = function()
+{
+    alert('test')
 }

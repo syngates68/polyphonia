@@ -49,6 +49,20 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 </div>
             </a>
 
+            <a href="#">
+                <div class="admin-card">
+                    <span class="material-icons">format_align_left</span>
+                    <h3>Propositions de projet</h3>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="admin-card">
+                    <span class="material-icons">help</span>
+                    <h3>Tickets</h3>
+                </div>
+            </a>
+
         </div>
 
         <div class="statistiques_tabor">
@@ -58,21 +72,28 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 <?php $nbr_projets = req_nbr_projets_jour(date("d/m/y")); ?>
                 <?= $nbr_projets ?> <?= ($nbr_projets > 1) ? "nouveaux projets ajoutés" : "nouveau projet ajouté"; ?>
                 <?php $comp_p = $nbr_projets - req_nbr_projets_jour(strftime("%d/%m/%Y", mktime(0, 0, 0, date('m'), date('d')-1, date('y')))); ?>
-                <B>(<?php if ($comp_p == 0) : ?>=<?php elseif ($comp_p > 0) : ?>+<?= $comp_p; ?><?php else : ?><?= $comp_p; ?><?php endif; ?>)</B>
+                <B>( <?php if ($comp_p == 0) : ?>=<?php elseif ($comp_p > 0) : ?>+<?= $comp_p; ?><?php else : ?><?= $comp_p; ?><?php endif; ?> )</B>
             </div>
             <div class="stat">
-                <span class="material-icons">chat</span>
+                <span class="material-icons">live_help</span>
                 <?php $nbr_sujets = req_nbr_sujets_jour(date("d/m/Y")); ?>
                 <?= $nbr_sujets ?> <?= ($nbr_sujets > 1) ? "nouveaux sujets ouverts" : "nouveau sujet ouvert"; ?>
                 <?php $comp_s = $nbr_sujets - req_nbr_sujets_jour(strftime("%d/%m/%Y", mktime(0, 0, 0, date('m'), date('d')-1, date('y')))); ?>
-                <B>(<?php if ($comp_s == 0) : ?>=<?php elseif ($comp_s > 0) : ?>+<?= $comp_s; ?><?php else : ?><?= $comp_s; ?><?php endif; ?>)</B>
+                <B>( <?php if ($comp_s == 0) : ?>=<?php elseif ($comp_s > 0) : ?>+<?= $comp_s; ?><?php else : ?><?= $comp_s; ?><?php endif; ?> )</B>
+            </div>
+            <div class="stat">
+                <span class="material-icons">chat</span>
+                <?php $nbr_reponses = req_nbr_reponses_jour(date("d/m/Y")); ?>
+                <?= $nbr_reponses ?> <?= ($nbr_reponses > 1) ? "nouvelles réponses ajoutées" : "nouvelle réponse ajoutée"; ?>
+                <?php $comp_r = $nbr_reponses - req_nbr_reponses_jour(strftime("%d/%m/%Y", mktime(0, 0, 0, date('m'), date('d')-1, date('y')))); ?>
+                <B>( <?php if ($comp_r == 0) : ?>=<?php elseif ($comp_r > 0) : ?>+<?= $comp_r; ?><?php else : ?><?= $comp_r; ?><?php endif; ?> )</B>
             </div>
             <div class="stat">
                 <span class="material-icons">person</span>
                 <?php $nbr_inscrits = req_nbr_inscrits_jour(date("d/m/Y")); ?>
                 <?= $nbr_inscrits ?> <?= ($nbr_inscrits > 1) ? "nouveaux inscrits" : "nouvel inscrit"; ?>
                 <?php $comp_i = $nbr_inscrits - req_nbr_inscrits_jour(strftime("%d/%m/%Y", mktime(0, 0, 0, date('m'), date('d')-1, date('y')))); ?>
-                <B>(<?php if ($comp_i == 0) : ?>=<?php elseif ($comp_i > 0) : ?>+<?= $comp_i; ?><?php else : ?><?= $comp_i; ?><?php endif; ?>)</B>
+                <B>( <?php if ($comp_i == 0) : ?>=<?php elseif ($comp_i > 0) : ?>+<?= $comp_i; ?><?php else : ?><?= $comp_i; ?><?php endif; ?> )</B>
             </div>
         </div>
 

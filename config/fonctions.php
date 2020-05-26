@@ -770,7 +770,7 @@ function req_liste_motifs_suppression()
  */
 function req_liste_utilisateurs()
 {
-    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, ms.libelle as motif_suppression, d.libelle as rang FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime LEFT JOIN droits d ON u.id_droit = d.id ORDER BY u.id');
+    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, u.actif, ms.libelle as motif_suppression, d.libelle as rang FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime LEFT JOIN droits d ON u.id_droit = d.id ORDER BY u.id');
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -947,7 +947,7 @@ function count_reponses_by_sujet($id_sujet)
 
 function req_reponses_by_sujet($id_sujet)
 {
-    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, u.nom_utilisateur, u.avatar, d.libelle as rang FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur LEFT JOIN droits d ON d.id = u.id_droit WHERE c.id_sujet = ? ORDER BY c.id");
+    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, u.nom_utilisateur, u.avatar, d.libelle as rang, d.libelle_site as libelle_site FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur LEFT JOIN droits d ON d.id = u.id_droit WHERE c.id_sujet = ? ORDER BY c.id");
     $req->execute([$id_sujet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -1132,6 +1132,14 @@ function req_nbr_projets_jour($date_jour)
 function req_nbr_sujets_jour($date_jour)
 {
     $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_sujet WHERE DATE_FORMAT(date_sujet, '%d/%m/%Y') LIKE ?");
+    $count->execute([$date_jour]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_nbr_reponses_jour($date_jour)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_contenu WHERE DATE_FORMAT(date_post, '%d/%m/%Y') LIKE ?");
     $count->execute([$date_jour]);
 
     return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
