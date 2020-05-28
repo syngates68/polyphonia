@@ -1095,7 +1095,7 @@ function delete_favoris($id_projet, $id_utilisateur)
 
 function req_liste_rangs()
 {
-    $req = db()->prepare("SELECT * FROM droits");
+    $req = db()->prepare("SELECT * FROM droits WHERE id != 1");
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -1103,10 +1103,10 @@ function req_liste_rangs()
 
 function req_rang_by_id($id_rang)
 {
-    $req = db()->prepare("SELECT libelle FROM droits WHERE id = ?");
+    $req = db()->prepare("SELECT libelle_site FROM droits WHERE id = ?");
     $req->execute([$id_rang]);
 
-    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['libelle'];
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0]['libelle_site'];
 }
 
 function update_droit_user($id_utilisateur, $id_droit)

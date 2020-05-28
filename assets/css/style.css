@@ -31,7 +31,7 @@ body
 
 .jquery-modal.blocker
 {
-    z-index: 4;
+    z-index: 11;
 }
 
 .jquery-modal .modal h2
@@ -429,7 +429,7 @@ nav
     border-bottom: 2px solid var(--orange);
     width: 100%;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
     box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
 }
 
@@ -1957,7 +1957,7 @@ footer .footer_content .footer_content__div .copyright
 
 .statistiques_tabor .stat
 {
-    padding: 16px;
+    padding: 8px 16px;
     font-size: 13px;
     font-weight: 300;
     display: flex;
@@ -2051,7 +2051,7 @@ footer .footer_content .footer_content__div .copyright
     border: 1px solid var(--border);
     margin: 32px 0;
     background: #FFF;
-    font-size: 13px;
+    font-size: 11px;
     min-height: 120px;
 }
 
@@ -2065,7 +2065,8 @@ footer .footer_content .footer_content__div .copyright
 .administration .tbl_contenu .statut.en_ligne
 {
     border: 1px solid #17a319;
-    color: #17a319;
+    background: #17a319;
+    color: #FFF;
 }
 
 .administration .tbl_contenu .statut.brouillon
@@ -2120,23 +2121,19 @@ footer .footer_content .footer_content__div .copyright
 
 .administration .tbl_actions .afficher_actions:hover
 {
-    border-radius: 2px;
     transition-duration: .3s;
-    background: var(--orange);
-    color: #FFF;
+    color: var(--orange);
     cursor: pointer;
 }
 
 .administration .tbl_actions .afficher_actions.actif 
 {
-    border-radius: 2px;
-    background: var(--orange);
-    color: #FFF;
+    color: var(--orange);
 }
 
 .administration .tbl_actions .dropdown_menu
 {
-    display: none;
+    scale: 0;
     border: 1px solid var(--border);
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
@@ -2144,6 +2141,13 @@ footer .footer_content .footer_content__div .copyright
     position: absolute;
     top: 17px;
     z-index: 2;
+    transition-duration: .3s;
+}
+
+.administration .tbl_actions .dropdown_menu.show
+{
+    scale: 1;
+    transition-duration: .3s;
 }
 
 .administration .tbl_actions .dropdown_menu .dropdown_lien .btn_administration
@@ -2156,12 +2160,14 @@ footer .footer_content .footer_content__div .copyright
     font-weight: 600;
     border-bottom: 1px solid var(--border);
     padding: 16px;
+    transition-duration: .1s;
 }
 
 .administration .tbl_actions .dropdown_menu .dropdown_lien .btn_administration:hover
 {
     color: var(--orange);
-    transition-duration: .3s;
+    border-left: 5px solid var(--orange);
+    transition-duration: .1s;
 }
 
 .administration .tbl_actions .dropdown_menu .dropdown_lien .btn_administration span
@@ -3582,6 +3588,42 @@ footer .footer_content .footer_content__div .copyright
     {
         margin-top: 16px;
         text-align: right;
+    }
+
+    .jquery-modal .modal
+    {
+        width: 100%;
+    }
+
+    .administration .tbl_header
+    {
+        display: none;
+    }
+
+    .administration .tbl_contenu
+    {
+        display: block;
+    }
+
+    .administration .tbl_contenu .tbl_contenu__col
+    {
+        padding: 8px 0;
+        line-height: 1;
+    }
+
+    .administration .tbl_contenu .tbl_actions
+    {
+        text-align: right;
+    }
+
+    .administration .tbl_contenu .statut
+    {
+        margin-top: 8px;
+    }
+
+    .administration .tbl_contenu input[type="checkbox"]
+    {
+        display: none;
     }
 
     .error_content

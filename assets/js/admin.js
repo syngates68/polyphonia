@@ -1,3 +1,39 @@
+document.onclick = function(event)
+{
+    if (!event.target.matches('.afficher_actions')) 
+    {
+        var dropdowns = document.getElementsByClassName("dropdown_menu");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) 
+        {
+            var openDropdown = dropdowns[i];
+            var id = openDropdown.getAttribute('id')
+            if (openDropdown.classList.contains('show'))
+            {
+                openDropdown.classList.remove('show')
+                document.querySelector("[dropdown='" + id + "']").classList.remove('actif')
+            }
+        }
+    }
+    else
+    {
+        var dropdowns = document.getElementsByClassName("dropdown_menu");
+        var id_dropdown = event.target.getAttribute('dropdown')
+
+        var i;
+        for (i = 0; i < dropdowns.length; i++) 
+        {
+            var openDropdown = dropdowns[i];
+            var id = openDropdown.getAttribute('id')
+            if (openDropdown.classList.contains('show') && id != id_dropdown)
+            {
+                openDropdown.classList.remove('show')
+                document.querySelector("[dropdown='" + id + "']").classList.remove('actif')
+            }
+        }
+    }
+}
+
 /**
  * Permet de simuler le clic sur l'input file caché
  */
@@ -56,20 +92,14 @@ function readURL(input){
 $(document).on('click', '.tbl_contenu .tbl_actions .afficher_actions', function()
 {
 
-    /*$('.dropdown_menu').each(function()
+    if (!$('#' + $(this).attr('dropdown')).hasClass('show'))
     {
-        if ($(this).css('display') != 'none')
-            $(this).hide()
-    })*/
-
-    if ($('#' + $(this).attr('dropdown')).css('display') == 'none')
-    {
-        $('#' + $(this).attr('dropdown')).show().addClass('show')
+        $('#' + $(this).attr('dropdown')).addClass('show')
         $(this).addClass('actif')
     }
     else
     {
-        $('#' + $(this).attr('dropdown')).hide().removeClass('show')
+        $('#' + $(this).attr('dropdown')).removeClass('show')
         $(this).removeClass('actif')
     }
 });
@@ -181,7 +211,7 @@ $(document).on('click', '.nouvel_utilisateur .genere_mdp', function()
 /**
  * Permet de bloquer un utilisateur
  */
-$(document).on('click', '.administration .bloquer_utilisateur', function(e)
+/*$(document).on('click', '.administration .bloquer_utilisateur', function(e)
 {
     e.preventDefault()
     $('.modal_bloquer_utilisateur').show()
@@ -199,31 +229,8 @@ $(document).on('click', '.administration .bloquer_utilisateur', function(e)
         $('.modal_bloquer_utilisateur .modal_content').html('')
         $('.modal_bloquer_utilisateur .modal_content').append(data)
     });
-})
+})*/
 
-$(document).on('click', '.valider_blocage', function()
-{
-    if (confirm("Confirmer le blocage de cet utilisateur?"))
-    {
-        $.post(baseurl + 'inc/bloquer_utilisateur.php',
-        {
-            id_utilisateur : $(this).attr('utilisateur'),
-            bloque : 1,
-            motif_blocage : $('#motif_blocage').val()
-        },
-        function(data)
-        {
-            alert(data);
-            location.reload();
-        });
-    }
-})
-
-$(document).on('click', '.annuler_blocage', function()
-{
-    $('.modal_bloquer_utilisateur').hide()
-    $('.has_modal').removeClass('is_visible')
-})
 
 /**
  * Permet de débloquer un utilisateur
@@ -233,17 +240,16 @@ $(document).on('click', '.administration .debloquer_utilisateur', function(e)
     e.preventDefault()
     if (confirm("Confirmer le déblocage de cet utilisateur?"))
     {
-        $.post(baseurl + 'inc/bloquer_utilisateur.php',
+        $.post(baseurl + 'inc/valider_blocage.php',
         {
             id_utilisateur : $(this).attr('utilisateur'),
             bloque : 0,
             motif_blocage : null
         },
-        function(data)
+        function()
         {
-            alert(data);
-            location.reload();
-        });
+            location.reload()
+        })
     }
 })
 
@@ -278,9 +284,4 @@ function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min +1)) + min;
-}
-
-window.onclick = function()
-{
-    alert('test')
 }

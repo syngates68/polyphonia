@@ -86,9 +86,15 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                             //On laisse la possibilité au superadmin de gérer tous les types d'utilisateur, et les administrateurs tous les utilisateurs saufs les autres admins et superadmins
                             if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 && ($utilisateur['rang'] != 'superadmin')) || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 && ($utilisateur['rang'] != 'admin' && $utilisateur['rang'] != 'superadmin')) : 
                             ?> 
-                                <div class="dropdown_lien">
-                                    <a href="#" utilisateur="<?= $utilisateur['id']; ?>" class="btn_administration <?php if($utilisateur['bloque'] == 1) : ?>de<?php endif; ?>bloquer_utilisateur"><?php if($utilisateur['bloque'] == 1) : ?><span class="material-icons">check_circle</span>Débloquer<?php else : ?><span class="material-icons">block</span>Bloquer<?php endif; ?></a> 
-                                </div>
+                                <?php if($utilisateur['bloque'] == 0) : ?>
+                                    <div class="dropdown_lien">
+                                        <a href="<?= BASEURL; ?>inc/bloquer_utilisateur?id_utilisateur=<?= $utilisateur['id']; ?>" rel="modal:open" class="btn_administration bloquer_utilisateur"><span class="material-icons">block</span>Bloquer</a> 
+                                    </div>
+                                <?php else : ?>
+                                    <div class="dropdown_lien">
+                                        <a href="#" utilisateur="<?= $utilisateur['id']; ?>" class="btn_administration debloquer_utilisateur"><span class="material-icons">check_circle</span>Débloquer</a> 
+                                    </div>
+                                <?php endif; ?>
                             <?php 
                             endif; 
                             ?>
@@ -103,10 +109,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
 
         </div>
 
-        <div class="modal_bloquer_utilisateur">
-            <div class="modal_title">
-                <h5>Bloquer un utilisateur</h5>
-            </div>
+        <div id="modal_bloquer_utilisateur" class="modal modal_bloquer_utilisateur" style="display:none">
             <div class="modal_content">
             </div>
         </div>
