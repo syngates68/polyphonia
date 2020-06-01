@@ -9,14 +9,14 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
 
         <div class="tabor">
 
-            <a href="<?= BASEURL; ?>liste_projets.html">
+            <a href="<?= BASEURL; ?>gestion_projets.html">
                 <div class="admin-card">
                     <span class="material-icons">description</span>
                     <h3>Gestion des projets</h3>
                 </div>
             </a>
 
-            <a href="<?= BASEURL; ?>liste_utilisateurs.html">
+            <a href="<?= BASEURL; ?>gestion_utilisateurs.html">
                 <div class="admin-card">
                     <span class="material-icons">account_circle</span>
                     <h3>Gestion des utilisateurs</h3>

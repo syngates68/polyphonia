@@ -14,7 +14,7 @@ $pages_admin = [
     "brouillon",
     "editer_projet",
     "nouveau_projet",
-    "liste_utilisateurs",
-    "liste_projets",
+    "gestion_utilisateurs",
+    "gestion_projets",
     "nouvel_utilisateur"
 ];

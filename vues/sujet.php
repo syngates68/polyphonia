@@ -57,7 +57,7 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                     <?php if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 3) && $sujet['resolu'] == 0) : ?>
                                         <span id="fermer_<?= $_GET['slug']; ?>" class="fermer">Fermer le sujet</span>
                                     <?php endif; ?>
-                                    <a href="#signaler_sujet_<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
+                                    <a href="<?= BASEURL; ?>inc/signaler_sujet?id_sujet=<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -89,7 +89,7 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                         <?php endif; ?>
                                         <p class="date_post"><?= ecart_date($reponse['date_post']); ?></p>
                                     </div>
-                                    <span class="signaler">Signaler</span>
+                                    <a href="<?= BASEURL; ?>inc/signaler_reponse?id_reponse=<?= $reponse['id']; ?>" rel="modal:open" class="signaler signaler_reponse">Signaler</a>
                                 </div>
                             </div>
                             <div class="reponse">
@@ -128,13 +128,7 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
             <?php endif; ?>
         </div>
         <!-- Modal de signalement -->
-        <div id="signaler_sujet_<?= $_GET['slug']; ?>" class="modal modal_signaler_sujet">
-            <h2>Signaler un sujet</h2>
-            <div class="erreur" style="display:none;"></div>
-            <p>Vous êtes sur le point de signaler ce sujet.</p>
-            <p>Veuillez indiquer ci-dessous le motif de votre signalement.</p>
-            <input type="text" name="motif">
-            <button class="btn btn-outline-blue signaler_sujet">Envoyer</button>
+        <div id="signaler" class="modal modal_signaler">
         </div>
         <script src="<?= BASEURL; ?>assets/js/aide.js"></script>
     <?php

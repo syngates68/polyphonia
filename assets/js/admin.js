@@ -285,3 +285,45 @@ function getRandomIntInclusive(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min +1)) + min;
 }
+
+/* GESTION DES PROJETS */
+function charge_liste_projets(titre, tri)
+{
+    $.post(baseurl + 'inc/admin_liste_projets.php',
+    {
+        titre : titre,
+        tri : tri
+    },
+    function(data)
+    {
+        $('.administration .tbl_projets').html(data)
+    })
+}
+
+$(document).on('keyup', '.administration #titre_projet', function()
+{
+    charge_liste_projets($(this).val(), $('.administration #tri').val())
+})
+
+$(document).on('change', '.administration #tri', function()
+{
+    charge_liste_projets($('.administration #titre_projet').val(), $(this).val())
+})
+
+/* GESTION DES UTILISATEURS */
+function charge_liste_utilisateurs(nom_utilisateur)
+{
+    $.post(baseurl + 'inc/admin_liste_utilisateurs.php',
+    {
+        nom_utilisateur : nom_utilisateur
+    },
+    function(data)
+    {
+        $('.administration .tbl_utilisateurs').html(data)
+    })
+}
+
+$(document).on('keyup', '.administration #nom_utilisateur', function()
+{
+    charge_liste_utilisateurs($(this).val())
+})

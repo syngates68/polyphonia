@@ -58,6 +58,53 @@ function req_liste_projets(?int $page, ?int $nbr_par_page, bool $admin = false, 
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function req_liste_projets_admin($titre = NULL, $tri = NULL)
+{
+    $where = '';
+    $order = ' ORDER BY p.id DESC';
+
+    if ($tri != NULL)
+    {
+        switch ($tri)
+        {
+            case 1 :
+                $order = ' ORDER BY p.date_ajout DESC';
+                break;
+            case 2 :
+                $order = ' ORDER BY p.date_ajout';
+                break;
+            case 3 :
+                $order = ' ORDER BY p.date_update DESC';
+                break;
+            case 4 :
+                $order = ' ORDER BY p.date_update';
+                break;
+            case 5 :
+                $order = ' ORDER BY p.vues DESC';
+                break;
+            case 6 :
+                $order = ' ORDER BY p.vues';
+                break;
+        }
+    }
+
+    if ($titre != NULL)
+    {
+        $where = ' AND p.titre LIKE :titre';
+    }
+
+    $sql = "SELECT p.id as id_projet, p.titre, p.contenu, p.illustration, p.brouillon, p.date_ajout, p.date_sauvegarde, p.date_update, p.slug, p.vues, p.tags, p.nom_photographe, p.lien_photo, u.nom_utilisateur FROM projets p LEFT JOIN utilisateurs u ON u.id = p.id_redacteur WHERE p.actif = 1".$where.$order;
+
+    $req = db()->prepare($sql);
+    
+    if ($titre != NULL)
+        $req->execute([":titre" => "%".$titre."%"]);
+    else
+        $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
 /**
  * req_nbr_pages
  * 
@@ -768,10 +815,20 @@ function req_liste_motifs_suppression()
  *
  * @return array
  */
-function req_liste_utilisateurs()
+function req_liste_utilisateurs($nom_utilisateur = NULL)
 {
-    $req = db()->prepare('SELECT u.id, u.email, u.nom_utilisateur, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, u.actif, ms.libelle as motif_suppression, d.libelle as rang FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime LEFT JOIN droits d ON u.id_droit = d.id ORDER BY u.id');
-    $req->execute();
+    $where = '';
+    if ($nom_utilisateur != NULL)
+    {
+        $where = 'WHERE u.nom_utilisateur LIKE :nom_utilisateur';
+    }
+
+    $req = db()->prepare("SELECT u.id, u.email, u.nom_utilisateur, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, u.actif, ms.libelle as motif_suppression, d.libelle as rang, d.libelle_site FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime LEFT JOIN droits d ON u.id_droit = d.id $where ORDER BY u.id");
+    
+    if ($nom_utilisateur != NULL)
+        $req->execute([":nom_utilisateur" => "%".$nom_utilisateur."%"]);
+    else
+        $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }

@@ -50,7 +50,7 @@ if (isset($_POST['editer_projet']))
                 }
 
                 $_SESSION['succes'] = "Le projet a bien été édité";
-                header('Location:'.BASEURL.'liste_projets.html');
+                header('Location:'.BASEURL.'gestion_projets.html');
             }
             else
             {

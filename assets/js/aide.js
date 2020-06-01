@@ -164,16 +164,18 @@ $(document).on('click', '.page_projet', function()
     location.href = $(this).attr('href')
 })
 
-$(document).on('click', '.modal .signaler_sujet', function()
+//Signaler un sujet/une réponse
+$(document).on('click', '.modal .signaler', function()
 {
     var motif = $('.modal input[name="motif"]').val()
-    var id_sujet = $('.modal_signaler_sujet').attr('id').replace('signaler_sujet_', '')
+    var id_type = $('input[name="id_type"]').val()
+    var type = $('input[name="type"]').val()
 
     $.post(baseurl + 'inc/signalement.php',
     {
         motif : motif,
-        type: "sujet",
-        id_type : id_sujet
+        type: type,
+        id_type : id_type
     },
     function(data)
     {
