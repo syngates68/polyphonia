@@ -105,26 +105,32 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                 <?php endforeach; ?>
             <?php endif; ?>
             <?php if ($sujet['resolu'] == 0 && $sujet['ouvert'] == 1) : ?>
-            <div class="form_reponse">
-                <div class="erreur" style="display:none;"></div>
-                <form>
-                    <div class="form_ligne">
-                        <label>Votre réponse</label>
-                        <textarea name="reponse" id="reponse"></textarea>
+                <?php if (isset($_SESSION['utilisateur'])) : ?>
+                    <div class="form_reponse">
+                        <div class="erreur" style="display:none;"></div>
+                        <form>
+                            <div class="form_ligne">
+                                <label>Votre réponse</label>
+                                <textarea name="reponse" id="reponse"></textarea>
+                            </div>
+                            <input type="hidden" name="utilisateur" value="<?= $_SESSION['utilisateur']; ?>">
+                            <input type="hidden" name="sujet" value="<?= $_GET['slug']; ?>">
+                            <input type="hidden" name="posteur" value="<?= $sujet['id_utilisateur']; ?>">
+                            <div class="button_ligne">
+                                <button type="submit" class="btn btn-blue">Répondre</button>
+                            </div>
+                        </form>
                     </div>
-                    <input type="hidden" name="utilisateur" value="<?= $_SESSION['utilisateur']; ?>">
-                    <input type="hidden" name="sujet" value="<?= $_GET['slug']; ?>">
-                    <input type="hidden" name="posteur" value="<?= $sujet['id_utilisateur']; ?>">
-                    <div class="button_ligne">
-                        <button type="submit" class="btn btn-blue">Répondre</button>
+                    <script>
+                        CKEDITOR.replace('reponse', {
+                            height: 200
+                        });
+                    </script>
+                <?php else : ?>
+                    <div class="connectez_vous">
+                        Afin de répondre à ce sujet, veuillez <a href="<?= BASEURL; ?>connexion.html">vous connecter</a>.
                     </div>
-                </form>
-            </div>
-            <script>
-                CKEDITOR.replace('reponse', {
-                    height: 200
-                });
-            </script>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
         <!-- Modal de signalement -->

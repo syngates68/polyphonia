@@ -18,19 +18,21 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
         ?>
 
         <div class="administration">
-            <div class="form_ligne" style="width:50%">
-                <input type="text" id="titre_projet" placeholder="Rechercher un projet">
-            </div>
-            <div class="form_ligne" style="width:50%">
-                <label for="">Trier par</label>
-                <select name="tri" id="tri">
-                    <option value="1" selected>Date d'ajout décroissante</option>
-                    <option value="2">Date d'ajout croissante</option>
-                    <option value="3">Date de mise à jour décroissante</option>
-                    <option value="4">Date de mise à jour croissante</option>
-                    <option value="5">Nombre de vues décroissant</option>
-                    <option value="6">Nombre de vues croissant</option>
-                </select>
+            <div class="filtres">
+                <div class="form_ligne" style="width:50%">
+                    <input type="text" id="titre_projet" placeholder="Rechercher un projet">
+                </div>
+                <div class="form_ligne" style="width:50%">
+                    <label for="">Trier par</label>
+                    <select name="tri" id="tri">
+                        <option value="1" selected>Date d'ajout décroissante</option>
+                        <option value="2">Date d'ajout croissante</option>
+                        <option value="3">Date de mise à jour décroissante</option>
+                        <option value="4">Date de mise à jour croissante</option>
+                        <option value="5">Nombre de vues décroissant</option>
+                        <option value="6">Nombre de vues croissant</option>
+                    </select>
+                </div>
             </div>
             <div class="tbl_top">
                 <div class="admin_cta">

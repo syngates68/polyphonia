@@ -24,8 +24,15 @@ if (isset($_POST['connexion']))
     
                     if (isset($_POST['remember_me']))
                         setcookie('auth', $utilisateur['id'] . '----' . sha1($utilisateur['nom_utilisateur'] . $utilisateur['pass']), time() + 3600 * 24 * 3, '/', '', false, true);
-    
-                    header('Location:'.BASEURL);
+                    
+                    //On redirige l'utilisateur vers la page précédente si nécessaire
+                    if (isset($_SESSION['redirect']))
+                    {
+                        header('Location:'.$_SESSION['redirect']);
+                        unset($_SESSION['redirect']);
+                    }
+                    else
+                        header('Location:'.BASEURL);
                 }
                 else
                 {

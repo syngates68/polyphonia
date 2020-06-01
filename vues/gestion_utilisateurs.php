@@ -18,8 +18,10 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
         ?>
 
         <div class="administration">
-            <div class="form_ligne" style="width:50%">
-                <input type="text" id="nom_utilisateur" placeholder="Rechercher un utilisateur">
+            <div class="filtres">
+                <div class="form_ligne" style="width:50%">
+                    <input type="text" id="nom_utilisateur" placeholder="Rechercher un utilisateur">
+                </div>
             </div>
             <div class="tbl_top">
                 <div class="admin_cta">

@@ -86,7 +86,7 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
             <div class="footer_content__div">
                 <h3>Polyphonia</h3>
                 <ul>
-                    <li><a href="#">Qu'est-ce que c'est?</a></li>
+                    <li><a href="<?= BASEURL; ?>a_propos.html">Qu'est-ce que c'est?</a></li>
                     <li><a href="#">Proposer un projet</a></li>
                 </ul>
             </div>

@@ -21,6 +21,8 @@ if (isset($_SESSION['utilisateur'])) :
                                     help_outline
                                 <?php elseif ($notification['type_notification'] == 'sujet_ferme') : ?>
                                     highlight_off
+                                <?php elseif ($notification['type_notification'] == 'changement_rang') : ?>
+                                    military_tech
                                 <?php endif; ?>
                             </span>
                             <?= $notification['contenu']; ?>
