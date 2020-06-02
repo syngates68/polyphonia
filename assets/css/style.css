@@ -1767,16 +1767,13 @@ footer .footer_content .footer_content__div .copyright
 
 .connectez_vous
 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 150px;
     font-weight: 700;
+    padding: 16px 0;
+    line-height: 2;
 }
 
 .connectez_vous a
 {
-    margin-left: 4px;
     color: var(--links);
 }
 
@@ -3172,36 +3169,92 @@ footer .footer_content .footer_content__div .copyright
 
 *********************************************************/
 
-.date_cgu
+.cgu .header
 {
-    margin-top: 16px;
+    color: #000;
+    padding: 64px 16px;
+    text-align: center;
+    background: url('../img/informatique.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.cgu .contenu
+{
+    width: 50%;
+    padding: 16px;
+    margin: 0 auto;
+}
+
+.cgu .contenu .date_cgu
+{
     color: var(--grey);
     font-size: 12px;
     font-style: italic;
 }
 
-.cgu_content
+.cgu .contenu .article
 {
-    padding: 32px 0;
+    padding-bottom: 32px;
 }
 
-.cgu_content .article 
+.cgu .contenu h2
 {
-    padding: 32px 0;
+    font-size: 23px;
+    font-weight: 700;
+    margin: 16px 0;
+    line-height: 1.2;
 }
 
-.cgu_content h2
+.cgu .contenu h3
 {
+    font-size: 18px;
     font-weight: 600;
-    font-size: 22px;
-    color: var(--orange);
+    margin: 16px 0;
+    line-height: 1.2;
 }
 
-.cgu_content p
+.cgu .contenu p
 {
-    color: #181818;
+    font-size: 16px;
+    color: var(--grey);
     line-height: 2;
-    padding: 16px 0;
+}
+
+.cgu .contenu br
+{
+    margin-bottom: 25px;
+}
+
+.cgu .contenu a
+{
+    color: var(--links);
+}
+
+.cgu .contenu ul
+{
+    color: var(--grey);
+    padding: 8px 0;
+}
+
+.cgu .contenu b
+{
+    font-weight: 700;
+}
+
+.cgu .contenu ul li
+{
+    margin-left: 32px;
+    list-style-type: circle;
+    padding: 8px 0;
+    line-height: 2;
+}
+
+.cgu .contenu br
+{
+    margin-bottom: 25px;
 }
 
 /*********************************************************
@@ -3231,7 +3284,7 @@ footer .footer_content .footer_content__div .copyright
 
 .a_propos .contenu .bloc
 {
-    padding: 32px 0;
+    padding-bottom: 32px;
 }
 
 .a_propos .contenu h2
@@ -3239,6 +3292,7 @@ footer .footer_content .footer_content__div .copyright
     font-size: 23px;
     font-weight: 700;
     margin: 16px 0;
+    line-height: 1.2;
 }
 
 .a_propos .contenu p
@@ -3269,6 +3323,7 @@ footer .footer_content .footer_content__div .copyright
     margin-left: 32px;
     list-style-type: circle;
     padding: 8px 0;
+    line-height: 2;
 }
 
 /*********************************************************
@@ -3736,6 +3791,7 @@ footer .footer_content .footer_content__div .copyright
         display: none;
     }
 
+    .cgu .contenu,
     .a_propos .contenu
     {
         width: 100%;

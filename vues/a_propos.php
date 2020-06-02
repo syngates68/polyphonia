@@ -10,7 +10,9 @@
                 Cette idée est venue suite à un besoin personnel, alors que je fouillais des tas de sites divers et variés pour trouver des idées de projets intéressants à mettre 
                 en oeuvre, et que les résultats ne me satisfaisaient pas, ces derniers étant trop vagues, voire résumés en une phrase.<br/> 
                 Je souhaitais pouvoir fournir à ceux qui le souhaitaient, des idées de projets, sous forme de mini cahier des charges, listant les différentes fonctionnalités
-                à mettre en place, ainsi que la finalité du projet.
+                à mettre en place, ainsi que la finalité du projet.<br/>
+                S'ajoute à ça la volonté de permettre d'apprendre tout en pratiquant sur des projets concrets, et d'obtenir
+                une aide précise sur un sujet précis lorsque cela est nécessaire.
             </p>
         </div>
         <div class="bloc">
@@ -21,7 +23,7 @@
             </p>
         </div>
         <div class="bloc">
-            <h2>Qui écrit les projets</h2>
+            <h2>Qui écrit les projets?</h2>
             <p>
                 Pour le moment je suis le seul à  m'occuper de la rédaction des projets, mais vous avez la possibilité de proposer vos idée de projets <a href="#">ici</a>,
                 si l'idée est intéressante, elle sera alors publiée sur le site (suite à certaines modifications afin de correspondre à la charte du site).
