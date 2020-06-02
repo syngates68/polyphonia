@@ -1222,6 +1222,25 @@ footer .footer_content .footer_content__div .copyright
     max-width: 100%;
 }
 
+.projet_contenu .projet_licence_cc
+{
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+    padding: 16px;
+}
+
+.projet_contenu .projet_licence_cc img
+{
+    margin-right: 8px;
+}
+
+.projet_contenu .projet_licence_cc a
+{
+    color: var(--links);
+}
+
 .projet_contenu__footer
 {
     border-top: 2px solid var(--orange);
@@ -3171,10 +3190,10 @@ footer .footer_content .footer_content__div .copyright
 
 .cgu .header
 {
-    color: #000;
+    color: #FFF;
     padding: 64px 16px;
     text-align: center;
-    background: url('../img/informatique.jpg') no-repeat;
+    background: url('../img/bg.png') no-repeat;
     background-size: cover;
     background-position: center;
     font-weight: 700;
@@ -3265,10 +3284,10 @@ footer .footer_content .footer_content__div .copyright
 
 .a_propos .header
 {
-    color: #000;
+    color: #FFF;
     padding: 64px 16px;
     text-align: center;
-    background: url('../img/informatique.jpg') no-repeat;
+    background: url('../img/bg.png') no-repeat;
     background-size: cover;
     background-position: center;
     font-weight: 700;

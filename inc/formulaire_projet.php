@@ -104,8 +104,10 @@ if (isset($_SESSION['id_projet']))
         </div>
     </div>
     <div class="bloc_formulaire droite">
-        <label>Contenu</label>
-        <textarea name="contenu" id="contenu"><?= $contenu; ?></textarea>
+        <div class="form_ligne">
+            <label>Contenu</label>
+            <textarea name="contenu" id="contenu"><?= $contenu; ?></textarea>
+        </div>
     </div>
 </div>
 
