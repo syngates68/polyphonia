@@ -24,13 +24,16 @@ if (!isset($_SESSION['utilisateur'])) :
             <div class="form_ligne">
                 <label for="pass">Mot de passe</label>
                 <input type="password" id="pass" name="pass">
+                <div class="mdp_oublie">
+                    <a href="<?= BASEURL; ?>mot_de_passe_oublie.html">Mot de passe oublié?</a> 
+                </div>
             </div>
             <button type="submit" name="connexion">Se connecter</button>
             <div class="form_ligne cgu">
                 <input type="checkbox" name="remember_me" id="remember_me">
                 <label for="remember_me">Se souvenir de moi
             </div>
-            <p class="message_connexion">Pas encore membre? <a href="<?= BASEURL; ?>inscription.html">Inscrivez-vous ici</a></p>   
+            <p class="message_connexion">Pas encore membre? <a href="<?= BASEURL; ?>inscription.html">Inscrivez-vous ici</a></p>  
         </form>
     </div>
 </div>

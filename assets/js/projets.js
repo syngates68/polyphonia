@@ -7,6 +7,7 @@
  */
 function req_liste_projets(page, recherche)
 {
+    $('.loader').show()
     $.post(baseurl + 'inc/liste_projets.php',
     {
         page : page,
@@ -14,7 +15,8 @@ function req_liste_projets(page, recherche)
     },
     function(data)
     {
-        $('.projets_container').html(data);
+        $('.projets_container').html(data)
+        $('.loader').hide()
     });
 }
 

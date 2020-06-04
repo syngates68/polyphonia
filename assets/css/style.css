@@ -721,6 +721,50 @@ footer .footer_content .footer_content__div .copyright
     color: var(--grey);
 }
 
+.loader
+{
+    text-align: center;
+    padding: 16px;
+    display: none;
+}
+
+.loader p
+{
+    margin-top: 16px;
+}
+
+.lds-dual-ring 
+{
+    display: inline-block;
+    width: 160px;
+    height: 160px;
+}
+
+.lds-dual-ring:after 
+{
+    content: " ";
+    display: block;
+    width: 128px;
+    height: 128px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 12px solid var(--orange);
+    border-color: var(--orange) transparent var(--orange) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;  
+}
+
+@keyframes lds-dual-ring 
+{
+    0% 
+    {
+      transform: rotate(0deg);
+    }
+    100% 
+    {
+      transform: rotate(360deg);
+    }
+}
+
 /*********************************************************
 
     PAGE D'ACCUEIL
@@ -1357,6 +1401,13 @@ footer .footer_content .footer_content__div .copyright
     margin-top: 8px;
 }
 
+.aide .aide_top .nbr_sujets_ouverts
+{
+    font-weight: 300;
+    margin-top: 16px;
+    font-size: 13px;
+}
+
 .aide .aide_top button
 {
     display: flex;
@@ -1821,11 +1872,32 @@ footer .footer_content .footer_content__div .copyright
 
 *********************************************************/
 
+.login_container
+{
+    min-height: 704px;
+}
+
+.sign_container
+{
+    min-height: 904px;
+}
+
+.login_container .mdp_oublie
+{
+    padding-top: 16px;
+    text-align: left;
+    font-size: 11px;
+}
+
+.login_container .mdp_oublie a
+{
+    color: var(--links);
+}
+
 .login_container,
 .sign_container
 {
     position: relative;
-    min-height: 904px;
     background: url("../img/bg.png") no-repeat;
     background-size: cover;
     /*background: linear-gradient(135deg, rgb(255, 171, 69) 0%, rgb(248, 172, 79) 35%, rgba(242,168,84,1) 51%, rgba(237,156,57,1) 71%, rgba(222,122,0,1) 100%);*/
@@ -1897,6 +1969,20 @@ footer .footer_content .footer_content__div .copyright
 .formulaire_connexion .message_connexion a:hover
 {
     color: var(--orange);
+}
+
+/*********************************************************
+
+    MOT DE PASSE OUBLIE
+
+*********************************************************/
+
+.texte_reinitialisation
+{
+    padding: 32px 0;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--grey);
 }
 
 /*********************************************************

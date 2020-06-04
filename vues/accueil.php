@@ -19,6 +19,11 @@
 
     <h1>Les projets</h1>
 
+    <div class="loader">
+        <div class="lds-dual-ring"></div>
+        <p>Chargement des projets...</p>
+    </div>
+
     <div class="projets_container"></div>
 
     <script src="<?= BASEURL; ?>assets/js/projets.js"></script>

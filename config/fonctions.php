@@ -487,6 +487,21 @@ function req_utilisateur_by_nom_utilisateur(string $nom_utilisateur)
     return $req->fetchAll(PDO::FETCH_ASSOC)[0];
 }
 
+/**
+ * req_utilisateur_by_email
+ *
+ * @param string $email
+ * 
+ * @return array
+ */
+function req_utilisateur_by_email(string $email)
+{
+    $req = db()->prepare('SELECT * FROM utilisateurs WHERE email = ?');
+    $req->execute([$email]);
+
+    return $req->fetchAll(PDO::FETCH_ASSOC)[0];
+}
+
 function count_utilisateur_by_nom_utilisateur($nom_utilisateur)
 {
     $req = db()->prepare('SELECT COUNT(*) as nb FROM utilisateurs WHERE nom_utilisateur = ?');
@@ -964,9 +979,9 @@ function count_sujets_by_projet($id_projet)
     return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
 }
 
-function req_sujets_by_projet($id_projet)
+function req_sujets_by_projet($id_projet, $var_limit)
 {
-    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id_projet = ? ORDER BY a.id DESC");
+    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id_projet = ? ORDER BY a.id DESC".$var_limit);
     $req->execute([$id_projet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -1246,11 +1261,18 @@ function envoi_mail($type, $email, $infos)
 
     $body = '<body style="font-family: \'Roboto\', sans-serif;font-size:25px;width:660px; padding: 10px;">';
     $body .= '<h1 style="text-align:center;color:#fa940f;">Polyphonia</h1>';
-    $body .= '<p>Bonjour '.$infos['nom_utilisateur'].'</p>';
     if ($type == 'inscription')
     {
+        $body .= '<p>Bonjour '.$infos['nom_utilisateur'].'</p>';
         $body .= '<p>Nous sommes ravis de vous compter parmis nos membres.</p>';
         $body .= '<p>Afin de confirmer votre inscription, veuillez rentrer le code suivant dans le champs indiqué sur Polyphonia : <B>'.$infos['code'].'</B></p>';
+    }
+    elseif ($type == 'mdp_oublie')
+    {
+        $body .= '<p>Bonjour,</p>';
+        $body .= '<p>Vous avez fait une demande de réinitialisation de votre mot de passe.</p>';
+        $body .= '<p>Votre mot de passe temporaire est le suivant : <B>'.$infos['mdp'].'</B></p>';
+        $body .= '<p>Ce mot de passe ne sera valable que pour une seule connexion, il devra impérativement être changé dans vos paramètres.</p>';
     }
     $body .= '<p>Cordialement,</p>';
     $body .= '<p><strong>L\'équipe administrative de Polyphonia</strong></p>';
@@ -1260,11 +1282,16 @@ function envoi_mail($type, $email, $infos)
     {
         if ($type == 'inscription')
         {
-            $mail->Subject = "Confirmation d'inscription à Polyphonia";
-            $mail->Body = $body;
-            $mail->AltBody = "";
-            $mail->send();
+            $mail->Subject = "Polyphonia - Confirmation d'inscription";
         }
+        elseif ($type == 'mdp_oublie')
+        {
+            $mail->Subject = "Polyphonia - Réinitialisation du mot de passe";
+        }
+
+        $mail->Body = $body;
+        $mail->AltBody = "";
+        $mail->send();
     }
     catch(Exception $e)
     {
