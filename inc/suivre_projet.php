@@ -7,6 +7,5 @@ if (isset($_SESSION['utilisateur']))
 }
 else
 {
-    $_SESSION['redirect'] = $_POST['href'];
     echo 'nope';
 }

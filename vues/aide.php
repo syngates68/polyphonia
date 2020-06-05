@@ -57,7 +57,7 @@ if (isset($_GET['slug']))
                     <div class="pagination">
                         <ul>
                             <?php for ($i = 0; $i < $nbr_pages; $i++) : ?>
-                                <li <?php if ($page == ($i + 1)) : ?>class="actif"<?php endif; ?>><a href="<?= BASEURL; ?>/aide/<?= $_GET['slug']; ?>.html/?pagination=<?= $i + 1; ?>"><?= $i + 1; ?></a></li>
+                                <li <?php if ($page == ($i + 1)) : ?>class="actif"<?php endif; ?>><a href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html/?pagination=<?= $i + 1; ?>"><?= $i + 1; ?></a></li>
                             <?php endfor; ?>
                         </ul>
                     </div>

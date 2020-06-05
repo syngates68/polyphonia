@@ -8,6 +8,12 @@ include("config/fonctions.php");
 include("config/captcha.php");
 include("config/cookies.php");
 
+//On garde la page en session afin de revenir à cette page après connexion
+if (!strpos($_SERVER['REQUEST_URI'], 'connexion') && !strpos($_SERVER['REQUEST_URI'], 'inscription'))
+{
+    $_SESSION['redirect'] = './'.$_SERVER['REQUEST_URI'];
+}
+
 //En cas de blocage de compte on déconnecte l'utilisateur
 if (isset($_SESSION['utilisateur']) && req_utilisateur_by_id($_SESSION['utilisateur'])['bloque'] == 1)
 {

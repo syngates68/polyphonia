@@ -724,8 +724,13 @@ footer .footer_content .footer_content__div .copyright
 .loader
 {
     text-align: center;
-    padding: 16px;
+    padding: 48px;
+    width: 300px;
     display: none;
+    position: absolute;
+    z-index: 4;
+    background: #ffffff7c;
+    right: calc(50% - 150px);
 }
 
 .loader p
@@ -849,47 +854,50 @@ footer .footer_content .footer_content__div .copyright
 .pagination
 {
     padding: 16px 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pagination ul li
 {
     display: inline-block;
-    margin: 0 8px;
-    padding: 8px;
     width: 35px;
     height: 35px;
+    position: relative;
+    margin: 0 8px;
+}
+
+.pagination ul li a
+{
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: 1px solid var(--border);
     font-size: 17px;
     text-align: center;
-    vertical-align: middle;
     transition-duration: .3s;
     background: #FFF;
     border-radius: 5px;
+    text-decoration: none;
+    color: #000;
 }
 
-.pagination ul li:hover
+.pagination ul li a:hover
 {
     background: var(--border);
     cursor: pointer; 
     transition-duration: .3s;
 }
 
-.pagination ul li.actif
+.pagination ul li.actif a
 {
     background: var(--orange);
     border: none;
-}
-
-.pagination ul li.actif a
-{
     color: #FFF;
-}
-
-.pagination ul li a
-{
-    text-decoration: none;
-    color: #000;
 }
 
 .nbr_projets
@@ -1977,12 +1985,44 @@ footer .footer_content .footer_content__div .copyright
 
 *********************************************************/
 
+.mdp_oublie_container
+{
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.mdp_oublie_container h1
+{
+    font-weight: 700;
+    color: var(--orange);
+}
+
 .texte_reinitialisation
 {
     padding: 32px 0;
     font-size: 14px;
-    line-height: 2;
+    line-height: 1.5;
     color: var(--grey);
+    width: 40%;
+    margin: auto;
+}
+
+.mdp_oublie_container .erreur
+{
+    margin-bottom: 16px !important;
+}
+
+.mdp_oublie_container form,
+.mdp_oublie_container .erreur
+{
+    width: 30%;
+    margin: auto;
+}
+
+.mdp_oublie_container form button
+{
+    width: 100%;
 }
 
 /*********************************************************
@@ -3741,6 +3781,17 @@ footer .footer_content .footer_content__div .copyright
     .formulaire_connexion form 
     {
         width: 90%;
+    }
+
+    .texte_reinitialisation
+    {
+        width: 100%;
+    }
+
+    .mdp_oublie_container form,
+    .mdp_oublie_container .erreur
+    {
+        width: 80%;
     }
 
     .form_modification form

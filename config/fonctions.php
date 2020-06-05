@@ -1019,7 +1019,7 @@ function count_reponses_by_sujet($id_sujet)
 
 function req_reponses_by_sujet($id_sujet)
 {
-    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, u.nom_utilisateur, u.avatar, d.libelle as rang, d.libelle_site as libelle_site FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur LEFT JOIN droits d ON d.id = u.id_droit WHERE c.id_sujet = ? ORDER BY c.id");
+    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, c.id_utilisateur, u.nom_utilisateur, u.avatar, d.libelle as rang, d.libelle_site as libelle_site FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur LEFT JOIN droits d ON d.id = u.id_droit WHERE c.id_sujet = ? ORDER BY c.id");
     $req->execute([$id_sujet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);

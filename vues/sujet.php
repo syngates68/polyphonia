@@ -57,7 +57,9 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                     <?php if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 3) && $sujet['resolu'] == 0) : ?>
                                         <span id="fermer_<?= $_GET['slug']; ?>" class="fermer">Fermer le sujet</span>
                                     <?php endif; ?>
-                                    <a href="<?= BASEURL; ?>inc/signaler_sujet?id_sujet=<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
+                                    <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur']) : ?>
+                                        <a href="<?= BASEURL; ?>inc/signaler_sujet?id_sujet=<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -89,7 +91,11 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                         <?php endif; ?>
                                         <p class="date_post"><?= ecart_date($reponse['date_post']); ?></p>
                                     </div>
-                                    <a href="<?= BASEURL; ?>inc/signaler_reponse?id_reponse=<?= $reponse['id']; ?>" rel="modal:open" class="signaler signaler_reponse">Signaler</a>
+                                    <?php if (isset($_SESSION['utilisateur'])) : ?>
+                                        <?php if ($_SESSION['utilisateur'] != $reponse['id_utilisateur']) : ?>
+                                            <a href="<?= BASEURL; ?>inc/signaler_reponse?id_reponse=<?= $reponse['id']; ?>" rel="modal:open" class="signaler signaler_reponse">Signaler</a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="reponse">
