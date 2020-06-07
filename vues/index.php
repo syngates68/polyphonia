@@ -15,7 +15,7 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                     <?php if (!in_array($var_page, $pages_admin)) : ?>
                         <a <?php if ($var_page == "accueil") : ?> class="actif" <?php endif; ?> href="<?= BASEURL ?>">Accueil</a>
                         <a <?php if ($var_page == "blog") : ?> class="actif" <?php endif; ?> href="<?= BASEURL ?>blog.html">Blog</a>
-                        <a href="<?= BASEURL ?>forum.html">Forum</a>
+                        <a href="<?= BASEURL ?>sujets.html">Sujets</a>
                         <a href="<?= BASEURL ?>contact.html">Contact</a>
                     <?php else : ?>
                         <a href="<?= BASEURL ?>">Retour au site</a>

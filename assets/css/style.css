@@ -1857,6 +1857,28 @@ footer .footer_content .footer_content__div .copyright
 
 /*********************************************************
 
+    LISTE DES SUJETS
+
+*********************************************************/
+
+.liste_sujets .sujet
+{
+    padding: 32px 0;
+}
+
+.liste_sujets .sujet .titre_sujet
+{
+    font-weight: 700;
+}
+
+.liste_sujets .sujet .titre_projet
+{
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+/*********************************************************
+
     SUGGERER UNE MODIFICATION
 
 *********************************************************/
@@ -3840,6 +3862,16 @@ footer .footer_content .footer_content__div .copyright
     {
         padding: 8px;
         width: 100%;
+    }
+
+    .aide .aide_top
+    {
+        display: block;
+    }
+
+    .aide .aide_top button
+    {
+        margin-top: 16px;
     }
 
     .aide .nouveau_sujet form
