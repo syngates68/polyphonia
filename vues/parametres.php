@@ -74,7 +74,7 @@ if (isset($_SESSION['utilisateur']))
                 </form>
                 <div class="notifications">
                     <div class="titre_section"><span class="material-icons">notifications</span>Notifications</div>
-                    <div class="form_ligne">
+                    <div class="form_ligne cgu">
                         <input type="checkbox" name="notifications" <?php if ($utilisateur['notifications'] == 1) : ?>checked<?php endif; ?>>
                         <label>Recevoir les notifications</label>
                     </div>

@@ -31,7 +31,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 </div>
             </a>
 
-            <a href="#">
+            <a href="<?= BASEURL; ?>gestion_signalements.html">
                 <div class="admin-card">
                     <span class="material-icons">report_problem</span>
                     <h3>Signalements</h3>

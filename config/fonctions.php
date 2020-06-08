@@ -1027,7 +1027,7 @@ function count_reponses_by_sujet($id_sujet)
 
 function req_reponses_by_sujet($id_sujet)
 {
-    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, c.id_utilisateur, u.nom_utilisateur, u.avatar, d.libelle as rang, d.libelle_site as libelle_site FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur LEFT JOIN droits d ON d.id = u.id_droit WHERE c.id_sujet = ? ORDER BY c.id");
+    $req = db()->prepare("SELECT c.id, c.contenu, c.date_post, c.id_utilisateur, c.modifie, u.nom_utilisateur, u.avatar, d.libelle as rang, d.libelle_site as libelle_site FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur LEFT JOIN droits d ON d.id = u.id_droit WHERE c.id_sujet = ? ORDER BY c.id");
     $req->execute([$id_sujet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -1037,6 +1037,12 @@ function ajouter_reponse_sujet($reponse, $id_utilisateur, $id_sujet)
 {
     $ins = db()->prepare("INSERT INTO aide_contenu(contenu, id_utilisateur, id_sujet) VALUES (?, ?, ?)");
     $ins->execute([$reponse, $id_utilisateur, $id_sujet]);
+}
+
+function update_reponse_sujet($reponse, $id_reponse)
+{
+    $upd = db()->prepare("UPDATE aide_contenu SET contenu = ?, modifie = 1 WHERE id = ?");
+    $upd->execute([$reponse, $id_reponse]);
 }
 
 function req_utilisateurs_sujet($id_sujet)
@@ -1239,6 +1245,14 @@ function req_nbr_signalements()
     $count->execute();
 
     return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_liste_signalements()
+{
+    $req = db()->prepare("SELECT s.id, s.type, s.motif, s.date_signalement, s.id_type, a.titre_sujet, a.contenu_sujet, c.contenu as reponse, c.id_sujet, u.nom_utilisateur FROM signalements s LEFT JOIN aide_contenu c ON c.id = s.id_type LEFT JOIN aide_sujet a ON a.id = s.id_type LEFT JOIN utilisateurs u ON u.id = s.id_utilisateur WHERE s.lu = 0");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function envoi_mail($type, $email, $infos)

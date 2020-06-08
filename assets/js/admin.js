@@ -327,3 +327,14 @@ $(document).on('keyup', '.administration #nom_utilisateur', function()
 {
     charge_liste_utilisateurs($(this).val())
 })
+
+//Afficher un(e) sujet/réponse signalé(e)
+$(document).on('click', '.liste_signalements .voir', function()
+{
+    var id_signalement = $(this).attr('id').replace('voir_', '')
+    $('.signalement_contenu').each(function()
+    {
+        $(this).slideUp()
+    })
+    $('#signalement_contenu_' + id_signalement).slideDown()
+})

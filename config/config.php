@@ -1,6 +1,6 @@
 <?php
 
-define("BASEURL", "http://localhost/polyphonia/");
+define("BASEURL", "http://192.168.1.41/polyphonia_new/");
 
 if ($_SERVER['SERVER_NAME'] == '192.168.1.41' || $_SERVER['SERVER_NAME'] == 'localhost')
     define("DEV", true);
@@ -16,5 +16,6 @@ $pages_admin = [
     "nouveau_projet",
     "gestion_utilisateurs",
     "gestion_projets",
+    "gestion_signalements",
     "nouvel_utilisateur"
 ];

@@ -96,24 +96,39 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                                 <?= $reponse['libelle_site']; ?>
                                             </span>
                                         <?php endif; ?>
-                                        <p class="date_post"><?= ecart_date($reponse['date_post']); ?></p>
+                                        <p class="date_post"><?= ecart_date($reponse['date_post']); ?> <?php if ($reponse['modifie'] == 1) : ?> - Modifié <?php endif; ?></p>
                                     </div>
                                     <?php if (isset($_SESSION['utilisateur'])) : ?>
                                         <?php if ($_SESSION['utilisateur'] != $reponse['id_utilisateur']) : ?>
                                             <a href="<?= BASEURL; ?>inc/signaler_reponse?id_reponse=<?= $reponse['id']; ?>" rel="modal:open" class="signaler signaler_reponse">Signaler</a>
                                         <?php else : ?>
-                                            <a href="#" class="modifier">Modifier</a>
+                                            <a href="#" id="modifier_reponse_<?= $reponse['id']; ?>" show="1" class="modifier">Modifier</a>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="reponse">
-                                <?= $reponse['contenu']; ?>
+                            <div class="div_reponse" id="div_reponse_<?= $reponse['id']; ?>">
+                                <div class="reponse">
+                                    <?= $reponse['contenu']; ?>
+                                </div>
+                                <div class="votes">
+                                    <span id="good_<?= $reponse['id']; ?>" class="material-icons <?php if (isset($_SESSION['utilisateur'])) : ?> good <?php endif; ?> <?php if(isset($_SESSION['utilisateur']) && req_note_by_utilisateur_reponse($reponse['id'], $_SESSION['utilisateur']) == 1) : ?> actif <?php endif; ?>">thumb_up</span>
+                                    <span id="note_<?= $reponse['id']; ?>"><?= req_note_by_reponse($reponse['id']); ?></span>
+                                    <span id="bad_<?= $reponse['id']; ?>" class="material-icons <?php if (isset($_SESSION['utilisateur'])) : ?> bad <?php endif; ?> <?php if(isset($_SESSION['utilisateur']) && req_note_by_utilisateur_reponse($reponse['id'], $_SESSION['utilisateur']) == '-1') : ?> actif <?php endif; ?>">thumb_down</span>
+                                </div>
                             </div>
-                            <div class="votes">
-                                <span id="good_<?= $reponse['id']; ?>" class="material-icons <?php if (isset($_SESSION['utilisateur'])) : ?> good <?php endif; ?> <?php if(isset($_SESSION['utilisateur']) && req_note_by_utilisateur_reponse($reponse['id'], $_SESSION['utilisateur']) == 1) : ?> actif <?php endif; ?>">thumb_up</span>
-                                <span id="note_<?= $reponse['id']; ?>"><?= req_note_by_reponse($reponse['id']); ?></span>
-                                <span id="bad_<?= $reponse['id']; ?>" class="material-icons <?php if (isset($_SESSION['utilisateur'])) : ?> bad <?php endif; ?> <?php if(isset($_SESSION['utilisateur']) && req_note_by_utilisateur_reponse($reponse['id'], $_SESSION['utilisateur']) == '-1') : ?> actif <?php endif; ?>">thumb_down</span>
+                            <div class="div_modifier_reponse" id="div_modifier_reponse_<?= $reponse['id']; ?>">
+                                <div class="erreur"></div>
+                                <textarea name="contenu_reponse" id="contenu_reponse_<?= $reponse['id']; ?>"></textarea>
+                                <div class="ligne_button">
+                                    <button class="btn btn-blue valider_modification" id="valider_modification_<?= $reponse['id']; ?>">Modifier</button>
+                                    <button class="btn btn-outline-red annuler_modification" show="0" id="annuler_modification_<?= $reponse['id']; ?>">Annuler</button>
+                                </div>
+                                <script>
+                                    CKEDITOR.replace('contenu_reponse_<?= $reponse['id']; ?>', {
+                                        height: 200
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -152,6 +167,14 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
         <div id="signaler" class="modal modal_signaler">
         </div>
         <script src="<?= BASEURL; ?>assets/js/aide.js"></script>
+        <script>
+            $(document).ready(function()
+            {
+                var ancre = window.location.hash
+                if (ancre != '')
+                    $(ancre).css('background', '#ff00004d')
+            })
+        </script>
     <?php
     }
     else

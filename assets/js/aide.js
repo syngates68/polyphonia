@@ -185,3 +185,44 @@ $(document).on('click', '.modal .signaler', function()
             location.reload()
     })
 })
+
+//Modifier une réponse
+$(document).on('click', '.modifier, .annuler_modification', function(e)
+{
+    e.preventDefault()
+
+    if ($(this).attr('show') == 1)
+    {
+        var id_reponse = $(this).attr('id').replace('modifier_reponse_', '')
+        
+        $('#div_reponse_' + id_reponse).hide()
+        $('#div_modifier_reponse_' + id_reponse).show()
+        CKEDITOR.instances['contenu_reponse_' + id_reponse].setData($('#div_reponse_' + id_reponse + ' .reponse').html())
+    }
+    else
+    {
+        var id_reponse = $(this).attr('id').replace('annuler_modification_', '')
+        
+        $('#div_reponse_' + id_reponse).show()
+        $('#div_modifier_reponse_' + id_reponse).hide()  
+        $('#div_modifier_reponse_' + id_reponse + ' .erreur').hide() 
+    }
+})
+
+$(document).on('click', '.valider_modification', function()
+{
+    var id_reponse = $(this).attr('id').replace('valider_modification_', '')
+
+    $.post(baseurl + 'inc/modifier_reponse.php',
+    {
+        id_reponse : id_reponse,
+        modification : CKEDITOR.instances['contenu_reponse_' + id_reponse].getData()
+    },
+    function(data)
+    {
+        if (data != '')
+            $('#div_modifier_reponse_' + id_reponse + ' .erreur').slideDown().css('display', 'flex').text(data)
+        else
+            location.reload()
+    })
+})
