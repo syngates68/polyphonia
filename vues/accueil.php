@@ -1,3 +1,4 @@
+<?php $page_title = 'Accueil'; ?>
 <div class="jumbotron">
     <img src="<?= BASEURL; ?>assets/img/logo_orange.png">
     <div class="message_presentation">

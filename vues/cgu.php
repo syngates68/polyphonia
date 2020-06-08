@@ -1,3 +1,4 @@
+<?php $page_title = 'Conditions Générales d\'Utilisation'; ?>
 <div class="cgu">
     <div class="header">
         <h1>Conditions générales d'utilisation</h1>

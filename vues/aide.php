@@ -10,13 +10,18 @@ if (isset($_GET['slug']))
     $nbr_pages = ceil($nbr_sujets/$nbr_elements_page);
     $page = (isset($_GET['pagination']) && is_numeric($_GET['pagination']) && $_GET['pagination'] <= $nbr_pages) ? $_GET['pagination'] : 1;
 
-    $exist_projet = count_by_id($id_projet);
+    if (is_numeric($id_projet))
+        $exist_projet = count_by_id($id_projet);
+    else
+        $exist_projet = 0;
 
     if ($exist_projet > 0)
     {
 
         $projet = req_by_id($id_projet);
         
+        $page_title = 'Aide - '.$projet['titre'];
+
         if ($slug == $projet['slug'])
         {
 

@@ -1,5 +1,5 @@
 <?php
-
+$page_title = 'Gestion des projets';
 if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2))
 {
 

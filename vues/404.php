@@ -1,3 +1,4 @@
+<?php $page_title = 'Page introuvable'; ?>
 <div class="error_page">
     <div class="error_content">
         <div class="error_text">

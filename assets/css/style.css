@@ -1635,6 +1635,7 @@ footer .footer_content .footer_content__div .copyright
 }
 
 .post_sujet .content .content_top .description .actions .signaler,
+.post_sujet .content .content_top .description .actions .modifier,
 .post_sujet .content .content_top .description .actions .fermer
 {
     font-size: 11px;
@@ -1649,6 +1650,7 @@ footer .footer_content .footer_content__div .copyright
 }
 
 .post_sujet .content .content_top .description .actions .signaler:hover,
+.post_sujet .content .content_top .description .actions .modifier:hover,
 .post_sujet .content .content_top .description .actions .fermer:hover
 {
     cursor: pointer;
@@ -1710,13 +1712,15 @@ footer .footer_content .footer_content__div .copyright
     text-decoration: none;
 }
 
-.reponse_sujet .informations .signaler
+.reponse_sujet .informations .signaler,
+.reponse_sujet .informations .modifier
 {
     font-size: 11px;
     color: var(--grey);
 }
 
-.reponse_sujet .informations .signaler:hover
+.reponse_sujet .informations .signaler:hover,
+.reponse_sujet .informations .modifier:hover
 {
     cursor: pointer;
     color: #000;
@@ -1861,9 +1865,21 @@ footer .footer_content .footer_content__div .copyright
 
 *********************************************************/
 
+.liste_sujets a
+{
+    text-decoration: none;
+    color: #000;
+}
+
 .liste_sujets .sujet
 {
-    padding: 32px 0;
+    padding: 32px 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.liste_sujets .sujet:hover
+{
+    background: var(--border);
 }
 
 .liste_sujets .sujet .titre_sujet
@@ -1875,6 +1891,26 @@ footer .footer_content .footer_content__div .copyright
 {
     margin-top: 8px;
     font-size: 12px;
+}
+
+.liste_sujets .sujet .infos
+{
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--grey);
+}
+
+.liste_sujets .sujet .sujet_ferme
+{
+    color: #d60242;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.liste_sujets .sujet .sujet_ferme span
+{
+    margin-right: 8px;
 }
 
 /*********************************************************

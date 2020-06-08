@@ -1,3 +1,4 @@
+<?php $page_title = 'A propos'; ?>
 <div class="a_propos">
     <div class="header">
         <h1>Polyphonia, qu'est-ce que c'est?</h1>

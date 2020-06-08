@@ -1,3 +1,4 @@
+<?php $page_title = 'Projet introuvable'; ?>
 <div class="container">
     <h1>Projet introuvable</h1>
     <div class="projet_introuvable">

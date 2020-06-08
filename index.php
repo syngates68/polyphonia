@@ -32,7 +32,7 @@ ob_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Polyphonia</title>
+    <title><!-- TITLE --> | Polyphonia</title>
     <link rel="stylesheet" href="<?= BASEURL ?>assets/css/reset.css">
     <link rel="stylesheet" href="<?= BASEURL ?>assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
@@ -68,4 +68,5 @@ ob_start();
 
 <?php 
 $content = ob_get_clean();
-echo $content;
+echo str_replace('<!-- TITLE -->', $page_title, $content);
+//echo $content;

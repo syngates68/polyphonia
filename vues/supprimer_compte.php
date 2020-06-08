@@ -1,3 +1,4 @@
+<?php $page_title = 'Suppression de votre compte'; ?>
 <div class="container">
     <h1>Suppression de votre compte</h1>
     <div class="supprime_compte">

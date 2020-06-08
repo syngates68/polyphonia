@@ -1,4 +1,5 @@
-<?php 
+<?php
+$page_title = 'Inscription';
 if (!isset($_SESSION['utilisateur'])) : 
 ?>
 <div class="sign_container">

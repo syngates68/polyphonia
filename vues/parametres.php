@@ -1,4 +1,6 @@
 <?php
+$page_title = 'Paramètres du compte';
+
 if (isset($_SESSION['utilisateur']))
 {
     $utilisateur = req_utilisateur_by_id($_SESSION['utilisateur']);

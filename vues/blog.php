@@ -1,3 +1,4 @@
+<?php $page_title = 'Blog'; ?>
 <div class="container blog_container">
     <div class="blog_article">
         <h2>Créer Polyphonia</h2>

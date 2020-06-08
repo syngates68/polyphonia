@@ -7,12 +7,16 @@ if (isset($_GET['slug']))
     $id_projet = $tab[(sizeof(explode('-', $_GET['slug'])) - 1)];
     $slug = str_replace('-'.$id_projet, '', $_GET['slug']);
 
-    $exist_projet = count_by_id($id_projet);
+    if (is_numeric($id_projet))
+        $exist_projet = count_by_id($id_projet);
+    else
+        $exist_projet = 0;
 
     if ($exist_projet > 0)
     {
 
         $projet = req_by_id($id_projet);
+        $page_title = $projet['titre'];
         
         if ($slug == $projet['slug'])
         {

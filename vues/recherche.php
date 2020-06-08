@@ -1,3 +1,4 @@
+<?php $page_title = $_GET['search']; ?>
 <div class="container">
 
     <p>Résultats de recherche pour : <?= htmlentities($_GET['search']); ?></p>

@@ -1,4 +1,5 @@
-<?php 
+<?php
+$page_title = 'Vos notifications';
 if (isset($_SESSION['utilisateur'])) :
 ?>
 <div class="container">

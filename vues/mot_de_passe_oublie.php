@@ -1,4 +1,5 @@
-<?php 
+<?php
+$page_title = 'Réinitialisation du mot de passe';
 if (!isset($_SESSION['utilisateur'])) : 
 ?>
 <div class="mdp_oublie_container container">

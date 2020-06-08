@@ -1,4 +1,6 @@
-<?php 
+<?php
+$page_title = 'Confirmation d\'inscription';
+
 if (isset($_SESSION['nom_utilisateur'])) : 
 ?>
 <div class="login_container">

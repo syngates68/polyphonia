@@ -1,4 +1,6 @@
 <?php 
+$page_title = 'Connexion à l\'espace membre';
+
 if (!isset($_SESSION['utilisateur'])) : 
 ?>
 <div class="login_container">

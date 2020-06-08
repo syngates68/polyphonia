@@ -981,7 +981,7 @@ function count_sujets_by_projet($id_projet)
 
 function req_liste_sujets()
 {
-    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, p.titre as titre_projet, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur LEFT JOIN projets p ON p.id = a.id_projet ORDER BY a.date_sujet DESC, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) DESC");
+    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, p.titre as titre_projet, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur LEFT JOIN projets p ON p.id = a.id_projet ORDER BY (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) DESC, a.date_sujet DESC");
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -989,7 +989,7 @@ function req_liste_sujets()
 
 function req_sujets_by_projet($id_projet, $var_limit)
 {
-    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id_projet = ? ORDER BY a.date_sujet DESC, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) DESC".$var_limit);
+    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur WHERE a.id_projet = ? ORDER BY (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) DESC, a.date_sujet DESC".$var_limit);
     $req->execute([$id_projet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);

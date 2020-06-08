@@ -4,6 +4,13 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
     if (count_sujet_by_id($_GET['slug']))
     {
         $sujet = req_sujet_by_id($_GET['slug']);
+        $tmp = '';
+        if ($sujet['resolu'] == 1)
+            $tmp = 'Résolu - ';
+        if ($sujet['ouvert'] == 0)
+            $tmp = 'Fermé - ';
+
+        $page_title = $tmp.$sujet['titre'];
     ?>
         <div class="container sujet_container">
             <h1 class="titre_sujet"><?= $sujet['titre']; ?></h1>
@@ -94,6 +101,8 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                     <?php if (isset($_SESSION['utilisateur'])) : ?>
                                         <?php if ($_SESSION['utilisateur'] != $reponse['id_utilisateur']) : ?>
                                             <a href="<?= BASEURL; ?>inc/signaler_reponse?id_reponse=<?= $reponse['id']; ?>" rel="modal:open" class="signaler signaler_reponse">Signaler</a>
+                                        <?php else : ?>
+                                            <a href="#" class="modifier">Modifier</a>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </div>

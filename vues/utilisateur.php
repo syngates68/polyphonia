@@ -8,6 +8,8 @@ if (verifie_nom_utilisateur($_GET['slug']) > 0)
 
     if (req_utilisateur_by_nom_utilisateur($_GET['slug'])['id'] != $id_utilisateur)
         $titre = 'Compte de '.$_GET['slug'];
+
+    $page_title = $titre;
 ?>
     <div class="container">
         <h1><?= $titre; ?></h1>

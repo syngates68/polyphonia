@@ -3,6 +3,7 @@ if (isset($_SESSION['utilisateur']))
 {
     if (verifie_nom_utilisateur($_GET['slug']) > 0)
     {
+        $page_title = 'Messages avec '.$_GET['slug'];
         set_message_as_lus($_SESSION['utilisateur'], req_utilisateur_by_nom_utilisateur($_GET['slug'])['id']);
     ?>
         <div class="container">

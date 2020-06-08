@@ -1,3 +1,4 @@
+<?php $page_title = 'Vos messages'; ?>
 <div class="container">
     <h1>Vos messages</h1>
     <div class="mes_messages">

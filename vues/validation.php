@@ -1,4 +1,6 @@
-<?php 
+<?php
+$page_title = 'Validation de suppression de compte';
+
 if (isset($_SESSION['compte_supprime'])) : 
     session_destroy();
     setcookie('auth', '', time() - 3600, '/', '', false, true);
