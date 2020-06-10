@@ -1690,6 +1690,7 @@ footer .footer_content .footer_content__div .copyright
     padding: 16px;
     font-weight: 700;
     border-bottom: 1px solid var(--border);
+    color: var(--orange);
 }
 
 .reponse_sujet .informations
@@ -1894,11 +1895,16 @@ footer .footer_content .footer_content__div .copyright
 .liste_sujets .liste_sujets_bloc
 {
     padding: 32px 0;
+    width: 70%;
+    margin: auto;
 }
 
 .liste_sujets .sujet
 {
-    padding: 32px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 16px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -1936,6 +1942,37 @@ footer .footer_content .footer_content__div .copyright
 .liste_sujets .sujet .sujet_ferme span
 {
     margin-right: 8px;
+    font-size: 17px;
+}
+
+.liste_sujets .sujet .badge_resolu
+{
+    color: #17a319;
+    margin-bottom: 8px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.liste_sujets .sujet .badge_resolu span
+{
+    margin-right: 4px;
+    font-size: 17px;
+}
+
+.liste_sujets .sujet .bloc_droit
+{
+    display: flex;
+    align-items: center;
+}
+
+.liste_sujets .sujet .bloc_droit span
+{
+    font-size: 17px;
+    margin-right: 8px;
+    color: var(--orange);
 }
 
 /*********************************************************
