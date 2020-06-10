@@ -1880,10 +1880,20 @@ footer .footer_content .footer_content__div .copyright
 
 *********************************************************/
 
+.liste_sujets h2
+{
+    margin-top: 8px;
+}
+
 .liste_sujets a
 {
     text-decoration: none;
     color: #000;
+}
+
+.liste_sujets .liste_sujets_bloc
+{
+    padding: 32px 0;
 }
 
 .liste_sujets .sujet
@@ -2739,9 +2749,37 @@ footer .footer_content .footer_content__div .copyright
     color: var(--grey);
 }
 
+.liste_signalements .signalement .bloc_droit
+{
+    display: flex;
+    align-items: center;
+}
+
+.liste_signalements .signalement .bloc_droit .is_lu
+{
+    color: var(--grey);
+}
+
+.liste_signalements .signalement .bloc_droit .is_lu:hover
+{
+    cursor: pointer;
+    color: #000;
+}
+
 .liste_signalements .signalement_contenu
 {
     display: none;
+    text-align: center;
+    padding: 16px;
+    background: var(--grey);
+}
+
+.liste_signalements .signalement_contenu iframe
+{
+    width: 70%;
+    height: 500px;
+    border: 1px solid var(--border);
+    background: #FFF;
 }
 
 /*********************************************************

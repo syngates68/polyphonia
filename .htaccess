@@ -11,4 +11,6 @@ RewriteCond %{REQUEST_FILENAME} !(.*)\$
 RewriteRule ^([^/]+)\.html$ index.php?page=$1
 RewriteRule ^([^/]+)/([^/]+)\.html$ index.php?page=$1&slug=$2
 
-ErrorDocument 404 /polyphonia_new/index.php?page=404
+ErrorDocument 404 /polyphonia/index.php?page=404
+
+Options -Indexes

@@ -15,15 +15,13 @@
                     </div>
                     <div class="bloc_droit">
                         <button class="btn btn-blue voir" id="voir_<?= $signalement['id']; ?>">Voir</button>
-                        <?php if ($signalement['type'] == 'sujet') : ?>
-                            <button class="btn btn-outline-red fermer">Fermer</button>
-                        <?php else : ?>
-                            <button class="btn btn-outline-red supprimer">Supprimer</button>
-                        <?php endif; ?>
+                        <button class="btn btn-outline-green valid" valid="1" user="<?= $signalement['id_utilisateur']; ?>" id="valid_<?= $signalement['id']; ?>">Valide</button>
+                        <button class="btn btn-outline-red invalid" valid="0" user="<?= $signalement['id_utilisateur']; ?>" id="invalid_<?= $signalement['id']; ?>">Invalide</button>
+                        <span class="material-icons is_lu" id="is_lu_<?= $signalement['id']; ?>" title="Ne pas donner suite">close</span>
                     </div>
                 </div>
                 <div class="signalement_contenu" id="signalement_contenu_<?= $signalement['id']; ?>">
-                    <iframe style="width:100%;height:500px;" <?php if ($signalement['type'] == 'sujet') : ?> src="<?= BASEURL; ?>sujet/<?= $signalement['id_type']; ?>.html" <?php else : ?> src="<?= BASEURL; ?>sujet/<?= $signalement['id_sujet']; ?>.html#reponse_sujet_<?= $signalement['id_type']; ?>" <?php endif; ?>>
+                    <iframe <?php if ($signalement['type'] == 'sujet') : ?> src="<?= BASEURL; ?>sujet/<?= $signalement['id_type']; ?>.html" <?php else : ?> src="<?= BASEURL; ?>sujet/<?= $signalement['id_sujet']; ?>.html#reponse_sujet_<?= $signalement['id_type']; ?>" <?php endif; ?>>
                     </iframe>
                 </div>
             <?php endforeach; ?>

@@ -1207,6 +1207,12 @@ function ajouter_signalement($type, $motif, $id_type, $id_utilisateur)
     $ins->execute([$type, $motif, $id_type, $id_utilisateur]);
 }
 
+function update_signalement($id_signalement)
+{
+    $upd = db()->prepare("UPDATE signalements SET lu = 1 WHERE id = ?");
+    $upd->execute([$id_signalement]);
+}
+
 function req_nbr_projets_jour($date_jour)
 {
     $count = db()->prepare("SELECT COUNT(*) as nb FROM projets WHERE DATE_FORMAT(date_ajout, '%d/%m/%Y') LIKE ?");
@@ -1249,7 +1255,7 @@ function req_nbr_signalements()
 
 function req_liste_signalements()
 {
-    $req = db()->prepare("SELECT s.id, s.type, s.motif, s.date_signalement, s.id_type, a.titre_sujet, a.contenu_sujet, c.contenu as reponse, c.id_sujet, u.nom_utilisateur FROM signalements s LEFT JOIN aide_contenu c ON c.id = s.id_type LEFT JOIN aide_sujet a ON a.id = s.id_type LEFT JOIN utilisateurs u ON u.id = s.id_utilisateur WHERE s.lu = 0");
+    $req = db()->prepare("SELECT s.id, s.type, s.motif, s.date_signalement, s.id_type, s.id_utilisateur, a.titre_sujet, a.contenu_sujet, c.contenu as reponse, c.id_sujet, u.nom_utilisateur FROM signalements s LEFT JOIN aide_contenu c ON c.id = s.id_type LEFT JOIN aide_sujet a ON a.id = s.id_type LEFT JOIN utilisateurs u ON u.id = s.id_utilisateur WHERE s.lu = 0");
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);

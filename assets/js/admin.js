@@ -332,9 +332,58 @@ $(document).on('keyup', '.administration #nom_utilisateur', function()
 $(document).on('click', '.liste_signalements .voir', function()
 {
     var id_signalement = $(this).attr('id').replace('voir_', '')
-    $('.signalement_contenu').each(function()
+    if (!$(this).hasClass('masquer'))
     {
-        $(this).slideUp()
+        $('.signalement_contenu').each(function()
+        {
+            $(this).slideUp()
+            $('#voir_' + $(this).attr('id').replace('signalement_contenu_', '')).removeClass('masquer')
+        })
+        $('#signalement_contenu_' + id_signalement).slideDown()
+        $(this).addClass('masquer')
+    }
+    else
+    {
+        $('#signalement_contenu_' + id_signalement).slideUp()
+        $(this).removeClass('masquer')
+    }
+})
+
+//Gestion des signalements
+$(document).on('click', '.liste_signalements .is_lu', function()
+{
+    if (confirm("Ne pas donner suite à ce signalement?"))
+    {
+        $.post(baseurl + 'inc/signalement_lu.php',
+        {
+            id_signalement : $(this).attr('id').replace('is_lu_', '')
+        },
+        function()
+        {
+            location.reload()
+        })
+    }
+})
+
+$(document).on('click', '.liste_signalements .valid, .liste_signalements .invalid', function()
+{
+    var valid = $(this).attr('valid')
+    if (valid == 1)
+        var id_signalement = $(this).attr('id').replace('valid_', '')
+    else
+        var id_signalement = $(this).attr('id').replace('invalid_', '')
+
+    var id_utilisateur = $(this).attr('user')
+
+    $.post(baseurl + 'inc/signalement_reponse.php',
+    {
+        valid : valid,
+        id_signalement : id_signalement,
+        id_utilisateur : id_utilisateur
+    },
+    function()
+    {
+        alert("L'utilisateur a bien été notifié du traitement de son signalement.")
+        location.reload()
     })
-    $('#signalement_contenu_' + id_signalement).slideDown()
 })
