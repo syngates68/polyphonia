@@ -276,7 +276,7 @@ function extrait_texte(string $texte, int $longueur)
         return $texte;
     
     $texte = substr($texte, 0, $longueur);
-    $espace = strrpos($texte, ' ');
+    $espace = strrpos($texte, '</p>');
 
     if ($espace > 0)
         $texte = substr($texte, 0, $espace);
@@ -981,7 +981,7 @@ function count_sujets_by_projet($id_projet)
 
 function req_liste_sujets($var_limit = NULL)
 {
-    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, p.titre as titre_projet, u.nom_utilisateur, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur LEFT JOIN projets p ON p.id = a.id_projet ORDER BY (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) DESC, a.date_sujet DESC".$var_limit);
+    $req = db()->prepare("SELECT a.id, a.titre_sujet as titre, a.contenu_sujet as contenu, a.date_sujet, a.resolu, a.ouvert, p.titre as titre_projet, u.nom_utilisateur, u.avatar, (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) as date_derniere_reponse, (SELECT u.nom_utilisateur FROM aide_contenu c LEFT JOIN utilisateurs u ON u.id = c.id_utilisateur WHERE c.id_sujet = a.id ORDER BY c.id DESC LIMIT 1) as nom_utilisateur_derniere_reponse, (SELECT COUNT(*) FROM aide_contenu WHERE id_sujet = a.id) as nbr_reponses FROM aide_sujet a LEFT JOIN utilisateurs u ON u.id = a.id_utilisateur LEFT JOIN projets p ON p.id = a.id_projet ORDER BY (SELECT date_post FROM aide_contenu WHERE id_sujet = a.id ORDER BY id DESC LIMIT 1) DESC, a.date_sujet DESC".$var_limit);
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);

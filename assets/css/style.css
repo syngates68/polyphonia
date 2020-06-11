@@ -1913,6 +1913,21 @@ footer .footer_content .footer_content__div .copyright
     background: var(--border);
 }
 
+.liste_sujets .sujet .bloc_gauche
+{
+    display: flex;
+    align-items: center;
+}
+
+.liste_sujets .sujet .bloc_gauche img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
 .liste_sujets .sujet .titre_sujet
 {
     font-weight: 700;
@@ -1922,6 +1937,14 @@ footer .footer_content .footer_content__div .copyright
 {
     margin-top: 8px;
     font-size: 12px;
+}
+
+.liste_sujets .sujet .contenu_sujet
+{
+    padding: 16px 0;
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.5;
 }
 
 .liste_sujets .sujet .infos
@@ -4082,6 +4105,16 @@ footer .footer_content .footer_content__div .copyright
         align-items: center;
         justify-content: right;
         margin-top: 16px;
+    }
+
+    .liste_sujets .sujet
+    {
+        padding: 32px 0;
+    }
+
+    .liste_sujets .liste_sujets_bloc
+    {
+        width: 100%;
     }
 
     .mes_notifications
