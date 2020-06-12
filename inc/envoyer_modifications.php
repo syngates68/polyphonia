@@ -10,7 +10,7 @@ $captcha_fait = true;
 if ($_POST['has_captcha'] && !champs_non_vides([$_POST['captcha']]))
     $captcha_fait = false;
 
-if (champs_non_vides([$_POST['email'], $_POST['suggestion']]) && $captcha_fait)
+if (champs_non_vides([$_POST['email'], $_POST['nom_utilisateur'], $_POST['suggestion']]) && $captcha_fait)
 {
     $captcha_reussi = true;
 
@@ -27,6 +27,7 @@ if (champs_non_vides([$_POST['email'], $_POST['suggestion']]) && $captcha_fait)
     if ($captcha_reussi)
     {
         //mail_nouvelle_suggestion($_POST['nom_utilisateur'], $_POST['email']);
+        ajouter_suggestion($_POST['email'], $_POST['nom_utilisateur'], $_POST['suggestion'], $_POST['id_projet']);
         $_SESSION['succes'] = "Merci pour votre suggestion, elle sera analysée dès que possible et vous serez évidemment crédité en cas de prise en compte dans le projet.";
     }
     else
@@ -36,5 +37,5 @@ if (champs_non_vides([$_POST['email'], $_POST['suggestion']]) && $captcha_fait)
 }
 else
 {
-    echo "Tous les champs sont obligatoires.";
+    echo $captcha_fait."Tous les champs sont obligatoires.";
 }

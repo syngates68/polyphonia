@@ -1,6 +1,6 @@
 <?php 
 $page_title = 'Liste des sujets';
-$nbr_elements_page = 20;
+$nbr_elements_page = 10;
 $nbr_sujets = sizeof(req_liste_sujets());
 $nbr_pages = ceil($nbr_sujets/$nbr_elements_page);
 $page = (isset($_GET['p']) && is_numeric($_GET['p']) && $_GET['p'] <= $nbr_pages) ? $_GET['p'] : 1;
@@ -18,12 +18,14 @@ $page = (isset($_GET['p']) && is_numeric($_GET['p']) && $_GET['p'] <= $nbr_pages
         </div>
         <?php
         $offset = ($page - 1) * $nbr_elements_page;
-        $limit = ' LIMIT '.$nbr_elements_page.' OFFSET '.$offset; 
+        $limit = ' LIMIT '.$nbr_elements_page.' OFFSET '.$offset;
         $sujets = req_liste_sujets($limit);
         foreach ($sujets as $sujet) :
         ?>
             <a href="<?= BASEURL; ?>sujet/<?= $sujet['id']; ?>.html">
-                <div class="sujet">
+                <div class="sujet <?php if ($sujet['resolu'] == 1) : ?> resolu <?php elseif ($sujet['ouvert'] == 0) : ?> ferme <?php endif; ?>">
+                    <?php if ($sujet['resolu'] == 1) : ?><span class="material-icons badge_resolu">check_circle</span><?php endif; ?>
+                    <?php if ($sujet['ouvert'] == 0) : ?><span class="material-icons badge_ferme">cancel</span><?php endif; ?>
                     <div class="bloc_gauche">
                         <div class="avatar_container">
                             <img src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
@@ -31,23 +33,19 @@ $page = (isset($_GET['p']) && is_numeric($_GET['p']) && $_GET['p'] <= $nbr_pages
                         <div class="infos_container">
                             <div class="titre_sujet"><?= $sujet['titre']; ?></div>
                             <div class="titre_projet">Projet : <?= $sujet['titre_projet']; ?></div>
-                            <?php if ($sujet['resolu'] == 1) : ?>
-                                <div class="badge_resolu"><span class="material-icons">check_circle_outline</span>Résolu</div>
-                            <?php endif; ?>
                             <div class="contenu_sujet">
                                 <?= extrait_texte($sujet['contenu'], 200); ?>
                             </div>
+                            <?php if ($sujet['ouvert'] == 1) : ?>
                             <div class="infos">
-                                <?php if ($sujet['ouvert'] == 1) : ?>
-                                    <?php if ($sujet['date_derniere_reponse'] == NULL) : ?>
-                                        Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= mb_strtolower(ecart_date($sujet['date_sujet'])); ?>
+                                    <span class="material-icons">chat</span>
+                                    <?php if ($sujet['nom_utilisateur_derniere_reponse'] == NULL) : ?>
+                                        Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= mb_strtolower(ecart_date($sujet['last_date'])); ?>
                                     <?php else : ?>
-                                        Dernière réponse par <?= $sujet['nom_utilisateur_derniere_reponse']; ?> <?= mb_strtolower(ecart_date($sujet['date_derniere_reponse'])); ?>
+                                        Dernière réponse par <?= $sujet['nom_utilisateur_derniere_reponse']; ?> <?= mb_strtolower(ecart_date($sujet['last_date'])); ?>
                                     <?php endif; ?>
-                                <?php else : ?>
-                                    <span class="sujet_ferme"><span class="material-icons">cancel</span>Ce sujet a été fermé</span>
-                                <?php endif; ?>
-                            </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="bloc_droit">

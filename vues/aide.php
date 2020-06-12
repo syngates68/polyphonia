@@ -82,12 +82,20 @@ if (isset($_GET['slug']))
                             <?php if ($sujet['resolu'] == 1) : ?>
                                 <div class="badge_resolu"><span class="material-icons">check_circle_outline</span>Résolu</div>
                             <?php endif; ?>
+                            <div class="contenu_sujet">
+                                <?= extrait_texte($sujet['contenu'], 200); ?>
+                            </div>
                             <div class="infos">
                                 <?php if ($sujet['ouvert'] == 1) : ?>
-                                    <?php if ($sujet['date_derniere_reponse'] == NULL) : ?>
-                                        Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= mb_strtolower(ecart_date($sujet['date_sujet'])); ?>
-                                    <?php else : ?>
-                                        Dernière réponse par <?= $sujet['nom_utilisateur_derniere_reponse']; ?> <?= mb_strtolower(ecart_date($sujet['date_derniere_reponse'])); ?>
+                                        <div class="info">
+                                            <img src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
+                                            Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= mb_strtolower(ecart_date($sujet['date_sujet'])); ?>
+                                        </div>
+                                    <?php if ($sujet['nom_utilisateur_derniere_reponse'] != NULL) : ?>
+                                        <div class="info">
+                                            <img src="<?= BASEURL; ?><?= $sujet['avatar_derniere_reponse']; ?>">
+                                            Dernière réponse par <?= $sujet['nom_utilisateur_derniere_reponse']; ?> <?= mb_strtolower(ecart_date($sujet['last_date'])); ?>
+                                        </div>
                                     <?php endif; ?>
                                 <?php else : ?>
                                     <span class="sujet_ferme"><span class="material-icons">cancel</span>Ce sujet a été fermé</span>

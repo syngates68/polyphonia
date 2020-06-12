@@ -47,6 +47,11 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
                 <div class="admin-card">
                     <span class="material-icons">emoji_objects</span>
                     <h3>Suggestions</h3>
+                    <?php if (req_nbr_suggestions() > 0) : ?>
+                        <div class="notification">
+                            <?= req_nbr_suggestions(); ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </a>
 

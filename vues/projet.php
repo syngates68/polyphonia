@@ -87,7 +87,7 @@ if (isset($_GET['slug']))
                         Si vous ne vous pensez pas avoir le niveau pour une partie du projet, ne vous bloquez pas pour autant, vous pouvez ne pas faire cette partie ou simplement la
                         remplacer par autre chose.
                     </div>
-                    <div class="bloc_suggerer_modifications"></div>
+                    <div class="bloc_suggerer_modifications" projet="<?= $id_projet; ?>"></div>
                 </div>
             </div>
             <script src="<?= BASEURL; ?>assets/js/projet.js"></script>

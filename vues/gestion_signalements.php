@@ -2,6 +2,11 @@
 <div class="container">
     <h1>Gestion des signalements</h1>
     <div class="liste_signalements">
+        <div class="alert_info">
+            En cliquant sur le bouton "Valide", cela envoi une notification à l'utilisateur pour l'avertir qu'une décision allant dans le sens de son signalement a été prise.<br/>
+            Le bouton "Invalide" quant à lui envoi une notification à l'utilisateur pour l'avertir que l'élément signalé n'enfreignait aucune règle du site.<br/>
+            Enfin, la croix permet de ne donner aucune suite à un signalement, dans ce cas aucune notification ne sera envoyée et le signalement n'apparaîtra plus.
+        </div>
         <?php if (req_nbr_signalements() > 0) : ?>
             <?php foreach (req_liste_signalements() as $signalement) : ?>
                 <div class="signalement">

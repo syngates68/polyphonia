@@ -338,6 +338,13 @@ body
     font-weight: 500;
 }
 
+.form_ligne .explication
+{
+    font-size: 12px;
+    color: var(--grey);
+    font-style: italic;
+}
+
 .group_form_ligne
 {
     display: flex;
@@ -416,8 +423,37 @@ form textarea
     margin-right: 8px;
 }
 
+.alert_info
+{
+    background-color: #e8f3f8;
+    color: #5ca5dd;
+    padding: 8px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border-radius: 5px;
+    border-top: 1px solid #bae1f3;
+    border-right: 1px solid #bae1f3;
+    border-bottom: 1px solid #bae1f3;
+    border-left: 7px solid #5ca5dd;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.alert_info::before
+{
+    font-family: "Material Icons";
+    content: "\e88e";
+    font-size: 25px;
+    font-weight: 300;
+    margin-right: 8px;
+}
+
 .erreur b,
-.succes b
+.succes b,
+.info b
 {
     font-weight: 700;
 }
@@ -1483,6 +1519,7 @@ footer .footer_content .footer_content__div .copyright
 {
     display: flex;
     align-items: center;
+    padding: 0 8px;
 }
 
 .aide .sujet .bloc_droit span
@@ -1498,10 +1535,35 @@ footer .footer_content .footer_content__div .copyright
     margin-bottom: 8px;
 }
 
+.aide .sujet .contenu_sujet
+{
+    padding: 16px 0;
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 2;
+}
+
 .aide .sujet .infos
 {
     font-size: 12px;
     color: var(--grey);
+}
+
+.aide .sujet .infos .info
+{
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.aide .sujet .infos .info img
+{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-right: 8px;
+    margin-right: 8px;
 }
 
 .aide .sujet .badge_resolu
@@ -1901,50 +1963,85 @@ footer .footer_content .footer_content__div .copyright
 
 .liste_sujets .sujet
 {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 32px 16px;
-    border-bottom: 1px solid var(--border);
+    margin: 32px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px #f2f2f28f;
+    border: 1px solid var(--border);
 }
 
-.liste_sujets .sujet:hover
+.liste_sujets .sujet .badge_resolu,
+.liste_sujets .sujet .badge_ferme
 {
-    background: var(--border);
+    position: absolute;
+    top: calc(50% - 14px);
+    left: -13px;
+    background: #FFF;
+    font-size: 24px;
+    border-radius: 100%;
+}
+
+.liste_sujets .sujet .badge_resolu
+{
+    color: #17a319;
+}
+
+.liste_sujets .sujet .badge_ferme
+{
+    color: #d60242;
+}
+
+.liste_sujets .sujet.resolu
+{
+    border-left: 2px solid #17a319;
+}
+
+.liste_sujets .sujet.ferme
+{
+    border-left: 2px solid #d60242;
 }
 
 .liste_sujets .sujet .bloc_gauche
 {
     display: flex;
-    align-items: center;
+    align-items: start;
 }
 
 .liste_sujets .sujet .bloc_gauche img
 {
+    display: none;
     width: 50px;
     height: 50px;
     border-radius: 100%;
     object-fit: cover;
-    margin-right: 8px;
+    margin-right: 16px;
+    border: 1px solid var(--orange);
+    box-shadow: 0 4px 4px #f2f2f28f;
 }
 
 .liste_sujets .sujet .titre_sujet
 {
     font-weight: 700;
+    font-size: 22px;
 }
 
 .liste_sujets .sujet .titre_projet
 {
     margin-top: 8px;
     font-size: 12px;
+    font-style: italic;
 }
 
 .liste_sujets .sujet .contenu_sujet
 {
     padding: 16px 0;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--grey);
-    line-height: 1.5;
+    line-height: 2;
 }
 
 .liste_sujets .sujet .infos
@@ -1952,43 +2049,22 @@ footer .footer_content .footer_content__div .copyright
     margin-top: 16px;
     font-size: 12px;
     color: var(--grey);
-}
-
-.liste_sujets .sujet .sujet_ferme
-{
-    color: #d60242;
-    font-weight: 600;
     display: flex;
     align-items: center;
 }
 
-.liste_sujets .sujet .sujet_ferme span
+.liste_sujets .sujet .infos span
 {
+    font-size: 16px;
     margin-right: 8px;
-    font-size: 17px;
-}
-
-.liste_sujets .sujet .badge_resolu
-{
-    color: #17a319;
-    margin-bottom: 8px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    margin-top: 8px;
-}
-
-.liste_sujets .sujet .badge_resolu span
-{
-    margin-right: 4px;
-    font-size: 17px;
+    color: var(--orange);
 }
 
 .liste_sujets .sujet .bloc_droit
 {
     display: flex;
     align-items: center;
+    padding: 0 8px;
 }
 
 .liste_sujets .sujet .bloc_droit span
@@ -4109,12 +4185,18 @@ footer .footer_content .footer_content__div .copyright
 
     .liste_sujets .sujet
     {
-        padding: 32px 0;
+        padding: 32px 8px;
     }
 
     .liste_sujets .liste_sujets_bloc
     {
         width: 100%;
+    }
+
+    .liste_sujets .sujet .badge_resolu,
+    .liste_sujets .sujet .badge_ferme
+    {
+        display: none;
     }
 
     .mes_notifications
