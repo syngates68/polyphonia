@@ -838,7 +838,7 @@ function req_liste_utilisateurs($nom_utilisateur = NULL)
         $where = 'WHERE u.nom_utilisateur LIKE :nom_utilisateur';
     }
 
-    $req = db()->prepare("SELECT u.id, u.email, u.nom_utilisateur, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, u.actif, ms.libelle as motif_suppression, d.libelle as rang, d.libelle_site FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime LEFT JOIN droits d ON u.id_droit = d.id $where ORDER BY u.id");
+    $req = db()->prepare("SELECT u.id, u.email, u.nom_utilisateur, u.avatar, u.date_inscription, u.derniere_connexion, u.supprime, u.bloque, u.actif, u.confirm, ms.libelle as motif_suppression, d.libelle as rang, d.libelle_site FROM utilisateurs u LEFT JOIN motif_suppression ms ON ms.id = u.motif_supprime LEFT JOIN droits d ON u.id_droit = d.id $where ORDER BY u.id");
     
     if ($nom_utilisateur != NULL)
         $req->execute([":nom_utilisateur" => "%".$nom_utilisateur."%"]);
@@ -1048,6 +1048,30 @@ function req_reponses_by_sujet($id_sujet)
     $req->execute([$id_sujet]);
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function count_resolus_by_projet($id_projet)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_sujet WHERE id_projet = ? AND resolu = 1");
+    $count->execute([$id_projet]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function count_fermes_by_projet($id_projet)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_sujet WHERE id_projet = ? AND ouvert = 0");
+    $count->execute([$id_projet]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function count_nb_reponses_by_projet($id_projet)
+{
+    $count = db()->prepare("SELECT COUNT(*) as nb FROM aide_contenu WHERE id_sujet IN (SELECT id FROM aide_sujet WHERE id_projet = ?)");
+    $count->execute([$id_projet]);
+
+    return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
 }
 
 function ajouter_reponse_sujet($reponse, $id_utilisateur, $id_sujet)

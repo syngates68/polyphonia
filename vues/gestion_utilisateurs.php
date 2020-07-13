@@ -33,7 +33,7 @@ if (isset($_SESSION['utilisateur']) && (req_utilisateur_by_id($_SESSION['utilisa
             </div>
             <div class="tbl_header">
                 <div class="tbl_header__col"><input type="checkbox"></div>
-                <div class="tbl_header__col">ID</div>
+                <div class="tbl_header__col">Avatar</div>
                 <div class="tbl_header__col">Nom d'utilisateur</div>
                 <div class="tbl_header__col">Adresse mail</div>
                 <div class="tbl_header__col">Membre depuis le</div>

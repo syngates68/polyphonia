@@ -980,7 +980,6 @@ footer .footer_content .footer_content__div .copyright
 .projet .titre_projet
 {
     font-size: 15px;
-    text-transform: capitalize;
     letter-spacing: 1px;
     font-weight: 600;
     line-height: 1.5;
@@ -1422,7 +1421,7 @@ footer .footer_content .footer_content__div .copyright
 .aide
 {
     padding: 32px;
-    width: 70%;
+    width: 90%;
     margin: auto;
 }
 
@@ -1445,17 +1444,40 @@ footer .footer_content .footer_content__div .copyright
     margin-top: 8px;
 }
 
-.aide .aide_top .nbr_sujets_ouverts
-{
-    font-weight: 300;
-    margin-top: 16px;
-    font-size: 13px;
-}
-
 .aide .aide_top button
 {
     display: flex;
     align-items: center;
+}
+
+.aide .aide_content
+{
+    display: flex;
+}
+
+.aide .aide_content .aide_bloc_infos
+{
+    width: 30%;
+    padding: 16px;
+}
+
+.aide .aide_content .aide_bloc_infos p
+{
+    line-height: 2;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.aide .aide_content .aide_bloc_infos ul li
+{
+    list-style: circle;
+    margin-left: 32px;
+    line-height: 2;
+}
+
+.aide .aide_content .aide_bloc_sujets
+{
+    width: 70%;
 }
 
 .aide .btn_nouveau_sujet
@@ -1501,18 +1523,46 @@ footer .footer_content .footer_content__div .copyright
     background: var(--border);
 }
 
-.aide .sujet_ferme
+.aide .sujet .bloc_gauche
 {
-    color: #d60242;
-    font-weight: 600;
     display: flex;
-    align-items: center;
 }
 
-.aide .sujet_ferme span
+.aide .sujet .bloc_gauche .avatar_container
 {
-    margin-right: 4px;
-    font-size: 17px;
+    position: relative;
+}
+
+.aide .sujet .bloc_gauche .avatar_container img
+{
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.aide .sujet .bloc_gauche .avatar_container .bulle span
+{
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    border-radius: 100%;
+    color: #FFF;
+}
+
+.aide .sujet .bloc_gauche .avatar_container .bulle.resolu span
+{
+    background: #17a319;
+}
+
+.aide .sujet .bloc_gauche .avatar_container .bulle.ferme span
+{
+    background: #d60242;
+}
+
+.aide .sujet .bloc_gauche .infos_container
+{
+    padding: 0 16px;
 }
 
 .aide .sujet .bloc_droit
@@ -1532,7 +1582,9 @@ footer .footer_content .footer_content__div .copyright
 .aide .sujet .titre_sujet
 {
     font-weight: 700;
+    color: var(--grey);
     margin-bottom: 8px;
+    font-size: 17px;
 }
 
 .aide .sujet .contenu_sujet
@@ -1543,20 +1595,20 @@ footer .footer_content .footer_content__div .copyright
     line-height: 2;
 }
 
-.aide .sujet .infos
+.aide .sujet
 {
     font-size: 12px;
     color: var(--grey);
 }
 
-.aide .sujet .infos .info
+.aide .sujet .info
 {
     display: flex;
     align-items: center;
     padding: 8px 0;
 }
 
-.aide .sujet .infos .info img
+.aide .sujet .info img
 {
     width: 30px;
     height: 30px;
@@ -1564,22 +1616,6 @@ footer .footer_content .footer_content__div .copyright
     border-radius: 100%;
     margin-right: 8px;
     margin-right: 8px;
-}
-
-.aide .sujet .badge_resolu
-{
-    color: #17a319;
-    margin-bottom: 8px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-}
-
-.aide .sujet .badge_resolu span
-{
-    margin-right: 4px;
-    font-size: 17px;
 }
 
 /*********************************************************
@@ -2472,6 +2508,13 @@ footer .footer_content .footer_content__div .copyright
 {
     border: 1px solid var(--grey);
     color: var(--grey);
+}
+
+.administration .tbl_contenu .statut.non_confirme
+{
+    border: 1px solid #fcba64;
+    background: #fcba64;
+    color: #FFF;
 }
 
 .administration .tbl_contenu .titre
@@ -4117,6 +4160,17 @@ footer .footer_content .footer_content__div .copyright
     .aide
     {
         padding: 8px;
+        width: 100%;
+    }
+
+    .aide .aide_content
+    {
+        display: block;
+    }
+
+    .aide .aide_content .aide_bloc_infos,
+    .aide .aide_content .aide_bloc_sujets
+    {
         width: 100%;
     }
 

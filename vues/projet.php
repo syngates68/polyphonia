@@ -39,7 +39,6 @@ if (isset($_GET['slug']))
                     <div class="projet_contenu__top">
                     <div class="projet_actions">
                         <button class="btn btn-orange page_aide" href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html"><span class="material-icons">help_outline</span>Page d'aide</button>
-                        <button title="Être averti lorsqu'une nouvelle question est posée." href="<?= BASEURL; ?>projet/<?= $_GET['slug']; ?>.html" id="suivre_projet_<?= $id_projet; ?>" class="btn btn-outline-orange suivre_projet"><span class="material-icons">favorite</span>Suivre le projet</button>
                     </div>
                     <div class="projet_infos">
                         <div class="auteur">

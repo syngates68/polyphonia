@@ -50,25 +50,3 @@ $(document).on('click', '.page_aide', function()
 {
     location.href = $(this).attr('href')
 })
-
-$(document).on('click', '.suivre_projet', function()
-{
-    if (!$(this).hasClass('stop'))
-    {
-        $(this).html('<span class="material-icons">highlight_off</span>Ne plus suivre le projet').addClass('stop')
-    }
-    else
-    {
-        $(this).html('<span class="material-icons">favorite</span>Suivre le projet').removeClass('stop')
-    }
-
-    $.post(baseurl + 'inc/suivre_projet.php',
-    {
-        href : $(this).attr('href')
-    },
-    function(data)
-    {
-        if (data != '')
-            location.href = baseurl + 'connexion.html'
-    })
-})

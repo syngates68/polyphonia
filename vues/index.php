@@ -87,15 +87,15 @@ if (file_exists('vues/'.$var_page.'.php') && !isset($_SESSION['not_found']))
                 <h3>Polyphonia</h3>
                 <ul>
                     <li><a href="<?= BASEURL; ?>a_propos.html">Qu'est-ce que c'est?</a></li>
-                    <li><a href="#">Proposer un projet</a></li>
+                    <!--<li><a href="#">Proposer un projet</a></li>-->
                 </ul>
             </div>
             <div class="footer_content__div">
                 <h3>Informations</h3>
                 <ul>
                     <li><a href="<?= BASEURL; ?>cgu.html">Conditions générales d'utilisation</a></li>
-                    <li><a href="#">Remerciements</a></li>
-                    <li><a href="#">Politique de protection des données personnelles</a></li>
+                    <!--<li><a href="#">Remerciements</a></li>-->
+                    <!--<li><a href="#">Politique de protection des données personnelles</a></li>-->
                 </ul>
             </div>
             <div class="footer_content__div">

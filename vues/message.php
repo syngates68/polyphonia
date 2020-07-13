@@ -83,6 +83,16 @@ if (isset($_SESSION['utilisateur']))
                 if (event.target.tagName.toLowerCase() !== 'textarea') return;
                 autoExpand(event.target);
             }, false);
+
+            
+            $('.form_message').on('submit', function()
+            {
+                if ($('#message').val().trim() == '')
+                {
+                    $('#message').val('').focus()
+                    return false
+                }
+            });
         </script>
     <?php
     }

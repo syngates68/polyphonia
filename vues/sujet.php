@@ -54,7 +54,7 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                             <?php if (isset($_SESSION['utilisateur']) && $sujet['ouvert'] == 1) : ?>
                                 <div class="actions">
                                     <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
-                                        <button class="btn btn-outline-blue">Suivre</button>
+                                        <!--<button class="btn btn-outline-blue">Suivre</button>-->
                                     <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
                                         <button class="btn btn-green-light sujet_resolu" sujet="<?= $_GET['slug']; ?>">Résolu</button>
                                     <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 1) : ?>

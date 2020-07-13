@@ -31,9 +31,6 @@ if (isset($_GET['slug']))
                     <div class="aide_titre">
                         <h1>Page d'aide</h1>
                         <h2><?= req_by_id($id_projet)['titre']; ?></h2>
-                        <?php if (count_sujets_by_projet($id_projet) > 0) : ?>
-                            <p class="nbr_sujets_ouverts"><?= count_sujets_by_projet($id_projet); ?> <?= (count_sujets_by_projet($id_projet) > 10) ? 'sujets ouverts' : 'sujet ouvert'; ?></p>
-                        <?php endif; ?>
                     </div>
                     <button class="btn btn-orange page_projet" href="<?= BASEURL; ?>projet/<?= $_GET['slug']; ?>.html"><span class="material-icons">description</span>Page projet</button>
                 </div>
@@ -46,83 +43,97 @@ if (isset($_GET['slug']))
                 endif;
                 ?>
 
-                <?php
-                if (isset($_SESSION['utilisateur'])) : ?>
-                    <button type="button" class="btn btn-outline-orange btn_nouveau_sujet">Nouveau sujet</button>
-                <?php endif; ?>
-                <div class="erreur erreur_sujet" style="display:none;"></div>
-                <input type="hidden" name="id_projet" value="<?= $id_projet; ?>">
-                <div class="nouveau_sujet"></div>
-                <?php
-                    //Pagination
-                    $offset = ($page - 1) * $nbr_elements_page;
-                    $limit = ' LIMIT '.$nbr_elements_page.' OFFSET '.$offset;
-                ?>
-                <?php if ($nbr_pages > 1) : ?>
-                    <div class="pagination">
-                        <ul>
-                            <?php for ($i = 0; $i < $nbr_pages; $i++) : ?>
-                                <li <?php if ($page == ($i + 1)) : ?>class="actif"<?php endif; ?>><a href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html/?pagination=<?= $i + 1; ?>"><?= $i + 1; ?></a></li>
-                            <?php endfor; ?>
-                        </ul>
+                <div class="aide_content">
+                    <div class="aide_bloc_infos">
+                        <?php if (isset($_SESSION['utilisateur'])) : ?>
+                            <button type="button" class="btn btn-outline-orange btn_nouveau_sujet">Nouveau sujet</button>
+                        <?php endif; ?>
+                        <p>
+                            En cas de problème lors de la réalisation du projet, cette page d'aide est là pour vous. Posez votre question et décrivez votre problème afin que les autres
+                            utilisateurs puissent vous répondre et ainsi vous permettre d'avancer sur votre projet.<br/>
+                            Pour ce projet : <br/>
+                            <ul>
+                                <li><?= count_sujets_by_projet($id_projet); ?> <?= (count_sujets_by_projet($id_projet) > 1) ? "sujets ont été ouverts" : "sujet a été ouvert" ?></li>
+                                <li><?= count_resolus_by_projet($id_projet); ?> <?= (count_resolus_by_projet($id_projet) > 1) ? "sujets ont été résolus" : "sujet a été résolu" ?></li>
+                                <li><?= count_fermes_by_projet($id_projet); ?> <?= (count_fermes_by_projet($id_projet) > 1) ? "sujets ont été fermés" : "sujet a été fermé" ?></li>
+                                <li><?= count_nb_reponses_by_projet($id_projet); ?> <?= (count_nb_reponses_by_projet($id_projet) > 1) ? "réponses ont été postées" : "réponse a été postée" ?></li>
+                            </ul>
+                        </p>
                     </div>
-                <?php endif; ?>
-                <?php
-                if (count_sujets_by_projet($id_projet) > 0)
-                {
-                    $sujets = req_sujets_by_projet($id_projet, $limit);
-
-                    foreach($sujets as $sujet) :
-                ?>
-
-                <a href="<?= BASEURL; ?>sujet/<?= $sujet['id']; ?>.html">
-                    <div class="sujet">
-                        <div class="bloc_gauche">
-                            <div class="titre_sujet"><?= $sujet['titre']; ?></div>
-                            <?php if ($sujet['resolu'] == 1) : ?>
-                                <div class="badge_resolu"><span class="material-icons">check_circle_outline</span>Résolu</div>
-                            <?php endif; ?>
-                            <div class="contenu_sujet">
-                                <?= extrait_texte($sujet['contenu'], 200); ?>
+                    <div class="aide_bloc_sujets">
+                        <div class="erreur erreur_sujet" style="display:none;"></div>
+                        <input type="hidden" name="id_projet" value="<?= $id_projet; ?>">
+                        <div class="nouveau_sujet"></div>
+                        <?php
+                            //Pagination
+                            $offset = ($page - 1) * $nbr_elements_page;
+                            $limit = ' LIMIT '.$nbr_elements_page.' OFFSET '.$offset;
+                        ?>
+                        <?php if ($nbr_pages > 1) : ?>
+                            <div class="pagination">
+                                <ul>
+                                    <?php for ($i = 0; $i < $nbr_pages; $i++) : ?>
+                                        <li <?php if ($page == ($i + 1)) : ?>class="actif"<?php endif; ?>><a href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html/?pagination=<?= $i + 1; ?>"><?= $i + 1; ?></a></li>
+                                    <?php endfor; ?>
+                                </ul>
                             </div>
-                            <div class="infos">
-                                <?php if ($sujet['ouvert'] == 1) : ?>
+                        <?php endif; ?>
+                        <?php
+                        if (count_sujets_by_projet($id_projet) > 0)
+                        {
+                            $sujets = req_sujets_by_projet($id_projet, $limit);
+
+                            foreach($sujets as $sujet) :
+                        ?>
+
+                        <a href="<?= BASEURL; ?>sujet/<?= $sujet['id']; ?>.html">
+                            <div class="sujet">
+                                <div class="bloc_gauche">
+                                    <div class="avatar_container">
+                                        <img src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
+                                        <div class="bulle <?php if ($sujet['ouvert'] == 0) : ?>ferme<?php endif; ?> <?php if ($sujet['resolu'] == 1) : ?>resolu<?php endif ?>"><span class="material-icons"><?php if ($sujet['ouvert'] == 0) : ?>cancel<?php endif; ?> <?php if ($sujet['resolu'] == 1) : ?>check_circle_outline<?php endif ?></span></div>
+                                    </div>
+                                    <div class="infos_container">
+                                        <div class="titre_sujet"><?= $sujet['titre']; ?></div>
                                         <div class="info">
-                                            <img src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
                                             Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= mb_strtolower(ecart_date($sujet['date_sujet'])); ?>
                                         </div>
-                                    <?php if ($sujet['nom_utilisateur_derniere_reponse'] != NULL) : ?>
-                                        <div class="info">
-                                            <img src="<?= BASEURL; ?><?= $sujet['avatar_derniere_reponse']; ?>">
-                                            Dernière réponse par <?= $sujet['nom_utilisateur_derniere_reponse']; ?> <?= mb_strtolower(ecart_date($sujet['last_date'])); ?>
+                                        <div class="contenu_sujet">
+                                            <?= extrait_texte($sujet['contenu'], 200); ?>
                                         </div>
-                                    <?php endif; ?>
-                                <?php else : ?>
-                                    <span class="sujet_ferme"><span class="material-icons">cancel</span>Ce sujet a été fermé</span>
-                                <?php endif; ?>
+                                        <div class="infos">
+                                            <?php if ($sujet['ouvert'] == 1 && $sujet['nom_utilisateur_derniere_reponse'] != NULL) : ?>
+                                                <div class="info">
+                                                    <img src="<?= BASEURL; ?><?= $sujet['avatar_derniere_reponse']; ?>">
+                                                    Dernière réponse par <?= $sujet['nom_utilisateur_derniere_reponse']; ?> <?= mb_strtolower(ecart_date($sujet['last_date'])); ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bloc_droit">
+                                    <span class="material-icons">chat</span><?= $sujet['nbr_reponses']; ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="bloc_droit">
-                            <span class="material-icons">chat</span><?= $sujet['nbr_reponses']; ?>
-                        </div>
-                    </div>
-                </a>
+                        </a>
 
-                <?php
-                    endforeach;
-                ?>
-                <script>
-                    setTimeout(function() { $('.succes_vanishing').slideUp() }, 4000)
-                </script>
-                <?php
-                }
-                else
-                {
-                ?>
-                    <div class="erreur">Aucun sujet n'a encore été ouvert pour ce projet</div>
-                <?php
-                }
-                ?>
+                        <?php
+                            endforeach;
+                        ?>
+                        <script>
+                            setTimeout(function() { $('.succes_vanishing').slideUp() }, 4000)
+                        </script>
+                        <?php
+                        }
+                        else
+                        {
+                        ?>
+                            <div class="erreur">Aucun sujet n'a encore été ouvert pour ce projet</div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
             <script src="<?= BASEURL; ?>assets/js/aide.js"></script>
         <?php

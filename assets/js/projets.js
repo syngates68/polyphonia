@@ -31,6 +31,9 @@ $(document).on('submit', '.recherche_projet form', function()
 
 $(document).on('click', '.pagination li', function(e)
 {
-    e.preventDefault();
-    req_liste_projets($(this).attr('page'), null);
+    e.preventDefault()
+    var recherche = null
+    if ($('input[name="recherche"]').val() != null && $('input[name="recherche"]').val() != undefined)
+        recherche = $('input[name="recherche"]').val()
+    req_liste_projets($(this).attr('page'), recherche);
 });

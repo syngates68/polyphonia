@@ -11,7 +11,9 @@ $nom_utilisateur = ($utilisateur['nom_utilisateur'] != NULL) ? $utilisateur['nom
     
     <div class="tbl_contenu">
         <div class="tbl_contenu__col">
-            <input type="checkbox">
+            <?php if ($utilisateur['rang'] != 'superadmin' && $utilisateur['rang'] != 'admin') : ?>
+                <input type="checkbox">
+            <?php endif; ?>
         </div>
         <div class="tbl_contenu__col">
             <?php if ($utilisateur['motif_suppression'] == NULL) : ?><img class="photo_profil" src="<?= BASEURL; ?><?= $utilisateur['avatar']; ?>"><br/><?php endif; ?>
@@ -36,6 +38,8 @@ $nom_utilisateur = ($utilisateur['nom_utilisateur'] != NULL) ? $utilisateur['nom
                 <span class="statut bloque">Bloqué</span> 
             <?php elseif ($utilisateur['actif'] == 0) : ?>
                 <span class="statut inactif">Inactif</span>
+            <?php elseif ($utilisateur['confirm'] == 0) : ?>
+                <span class="statut non_confirme">Non confirmé</span>
             <?php else : ?>
                 <span class="statut en_ligne">Actif</span>
             <?php endif; ?>
