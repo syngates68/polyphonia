@@ -272,16 +272,24 @@ function ecart_date($date)
  */
 function extrait_texte(string $texte, int $longueur)
 {
-    if (strlen($texte) <= $longueur)
-        return $texte;
+    //On évite l'affichage d'une image ou d'un code si le texte commence par ça
+    if (substr($texte, 1, 3) != 'img' && substr($texte, 1, 3) != 'pre')
+    {
+        if (strlen($texte) <= $longueur)
+            return $texte;
+        
+        $texte = substr($texte, 0, $longueur);
+        $espace = strrpos($texte, '</p>');
     
-    $texte = substr($texte, 0, $longueur);
-    $espace = strrpos($texte, '</p>');
-
-    if ($espace > 0)
-        $texte = substr($texte, 0, $espace);
-
-    return $texte.'...';
+        if ($espace > 0)
+            $texte = substr($texte, 0, $espace);
+    
+        return $texte.'...';
+    }
+    else
+    {
+        return "<I>Aucun aperçu du sujet disponible</I>";
+    }
 }
 
 /**
@@ -1314,6 +1322,14 @@ function req_nbr_suggestions()
     $count->execute();
 
     return $count->fetchAll(PDO::FETCH_ASSOC)[0]['nb'];
+}
+
+function req_liste_suggestions()
+{
+    $req = db()->prepare("SELECT s.id, s.email, s.nom_utilisateur, s.suggestion, s.date_suggestion, p.titre FROM suggestions_modifications s LEFT JOIN projets p ON p.id = s.id_projet WHERE s.lu = 0 ORDER BY id DESC");
+    $req->execute();
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function envoi_mail($type, $email, $infos)

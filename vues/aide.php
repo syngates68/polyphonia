@@ -27,10 +27,11 @@ if (isset($_GET['slug']))
 
         ?>
             <div class="aide">
-                <div class="aide_top">
+                <div class="aide_top" style="background: url('<?= BASEURL; ?><?= $projet['illustration']; ?>') no-repeat; background-size: cover; background-position: center;">
+                    <div class="bloc_noir"></div>
                     <div class="aide_titre">
                         <h1>Page d'aide</h1>
-                        <h2><?= req_by_id($id_projet)['titre']; ?></h2>
+                        <h2><?= $projet['titre']; ?></h2>
                     </div>
                     <button class="btn btn-orange page_projet" href="<?= BASEURL; ?>projet/<?= $_GET['slug']; ?>.html"><span class="material-icons">description</span>Page projet</button>
                 </div>

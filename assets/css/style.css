@@ -1418,30 +1418,42 @@ footer .footer_content .footer_content__div .copyright
 
 *********************************************************/
 
-.aide
-{
-    padding: 32px;
-    width: 90%;
-    margin: auto;
-}
-
 .aide .aide_top
 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px;
+    background-size: cover;
+    padding: 32px;
+    position: relative;
+}
+
+.aide .aide_top .bloc_noir
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.719) 0%, rgba(0, 0, 0, 0.74) 50%, rgba(0, 0, 0, 0.404) 90%);
+}
+
+.aide .aide_top .aide_titre
+{
+    position: relative;
+    color: #FFF;
 }
 
 .aide .aide_top h1
 {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 3rem;
 }
 
 .aide .aide_top h2
 {
-    margin-top: 8px;
+    margin-top: 16px;
 }
 
 .aide .aide_top button
@@ -1453,6 +1465,8 @@ footer .footer_content .footer_content__div .copyright
 .aide .aide_content
 {
     display: flex;
+    width: 90%;
+    margin: auto;
 }
 
 .aide .aide_content .aide_bloc_infos
