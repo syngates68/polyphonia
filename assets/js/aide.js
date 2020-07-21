@@ -40,8 +40,9 @@ $('.sujet_container form').submit(function()
     return false;
 })
 
-$(document).on('click', '.sujet_resolu', function()
+$(document).on('click', '.sujet_resolu', function(e)
 {
+    e.preventDefault()
     var id_sujet = $(this).attr('sujet')
 
     $.post(baseurl + 'inc/sujet_resolu.php',
@@ -55,8 +56,9 @@ $(document).on('click', '.sujet_resolu', function()
     })
 })
 
-$(document).on('click', '.sujet_non_resolu', function()
+$(document).on('click', '.sujet_non_resolu', function(e)
 {
+    e.preventDefault()
     var id_sujet = $(this).attr('sujet')
 
     $.post(baseurl + 'inc/sujet_resolu.php',
@@ -142,8 +144,9 @@ $(document).on('click', '.bad', function()
     })
 })
 
-$(document).on('click', '.actions .fermer', function()
+$(document).on('click', '.action .fermer', function(e)
 {
+    e.preventDefault();
     if (confirm("Confirmer la fermeture de ce sujet?"))
     {
         var id_sujet = $(this).attr('id').replace('fermer_', '')

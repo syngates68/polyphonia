@@ -49,17 +49,19 @@ if (isset($_GET['slug']))
                         <?php if (isset($_SESSION['utilisateur'])) : ?>
                             <button type="button" class="btn btn-outline-orange btn_nouveau_sujet">Nouveau sujet</button>
                         <?php endif; ?>
-                        <p>
-                            En cas de problème lors de la réalisation du projet, cette page d'aide est là pour vous. Posez votre question et décrivez votre problème afin que les autres
-                            utilisateurs puissent vous répondre et ainsi vous permettre d'avancer sur votre projet.<br/>
-                            Pour ce projet : <br/>
-                            <ul>
-                                <li><?= count_sujets_by_projet($id_projet); ?> <?= (count_sujets_by_projet($id_projet) > 1) ? "sujets ont été ouverts" : "sujet a été ouvert" ?></li>
-                                <li><?= count_resolus_by_projet($id_projet); ?> <?= (count_resolus_by_projet($id_projet) > 1) ? "sujets ont été résolus" : "sujet a été résolu" ?></li>
-                                <li><?= count_fermes_by_projet($id_projet); ?> <?= (count_fermes_by_projet($id_projet) > 1) ? "sujets ont été fermés" : "sujet a été fermé" ?></li>
-                                <li><?= count_nb_reponses_by_projet($id_projet); ?> <?= (count_nb_reponses_by_projet($id_projet) > 1) ? "réponses ont été postées" : "réponse a été postée" ?></li>
-                            </ul>
-                        </p>
+                        <div class="text_aide">
+                            <p>
+                                En cas de problème lors de la réalisation du projet, cette page d'aide est là pour vous. Posez votre question et décrivez votre problème afin que les autres
+                                utilisateurs puissent vous répondre et ainsi vous permettre d'avancer sur votre projet.<br/>
+                                Pour ce projet : <br/>
+                                <ul>
+                                    <li><?= count_sujets_by_projet($id_projet); ?> <?= (count_sujets_by_projet($id_projet) > 1) ? "sujets ont été ouverts" : "sujet a été ouvert" ?></li>
+                                    <li><?= count_resolus_by_projet($id_projet); ?> <?= (count_resolus_by_projet($id_projet) > 1) ? "sujets ont été résolus" : "sujet a été résolu" ?></li>
+                                    <li><?= count_fermes_by_projet($id_projet); ?> <?= (count_fermes_by_projet($id_projet) > 1) ? "sujets ont été fermés" : "sujet a été fermé" ?></li>
+                                    <li><?= count_nb_reponses_by_projet($id_projet); ?> <?= (count_nb_reponses_by_projet($id_projet) > 1) ? "réponses ont été postées" : "réponse a été postée" ?></li>
+                                </ul>
+                            </p>
+                        </div>
                     </div>
                     <div class="aide_bloc_sujets">
                         <div class="erreur erreur_sujet" style="display:none;"></div>
@@ -73,9 +75,11 @@ if (isset($_GET['slug']))
                         <?php if ($nbr_pages > 1) : ?>
                             <div class="pagination">
                                 <ul>
+                                    <li page="1"><a href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html/?pagination=1"><span class="material-icons">first_page</span></a></li>
                                     <?php for ($i = 0; $i < $nbr_pages; $i++) : ?>
                                         <li <?php if ($page == ($i + 1)) : ?>class="actif"<?php endif; ?>><a href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html/?pagination=<?= $i + 1; ?>"><?= $i + 1; ?></a></li>
                                     <?php endfor; ?>
+                                    <li page="1"><a href="<?= BASEURL; ?>aide/<?= $_GET['slug']; ?>.html/?pagination=<?= $nbr_pages; ?>"><span class="material-icons">last_page</span></a></li>
                                 </ul>
                             </div>
                         <?php endif; ?>

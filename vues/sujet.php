@@ -39,72 +39,76 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
             ?>
 
             <div class="post_sujet">
-                <div class="avatar_container">
-                    <img class="avatar" src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
-                </div>
                 <div class="content">
                     <div class="content_top">
+                        <div class="avatar_container">
+                            <img class="avatar" src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
+                        </div>
                         <div class="description">
-                            <div class="informations">
-                                <div class="infos">
-                                    Sujet ouvert par <a href="<?= BASEURL; ?>utilisateur/<?= $sujet['nom_utilisateur']; ?>.html"><?= $sujet['nom_utilisateur']; ?></a> 
-                                    <p class="date_post"><?= ecart_date($sujet['date_sujet']); ?></p>
-                                </div>
+                            <div class="infos">
+                                Sujet ouvert par <a href="<?= BASEURL; ?>utilisateur/<?= $sujet['nom_utilisateur']; ?>.html"><?= $sujet['nom_utilisateur']; ?></a> 
+                                <p class="date_post"><?= ecart_date($sujet['date_sujet']); ?></p>
                             </div>
-                            <?php if (isset($_SESSION['utilisateur']) && $sujet['ouvert'] == 1) : ?>
-                                <div class="actions">
-                                    <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
-                                        <!--<button class="btn btn-outline-blue">Suivre</button>-->
-                                    <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
-                                        <button class="btn btn-green-light sujet_resolu" sujet="<?= $_GET['slug']; ?>">Résolu</button>
-                                    <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 1) : ?>
-                                        <button class="btn btn-red sujet_non_resolu" sujet="<?= $_GET['slug']; ?>">Non Résolu</button>
-                                    <?php endif; ?>
-                                    
-                                    <?php if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 3) && $sujet['resolu'] == 0) : ?>
-                                        <span id="fermer_<?= $_GET['slug']; ?>" class="fermer">Fermer le sujet</span>
-                                    <?php endif; ?>
-                                    <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur']) : ?>
-                                        <a href="<?= BASEURL; ?>inc/signaler_sujet?id_sujet=<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="contenu"><?= nl2br($sujet['contenu']); ?></div>
+                    <?php if (isset($_SESSION['utilisateur']) && $sujet['ouvert'] == 1) : ?>
+                        <div class="content_footer">
+                            <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
+                                <!--<button class="btn btn-outline-blue">Suivre</button>-->
+                            <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
+                                <div class="action">
+                                    <span class="material-icons">done</span>
+                                    <a class="sujet_resolu" sujet="<?= $_GET['slug']; ?>" href="#">Résolu</a>
+                                </div>
+                            <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 1) : ?>
+                                <div class="action">
+                                    <span class="material-icons">cancel</span>
+                                    <a class="sujet_non_resolu" sujet="<?= $_GET['slug']; ?>" href="#">Non Résolu</a>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 3) && $sujet['resolu'] == 0) : ?>
+                                <div class="action">
+                                    <span class="material-icons">cancel</span>
+                                    <a id="fermer_<?= $_GET['slug']; ?>" class="fermer" href="#">Fermer le sujet</a>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur']) : ?>
+                                <div class="action">
+                                    <span class="material-icons">format_quote</span>
+                                    Citer
+                                </div>
+                                <div class="action">
+                                    <span class="material-icons">error</span>
+                                    <a href="<?= BASEURL; ?>inc/signaler_sujet?id_sujet=<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="nbr_reponses"><?= count_reponses_by_sujet($_GET['slug']); ?> <?= (count_reponses_by_sujet($_GET['slug']) > 1) ? "réponses" : "réponse"; ?></div>
             <?php if (count_reponses_by_sujet($_GET['slug']) > 0) : ?>
                 <?php foreach (req_reponses_by_sujet($_GET['slug']) as $reponse) : ?>
                     <div class="reponse_sujet" id="reponse_sujet_<?= $reponse['id']; ?>">
-                        <div class="avatar_container">
-                            <img class="avatar" src="<?= BASEURL; ?><?= ($reponse['avatar'] != NULL) ? $reponse['avatar'] : 'assets/utilisateurs/default.jpg'; ?>">
-                        </div>
                         <div class="content">
                             <div class="reponse_top">
-                                <div class="informations">
-                                    <div class="infos">
-                                        par 
-                                        <?php if ($reponse['nom_utilisateur'] != NULL) : ?>
-                                            <a href="<?= BASEURL; ?>utilisateur/<?= $reponse['nom_utilisateur']; ?>.html"><?= $reponse['nom_utilisateur']; ?></a>
-                                        <?php else : ?>
-                                            compte supprimé
-                                        <?php endif; ?>
-                                        <?php if ($reponse['rang'] == 'superadmin' || $reponse['rang'] == 'admin' || $reponse['rang'] == 'moderateur') : ?>
-                                            <span class="badge_rang">
-                                                <?= $reponse['libelle_site']; ?>
-                                            </span>
-                                        <?php endif; ?>
-                                        <p class="date_post"><?= ecart_date($reponse['date_post']); ?> <?php if ($reponse['modifie'] == 1) : ?> - Modifié <?php endif; ?></p>
-                                    </div>
-                                    <?php if (isset($_SESSION['utilisateur'])) : ?>
-                                        <?php if ($_SESSION['utilisateur'] != $reponse['id_utilisateur']) : ?>
-                                            <a href="<?= BASEURL; ?>inc/signaler_reponse?id_reponse=<?= $reponse['id']; ?>" rel="modal:open" class="signaler signaler_reponse">Signaler</a>
-                                        <?php else : ?>
-                                            <a href="#" id="modifier_reponse_<?= $reponse['id']; ?>" show="1" class="modifier">Modifier</a>
-                                        <?php endif; ?>
+                                <div class="avatar_container">
+                                    <img class="avatar" src="<?= BASEURL; ?><?= ($reponse['avatar'] != NULL) ? $reponse['avatar'] : 'assets/utilisateurs/default.jpg'; ?>">
+                                </div>
+                                <div class="infos">
+                                    <?php if ($reponse['nom_utilisateur'] != NULL) : ?>
+                                        <a href="<?= BASEURL; ?>utilisateur/<?= $reponse['nom_utilisateur']; ?>.html"><?= $reponse['nom_utilisateur']; ?></a>
+                                    <?php else : ?>
+                                        compte supprimé
                                     <?php endif; ?>
+                                    <?php if ($reponse['rang'] == 'superadmin' || $reponse['rang'] == 'admin' || $reponse['rang'] == 'moderateur') : ?>
+                                        <span class="badge_rang">
+                                            <?= $reponse['libelle_site']; ?>
+                                        </span>
+                                    <?php endif; ?>
+                                    <p class="date_post"><?= ecart_date($reponse['date_post']); ?> <?php if ($reponse['modifie'] == 1) : ?> - Modifié <?php endif; ?></p>
                                 </div>
                             </div>
                             <div class="div_reponse" id="div_reponse_<?= $reponse['id']; ?>">
@@ -116,6 +120,26 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
                                     <span id="note_<?= $reponse['id']; ?>"><?= req_note_by_reponse($reponse['id']); ?></span>
                                     <span id="bad_<?= $reponse['id']; ?>" class="material-icons <?php if (isset($_SESSION['utilisateur'])) : ?> bad <?php endif; ?> <?php if(isset($_SESSION['utilisateur']) && req_note_by_utilisateur_reponse($reponse['id'], $_SESSION['utilisateur']) == '-1') : ?> actif <?php endif; ?>">thumb_down</span>
                                 </div>
+
+                                <?php if (isset($_SESSION['utilisateur'])) : ?>
+                                    <div class="content_footer">
+                                        <?php if ($_SESSION['utilisateur'] != $reponse['id_utilisateur']) : ?>
+                                            <div class="action">
+                                                <span class="material-icons">format_quote</span>
+                                                Citer
+                                            </div>
+                                            <div class="action">
+                                                <span class="material-icons">error</span>
+                                                <a href="<?= BASEURL; ?>inc/signaler_reponse?id_reponse=<?= $reponse['id']; ?>" rel="modal:open" class="signaler signaler_reponse">Signaler</a>
+                                            </div>
+                                        <?php else : ?>
+                                            <div class="action">
+                                                <span class="material-icons">create</span>
+                                                <a href="#" id="modifier_reponse_<?= $reponse['id']; ?>" show="1" class="modifier">Modifier</a>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div class="div_modifier_reponse" id="div_modifier_reponse_<?= $reponse['id']; ?>">
                                 <div class="erreur"></div>
