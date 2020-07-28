@@ -12,8 +12,46 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
 
         $page_title = $tmp.$sujet['titre'];
     ?>
-        <div class="container sujet_container">
-            <h1 class="titre_sujet"><?= $sujet['titre']; ?></h1>
+        <div class="bloc_top_sujet">
+            <div class="bloc_top_infos">
+                <div class="avatar_container">
+                    <img class="avatar" src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
+                </div>
+                <div class="description">
+                    <h1 class="titre_sujet"><?= $sujet['titre']; ?></h1>
+                    <div class="infos">
+                        Sujet ouvert par <a href="<?= BASEURL; ?>utilisateur/<?= $sujet['nom_utilisateur']; ?>.html"><?= $sujet['nom_utilisateur']; ?></a> 
+                        <p class="date_post"><?= ecart_date($sujet['date_sujet']); ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="bloc_top_stats">
+                <div class="stat">
+                    <p class="nbr_reponses"><?= count_reponses_by_sujet($_GET['slug']); ?></p> 
+                    <?= (count_reponses_by_sujet($_GET['slug']) > 1) ? "réponses" : "réponse"; ?>
+                </div>
+                <div class="stat">
+                    <p class="nbr_reponses">17</p>
+                    participants
+                    <div class="participants">
+                        <div class="bloc_participant" style="left:0">
+                            <img src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
+                        </div>
+                        <div class="bloc_participant" style="left:-30px">
+                            <img src="<?= BASEURL; ?>assets/utilisateurs/ludogh68/ludogh68.jpeg">
+                        </div>
+                        <div class="bloc_participant" style="left:-60px">
+                            <img src="<?= BASEURL; ?>assets/utilisateurs/q.schifferle/q.schifferle.jpeg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bloc_top_actions">
+                <button class="btn btn-orange">Répondre</button><br/>
+                <button class="btn btn-outline-green">Résolu</button>
+            </div>
+        </div>
+        <div class="sujet_container">
             <?php 
             //Message de succès après signalement
             if (isset($_SESSION['succes'])) : 
@@ -39,54 +77,41 @@ if (isset($_GET['slug']) && is_numeric($_GET['slug']))
             ?>
 
             <div class="post_sujet">
-                <div class="content">
-                    <div class="content_top">
-                        <div class="avatar_container">
-                            <img class="avatar" src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
-                        </div>
-                        <div class="description">
-                            <div class="infos">
-                                Sujet ouvert par <a href="<?= BASEURL; ?>utilisateur/<?= $sujet['nom_utilisateur']; ?>.html"><?= $sujet['nom_utilisateur']; ?></a> 
-                                <p class="date_post"><?= ecart_date($sujet['date_sujet']); ?></p>
+                <div class="contenu"><?= nl2br($sujet['contenu']); ?></div>
+                <?php if (isset($_SESSION['utilisateur']) && $sujet['ouvert'] == 1) : ?>
+                    <div class="content_footer">
+                        <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
+                            <!--<button class="btn btn-outline-blue">Suivre</button>-->
+                        <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
+                            <div class="action">
+                                <span class="material-icons">done</span>
+                                <a class="sujet_resolu" sujet="<?= $_GET['slug']; ?>" href="#">Résolu</a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="contenu"><?= nl2br($sujet['contenu']); ?></div>
-                    <?php if (isset($_SESSION['utilisateur']) && $sujet['ouvert'] == 1) : ?>
-                        <div class="content_footer">
-                            <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
-                                <!--<button class="btn btn-outline-blue">Suivre</button>-->
-                            <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 0) : ?>
-                                <div class="action">
-                                    <span class="material-icons">done</span>
-                                    <a class="sujet_resolu" sujet="<?= $_GET['slug']; ?>" href="#">Résolu</a>
-                                </div>
-                            <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 1) : ?>
-                                <div class="action">
-                                    <span class="material-icons">cancel</span>
-                                    <a class="sujet_non_resolu" sujet="<?= $_GET['slug']; ?>" href="#">Non Résolu</a>
-                                </div>
-                            <?php endif; ?>
+                        <?php elseif ($_SESSION['utilisateur'] == $sujet['id_utilisateur'] && $sujet['resolu'] == 1) : ?>
+                            <div class="action">
+                                <span class="material-icons">cancel</span>
+                                <a class="sujet_non_resolu" sujet="<?= $_GET['slug']; ?>" href="#">Non Résolu</a>
+                            </div>
+                        <?php endif; ?>
 
-                            <?php if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 3) && $sujet['resolu'] == 0) : ?>
-                                <div class="action">
-                                    <span class="material-icons">cancel</span>
-                                    <a id="fermer_<?= $_GET['slug']; ?>" class="fermer" href="#">Fermer le sujet</a>
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur']) : ?>
-                                <div class="action">
-                                    <span class="material-icons">format_quote</span>
-                                    Citer
-                                </div>
-                                <div class="action">
-                                    <span class="material-icons">error</span>
-                                    <a href="<?= BASEURL; ?>inc/signaler_sujet?id_sujet=<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                        <?php if ((req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 1 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 2 || req_utilisateur_by_id($_SESSION['utilisateur'])['id_droit'] == 3) && $sujet['resolu'] == 0) : ?>
+                            <div class="action">
+                                <span class="material-icons">cancel</span>
+                                <a id="fermer_<?= $_GET['slug']; ?>" class="fermer" href="#">Fermer le sujet</a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($_SESSION['utilisateur'] != $sujet['id_utilisateur']) : ?>
+                            <div class="action">
+                                <span class="material-icons">format_quote</span>
+                                Citer
+                            </div>
+                            <div class="action">
+                                <span class="material-icons">error</span>
+                                <a href="<?= BASEURL; ?>inc/signaler_sujet?id_sujet=<?= $_GET['slug']; ?>" rel="modal:open" class="signaler">Signaler</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="nbr_reponses"><?= count_reponses_by_sujet($_GET['slug']); ?> <?= (count_reponses_by_sujet($_GET['slug']) > 1) ? "réponses" : "réponse"; ?></div>
             <?php if (count_reponses_by_sujet($_GET['slug']) > 0) : ?>

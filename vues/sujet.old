@@ -1,0 +1,11 @@
+                    <div class="content_top">
+                        <div class="avatar_container">
+                            <img class="avatar" src="<?= BASEURL; ?><?= $sujet['avatar']; ?>">
+                        </div>
+                        <div class="description">
+                            <div class="infos">
+                                Sujet ouvert par <a href="<?= BASEURL; ?>utilisateur/<?= $sujet['nom_utilisateur']; ?>.html"><?= $sujet['nom_utilisateur']; ?></a> 
+                                <p class="date_post"><?= ecart_date($sujet['date_sujet']); ?></p>
+                            </div>
+                        </div>
+                    </div>

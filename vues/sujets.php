@@ -37,7 +37,7 @@ $page = (isset($_GET['p']) && is_numeric($_GET['p']) && $_GET['p'] <= $nbr_pages
                                 <?= extrait_texte($sujet['contenu'], 200); ?>
                             </div>
                             <?php if ($sujet['ouvert'] == 1) : ?>
-                            <div class="infos">
+                                <div class="infos">
                                     <span class="material-icons">chat</span>
                                     <?php if ($sujet['nom_utilisateur_derniere_reponse'] == NULL) : ?>
                                         Ouvert par <?= $sujet['nom_utilisateur']; ?> <?= mb_strtolower(ecart_date($sujet['last_date'])); ?>
